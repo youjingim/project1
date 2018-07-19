@@ -1,0 +1,309 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src = "http://code.jquery.com/jquery-latest.min.js"></script>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+</head>
+<style>
+div#myNavbar a {
+font-size:25px;
+color:black;
+font-weight:bold;
+}
+div#myNavbar ul li a:hover{
+color:gray;
+}
+header{
+width:100%;
+height:100px;
+position:fixed;
+
+}
+.container{
+height:1000px;
+}
+#head_container{
+width:100%;
+height:100px;
+background-color:black;
+opacity: 0.5;
+transition:0.5s;
+
+}
+#logo_span{
+position:absolute;
+left:20px;
+top:25px;
+transition:0.5s;
+z-index:1001;
+
+}
+span#logo_span a{
+font-size:30px;
+font-weight:bold;
+color:white;
+text-decoration:none;
+}
+.login{
+position:absolute;
+right:30px;
+top:20px;
+}
+.login a{
+font-size:15px;
+font-weight:bold;
+color:white;
+text-decoration:none;
+}
+section{
+width:100%;
+height:1500px;
+}
+footer{
+width:100%;
+height:300px;
+border:1px solid black;
+}
+#img_slide{
+width:100%;
+height:1000px;
+position:relative;
+z-index:-1;
+}
+#info_container{
+width:100%;
+height:200px;
+}
+
+
+* {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 3s;
+  animation-name: fade;
+  animation-duration: 3s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+
+
+</style>
+
+
+<body>
+<header class='transparent-header full-header dark'>
+<div id='head_container'>
+<span id='logo_span'>
+      <a href="#"><span style='color:yellow'>Jo</span> 동아리</a>
+</span>
+<span class='login'><a href="#"> Sign Up</a>
+<a href="#"> Login</a></span>
+</div>
+
+<nav class="navbar navbar-default" style='opacity: 0.8;'>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+
+      <ul class="nav navbar-nav navbar-right" >
+        <li><a href="#">공지사항</a></li>
+        <li><a href="#">학교 신청</a></li>
+        <li><a href="#">동아리 찾기</a></li>
+        <li><a href="#">동아리 개설</a></li> 
+        <li><a href="#">With us</a></li> 
+        <li><a href="#">자유게시판</a></li> 
+        <li><a href="#">Q&A</a></li> 
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+</header>
+
+<section>
+<div id='img_slide'>
+<div class="slideshow-container">
+
+<div class="mySlides fade">
+  <img src="http://cramong.com/uploaded/member/sunny/3_d7703d1d77c95e02b400379b7de8768a2.jpg" style="width:100%; height:900px;">
+  <div class="text">Caption Text</div>
+</div>
+
+<div class="mySlides fade">
+  <img src="c" style="width:100%; height:900px;">
+  <div class="text">Caption Two</div>
+</div>
+
+<div class="mySlides fade">
+  <img src="http://res.heraldm.com/content/image/2012/11/21/20121121000747_1.jpg" style="width:100%; height:900px;">
+  <div class="text">Caption Three</div>
+</div>
+
+<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+<a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span> 
+  <span class="dot" onclick="currentSlide(3)"></span> 
+</div>
+</div>
+<div id='info_container'>
+
+</div>
+</section>
+<footer>
+
+
+</footer>
+
+<script>
+
+var slideIndex = 0;
+showSlides();
+
+
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none"; 
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1} 
+    slides[slideIndex-1].style.display = "block"; 
+    setTimeout(showSlides, 3000); // Change image every 2 seconds
+}
+
+$(window).scroll(function() {
+	  var $el = $('#head_container');
+	  var $el2 = $('#logo_span')
+	  
+	  if($(this).scrollTop() >= 200){ $el.css('height','60px'); $el2.css('top','10px');}
+	  else {$el.css('height','100px'); $el2.css('top','25px');}
+	});
+
+
+</script>
+
+
+</body>
+</html>
+
+http://img.ezmember.co.kr/cache/board/2018/04/01/26d010d6a3f01fa89a7727542f69e5a2.gif

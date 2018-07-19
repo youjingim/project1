@@ -1,0 +1,20 @@
+		<%
+		boolean []sel = {false,false,false,false};
+		String []sel1 = {"","","",""};
+		if(!selectpage.isEmpty()){
+		if(selectpage.equals("All")){
+			sel[0]=true;
+			sel1[0]="active";
+		}else if(selectpage.equals("main1")){
+			sel[1]=true;
+			sel1[1]="active";
+		}else if(selectpage.equals("main2")){
+			sel[2]=true;
+			sel1[2]="active";
+		}else if(selectpage.equals("main3")){
+			sel[3]=true;
+			sel1[3]="active";
+		}}
+			%>
+
+

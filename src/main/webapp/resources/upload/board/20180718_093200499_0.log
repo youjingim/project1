@@ -1,0 +1,4 @@
+[0530/134312.871:ERROR:file_io.cc(134)] WriteFile: 파이프가 닫히는 중입니다. (0xE8)
+[0530/134312.868:ERROR:file_io.cc(134)] WriteFile: 파이프가 닫히는 중입니다. (0xE8)
+[0607/132722.060:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0608/120447.353:ERROR:file_io.cc(134)] WriteFile: 파이프가 닫히는 중입니다. (0xE8)

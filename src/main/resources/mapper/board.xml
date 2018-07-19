@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board">
+<resultMap type="map" id="board">
+</resultMap>
+<select id="selectBoardList" resultMap="board">
+select A.*,(select count(*) from attachment where boardno=A.boardno) as filecount from board A order by boarddate desc
+</select>
+<select id="selectCount" resultType="_int">
+select count(*) from board
+</select>
+<insert id="insertBoard" parameterType="Board">
+insert into BOARD(BOARDNO,BOARDTITLE,BOARDWRITER,BOARDCONTENT) values(SEQ_BOARDNO.NEXTVAL,#{boardTitle},#{boardWriter},#{boardContent})
+<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
+select SEQ_BOARDNO.CURRVAL FROM DUAL
+</selectKey>
+</insert>
+<insert id = "insertAttach" parameterType="Attachment">
+insert into attachment (ATTACHMENTNO, BOARDNO, ORIGINALFILENAME, RENAMEDFILENAME) values(SEQ_ATTACHMENTNO.NEXTVAL,#{boardNo},#{originalFileName},#{renameFileName})
+</insert>
+<select id="selectOne" parameterType="_int" resultType="Board">
+select * from board where BOARDNO=#{boardNo}
+</select>
+<resultMap type="Attachment" id="attachMap">
+<result column="RENAMEDFILENAME" property="renameFileName"/>
+</resultMap>
+<select id="selectAttach" parameterType="_int" resultMap="attachMap">
+select * from attachment where BOARDNO=#{boardNo}
+</select>
+</mapper>
