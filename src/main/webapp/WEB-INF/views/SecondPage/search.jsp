@@ -70,7 +70,6 @@ margin-left:9%;
 <section>
 
 <div id='main_container'>
-<a href="${path }/memo/memoLoding">메모</a>
 <span style='color:gray;font-weight:bold;margin-top:100px;margin-left:5%;font-size:30px;'>동아리 랭킹</span>
 <hr/>
 

@@ -1,4 +1,4 @@
-package com.yj.project.model.dao;
+package com.yj.project.member.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.yj.project.model.vo.Member;
-import com.yj.project.model.vo.Memo;
+import com.yj.project.member.model.vo.Member;
+import com.yj.project.member.model.vo.Memo;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{

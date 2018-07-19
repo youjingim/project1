@@ -1,4 +1,4 @@
-package com.yj.project.model.vo;
+package com.yj.project.member.model.vo;
 
 
 import java.sql.Date;

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
-import com.yj.project.model.vo.Member;
+import com.yj.project.member.model.vo.Member;
 
 @Component
 @Aspect

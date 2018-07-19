@@ -1,13 +1,13 @@
-package com.yj.project.model.service;
+package com.yj.project.member.model.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yj.project.model.dao.MemberDao;
-import com.yj.project.model.vo.Member;
-import com.yj.project.model.vo.Memo;
+import com.yj.project.member.model.dao.MemberDao;
+import com.yj.project.member.model.vo.Member;
+import com.yj.project.member.model.vo.Memo;
 @Service
 public class MemberServiceImpl implements MemberService{
 	@Autowired
