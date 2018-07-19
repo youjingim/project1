@@ -86,7 +86,7 @@ background-color:white;
         left: 'prev,next today',
         center: 'title',
         right: 'month'
-      },
+      },/* ddd */
       defaultDate: '${date}',
       navLinks: true, // can click day/week names to navigate views
       editable: false,
