@@ -43,10 +43,10 @@ public class MemberController {
 		@RequestMapping("/memberEnrollEnd.do")
 		public String MemberEnrollEnd(Member member, Model model,HttpServletRequest req) {
 			model.addAttribute("member",member);
-		      String oripw=member.getPassword();
+		      String oripw=member.getMember_pw();
 		      System.out.println("암호화 전 비번 : "+oripw);
-		      member.setPassword(bcrypt.encode(oripw));
-		      System.out.println("암호화 후 비번 : "+member.getPassword());
+		      member.setMember_pw(bcrypt.encode(oripw));
+		      System.out.println("암호화 후 비번 : "+member.getMember_pw());
 			int result=service.insertMember(member);
 			
 			String msg="";
@@ -72,7 +72,7 @@ public class MemberController {
 
 			      if(m!=null) {
 	/*		         if(m.getPassword().equals(password)) {
-	*/		        	 if(bcrypt.matches(password, m.getPassword())) {
+	*/		        	 if(bcrypt.matches(password, m.getMember_pw())) {
 						
 						msg="로그인 성공";
 			            /*			Session!
@@ -114,8 +114,8 @@ public class MemberController {
 			@RequestMapping("/member/memberView.do")
 			public String update(@RequestParam(value="userId") String userId,HttpServletRequest req) {
 			    Member m=service.loginCheck(userId);
-			    System.out.println(m.getHobby());
-			    List<String> hobbyList = Arrays.asList(m.getHobby());
+			    System.out.println(m.getEnroll_category());
+			    List<String> hobbyList = Arrays.asList(m.getEnroll_category());
 	/*		    for(int i=0;i<m.getHobby().length;i++) {
 			    	hobbyList.add(m.getHobby()[i]);
 			    }

@@ -1,7 +1,6 @@
 package com.yj.project.member.model.dao;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yj.project.member.model.vo.Member;
-import com.yj.project.member.model.vo.Memo;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -24,10 +22,7 @@ public class MemberDaoImpl implements MemberDao{
 	public Member loginCheck(String userId) {
 		return sqlSession.selectOne("project.selectOne",userId);
 	}
-	@Override
-	public List<Memo> memoLoding() {
-		return sqlSession.selectList("project.LoadMemo");
-	}
+
 	@Override
 	public int insertMemo(String memo, String password) {
 		Map<String, String> memo1 = new HashMap<String, String>();

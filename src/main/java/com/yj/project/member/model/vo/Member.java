@@ -5,120 +5,136 @@ import java.sql.Date;
 import java.util.Arrays;
 
 public class Member {
-   private String userId;
-   private String password;
-   private String userName;
-   private String gender;
-   private int age;
-   private String email;
-   private String phone;
-   private String address;
-   private String[] hobby;
-   private Date enrolldate;
+
+	
+   private String member_id;
+   private String member_pw;
+   private String member_name;
+   private String member_email;
+   private String member_phone;
+   private String member_addr;
+   private String[] enroll_category;
+   private Date enroll_date;
+   private Date member_birth;
+   private String member_level;
+   private String university;
    
    public Member() {}
 
-   public Member(String userId, String password, String userName, String gender, int age, String email, String phone,
-         String address, String[] hobby, Date enrolldate) {
-      super();
-      this.userId = userId;
-      this.password = password;
-      this.userName = userName;
-      this.gender = gender;
-      this.age = age;
-      this.email = email;
-      this.phone = phone;
-      this.address = address;
-      this.hobby = hobby;
-      this.enrolldate = enrolldate;
-   }
+public Member(String member_id, String member_pw, String member_name, String member_email, String member_phone,
+		String member_addr, String[] enroll_category, Date enroll_date, Date member_birth, String member_level,
+		String university) {
+	super();
+	this.member_id = member_id;
+	this.member_pw = member_pw;
+	this.member_name = member_name;
+	this.member_email = member_email;
+	this.member_phone = member_phone;
+	this.member_addr = member_addr;
+	this.enroll_category = enroll_category;
+	this.enroll_date = enroll_date;
+	this.member_birth = member_birth;
+	this.member_level = member_level;
+	this.university = university;
+}
 
-   public String getUserId() {
-      return userId;
-   }
+public String getMember_id() {
+	return member_id;
+}
 
-   public void setUserId(String userId) {
-      this.userId = userId;
-   }
+public void setMember_id(String member_id) {
+	this.member_id = member_id;
+}
 
-   public String getPassword() {
-      return password;
-   }
+public String getMember_pw() {
+	return member_pw;
+}
 
-   public void setPassword(String password) {
-      this.password = password;
-   }
+public void setMember_pw(String member_pw) {
+	this.member_pw = member_pw;
+}
 
-   public String getUserName() {
-      return userName;
-   }
+public String getMember_name() {
+	return member_name;
+}
 
-   public void setUserName(String userName) {
-      this.userName = userName;
-   }
+public void setMember_name(String member_name) {
+	this.member_name = member_name;
+}
 
-   public String getGender() {
-      return gender;
-   }
+public String getMember_email() {
+	return member_email;
+}
 
-   public void setGender(String gender) {
-      this.gender = gender;
-   }
+public void setMember_email(String member_email) {
+	this.member_email = member_email;
+}
 
-   public int getAge() {
-      return age;
-   }
+public String getMember_phone() {
+	return member_phone;
+}
 
-   public void setAge(int age) {
-      this.age = age;
-   }
+public void setMember_phone(String member_phone) {
+	this.member_phone = member_phone;
+}
 
-   public String getEmail() {
-      return email;
-   }
+public String getMember_addr() {
+	return member_addr;
+}
 
-   public void setEmail(String email) {
-      this.email = email;
-   }
+public void setMember_addr(String member_addr) {
+	this.member_addr = member_addr;
+}
 
-   public String getPhone() {
-      return phone;
-   }
+public String[] getEnroll_category() {
+	return enroll_category;
+}
 
-   public void setPhone(String phone) {
-      this.phone = phone;
-   }
+public void setEnroll_category(String[] enroll_category) {
+	this.enroll_category = enroll_category;
+}
 
-   public String getAddress() {
-      return address;
-   }
+public Date getEnroll_date() {
+	return enroll_date;
+}
 
-   public void setAddress(String address) {
-      this.address = address;
-   }
+public void setEnroll_date(Date enroll_date) {
+	this.enroll_date = enroll_date;
+}
 
-   public String[] getHobby() {
-      return hobby;
-   }
+public Date getMember_birth() {
+	return member_birth;
+}
 
-   public void setHobby(String[] hobby) {
-      this.hobby = hobby;
-   }
+public void setMember_birth(Date member_birth) {
+	this.member_birth = member_birth;
+}
 
-   public Date getEnrolldate() {
-      return enrolldate;
-   }
+public String getMember_level() {
+	return member_level;
+}
 
-   public void setEnrolldate(Date enrolldate) {
-      this.enrolldate = enrolldate;
-   }
+public void setMember_level(String member_level) {
+	this.member_level = member_level;
+}
 
-   @Override
-   public String toString() {
-      return "Member [userId=" + userId + ", password=" + password + ", userName=" + userName + ", gender=" + gender
-            + ", age=" + age + ", email=" + email + ", phone=" + phone + ", address=" + address + ", hobby="
-            + Arrays.toString(hobby) + ", enrolldate=" + enrolldate + "]";
-   }
+public String getUniversity() {
+	return university;
+}
+
+public void setUniversity(String university) {
+	this.university = university;
+}
+
+@Override
+public String toString() {
+	return "Member [member_id=" + member_id + ", member_pw=" + member_pw + ", member_name=" + member_name
+			+ ", member_email=" + member_email + ", member_phone=" + member_phone + ", member_addr=" + member_addr
+			+ ", enroll_category=" + Arrays.toString(enroll_category) + ", enroll_date=" + enroll_date
+			+ ", member_birth=" + member_birth + ", member_level=" + member_level + ", university=" + university + "]";
+}
+   
+   
    
    
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.yj.project.member.model.dao.MemberDao;
 import com.yj.project.member.model.vo.Member;
-import com.yj.project.member.model.vo.Memo;
 @Service
 public class MemberServiceImpl implements MemberService{
 	@Autowired
@@ -20,11 +19,7 @@ public class MemberServiceImpl implements MemberService{
 	public Member loginCheck(String userId) {
 		return memberDao.loginCheck(userId);
 	}
-	@Override
-	public List<Memo> memoLoding() {
-		
-		return memberDao.memoLoding();
-	}
+
 	@Override
 	public int insertMemo(String memo, String password) {
 		return memberDao.insertMemo(memo,password);

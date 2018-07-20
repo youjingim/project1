@@ -30,7 +30,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yj.project.common.MemberException;
 import com.yj.project.member.model.service.MemberService;
 import com.yj.project.member.model.vo.Member;
-import com.yj.project.member.model.vo.Memo;
 @Controller
 public class MainPageController {
 
