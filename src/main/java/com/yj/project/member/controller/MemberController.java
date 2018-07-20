@@ -34,14 +34,19 @@ public class MemberController {
 	   @RequestMapping("/member/memberEnroll.do")
 		public String MemberEnroll() {
 		   
-		   
-		   
-		   
 			return "member/memberEnroll";
 		}
 		
 		@RequestMapping("/memberEnrollEnd.do")
-		public String MemberEnrollEnd(Member member, Model model,HttpServletRequest req) {
+		public String MemberEnrollEnd(Member member, Model model,HttpServletRequest req,
+				@RequestParam(value="member_phone1")String p1,@RequestParam(value="member_phone2")String p2,
+				@RequestParam(value="member_phone3")String p3,@RequestParam(value="member_email1")String e1,
+				@RequestParam(value="member_email2")String e2,@RequestParam(value="member_addr1")String add1,
+				@RequestParam(value="member_addr2")String add2,@RequestParam(value="member_addr3")String add3
+				) {
+			member.setMember_phone(p1+p2+p3);
+			member.setMember_email(e1+e2);
+			member.setMember_addr(add1+add2+add3);
 			model.addAttribute("member",member);
 		      String oripw=member.getMember_pw();
 		      System.out.println("암호화 전 비번 : "+oripw);
