@@ -37,16 +37,18 @@ public class MemberController {
 			return "member/memberEnroll";
 		}
 		
-		@RequestMapping("/memberEnrollEnd.do")
+		@RequestMapping("/member/memberEnrollEnd.do")
 		public String MemberEnrollEnd(Member member, Model model,HttpServletRequest req,
 				@RequestParam(value="member_phone1")String p1,@RequestParam(value="member_phone2")String p2,
 				@RequestParam(value="member_phone3")String p3,@RequestParam(value="member_email1")String e1,
 				@RequestParam(value="member_email2")String e2,@RequestParam(value="member_addr1")String add1,
 				@RequestParam(value="member_addr2")String add2,@RequestParam(value="member_addr3")String add3
+				,@RequestParam(value="member_level",required=false,defaultValue="일반")String level
 				) {
 			member.setMember_phone(p1+p2+p3);
 			member.setMember_email(e1+e2);
 			member.setMember_addr(add1+add2+add3);
+			member.setMember_level(level);
 			model.addAttribute("member",member);
 		      String oripw=member.getMember_pw();
 		      System.out.println("암호화 전 비번 : "+oripw);
@@ -67,7 +69,7 @@ public class MemberController {
 			return "common/msg";
 		}
 			@RequestMapping("/member/memberLogin.do")
-		   public String memberLogin(String userId, String password, Model model,HttpSession session) {
+		   public String memberLogin(@RequestParam(value="member_id")String userId,@RequestParam(value="member_pw")String password, Model model,HttpSession session) {
 			      logger.debug("로그인메소드 호출");
 				  Member m=service.loginCheck(userId);
 			      //응답페이지

@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="project">
 <insert id="insertMember" parameterType="com.yj.project.member.model.vo.Member">
-insert into member values(#{member_id},#{member_pw},#{member_name},#{member_email},#{member_phone},#{member_addr},#{enroll_category,typeHandler=StringArray},sysdate,#{member_birth},#{member_level},#{university})
+insert into member values(#{member_id},#{member_pw},#{member_name},#{member_email},#{member_birth},#{university},#{member_addr},#{member_level},#{member_phone},sysdate,#{enroll_category,typeHandler=StringArray})
 
 </insert>
 <resultMap type="com.yj.project.member.model.vo.Member" id="selectMap">
 <result column="hobby" property="hobby" typeHandler="com.yj.project.common.StringArrayTypeHandler"/>
 </resultMap>
 <select id="selectOne" parameterType="string" resultMap="selectMap">
-select * from member where userid=#{member_id}
+select * from member where member_id=#{member_id}
 </select>
 
 

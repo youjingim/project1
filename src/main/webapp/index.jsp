@@ -163,9 +163,9 @@ overflow:scroll;
 <div class="main_logo">Campus Pick</div>
 <form id="login_Frm" action="${pageContext.request.contextPath}/member/memberLogin.do" method="post">
 <span class="loginBar">
-<input type="text" class="form-control" name="userId" placeholder="아이디" autofocus>
+<input type="text" class="form-control" name="member_id" placeholder="아이디" autofocus>
 <br>
-<input type="password" class="form-control" placeholder="비밀번호" name="password">
+<input type="password" class="form-control" placeholder="비밀번호" name="member_pw">
 <br><br>
   <button type="button" class="btn btn-primary btn-block" onclick="login()">로 그 인</button>
   <br><br>
@@ -179,13 +179,197 @@ overflow:scroll;
 </section>
 <script>
 function login(){
-	$('#login_Frm').submit();
-	
+   $('#login_Frm').submit();
+   
 }
 
 </script>
 
+<div class="modal fade" id="myModal" role="dialog">
+    <div id="modal_move" class="modal-dialog" style="margin-left:310px;">
+    
+      <!-- Modal content-->
+     <div id="Enroll_container">
+  <br>
+      <br> <span
+         style='font-size: 30px; font-weight: bold; margin-left: 50px;'>회원가입</span>
+      <br>
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+      <hr />
 
+           <span style="display:inline-block;position:absolute;right:30px;"><img src="resources/image/join.jpg" width="350px" height="600px"></span>
+
+      <div class="col-sm-6 col-md-offset-3" style='margin-left:5%; display:inline-block;'>
+      
+         <form action='${path }/member/memberEnrollEnd.do' method='post'>
+            <div class="form-group">
+               <label for="memberId">ID</label><span style="color: blue">
+                  (*)</span> <input type="text" class="form-control" id="member_id" name="member_id"
+                  placeholder="ID를 입력해 주세요" style='width:200px'>
+            </div>
+            <div class="form-group">
+               <label for="inputPassword">비밀번호</label><span style="color: blue">
+                  (*)</span> <input type="password" class="form-control" id="member_pw" name='member_pw'
+                  placeholder="비밀번호를 입력해주세요" style='width:300px'>
+            </div>
+            <div class="form-group">
+               <label for="inputPasswordCheck">비밀번호 확인</label><span
+                  style="color: blue"> (*)</span> <input type="password"
+                  class="form-control" id="passwordCheck" name='member_pwCheck'
+                  placeholder="비밀번호 확인을 위해 다시 입력 해 주세요"style='width:300px'>
+            </div>
+            <div class="form-group">
+               <label for="member_name">이름</label><span style="color: blue">
+                  (*)</span> <input type="text" class="form-control" id="member_name" name='member_name' style='width:200px'
+                  placeholder="이름을 입력해 주세요">
+            </div>
+            <div class="form-group">
+               <label for="member_birth">생년월일</label><span style="color: blue">
+                  (*)</span> <input type="Date" class="form-control" id="member_birth" name='member_birth' style='width:200px'>
+            </div>
+            <div class="form-group">
+               <label for="university">소속 대학</label><span style="color: blue">
+                  (*)</span><br> <input type="text" class="form-control" id="university" name='university' style='width:200px; display:inline-block'
+                  placeholder="대학교를 선택하세요">
+                  <select id='school_select' name='school_select' class="form-control" style='width:150px; display:inline-block;'>
+                       <option value="" selected>선택하세요</option>
+                       <option value='서울대학교'>서울대학교</option>
+                       <option value='연세대학교'>연세대학교</option>
+                       <option value='고려대학교'>고려대학교</option>
+                       <option value='경희대학교'>경희대학교</option>
+                       <option value='홍익대학교'>홍익대학교</option>
+                       <option value='성균관대학교'>성균관대학교</option>
+                       <option value='서강대학교'>서강대학교</option>
+                       <option value='한양대학교'>한양대학교</option>
+                       <option value='1'>직접입력</option>
+                  </select>
+            </div>
+            <div class="form-group">
+               <label for="phone">휴대폰 번호</label><span style="color: blue">
+                  (*)</span> <br/>
+                  <select name='member_phone1' class="form-control" style='width:90px; display:inline-block;'>
+                       <option value='010'>010</option>
+                       <option value='011'>011</option>
+                       <option value='019'>019</option>
+                       <option value='070'>070</option>
+                  </select>-
+                  <input type="tel" name='member_phone2' class="form-control" maxlength="4" onKeyDown="checkKeysInt(event,'');" onKeyUp="checkKeysInt(event,'');" id="inputMobilemiddle" style='width:90px; display:inline-block;'>-
+                  <input type="tel" name='member_phone3' class="form-control" maxlength="4" onKeyDown="checkKeysInt(event,'');" onKeyUp="checkKeysInt(event,'');" id="inputMobilelast" style='width:90px; display:inline-block;'>
+            </div>
+            <div class="form-group">
+               <label for="Email">이메일 주소</label><span style="color: blue">
+                  (*)</span><br> <input type="text" class="form-control" id="member_email1" name='member_email1' style='width:150px; display:inline-block'
+                  placeholder="이메일 주소를 입력해주세요">@
+                  <input type='text' class='form-control' name='member_email2' id='member_email2' style='width:150px;display:inline-block' readonly>
+                  <select id='email_select' name='email_select' class="form-control" style='width:150px; display:inline-block;'>
+                       <option value="" selected>선택하세요</option>
+                       <option value='naver.com'>naver.com</option>
+                       <option value='gmail.com'>gmail.com</option>
+                       <option value='daum.net'>daum.net</option>
+                       <option value='1'>직접입력</option>
+                  </select>
+            </div>
+
+            <div class="form-group">
+               <label for="member_addr">주소</label> <span style="color: blue">
+                  (*)</span><br/> 
+                  <input type="text" class="form-control btn btn-outline" id="sample6_postcode"  name='member_addr1' style="width:300px; background-color:white;" placeholder="우편번호"  readonly>
+                  <input type="button" onclick="sample6_execDaumPostcode()" class="btn" value="우편번호 찾기"><br>
+                  <input type="text" class="form-control btn btn-outline-secondary"id="sample6_address" name='member_addr2' style="width:300px; background-color:white;" placeholder="주소"readonly>
+                  <input type="text"class="form-control btn btn-outline-secondary" id="sample6_address2" name='member_addr3' style="width:300px" placeholder="상세주소">
+            </div>
+
+            <div class="form-group">
+               <label for="enroll_category">관심분야</label>
+            </div>
+            <div class="col-sm-12">
+               <div class="checkbox" style="display:inline-block;">
+                  <label for='enroll_category1'> <input type="checkbox"name='enroll_category' id='enroll_category1' value="sport"> <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 운동</label>
+            
+               </div>
+               <div class="checkbox" style="display:inline-block;">
+                  <label for='enroll_category2'> <input type="checkbox" name='enroll_category'  id='enroll_category2' value="help" > <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 봉사
+                  </label>
+               </div>
+               <div class="checkbox" style="display:inline-block;">
+                  <label for='enroll_category3'> <input type="checkbox" name='enroll_category' id='enroll_category3' value="book" > <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 독서
+                  </label>
+               </div>
+               <div class="checkbox" style="display:inline-block;">
+                  <label for='enroll_category4'> <input type="checkbox" name='enroll_category' id='enroll_category4'  value="trip" > <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 여행
+                  </label>
+               </div>
+               <div class="checkbox" style="display:inline-block;">
+                  <label for='enroll_category5'> <input type="checkbox" name='enroll_category' id='enroll_category5' value="study" > <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 학습
+                  </label>
+               </div>
+               <br>
+               <div class="checkbox" style="display:inline-block;">
+                  <label for='enroll_category6'> <input type="checkbox" name='enroll_category' id='enroll_category6' value="religion" > <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 종교
+                  </label>
+               </div>
+               <div class="checkbox" style="display:inline-block;">
+                  <label for='enroll_category7'> <input type="checkbox" name='enroll_category' id='enroll_category7' value="photo" > <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 사진
+                  </label>
+               </div>
+               <div class="checkbox" style="display:inline-block;">
+                  <label for='enroll_category8'> <input type="checkbox" name='enroll_category' id='enroll_category8' value="music" > <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 음악
+                  </label>
+               </div>
+               <div class="checkbox" style="display:inline-block;">
+                  <label for='enroll_category9'> <input type="checkbox" name='enroll_category' id='enroll_category9' value="game" > <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 게임
+                  </label>
+               </div>
+               <div class="checkbox" style="display:inline-block;">
+                  <label for='enroll_category10'> <input type="checkbox" name='enroll_category' id='enroll_category10' value="dance" > <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 댄스
+                  </label>
+               </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+         
+            <div class="form-group">
+               <label>약관 동의</label>
+               <div data-toggle="buttons">
+                  <label class="btn btn-primary active"> <span
+                     class="fa fa-check"></span> <input id="agree" type="checkbox"
+                     autocomplete="off" checked>
+                  </label> <a style="color:black" href="#">이용약관</a>에 동의합니다.
+               </div>
+            </div>
+            <br/>
+            <div class="form-group" style='margin:0 0 10% 10%'>
+               <button type="submit" id="join-submit" class="btn btn-primary" >
+                  회원가입<i class="fa fa-check spaceLeft"></i>
+                  </button>
+               &nbsp;
+               <button type="reset" class="btn btn-warning">
+                  다시작성<i class="fa fa-times spaceLeft"></i>
+               </button>
+            </div>
+         </form>
+
+
+
+
+</div>
+</div>
+      
+    </div>
+  </div>
   
 <script>
 function sample6_execDaumPostcode() {
@@ -232,32 +416,50 @@ function sample6_execDaumPostcode() {
   $(function(){
     // 회원 가입 처리
     $('#join-submit').click(function(e){
-                
-        if($("#inputName").val() ==''){
+       if($("#member_id").val() ==''){
+            alert('ID를 입력하세요');
+            $("#member_id").focus();
+            return false;
+        }
+       if($("#member_pw").val() ==''){
+            alert('비밀번호를 입력하세요');
+            $("#inputPassword").focus();
+            return false;
+        }
+
+        if($("#member_pwCheck").val() ==''){
+            alert('비밀번호를 다시 한번 더 입력하세요');
+            $("#member_pwCheck").focus();
+            return false;
+        }
+        
+
+
+        if($("#member_name").val() ==''){
             alert('이름을 입력하세요');
-            $("#inputName").focus();
+            $("#member_name").focus();
             return false;
         }
-         if($("#inputMobilemiddle").val() ==''){
+         if($("#member_phone1").val() ==''){
             alert('휴대폰 번호를 입력하세요');
-            $("#inputMobilemiddle").focus();
+            $("#member_phone1").focus();
             return false;
         }
-         if($("#inputMobilelast").val() ==''){
+         if($("#member_phone2").val() ==''){
              alert('휴대폰 번호를 입력하세요');
-             $("#inputMobilelast").focus();
+             $("#member_phone2").focus();
              return false;
          }
 
-        var email = $('#InputEmail').val();
-        var email2=$('#inputEmail2').val();
+        var email = $('#member_email1').val();
+        var email2=$('#member_email2').val();
         if(email == ''){
             alert('이메일 ID를 입력하세요');
-            $("#InputEmail").focus();
+            $("#member_email1").focus();
             return false;
         } else if(email2=='') {
            alert('이메일 주소를 입력하세요');
-            $("#InputEmail2").focus();
+            $("#member_email2").focus();
         }
         
         if($("#agree").is(":checked") == false){
@@ -275,7 +477,7 @@ function checkKeysInt(e,event) {
        } else {
          e.returnValue = false;
          alert('숫자만 입력하세요!');
-         $("#inputMobileMiddle").val('');
+         $("#member_phone2").val('');
        }
      } else if (e.which) {
        var code = e.which;
@@ -288,19 +490,28 @@ function checkKeysInt(e,event) {
      }
    }
 $(function() {
-   $('#email_select').change(function(){ 
-         if($(this).val()== '1'){ 
-            $("#inputEmail2").val('');
-            $("#inputEmail2").prop("readonly",false); 
-         }else{ 
-            $("#inputEmail2").val($('#email_select').val());
-            $("#inputEmail2").prop("readonly",true); 
-         } 
-      }); 
-   });
+      $('#email_select').change(function(){ 
+            if($(this).val()== '1'){ 
+               $("#member_email2").val('');
+               $("#member_email2").prop("readonly",false); 
+            }else{ 
+               $("#member_email2").val($('#email_select').val());
+               $("#member_email2").prop("readonly",true); 
+            } 
+         }); 
+      });
+$(function() {
+      $('#school_select').change(function(){ 
+            if($(this).val()== '1'){ 
+               $("#university").val('');
+               $("#university").prop("readonly",false); 
+            }else{ 
+               $("#university").val($('#school_select').val());
+               $("#university").prop("readonly",true); 
+            } 
+         }); 
+      });
 </script>
-
-
 </body>
 </html>
 
