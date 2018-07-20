@@ -56,7 +56,7 @@ background-color:white;
 	<jsp:param value="" name="pageTitle"/>
 	</jsp:include>
 	<section>
-	<br><span style="font-size:35px;color:gray;font-weight:bold;margin-left:3%;">With Us</span>
+	<br><span style="font-size:35px;color:gray;font-weight:bold;margin-left:3%;" data-toggle="modal" data-target="#matching">With Us</span>
 	<br><hr>
 
 	<span style="margin-left:5%;width:10px;">
@@ -69,7 +69,7 @@ background-color:white;
 	</select>
 	</span>
 	<div id='main_container'>
-	<button type="button" class="btn btn-success" style="margin-left:90%;margin-bottom:10px;cursor:pointer;">+</button>	
+	<button type="button" class="btn btn-success" style="margin-left:86.5%;margin-bottom:10px;cursor:pointer;" data-toggle="modal" data-target="#myModal">매칭 업로드</button>	
 	<div id='calendar'>
 	</div>
 	</div>
@@ -97,6 +97,8 @@ background-color:white;
           start: '2018-07-19',
           modalContent:'축구매칭',
           modalPlace:'kh교육원',
+          time:'09:00~17:00',
+          
           
         }
         ,
@@ -105,25 +107,39 @@ background-color:white;
             start: '2018-04-06',
             modalContent:'야구매칭',
             modalPlace:'kj교육원',
+            time:'09:00~17:00',
+
         },
         {
             title: '서영누나 바보',
             start: '2018-04-16',
             modalContent:'야구매칭',
-            modalPlace:'kj교육원',  
+            modalPlace:'kj교육원',
+            time:'09:00~17:00',
+
         },
           {
               title: '슬기도 바보',
               start: '2018-04-06',
               modalContent:'봉사매칭',
               modalPlace:'kh교육원1',
+              time:'09:00~17:00',
+
             }
         ],
         eventClick: function(event) {
-        	 $('#modalTitle').html('동아리 이름 : '+ event.title);
-        	 $('#modalContent').html('내용 : ' + event.modalContent);
-             $('#modalPlace').html('장소 : ' + event.modalPlace);
+        	 $('#Title').html('동아리 이름 : '+ event.title);
+        	 $('#Content').html('내용 : ' + event.modalContent);
+             $('#Place').html('장소 : ' + event.modalPlace);
+             $('#Time').html('시간 : ' + event.time);
+
         	 $('#calendarModal').modal();
+        	 $('#machingTitleIn').attr("value",event.title);
+        	 $('#machingContentIn').attr("value",event.modalContent);
+        	 $('#machingPlaceIn').attr("value",event.modalPlace);
+             $('#machingTimeIn').attr("value", event.time);
+             $('#machingDateIn').attr("value",event.start);
+
         }
 
     });
@@ -133,6 +149,37 @@ background-color:white;
 
 </script>
 
+<div id="myModal" class="modal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">매칭 업로드</h4>
+      </div>
+      <div class="modal-body">
+      <form action="${path }/uploadMatching.do" method="post" id="uploadMatching">
+      제목 : <input type="text" name="machingTitle" id="machingTitle" class="form-control" style="width:50%;"><br>
+      날짜 : <input type="date" name="machingDate" id="machingDate" class="form-control" style="width:50%;"><br>
+      시간 : <input type="text" name="machingTime" id="machingTime" class="form-control" style="width:50%;"><br>
+      장소 : <input type="text" name="machingPlace" id="machingPlace" class="form-control" style="width:50%;"><br>
+      내용 : <input type="text" name="machingContent" id="machingContent" class="form-control" style="width:50%;"><br>
+      
+      </form>
+      
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="uploadMatching()">업로드</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
 <div id="calendarModal" class="modal">
 <div class="modal-dialog">
     <div class="modal-content">
@@ -141,23 +188,46 @@ background-color:white;
             <h4 style="color:black;">Matching</h4>
         </div>
         <div id="modalBody" class="modal-body">
-        	<h4 id="modalTitle" class="modal-title" style="color:black;"> </h4>
+        	<form id="matchingFrm" action="${path }/send_Matching.do" method="post">
+        	
+        	<h4 id="Title" class="modal-title" style="color:black;"></h4>
+        	<input type="hidden" name="machingTitle" id="machingTitleIn">
         	<br>
-         	<h5 id="modalPlace" class="modal-title" style="color:black;"> </h5>
+         	<h5 id="Place" class="modal-title" style="color:black;"> </h5>
+         	<input type="hidden" name="machingPlace" id="machingPlaceIn">
          	<br>
-         	<h5 id="modalContent" class="modal-title" style="color:black;"> </h5>
+         	<h5 id="Content" class="modal-title" style="color:black;"> </h5>
+         	<input type="hidden" name="machingContent" id="machingContentIn">
+         	<br>
+         	<h5 id="Time" class="modal-title" style="color:black;"> </h5>
+         	<input type="hidden" name="machingTime" id="machingTimeIn">
+         	
+         	<input type="hidden" name="machingDate" id="machingDateIn">
+
+         	</form>
+         	
          	
          	<br><br><br>
          	
          	
+         	
          </div>
         <div class="modal-footer">
-            <form action="#" method="post">
-         	<span style="margin-left:35%;"><input type="button" value="매칭신청" class="btn btn-success" onclick="alert('매칭이 신청되었습니다!');location.href='${path}/calendargo.do'">
+         	<span style="margin-left:35%;"><input type="button" value="매칭신청" class="btn btn-success" onclick="matchingFrm()">
          	 <input type="button" value="취소" class="btn btn-danger"></span>
-         	</form>
          	
         </div>
     </div>
 </div>
 </div>
+
+<script>
+function matchingFrm(){
+	$('#matchingFrm').submit();
+}
+function uploadMatching(){
+	$('#uploadMatching').submit();
+	
+}
+
+</script>

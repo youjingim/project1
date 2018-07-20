@@ -47,7 +47,6 @@ background: #ffffff; background: rgba(255, 255, 255, 0);
 left:60%;
 }
 .main_logo{
-font-family: 'Lobster', cursive;
 font-size:80px;
 color:white;
 position:absolute;

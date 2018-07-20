@@ -24,6 +24,8 @@
   <script src="${path }/resources/js/modernizr.custom.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">  
+<link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+
 <script>
 function fnMove(seq){
     var offset = $("#info" + seq).offset();
@@ -88,10 +90,28 @@ font-size:40px;
 font-weight:bold;
 color:black;
 text-decoration:none;
-font-family: 'Lobster', cursive;
+font-family: 'Poiret One', cursive;
 margin-left:30px;
 padding-top:10px;
 }
+
+span#info_span a{
+font-size:20px;
+font-weight:bold;
+color:black;
+text-decoration:none;
+margin-left:30px;
+padding-top:10px;
+}
+
+#info_span{
+position:absolute;
+right:60px;
+transition:0.5s;
+z-index:1001;
+top:20px;
+}
+
 .login{
 position:absolute;
 right:30px;
@@ -472,6 +492,12 @@ margin-bottom:0px;
 #navbar_set:hover{
 background:white;
 }
+@media screen and (max-width: 750px) {
+#info_span{
+right:60px;
+}
+
+}
 </style>
 
 </head>
@@ -481,11 +507,11 @@ background:white;
 <input type="hidden" id="color_select">
 <div class="col-sm-3">
 <span id='logo_span'>
-      <a href="#" onclick="fnMove('5')" style="opacity:1 !important;">Campus Pick</a>
+      <a href="#" onclick="fnMove('5')" style="opacity:1 !important;">CampusPick</a>
 </span>
 </div>
-  <div class="container-fluid col-sm-9" style="margin-top:10px;">
-    <div class="navbar-header">
+  <div class="container-fluid col-sm-7" style="margin-top:10px;">
+    <div class="navbar-header" >
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -494,46 +520,25 @@ background:white;
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
 
-      <ul class="nav navbar-nav navbar-right" >
-         <li><a href="#" onclick="fnMove('1')">Campus Pick</a></li>
+      <ul class="nav navbar-nav navbar-left" >
+      	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+         <li><a href="#" onclick="fnMove('1')">CampusPick</a></li>
         <li><a href="${path}/secondPage.do">동아리</a></li>
         <li><a href="#">동아리 개설</a></li>
         <li><a href="${path}/calendar.do">With us</a></li> 
         <li><a href="${path }/board/boardList.do">자유게시판</a></li>
-        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         
-        </li>
-        <li>
-		<c:if test="${memberLoggedIn == null }">
-		<a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" data-toggle="modal" data-target="#loginModal" style='cursor:pointer;'>로그인</a>     
-        </c:if>
-        <c:if test="${memberLoggedIn != null }">
+      </ul>
+    </div>
+  </div>
+
+</nav>
+  <span id="info_span">
+  <c:if test="${memberLoggedIn != null }">
         <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" type="button" onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a>
 							&nbsp;
         </c:if>
-        </li>
-        <li>
-        		<c:if test="${memberLoggedIn == null }">
-        		<a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
-		onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'" style='cursor:pointer;'>회원가입</a>
-        </c:if>
-        <c:if test="${memberLoggedIn != null }">
-		<%-- <a href="${pageContext.request.contextPath }/member/memberView.do?userId=${memberLoggedIn.userId}" title="내정보보기">${memberLoggedIn.userName }님 안녕하세요</a> --%>
-		
-        </c:if>
-        
-        </li> 
-    
-
-      </ul>
-
-    </div>
-  </div>
-</nav>
-
+  </span>
 </header>
 
 

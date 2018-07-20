@@ -33,6 +33,10 @@ public class MemberController {
 	
 	   @RequestMapping("/member/memberEnroll.do")
 		public String MemberEnroll() {
+		   
+		   
+		   
+		   
 			return "member/memberEnroll";
 		}
 		

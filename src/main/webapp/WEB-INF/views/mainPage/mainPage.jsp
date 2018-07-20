@@ -180,6 +180,10 @@ display:none;
 display:none;
 
 }
+.footer_logo{
+display:none;
+
+}
 
 }
 
@@ -296,10 +300,10 @@ $(window).scroll(function() {
 <div id='page1'>
 <h1 style="color:black;margin-left:10%;font-weight:bold;">동아리 통합관리 페이지</h1>
 <br><br>
-<span style="color:black;margin-left:6%;margin-top:50px;font-size:25px;font-family: 'Gothic A1', sans-serif;">전국의 동아리 들을 모아놓은 곳, </span><span style="color:#000063;margin-top:50px;font-size:30px;font-weight:bold;">Campus Pick!</span><br>
-<span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;">Campus pick은 전국의 동아리들이 더 쉽고 편리하게 이용할 수 있는</span><br><span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;"> 커뮤니티 사이트 입니다.</span><br><span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;">자학교 동아리만이 아닌 전국의 동아리들과 함께 활동할 수 있는 활동 </span><br><span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;">매칭 기능부터, 동아리 홍보 또는 등록도 쉽게 할 수 있으며, 동아리들</span><br><span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;">간의 정보를 공유할 수 있는 소통의 공간까지 다양하게 제공합니다.</span><br><span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;">누구나 쉽게 공통의 관심사를 공유하고 모임으로 하나되는 즐거움을 </span><br><span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;">경험할 수 있도록 </span><span style="color:#000063;margin-top:25%;font-size:30px;font-weight:bold;">Campus Pick</span><span style="color:black;margin-top:25%;font-size:25px;font-family: 'Gothic A1', sans-serif;">은 언제나 최선을 다하고 있습니다.</span>
+<span style="color:black;margin-left:6%;margin-top:50px;font-size:25px;font-family: 'Gothic A1', sans-serif;">전국의 동아리 들을 모아놓은 곳, </span><span style="color:#51ABF3;margin-top:50px;font-size:30px;font-weight:bold;">CampusPick!</span><br>
+<span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;">Campus pick은 전국의 동아리들이 더 쉽고 편리하게 이용할 수 있는</span><br><span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;"> 커뮤니티 사이트 입니다.</span><br><span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;">자학교 동아리만이 아닌 전국의 동아리들과 함께 활동할 수 있는 활동 </span><br><span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;">매칭 기능부터, 동아리 홍보 또는 등록도 쉽게 할 수 있으며, 동아리들</span><br><span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;">간의 정보를 공유할 수 있는 소통의 공간까지 다양하게 제공합니다.</span><br><span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;">누구나 쉽게 공통의 관심사를 공유하고 모임으로 하나되는 즐거움을 </span><br><span style="color:black;margin-top:25%;font-size:25px;margin-left:6%;font-family: 'Gothic A1', sans-serif;">경험할 수 있도록 </span><span style="color:#51ABF3;margin-top:25%;font-size:30px;font-weight:bold;">CampusPick</span><span style="color:black;margin-top:25%;font-size:25px;font-family: 'Gothic A1', sans-serif;">은 언제나 최선을 다하고 있습니다.</span>
 
-<div class="big_logo">Campus Pick</div>
+<div class="big_logo">CampusPick</div>
 
 </div>
 </div>
