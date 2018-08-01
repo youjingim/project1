@@ -56,7 +56,7 @@ top:100px;
 						</c:if>
 					</td>
 					<td>${board.BOARDCOUNT }</td>
-				</tr>	
+				</tr>
 			</c:forEach>
 		</c:if>
 	</table>

@@ -74,6 +74,7 @@ margin-left:9%;
 <hr/>
 
 <div id='rank_container'>
+<input type="button" onclick = "location.href='${path}/clubPage.do'" value="클릭">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">

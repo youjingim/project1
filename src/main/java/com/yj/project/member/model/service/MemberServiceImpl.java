@@ -1,6 +1,8 @@
 package com.yj.project.member.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,13 +23,27 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int insertMemo(String memo, String password) {
-		return memberDao.insertMemo(memo,password);
-	}
-	@Override
 	public int duplicateIdCheck(String userId) {
 		return memberDao.duplicateIdCheck(userId);
 	}
-	
+	@Override
+	public String findPw(Map<String, String> map) {
+		return memberDao.findPw(map);
+	}
+	@Override
+	public String findId(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return memberDao.findId(map);
+	}
+	@Override
+	public int selectEmail(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return memberDao.selectEmail(map);
+	}
+	@Override
+	public int selectId(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return memberDao.selectId(map);
+	}
 
 }

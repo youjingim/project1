@@ -24,15 +24,27 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public int insertMemo(String memo, String password) {
-		Map<String, String> memo1 = new HashMap<String, String>();
-		memo1.put("memo", memo);
-		memo1.put("password", password);
-		return sqlSession.insert("project.insertMemo",memo1);
-	}
-	@Override
 	public int duplicateIdCheck(String userId) {
 		return sqlSession.selectOne("project.selectCheck",userId);
+	}
+	@Override
+	public String findPw(Map<String, String> map) {
+		return sqlSession.selectOne("project.findPw",map);
+	}
+	@Override
+	public String findId(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("project.findId",map);
+	}
+	@Override
+	public int selectEmail(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("project.selectEmail",map);
+	}
+	@Override
+	public int selectId(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("project.selectId",map);
 	}
 
 	

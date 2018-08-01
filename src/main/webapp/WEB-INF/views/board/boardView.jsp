@@ -11,7 +11,7 @@
     div#board-container input,div#board-container button{margin-bottom:15px;}
     /* 부트스트랩 : 파일라벨명 정렬*/
     div#board-container label.custom-file-label{text-align:left;}
-    section{
+section{
 width:100%;
 height:800px;
 position:relative;

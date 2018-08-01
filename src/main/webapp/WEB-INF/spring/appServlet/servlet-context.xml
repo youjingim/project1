@@ -28,7 +28,7 @@
 	
 	<interceptors>
 	<interceptor>
-	<mapping path="/**/secondPage.do"/>
+	<mapping path="/**//send_Matching.do"/>
 	<beans:bean id='loggerInterceptor' class='com.yj.project.common.Loggerinterceptor'/>
 	
 	</interceptor>

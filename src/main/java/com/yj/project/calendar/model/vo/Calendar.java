@@ -4,70 +4,171 @@ import java.sql.Date;
 
 public class Calendar {
 	
-	private String machingTitle;
-	private Date machingDate;
-	private String machingTime;
-	private String machingPlace;
-	private String machingContent;
-	
+    private int withus_num;
+    private String withus_title;
+    private String withus_content;
+    private String member_id;
+    private String register_circle;
+    private Date matching_date;
+    private Date enroll_date;
+    private String withus_place;
+    private String withus_category;
+    private String time1;
+    private String time2;    
+    private String status;
+
+    
 	public Calendar() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Calendar(String machingTitle, Date machingDate, String machingTime, String machingPlace,
-			String machingContent) {
-		super();
-		this.machingTitle = machingTitle;
-		this.machingDate = machingDate;
-		this.machingTime = machingTime;
-		this.machingPlace = machingPlace;
-		this.machingContent = machingContent;
+
+	public int getWithus_num() {
+		return withus_num;
 	}
 
-	public String getMachingTitle() {
-		return machingTitle;
+
+	public void setWithus_num(int withus_num) {
+		this.withus_num = withus_num;
 	}
 
-	public void setMachingTitle(String machingTitle) {
-		this.machingTitle = machingTitle;
+
+	public String getWithus_title() {
+		return withus_title;
 	}
 
-	public Date getMachingDate() {
-		return machingDate;
+
+	public void setWithus_title(String withus_title) {
+		this.withus_title = withus_title;
 	}
 
-	public void setMachingDate(Date machingDate) {
-		this.machingDate = machingDate;
+
+	public String getWithus_content() {
+		return withus_content;
 	}
 
-	public String getMachingTime() {
-		return machingTime;
+
+	public void setWithus_content(String withus_content) {
+		this.withus_content = withus_content;
 	}
 
-	public void setMachingTime(String machingTime) {
-		this.machingTime = machingTime;
+
+	public String getMember_id() {
+		return member_id;
 	}
 
-	public String getMachingPlace() {
-		return machingPlace;
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 
-	public void setMachingPlace(String machingPlace) {
-		this.machingPlace = machingPlace;
+
+	public String getRegister_circle() {
+		return register_circle;
 	}
 
-	public String getMachingContent() {
-		return machingContent;
+
+	public void setRegister_circle(String register_circle) {
+		this.register_circle = register_circle;
 	}
 
-	public void setMachingContent(String machingContent) {
-		this.machingContent = machingContent;
+
+	public Date getMatching_date() {
+		return matching_date;
 	}
+
+
+	public void setMatching_date(Date matching_date) {
+		this.matching_date = matching_date;
+	}
+
+
+	public Date getEnroll_date() {
+		return enroll_date;
+	}
+
+
+	public void setEnroll_date(Date enroll_date) {
+		this.enroll_date = enroll_date;
+	}
+
+
+	public String getWithus_place() {
+		return withus_place;
+	}
+
+
+	public void setWithus_place(String withus_place) {
+		this.withus_place = withus_place;
+	}
+
+
+	public String getWithus_category() {
+		return withus_category;
+	}
+
+
+	public void setWithus_category(String withus_category) {
+		this.withus_category = withus_category;
+	}
+
+
+	public String getTime1() {
+		return time1;
+	}
+
+
+	public void setTime1(String time1) {
+		this.time1 = time1;
+	}
+
+
+	public String getTime2() {
+		return time2;
+	}
+
+
+	public void setTime2(String time2) {
+		this.time2 = time2;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Calendar [machingTitle=" + machingTitle + ", machingDate=" + machingDate + ", machingTime="
-				+ machingTime + ", machingPlace=" + machingPlace + ", machingContent=" + machingContent + "]";
+		return "Calendar [withus_num=" + withus_num + ", withus_title=" + withus_title + ", withus_content="
+				+ withus_content + ", member_id=" + member_id + ", register_circle=" + register_circle
+				+ ", matching_date=" + matching_date + ", enroll_date=" + enroll_date + ", withus_place=" + withus_place
+				+ ", withus_category=" + withus_category + ", time1=" + time1 + ", time2=" + time2 + ", status="
+				+ status + "]";
+	}
+
+
+	public Calendar(int withus_num, String withus_title, String withus_content, String member_id,
+			String register_circle, Date matching_date, Date enroll_date, String withus_place, String withus_category,
+			String time1, String time2, String status) {
+		super();
+		this.withus_num = withus_num;
+		this.withus_title = withus_title;
+		this.withus_content = withus_content;
+		this.member_id = member_id;
+		this.register_circle = register_circle;
+		this.matching_date = matching_date;
+		this.enroll_date = enroll_date;
+		this.withus_place = withus_place;
+		this.withus_category = withus_category;
+		this.time1 = time1;
+		this.time2 = time2;
+		this.status = status;
 	}
 	
 }

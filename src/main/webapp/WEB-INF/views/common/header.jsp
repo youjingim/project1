@@ -1,8 +1,10 @@
+<%@page import="com.yj.project.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
         <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
     <%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
     <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
+
     <c:set var='path' value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -17,7 +19,7 @@
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding" rel="stylesheet">
   
       <link rel="stylesheet" type="text/css" href="${path }/resources/css/component.css">
     <link rel="stylesheet" type="text/css" href="${path }/resources/css/default.css">
@@ -64,9 +66,11 @@ position:relative;
 div#myNavbar a {
 font-size:20px;
 color:black;
+font-family: 'Nanum Gothic Coding', monospace;
 }
 div#myNavbar ul li a:hover{
 color:gray;
+font-size:21px;
 }
 header{
 width:100%;
@@ -95,8 +99,8 @@ margin-left:30px;
 padding-top:10px;
 }
 
-span#info_span a{
-font-size:20px;
+#info_span a{
+font-size:10px;
 font-weight:bold;
 color:black;
 text-decoration:none;
@@ -106,10 +110,10 @@ padding-top:10px;
 
 #info_span{
 position:absolute;
-right:60px;
+right:30px;
 transition:0.5s;
 z-index:1001;
-top:20px;
+top:25px;
 }
 
 .login{
@@ -473,7 +477,7 @@ div#img_slider{
 width:100%;
 height:500px;
 position:fixed;
-background-image:url('http://cfile28.uf.tistory.com/image/99E92C3359CA5D8E041582');
+background-image:url('resources/image/backgroundNew.jpg');
 background-size:cover;
 z-index:-1;
 top:80px;
@@ -489,29 +493,35 @@ border:none;
 margin-left:0.2%;
 margin-bottom:0px;
 }
-#navbar_set:hover{
-background:white;
+
+@media screen and (max-width: 765px) {
+#navbar_set{
+background-color:white;
 }
-@media screen and (max-width: 750px) {
 #info_span{
 right:60px;
 }
-
+#nav_move{
+margin-left:0% !important;
+}
+#nav_span{
+background-color:white;
+}
 }
 </style>
 
 </head>
 <body id='info5'>
-<header class='transparent-header dark' >
-<nav id='navbar_set' class="navbar navbar-default row" style="top:0px;">
+<header class='transparent-header dark'>
+<nav id='navbar_set' class="navbar navbar-default row navbar-expand-lg" style="top:0px;">
 <input type="hidden" id="color_select">
 <div class="col-sm-3">
 <span id='logo_span'>
       <a href="#" onclick="fnMove('5')" style="opacity:1 !important;">CampusPick</a>
 </span>
 </div>
-  <div class="container-fluid col-sm-7" style="margin-top:10px;">
-    <div class="navbar-header" >
+  <div id="nav_move" class="container-fluid col-sm-9" style="margin-top:10px;margin-left:30%;">
+    <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -519,26 +529,29 @@ right:60px;
       </button>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-
-      <ul class="nav navbar-nav navbar-left" >
+      <ul class="nav navbar-nav navbar-left" id="nav_span" >
       	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
          <li><a href="#" onclick="fnMove('1')">CampusPick</a></li>
         <li><a href="${path}/secondPage.do">동아리</a></li>
         <li><a href="#">동아리 개설</a></li>
         <li><a href="${path}/calendar.do">With us</a></li> 
         <li><a href="${path }/board/boardList.do">자유게시판</a></li>
-        
       </ul>
     </div>
   </div>
 
 </nav>
-  <span id="info_span">
-  <c:if test="${memberLoggedIn != null }">
-        <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" type="button" onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a>
-							&nbsp;
-        </c:if>
-  </span>
+		<div class="dropdown" id="info_span">
+		<a style="font-weight:900; color:black;font-size:20px;cursor:pointer;"><c:out value="${memberLoggedIn.member_id}"/>님</a>
+			
+			<div class="dropdown-content">
+				<a href="#">마이페이지</a>
+				<a href="#">쪽지함</a> 
+				<a href="#">내 정보 수정</a>
+				<a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" type="button" onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a>
+				
+			</div>
+		</div>
 </header>
 
 
