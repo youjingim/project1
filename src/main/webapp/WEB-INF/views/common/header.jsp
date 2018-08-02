@@ -477,7 +477,7 @@ div#img_slider{
 width:100%;
 height:500px;
 position:fixed;
-background-image:url('resources/image/backgroundNew.jpg');
+background-image:url('${path}/resources/image/backgroundNew.jpg');
 background-size:cover;
 z-index:-1;
 top:80px;

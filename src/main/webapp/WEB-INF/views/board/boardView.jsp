@@ -28,29 +28,16 @@ background-color:white;
 top:100px;
 }
     </style>
-        <script>
-    function fileDownload(oName, rName){
-        //한글파일명이 있을 수 있으므로, 명시적으로 encoding
-	    oName = encodeURIComponent(oName);
-        location.href="${pageContext.request.contextPath}/board/fileDownload.do?oName="+oName+"&rName="+rName;
-    }
-    </script>
+
     <section>
 <div id="main_container">
     
     <div id="board-container">
-        <input type="text" class="form-control" placeholder="제목" name="boardTitle" id="boardTitle" value="${board.boardTitle }" required>
-        <input type="text" class="form-control" name="boardWriter" value="${memberLoggedIn.userId}" readonly required>
+        <input type="text" class="form-control" placeholder="제목" name="boardTitle" id="boardTitle" value="${board.freeboard_title }" required>
+        <input type="text" class="form-control" name="boardWriter" value="${memberLoggedIn.member_id}" readonly required>
 
-        <c:forEach items="${attachList}" var="a" varStatus="vs">
-            <button type="button" 
-                    class="btn btn-outline-success btn-block"
-                    onclick="fileDownload('${a.originalFileName}','${a.renameFileName }');">
-                첨부파일${vs.count} - ${a.originalFileName }
-            </button>
-        </c:forEach>
         
-        <textarea class="form-control" name="boardContent" placeholder="내용" required>${board.boardContent }</textarea>
+        <textarea class="form-control" name="boardContent" placeholder="내용" required>${board.freeboard_content }</textarea>
     </div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

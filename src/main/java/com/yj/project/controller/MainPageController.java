@@ -41,6 +41,10 @@ public class MainPageController {
 			req.setAttribute("seq", seq);
 			return "mainPage/mainPage";
 		}
+		@RequestMapping("mainpage.do")
+		public String mainpagedo() {
+			return "mainPage/mainPage";
+		}
 	   
 	   
 	   

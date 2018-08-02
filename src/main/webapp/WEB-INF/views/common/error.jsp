@@ -3,17 +3,15 @@
     <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
     <%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
     <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
-    <style>
+<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">    <style>
     #error-container{
     height:600px;
     width:100%;
-    
     }
     section{
 width:100%;
 height:800px;
 position:relative;
-top:570px;
 background-color:white;
 z-index:10;
 }
@@ -23,21 +21,28 @@ height:500px;
 position:relative;
 z-index:10;
 background-color:white;
-top:100px;
 }
-    
+.font_style{
+color:black;font-size:60px;margin-left:40%;
+font-family: 'Gloria Hallelujah', cursive;
+}
+.font_style2{
+margin-left:25%;
+font-family: 'Gloria Hallelujah', cursive;
+width:10%;
+}
+.font_style2 a{
+text-decoration:none;color:black;font-size:20px;
+}    
     </style>
-    	<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="" name="pageTitle"/>
-	</jsp:include>
 	<section>
 	<div id="main_container">
 	<div id='error-container'>
-	<h1>Error</h1>
-	<h2 style='color:red;'><%= exception.getMessage() %></h2>
-	<a href="${pageContext.request.contextPath }/">첫화면으로 돌아가기</a>
+	<span class="font_style">Error Page</span><span class="font_style2"><a href="${pageContext.request.contextPath }/">첫화면으로 돌아가기</a></span>
+	<img src = "resources/image/sorry.png" width="40%" height="700px" style='margin-left:28%;'>
+	
 	</div>
 	</div>
 </section>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
 	
