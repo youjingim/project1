@@ -3,7 +3,7 @@
     <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
     <%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
     <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
-    	<jsp:include page="/WEB-INF/views/common/header.jsp">
+    <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
 	</jsp:include>
 <style>
@@ -24,6 +24,25 @@ background-color:white;
 top:100px;
 }
 	input#btn-add {float:right; margin:0 0 15px;}
+
+div#main_container table#tbl-board th{
+height:60px;
+padding:20px;
+text-align:center;
+}
+div#main_container table#tbl-board td{
+padding:20px;
+text-align:center;
+
+}
+
+div#main_container table#tbl-board th:nth-of-type(1){
+width:5%;
+}
+div#main_container table#tbl-board th:nth-of-type(2){
+width:20%;
+}
+	
 </style>
 <section>
 <div id="main_container">
@@ -39,28 +58,30 @@ top:100px;
 			<th>번호</th>
 			<th>제목</th>
 			<th>작성자</th>
-			<th>작성일</th>
+			<th>조회수</th>
 			<th>첨부파일</th>
-			<th>조회수</th>			
+			<th>작성일</th>		
 		</tr>
 		<c:if test="${not empty list }">
 			<c:forEach var='board' items='${list }' varStatus="vs">
 				<tr>
-					<td>${board.BOARDNO }</td>
-					<td><a href='${pageContext.request.contextPath}/board/boardView.do?no=${board.BOARDNO }'>${board.BOARDTITLE }</a></td>
-					<td>${board.BOARDWRITER }</td>
-					<td>${board.BOARDDATE }</td>
-					<td align='center'>
-						<c:if test='${board.FILECOUNT>0 }'>
-							<img alt="첨부파일" src="${pageContext.request.contextPath }/resources/images/file.png" width=16px>
-						</c:if>
-					</td>
-					<td>${board.BOARDCOUNT }</td>
-				</tr>
+					<td>${board.FREEBOARD_NUM}</td>
+					<td><a href='${pageContext.request.contextPath}/board/boardView.do?no=${board.FREEBOARD_NUM }'>${board.FREEBOARD_TITLE}</a></td>
+					<td>${board.MEMBER_ID }</td>
+					<td>${board.FREEBOARD_VIEW }</td>
+						<td align='center'><c:if test='${board.FREEBOARD_ATTACHMENT>0 }'>
+								<img alt="첨부파일"
+									src="${pageContext.request.contextPath }/resources/images/file.png"
+									width=16px>
+							</c:if></td>
+							<td>${board.FREEBOARD_DATE }</td>
+					</tr>
 			</c:forEach>
 		</c:if>
 	</table>
+	<span style="margin-left:50%;margin-top:100px;">
 	${pageBar }
+	</span>
 </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
