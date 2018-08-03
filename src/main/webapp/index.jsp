@@ -37,7 +37,7 @@ section{
 width:100%;
 height:100%;
 position:relative;
-background-image:url('resources/image/backgroundNew.jpg');
+background-image:url('http://www.cdu.ac.kr/common/file/getImage.do?atchFileId=FILE_000000000305508');
 background-size:cover;
 margin:0px;
 }
@@ -91,6 +91,7 @@ left:10%;
 @media screen and (max-width: 1200px) {
 #modal_move{
 margin-left:100px;
+
 }
 }
 
@@ -184,7 +185,8 @@ margin:0 auto;
 <input type="password" class="form-control" placeholder="비밀번호" id="login_pw" name="member_pw">
 <br><br>
   <button type="submit" class="btn btn-primary btn-block" onclick="login()">로 그 인</button>
-    <br><br>
+  <br><br>
+  
  <span style="color:black;font-size:17px;margin-left:18%;">계정이 없으신가요? &nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#myModal" style="font-weight:bold;text-decoration:none;color:black;">가입하기</a></span><br><br>
  
  <span style="color:black;font-size:15px;margin-left:22%;"><a href="#" data-toggle="modal" data-target="#idModal" >아이디 찾기</a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#passwordModal" >비밀번호 찾기 </a></span>
@@ -211,7 +213,7 @@ function login(){
 
 </script>
 <div class="modal fade" id="idModal" role="dialog">
-    <div id="modal_move" class="modal-dialog" style="margin-left:310px;">
+    <div id="modal_move" class="modal-dialog" style="margin-left:310px; width:900px; overflow-x:hidden; overflow-y:hidden;">
          <div id="find_container">
   <br>
       <br> <span
@@ -222,18 +224,18 @@ function login(){
 
            <span style="display:inline-block;position:absolute;right:30px;"></span>
 
-      <div id="checkedId" class="col-sm-6 col-md-offset-3" style='width:500px; margin-left:5%; display:inline-block;'>
+      <div id="checkedId" class="col-sm-6 col-md-offset-3" style='width:630px; margin-left:5%; display:inline-block;'>
     
     <form id = "idsearch" action="<%=request.getContextPath()%>/member/findId.do" method="post" >
 				            <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                <input type="text" name="fid_name" id="fid_name" value='' placeholder="이름을 입력하세요" style='width:150px' class="form-control" required/>
+                                <input type="text" name="fid_name" id="fid_name" placeholder="이름을 입력하세요" style='width:150px' class="form-control" required/>
                             </div>
 			
 							<div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 				<input type="text" class="form-control" id='fid_email1' name='member_email1' style='width:150px; display:inline-block'
-                  placeholder="이메일 ID를 입력해주세요" required>@
+                  placeholder="이메일 ID를 입력해주세요" required><span style="display:inline-block">@</span>
                   <input type='text' class='form-control' id='fid_email2' name='member_email2'  style='width:150px;display:inline-block' readonly>
                   <select id='fid_select' class="form-control" style='width:150px; display:inline-block;'>
                        <option value="" selected>선택하세요</option>
@@ -243,15 +245,16 @@ function login(){
                        <option value='1'>직접입력</option>
                   </select>                            
                   </div>
-                                <button type="button" class="btn" style='display:inline-block' onclick="fn_fidcheck();" id='fidbtn'>이메일인증</button>
-                                <span id='check'></span>
+               <button class="btn" style='display:inline-block' onclick="fn_fidcheck();" id='fidbtn'>이메일인증</button>
                                 
-			
-				<button class="btn" type='button' onclick="idView()">확인</button>
+			<br>
+				<button class="btn btn-success" type='submit' onclick="idView()">확인</button>
 				</form>
+			
 				<script>
 				var searchID=$('#idsearch').html();
 				function idView(){
+					
 		    		$.ajax({
 		    			url:"${path}/member/findId.do",
 		    			data:{"fid_name":$('#fid_name').val(),"member_email1":$('#fid_email1').val(),"member_email2":$('#fid_email2').val()},
@@ -262,11 +265,10 @@ function login(){
 		    				}else{
 		    					$('#checkedId').html("찾으시는 아이디가 없습니다."+"<button class='btn' type='button' onclick='back()'>뒤로</button>");
 		    				}
-		    				
-					
 				}
 		    		})
-				}
+				} 
+				
 				function back(){
 					$('#checkedId').html(searchID);
 				}
@@ -277,7 +279,7 @@ function login(){
 		</div>
 
 <div class="modal fade" id="passwordModal" role="dialog">
-    <div id="modal_move" class="modal-dialog" style="margin-left:310px;">
+    <div id="modal_move" class="modal-dialog" style="margin-left:310px; width:900px; overflow-x:hidden; overflow-y:hidden">
          <div id="find_container">
   <br>
       <br> <span
@@ -288,16 +290,16 @@ function login(){
 
            <span style="display:inline-block;position:absolute;right:30px;"></span>
 
-      <div class="col-sm-6 col-md-offset-3" style='margin-left:5%; display:inline-block;'>
+      <div class="col-sm-6 col-md-offset-3" style='width:635px; margin-left:5%; display:inline-block;'>
     
     <form action="<%=request.getContextPath()%>/member/findPw.do" method="post" >
 				<div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="text" name="fpw_id"  value='' placeholder="ID를 입력하세요" class="form-control" required/>
+                                <input type="text" name="fpw_id"  value='' placeholder="ID를 입력하세요" style='width:150px;' class="form-control" required/>
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                <input type="text" name="fpw_name" value='' placeholder="이름을 입력하세요" class="form-control" required/>
+                                <input type="text" name="fpw_name" value='' placeholder="이름을 입력하세요" style='width:150px;' class="form-control" required/>
                             </div>
 			
 							<div class="input-group">
@@ -312,12 +314,11 @@ function login(){
                        <option value='daum.net'>daum.net</option>
                        <option value='1'>직접입력</option>
                   </select>                            
-                  </div>
                                 <button type="button" class="btn" style='display:inline-block' onclick="fn_fpwcheck();" id='fpwbtn'>이메일인증</button>
-                                <span id='check'></span>
+                  </div>
                                 
 			
-				<button name='next' class="btn" type='submit'>확인</button>
+				<button name='next' class="btn btn-success" type='submit'>확인</button>
 		</form>
 		</div>
 		</div>
@@ -404,6 +405,7 @@ function login(){
                   (*)</span><br> <input type="text" class="form-control" id="member_email1" name='member_email1' style='width:150px; display:inline-block'
                   placeholder="이메일 ID를 입력해주세요">@
                   <input type='text' class='form-control' name='member_email2' id='member_email2' style='width:150px;display:inline-block' readonly>
+            <span style="margin:10px 10px 10px 70% ;" id='check'></span>
                   <select id='email_select' name='email_select' class="form-control" style='width:150px; display:inline-block;'>
                        <option value="" selected>선택하세요</option>
                        <option value='naver.com'>naver.com</option>
@@ -413,7 +415,6 @@ function login(){
                   </select><br>
                   
             <button type="button" style="margin:10px 10px 10px 70% ;"onclick="fn_emailcheck();" class="btn" id='chbtn'>인증번호 받기</button> 
-            <span id='check'></span>
             </div> 
 
             <div class="form-group">
@@ -1137,13 +1138,13 @@ $(function() {
       $('#school_select').change(function(){ 
             if($(this).val()== '1'){ 
                $("#university").val('');
-               $("#university").prop("readonly",false);
+               $("#university").prop("readonly",false); 
             }else{ 
                $("#university").val($('#school_select').val());
                $("#university").prop("readonly",true); 
             } 
          }); 
       });
-</script> 
+</script>
 </body>
 </html>
