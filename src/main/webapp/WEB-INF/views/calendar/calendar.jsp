@@ -125,20 +125,6 @@ color:black;
       editable: false,
       eventLimit: true, // allow "more" link when too many events
       events: [
-<<<<<<< HEAD
-         <c:forEach var="c" items="${list}" varStatus="vs">
-         {
-              <c:choose>
-              <c:when test="${memberLoggedIn.member_id eq c.member_id}">
-            color:'#7C96C9',
-              </c:when>
-
-              <c:otherwise>
-                  color:'#A5DE9F',
-              </c:otherwise>
-             </c:choose>
-            widthus_num: '${c.withus_num}',
-=======
     	  <c:forEach var="c" items="${list}" varStatus="vs">
     	  {
     		/*     <c:choose>
@@ -151,7 +137,6 @@ color:black;
     		    </c:otherwise>
     			</c:choose> */
     		  widthus_num: '${c.withus_num}',
->>>>>>> seoyoung
               title: '${c.withus_title}',
               start: '${c.matching_date}',
               modalContent:'${c.withus_content}',
