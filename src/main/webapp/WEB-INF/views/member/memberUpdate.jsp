@@ -1,45 +1,29 @@
+<%@page import="com.yj.project.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+    <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
     <%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
     <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
+
     <c:set var='path' value="${pageContext.request.contextPath}"/>
-    
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	
-<!DOCTYPE>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-body{
-margin:0px;
-
-}
-section{
-width:100%;
-height:1300px;
-position:relative;
-background-image:url('${path}/resources/image/background.jpg');
-background-size:cover;
-margin:0px;
-}
-#Enroll_container{
-position:relative;
-top:80px;
-width:58%;
-height:1100px;
-background: white;
-left:40%;
-}
-.checkbox label:after, .radio label:after {
+    
+    	<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param value="" name="pageState"/>
+	</jsp:include>
+	<style>
+	.checkbox label:after, .radio label:after {
    content: '';
    display: table;
    clear: both;
@@ -94,10 +78,27 @@ left:40%;
    {
    opacity: .5;
 }
+.input-group {
+    margin-top: 1em;
+    margin-bottom: 1em;
+} 
+	section{
+width:100%;
+height:800px;
+position:relative;
+top:570px;
+background-color:white;
+z-index:10;
+}
+section div#Enroll_container{
+width:100%;
+height:1200px;
+position:relative;
+z-index:10;
+background-color:white;
 
-</style>
-</head>
-<body>
+}
+	</style>
 <section>
 <div id="Enroll_container">
   <br>
@@ -122,17 +123,6 @@ left:40%;
                <label for="inputName">이름</label><span style="color: blue">
                   (*)</span> <input type="text" class="form-control" id="inputName" style='width:200px'
                   placeholder="이름을 입력해 주세요">
-            </div>
-            <div class="form-group">
-               <label for="inputPassword">비밀번호</label><span style="color: blue">
-                  (*)</span> <input type="password" class="form-control" id="inputPassword"
-                  placeholder="비밀번호를 입력해주세요" style='width:300px'>
-            </div>
-            <div class="form-group">
-               <label for="inputPasswordCheck">비밀번호 확인</label><span
-                  style="color: blue"> (*)</span> <input type="password"
-                  class="form-control" id="inputPasswordCheck"
-                  placeholder="비밀번호 확인을 위해 다시 입력 해 주세요"style='width:300px'>
             </div>
             
             <div class="form-group">
@@ -159,6 +149,8 @@ left:40%;
                        <option value='daum.net'>daum.net</option>
                        <option value='1'>직접입력</option>
                   </select>
+                  <button type="button" class="btn" style='display:inline-block' onclick="fn_fidcheck();" id='fidbtn'>이메일인증</button>
+                                <span id='check'></span>
             </div>
 
             <div class="form-group">
@@ -175,53 +167,53 @@ left:40%;
             </div>
             <div class="col-sm-12">
                <div class="checkbox" style="display:inline-block;">
-                  <label> <input type="checkbox" value="sport" > <span
-                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 운동
+                  <label for='enroll_category1'> <input type="checkbox"name='enroll_category' id='enroll_category1' value="sport"> <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 운동</label>
             
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label> <input type="checkbox" value="help" > <span
+                  <label for='enroll_category2'> <input type="checkbox" name='enroll_category'  id='enroll_category2' value="help" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 봉사
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label> <input type="checkbox" value="book" > <span
+                  <label for='enroll_category3'> <input type="checkbox" name='enroll_category' id='enroll_category3' value="book" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 독서
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label> <input type="checkbox" value="trip" > <span
+                  <label for='enroll_category4'> <input type="checkbox" name='enroll_category' id='enroll_category4'  value="trip" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 여행
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label> <input type="checkbox" value="study" > <span
+                  <label for='enroll_category5'> <input type="checkbox" name='enroll_category' id='enroll_category5' value="study" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 학습
                   </label>
                </div>
                <br>
                <div class="checkbox" style="display:inline-block;">
-                  <label> <input type="checkbox" value="religion" > <span
+                  <label for='enroll_category6'> <input type="checkbox" name='enroll_category' id='enroll_category6' value="religion" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 종교
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label> <input type="checkbox" value="photo" > <span
+                  <label for='enroll_category7'> <input type="checkbox" name='enroll_category' id='enroll_category7' value="photo" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 사진
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label> <input type="checkbox" value="music" > <span
+                  <label for='enroll_category8'> <input type="checkbox" name='enroll_category' id='enroll_category8' value="music" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 음악
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label> <input type="checkbox" value="game" > <span
+                  <label for='enroll_category9'> <input type="checkbox" name='enroll_category' id='enroll_category9' value="game" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 게임
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label> <input type="checkbox" value="dance" > <span
+                  <label for='enroll_category10'> <input type="checkbox" name='enroll_category' id='enroll_category10' value="dance" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 댄스
                   </label>
                </div>
@@ -232,16 +224,7 @@ left:40%;
             <br>
             <br>
          
-            <div class="form-group">
-               <label>약관 동의</label>
-               <div data-toggle="buttons">
-                  <label class="btn btn-primary active"> <span
-                     class="fa fa-check"></span> <input id="agree" type="checkbox"
-                     autocomplete="off" checked>
-                  </label> <a style="color:black" href="#">이용약관</a>에 동의합니다.
-               </div>
-            </div>
-            <br/>
+            
             <div class="form-group" style='margin:0 0 10% 10%'>
                <button type="submit" id="join-submit" class="btn btn-primary" >
                   회원가입<i class="fa fa-check spaceLeft"></i>
@@ -258,7 +241,7 @@ left:40%;
 
 </div>
 </div>
-
+  	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </section>
 <script>
 function sample6_execDaumPostcode() {
@@ -373,5 +356,3 @@ $(function() {
    });
 </script>
 
-</body>
-</html>
