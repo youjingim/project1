@@ -127,7 +127,7 @@ color:black;
       events: [
     	  <c:forEach var="c" items="${list}" varStatus="vs">
     	  {
-    		    <c:choose>
+    		/*     <c:choose>
     		    <c:when test="${memberLoggedIn.member_id eq c.member_id}">
 				color:'#7C96C9',
     		    </c:when>
@@ -135,7 +135,7 @@ color:black;
     		    <c:otherwise>
     		        color:'#A5DE9F',
     		    </c:otherwise>
-    			</c:choose>
+    			</c:choose> */
     		  widthus_num: '${c.withus_num}',
               title: '${c.withus_title}',
               start: '${c.matching_date}',
