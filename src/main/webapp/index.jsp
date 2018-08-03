@@ -184,6 +184,7 @@ margin:0 auto;
 <input type="password" class="form-control" placeholder="비밀번호" id="login_pw" name="member_pw">
 <br><br>
   <button type="submit" class="btn btn-primary btn-block" onclick="login()">로 그 인</button>
+  
     <br><br>
  <span style="color:black;font-size:17px;margin-left:18%;">계정이 없으신가요? &nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#myModal" style="font-weight:bold;text-decoration:none;color:black;">가입하기</a></span><br><br>
  
