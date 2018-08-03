@@ -29,6 +29,8 @@ div#main_container table#tbl-board th{
 height:60px;
 padding:20px;
 text-align:center;
+border-top:1px solid black;
+border-bottom:1px solid black;
 }
 div#main_container table#tbl-board td{
 padding:20px;
@@ -37,27 +39,35 @@ text-align:center;
 }
 
 div#main_container table#tbl-board th:nth-of-type(1){
-width:5%;
+width:8%;
 }
 div#main_container table#tbl-board th:nth-of-type(2){
-width:20%;
+width:10%;
 }
-	
+div#main_container table#tbl-board th:nth-of-type(3){
+width:45%;
+}	
+div#main_container table#tbl-board th:nth-of-type(4){
+width:10%;
+}
+
+
+
 </style>
 <section>
 <div id="main_container">
 	<p> 총 ${totalCount }건의 게시물이 있습니다.</p>
-	<input type="button" value="글쓰기" id='btn-add' class='btn btn-success' onclick='fn_goboardForm();'/>
+	<input type="button" value="글쓰기" id='btn-add' class='btn btn-default' onclick='fn_goboardForm();'/>
 	<script>
 		function fn_goboardForm(){
 			location.href="${pageContext.request.contextPath}/board/boardForm.do";
 		}
 	</script>
-	<table id='tbl-board' class='table table-striped table-hover'>
+	<table id='tbl-board' class='table'>
 		<tr>
 			<th>번호</th>
-			<th>제목</th>
 			<th>작성자</th>
+			<th>제목</th>
 			<th>조회수</th>
 			<th>첨부파일</th>
 			<th>작성일</th>		
@@ -66,8 +76,8 @@ width:20%;
 			<c:forEach var='board' items='${list }' varStatus="vs">
 				<tr>
 					<td>${board.FREEBOARD_NUM}</td>
-					<td><a href='${pageContext.request.contextPath}/board/boardView.do?no=${board.FREEBOARD_NUM }'>${board.FREEBOARD_TITLE}</a></td>
 					<td>${board.MEMBER_ID }</td>
+					<td><a href='${pageContext.request.contextPath}/board/boardView.do?no=${board.FREEBOARD_NUM }'>${board.FREEBOARD_TITLE}</a></td>
 					<td>${board.FREEBOARD_VIEW }</td>
 						<td align='center'><c:if test='${board.FREEBOARD_ATTACHMENT>0 }'>
 								<img alt="첨부파일"
