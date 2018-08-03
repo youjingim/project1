@@ -124,17 +124,6 @@ background-color:white;
                   (*)</span> <input type="text" class="form-control" id="inputName" style='width:200px'
                   placeholder="이름을 입력해 주세요">
             </div>
-            <div class="form-group">
-               <label for="inputPassword">비밀번호</label><span style="color: blue">
-                  (*)</span> <input type="password" class="form-control" id="inputPassword"
-                  placeholder="비밀번호를 입력해주세요" style='width:300px'>
-            </div>
-            <div class="form-group">
-               <label for="inputPasswordCheck">비밀번호 확인</label><span
-                  style="color: blue"> (*)</span> <input type="password"
-                  class="form-control" id="inputPasswordCheck"
-                  placeholder="비밀번호 확인을 위해 다시 입력 해 주세요"style='width:300px'>
-            </div>
             
             <div class="form-group">
                <label for="inputMobile">휴대폰 번호</label><span style="color: blue">
@@ -160,6 +149,8 @@ background-color:white;
                        <option value='daum.net'>daum.net</option>
                        <option value='1'>직접입력</option>
                   </select>
+                  <button type="button" class="btn" style='display:inline-block' onclick="fn_fidcheck();" id='fidbtn'>이메일인증</button>
+                                <span id='check'></span>
             </div>
 
             <div class="form-group">
