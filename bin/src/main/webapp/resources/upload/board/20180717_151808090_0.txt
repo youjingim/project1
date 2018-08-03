@@ -1,0 +1,8 @@
+      <ul class="nav navbar-nav navbar-right" >
+        <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Jo 동아리<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+        <li><a href='#' onclick="fnMove('1')" style='font-size:20px; font-weight:none;'>소개</a></li>
+        <li><a href='#' onclick="fnMove('2')" style='font-size:20px; font-weight:none;'>공지사항</a></li>
+      </ul>
+      </li>
