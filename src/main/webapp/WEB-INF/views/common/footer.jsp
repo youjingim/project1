@@ -28,7 +28,7 @@ height:400px;
 }
 footer p {
   font-family: dotum;
-  font-size: 12px;
+  font-size: 10px;
   color: white;
 }
 .footer_intro{
@@ -82,7 +82,7 @@ font-size:45px;
 color:white;
 position:absolute;
 right:7%;
-top:160px;
+top:180px;
 }
 
 
@@ -179,7 +179,10 @@ font-size:18px;
                 <a href="http://www.google.com"><img class='icon' src="${pageContext.request.contextPath }/resources/image/mail.png"></a>
             </div>
     <div style='color:white;text-decoration:none;'>
-       <a href="#" onclick="fnMove('1')" style='color:white;'><b>소 개</b></a>&nbsp;&nbsp; &nbsp;&nbsp; <a href="/common/.do" style='color:white;'><b>공지사항</b></a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="#" style='color:white;'><b>FAQ</b></a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="#" style='color:white;'><b>1:1 문의</b></a><br><br><br>
+       <a href="#" onclick="fnMove('1')" style='color:white; font-size:16px;'><b>소 개</b></a>&nbsp;&nbsp; &nbsp;&nbsp; 
+       <a href="${pageContext.request.contextPath }/notice/noticeList.do" style='color:white; font-size:16px;'><b>공지사항</b></a> &nbsp;&nbsp;&nbsp;&nbsp; 
+       <a href="${pageContext.request.contextPath }/faq.do"  style='color:white; font-size:16px;'><b>FAQ</b></a> &nbsp;&nbsp;&nbsp;&nbsp; 
+       <a href="${pageContext.request.contextPath }/contact.do" style='color:white; font-size:16px;'><b>문의하기</b></a><br><br><br>
         <div style='color:gray; '>
         <b>상호명 : (주)Campuspick</b> &nbsp 대표: 김유진<br/>
         <b>사업자등록번호</b> : 123-45-67890&nbsp |&nbsp <b>통신판매업신고번호</b> : 제 2013-강남 역삼-1234 호<br/>

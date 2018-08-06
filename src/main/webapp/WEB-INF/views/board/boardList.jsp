@@ -32,10 +32,15 @@ text-align:center;
 border-top:1px solid black;
 border-bottom:1px solid black;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 color:black;
 font-size:16px;
 >>>>>>> yujin
+=======
+color:black;
+font-size:16px;
+>>>>>>> sjs
 }
 div#main_container table#tbl-board td{
 padding:20px;
@@ -62,11 +67,14 @@ width:10%;
 div#main_container table#tbl-board th:nth-of-type(3){
 width:45%;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }	
 div#main_container table#tbl-board th:nth-of-type(4){
 width:10%;
 }
 =======
+=======
+>>>>>>> sjs
 }   
 div#main_container table#tbl-board th:nth-of-type(4){
 width:10%;
@@ -74,13 +82,17 @@ width:10%;
 div#main_container table#tbl-board td:nth-of-type(3){
 text-align:left;
 }
+<<<<<<< HEAD
 >>>>>>> yujin
+=======
+>>>>>>> sjs
 
 
 
 </style>
 <section>
 <div id="main_container">
+<<<<<<< HEAD
 <<<<<<< HEAD
 	<p> 총 ${totalCount }건의 게시물이 있습니다.</p>
 	<input type="button" value="글쓰기" id='btn-add' class='btn btn-default' onclick='fn_goboardForm();'/>
@@ -119,13 +131,21 @@ text-align:left;
 	${pageBar }
 	</span>
 =======
+=======
+>>>>>>> sjs
 <h1 style='color:black;margin-left:1%;'>자유게시판</h1>
 <br/>
    <p style="margin-left:1%;"> 총 ${totalCount }건의 게시물이 있습니다.</p>
    <input type="button" value="글쓰기" id='btn-add' class='btn btn-default' onclick='fn_goboardForm();'/>
+<<<<<<< HEAD
    <script> 
       function fn_goboardForm(){
          location.href="${pageContext.request.contextPath}/boardForm.do";
+=======
+   <script>
+      function fn_goboardForm(){
+         location.href="${pageContext.request.contextPath}/board/boardForm.do";
+>>>>>>> sjs
       }
    </script>
    <table id='tbl-board' class='table'>
@@ -157,7 +177,10 @@ text-align:left;
    <span style="margin-left:50%;margin-top:100px;">
    ${pageBar }
    </span>
+<<<<<<< HEAD
 >>>>>>> yujin
+=======
+>>>>>>> sjs
 </div>
    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
