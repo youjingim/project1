@@ -125,20 +125,6 @@ color:black;
       editable: false,
       eventLimit: true, // allow "more" link when too many events
       events: [
-<<<<<<< HEAD
-         <c:forEach var="c" items="${list}" varStatus="vs">
-         {
-              <c:choose>
-              <c:when test="${memberLoggedIn.member_id eq c.member_id}">
-            color:'#7C96C9',
-              </c:when>
-
-              <c:otherwise>
-                  color:'#A5DE9F',
-              </c:otherwise>
-             </c:choose>
-            widthus_num: '${c.withus_num}',
-=======
     	  <c:forEach var="c" items="${list}" varStatus="vs">
     	  {
     		/*     <c:choose>
@@ -151,7 +137,6 @@ color:black;
     		    </c:otherwise>
     			</c:choose> */
     		  widthus_num: '${c.withus_num}',
->>>>>>> seoyoung
               title: '${c.withus_title}',
               start: '${c.matching_date}',
               modalContent:'${c.withus_content}',
@@ -167,7 +152,7 @@ color:black;
          </c:forEach>
                ],
         eventClick: function(event) {
-           
+           if(event.start>${date}){
 
            
               $('#member_id_in').html('아이디 : '+ event.member_id);
@@ -190,10 +175,10 @@ color:black;
              $('#register_circle_in').attr("value",event.register_circle);
             if($('#member_id').val()=='${memberLoggedIn.member_id}'){
               var btn2 = "<input type='button' value='삭제' class='btn btn-danger' onclick='deleteFrm()' style='width:250px;margin-right:170px;'>";
-              $('.modal-footer').html(btn2);
+              $('#modal_foot').html(btn2);
            }else{
                var btn4 = "<input type='button' value='매칭신청' class='btn btn-success' onclick='matchingFrm()' style='width:250px;margin-right:170px;'>";
-              $('.modal-footer').html("<span id='change' style='cursor:pointer;color:black;position:absolute;left:15px;' onclick='chage_toggle()'> 변경하기 </span>"+btn4);
+              $('#modal_foot').html("<span id='change' style='cursor:pointer;color:black;position:absolute;left:15px;' onclick='chage_toggle()'> 변경하기 </span>"+btn4);
               
            }
             
@@ -230,7 +215,11 @@ color:black;
               map.setCenter(coords);
           } 
       });
-
+           }
+           else{
+        	   alert('지난 Matging은 신청할 수 없습니다.');
+        	   
+           }
 
         },
         dayClick: function(date, allDay, jsEvent, view) {
@@ -251,13 +240,20 @@ color:black;
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" style="color:black;">매칭 업로드</h4>
+        <h4 class="modal-title" style="color:black;margin-left:200px;font-weight:bold;">Matching Enroll</h4>
       </div>
       <div class="modal-body">
       <form action="${path }/uploadMatching.do" method="post" id="uploadMatching">
-      <p>제목 :</p> <input type="text" name="withus_title" id="machingTitle" class="form-control" style="width:50%;" required><br>
-      <p>날짜 :</p> <input type="date" name="matching_date" id="machingDate" class="form-control" style="width:50%;" required><br><br>
-      <p>시간 :</p> <select id="t1" name="time1" style="width:20%;display:inline-block;" class="form-control">
+            <p>카테고리 </p> <select name="withus_category" id="withus_category" class="form-control" style="width:50%;">
+      <option value="축구">축구</option>
+      <option value="봉사">봉사</option>
+      <option value="음악">음악</option>
+      <option value="여행">여행</option>
+      <option value="연극">연극</option>
+      </select><br>
+      <p>제목 </p> <input type="text" name="withus_title" id="machingTitle" class="form-control" style="width:50%;" required><br>
+      <p>날짜 </p> <input type="date" name="matching_date" id="machingDate" class="form-control" style="width:50%;" required><br><br>
+      <p>시간 </p> <select id="t1" name="time1" style="width:20%;display:inline-block;" class="form-control">
       <option value="08">08:00</option>
       <option value="09">09:00</option>
       <option value="10">10:00</option>
@@ -292,24 +288,16 @@ color:black;
       <option value="22">22:00</option>
       </select><br><br>
                   <div class="form-group">
-               <label for="member_addr">주소</label>
+               <p>주소</p>
                   <br/>
                   <input type="text" class="form-control btn btn-outline" id="sample6_postcode"  name='member_addr1' style="width:300px; background-color:white;" placeholder="우편번호"  readonly>
                   <input type="button" onclick="sample6_execDaumPostcode()" class="btn" value="우편번호 찾기"><br>
                   <input type="text" class="form-control btn btn-outline-secondary"id="sample6_address" name="withus_place" style="width:300px; background-color:white;" placeholder="주소"readonly>
             </div>
             
-      <p>내용 :</p> <input type="text" name="withus_content" id="machingContent" class="form-control" style="width:50%;" ><br>
+      <p>내용 </p><br> <textarea name="withus_content" id="machingContent" class="form-control" style="width:98%;height:100px;" ></textarea><br>
       <input type="hidden" name="register_circle" id="register_circle" value="${memberLoggedIn.circle1_num}">
-      <p>카테고리 :</p> <select name="withus_category" id="withus_category" class="form-control" style="width:50%;">
-      <option value="축구">축구</option>
-      <option value="봉사">봉사</option>
-      <option value="음악">음악</option>
-      <option value="여행">여행</option>
-      <option value="연극">연극</option>
-      </select>
-      
-      <br>
+
       </form>
       
       
@@ -343,6 +331,8 @@ color:black;
             ~ <h4 id="Time2" class="modal-title" style="color:black;display:inline-block;"> </h4>
              <input type="hidden" name="time2" id="time2In"><br>
             <br>
+            <h4 id="Content" class="modal-title" style="color:black;"> </h4>
+            <br><br>
             <h4 id="Place" class="modal-title" style="color:black;"> </h4>
             <input type="hidden" name="withus_place" id="machingPlaceIn">
             <br>
@@ -352,7 +342,6 @@ color:black;
                 <div id="map" style="width:500px;height:250px;margin-left:35px;"></div>
 
             <br>
-            <h4 id="Content" class="modal-title" style="color:black;"> </h4>
             <input type="hidden" name="withus_content" id="machingContentIn">
             <br>
             </div>
@@ -364,8 +353,8 @@ color:black;
             <input type="hidden" id="chage_toggle" value="false">
             <div id="update_info">
             <br>
-            <p>변경할 날짜 :</p> <input type="date" name="req_matching_date1" style="width:50%;" id="req_matching_date" class="form-control"><br>
-         <p>변경할 시간 :</p> <select id = "re_time1" name="re_time11" style="width: 20%; display: inline-block;" class="form-control">
+            <p>변경할 날짜 </p> <input type="date" name="req_matching_date1" style="width:50%;" id="req_matching_date" class="form-control"><br>
+         <p>변경할 시간 </p> <select id = "re_time1" name="re_time11" style="width: 20%; display: inline-block;" class="form-control">
                      <option value="null">00:00</option>
                      <option value="08">08:00</option>
                      <option value="09">09:00</option>
@@ -401,7 +390,7 @@ color:black;
                      <option value="22">22:00</option>
                   </select><br> <br>
                   <div class="form-group">
-                      <p>변경할 주소 :</p>
+                      <p>변경할 주소 </p>
                       <br /> <input type="text"
                         class="form-control btn btn-outline" id="sample6_postcode1"
                         name='member_addr1'
@@ -413,7 +402,7 @@ color:black;
                         style="width: 300px; background-color: white;" placeholder="주소"
                         readonly>
                   </div>
-            <p>변경할 내용 :</p> <input type="text" name="req_withus_content1" style="width:50%;" id="req_withus_content" class="form-control"><br>
+            <p>변경할 내용 </p> <input type="text" name="req_withus_content1" style="width:50%;" id="req_withus_content" class="form-control"><br>
             </div>
             
             
@@ -424,7 +413,7 @@ color:black;
             
             
          </div>
-        <div class="modal-footer">
+        <div id="modal_foot" class="modal-footer">
         
             
         </div>
