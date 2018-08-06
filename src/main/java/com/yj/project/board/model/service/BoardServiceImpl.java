@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yj.project.board.model.dao.BoardDAO;
-<<<<<<< HEAD
-=======
 
->>>>>>> sjs
 import com.yj.project.board.model.vo.Board;
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -30,16 +27,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 	@Override
 	public Board boardView(int boardNo) {
-<<<<<<< HEAD
+
 		return boardDAO.boardView(boardNo);
 	}
 
 	
-=======
-		
-		return boardDAO.boardView(boardNo);
-	}
->>>>>>> sjs
+
 
 	
 }

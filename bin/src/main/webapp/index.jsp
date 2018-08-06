@@ -177,7 +177,7 @@ margin:0 auto;
 <body>
 <section>
 <div id="login_container">
-<div class="main_logo">Campus Pick</div>
+<div class="main_logo">CampusPick</div>
 <form id="login_Frm" action="${pageContext.request.contextPath}/member/memberLogin.do" method="post">
 <span class="loginBar">
 <input type="text" class="form-control" id="login_id" name="member_id" placeholder="아이디" autofocus>
@@ -231,7 +231,7 @@ function login(){
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                 <input type="text" name="fid_name" id="fid_name" placeholder="이름을 입력하세요" style='width:150px' class="form-control" required/>
                             </div>
-			
+
 							<div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 				<input type="text" class="form-control" id='fid_email1' name='member_email1' style='width:150px; display:inline-block'

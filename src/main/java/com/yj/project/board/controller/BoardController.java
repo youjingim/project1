@@ -25,10 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yj.project.board.model.service.BoardService;
-<<<<<<< HEAD
-=======
 
->>>>>>> sjs
 import com.yj.project.board.model.vo.Board;
 import com.yj.project.common.page.PageCreate;
 @Controller
@@ -59,33 +56,22 @@ public class BoardController {
 		return mv;
 	}
 	@RequestMapping("/board/boardView.do")
-<<<<<<< HEAD
 	public ModelAndView boardView(@RequestParam(value="no") int boardNo) {
-=======
-	public ModelAndView boardView(@RequestParam(value="no") int boardNo)
-	{
->>>>>>> sjs
+
 		ModelAndView mv = new ModelAndView();
 		Board board = boardService.boardView(boardNo);
 		mv.addObject("board",board);
 		mv.setViewName("board/boardView");
-<<<<<<< HEAD
 		
 		return mv;
 	}
 	
 	@RequestMapping("/boardForm.do")
 	public String boardForm() {
-=======
-		return mv;
->>>>>>> sjs
+
 		
 		return "board/boardForm";
 	}
-<<<<<<< HEAD
 	
 
 }
-=======
-}
->>>>>>> sjs
