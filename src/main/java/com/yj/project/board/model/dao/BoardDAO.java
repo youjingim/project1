@@ -10,8 +10,4 @@ public interface BoardDAO {
 	int selectCount();
 	Board boardView(int boardNo);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> sjs
 }

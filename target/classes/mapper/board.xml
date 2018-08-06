@@ -9,11 +9,7 @@ select * from free_board
 <select id="selectCount" resultType="_int">
 select count(*) from free_board
 </select>
-<<<<<<< HEAD
 <select id="selectView" resultType="com.yj.project.board.model.vo.Board" parameterType="_int">
-=======
-<select id="selectView" resultType="board" parameterType="_int">
->>>>>>> sjs
 select * from free_board where freeboard_num=#{boardNo}
 </select>
 
