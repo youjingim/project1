@@ -4,7 +4,7 @@
 <typeAliases>
 <typeAlias type="com.yj.project.common.StringArrayTypeHandler" alias="StringArray"/>
 <typeAlias type="com.yj.project.board.model.vo.Board" alias="Board"/>
-<typeAlias type="com.yj.project.board.model.vo.Attachment" alias="Attachment"/>
+<typeAlias type="com.yj.project.notice.model.vo.Notice" alias="Notice"/>
 
 </typeAliases>
 

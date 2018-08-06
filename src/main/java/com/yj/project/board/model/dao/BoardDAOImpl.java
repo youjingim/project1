@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.yj.project.board.model.vo.Attachment;
+
 import com.yj.project.board.model.vo.Board;
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -27,25 +27,9 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public int insertBoard(Board board) {
-		return sqlSession.insert("board.insertBoard",board);
+	public Board boardView(int boardNo) {
+		
+		return sqlSession.selectOne("board.selectView", boardNo);
 	}
 
-	@Override
-	public int insertAttach(Attachment attach) {
-		return sqlSession.insert("board.insertAttach",attach);
 	}
-
-	@Override
-	public Board selectBoardOne(int boardNo) {
-		return sqlSession.selectOne("board.selectOne",boardNo);
-	}
-
-	@Override
-	public List<Attachment> selectAttchList(int boardNo) {
-		return sqlSession.selectList("board.selectAttach",boardNo);
-	}
-
-
-
-}

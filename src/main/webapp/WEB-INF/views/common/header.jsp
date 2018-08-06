@@ -64,13 +64,13 @@ height:auto;
 position:relative;
 }
 div#myNavbar a {
-font-size:20px;
+font-size:17px;
 color:black;
 font-family: 'Nanum Gothic Coding', monospace;
 }
 div#myNavbar ul li a:hover{
 color:gray;
-font-size:21px;
+font-size:18px;
 }
 header{
 width:100%;
@@ -542,13 +542,13 @@ background-color:white;
 
 </nav>
 		<div class="dropdown" id="info_span">
-		<a style="font-weight:900; color:black;font-size:20px;cursor:pointer;"><c:out value="${memberLoggedIn.member_id}"/>님</a>
+		<a style="font-weight:900; color:black;font-size:16px;cursor:pointer;"><c:out value="${memberLoggedIn.member_id}"/>님</a>
 			
 			<div class="dropdown-content">
-				<a href="#">마이페이지</a>
-				<a href="#">쪽지함</a> 
-				<a href="#">내 정보 수정</a>
-				<a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" type="button" onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a>
+				<a href="#" style="font-size:13px;">마이페이지</a>
+				<a href="#" style="font-size:13px;" >쪽지함</a> 
+				<a href="#" style="font-size:13px;">내 정보 수정</a>
+				<a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" style="font-size:13px;" type="button" onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a>
 				
 			</div>
 		</div>
