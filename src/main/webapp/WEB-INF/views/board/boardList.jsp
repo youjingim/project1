@@ -75,7 +75,7 @@ text-align:left;
 <br/>
    <p style="margin-left:1%;"> 총 ${totalCount }건의 게시물이 있습니다.</p>
    <input type="button" value="글쓰기" id='btn-add' class='btn btn-default' onclick='fn_goboardForm();'/>
-   <script>
+   <script> 
       function fn_goboardForm(){
          location.href="${pageContext.request.contextPath}/boardForm.do";
       }
