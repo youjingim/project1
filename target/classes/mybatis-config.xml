@@ -4,9 +4,13 @@
 <typeAliases>
 <typeAlias type="com.yj.project.common.StringArrayTypeHandler" alias="StringArray"/>
 <typeAlias type="com.yj.project.board.model.vo.Board" alias="Board"/>
+<<<<<<< HEAD
 
 <typeAlias type="com.yj.project.notice.model.vo.Notice" alias="Notice"/>
 
+=======
+<typeAlias type="com.yj.project.notice.model.vo.Notice" alias="Notice"/>
+>>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
 </typeAliases>
 
 

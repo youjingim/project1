@@ -93,6 +93,9 @@ text-align:left;
 <section>
 <div id="main_container">
 <<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
 	<p> 총 ${totalCount }건의 게시물이 있습니다.</p>
 	<input type="button" value="글쓰기" id='btn-add' class='btn btn-default' onclick='fn_goboardForm();'/>
@@ -133,6 +136,7 @@ text-align:left;
 =======
 =======
 >>>>>>> sjs
+>>>>>>> bbe0dcb499eebb33c6f45f9c3e30d41511a58e88
 <h1 style='color:black;margin-left:1%;'>자유게시판</h1>
 <br/>
    <p style="margin-left:1%;"> 총 ${totalCount }건의 게시물이 있습니다.</p>
@@ -178,9 +182,12 @@ text-align:left;
    ${pageBar }
    </span>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 >>>>>>> yujin
 =======
 >>>>>>> sjs
+>>>>>>> bbe0dcb499eebb33c6f45f9c3e30d41511a58e88
 </div>
    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 

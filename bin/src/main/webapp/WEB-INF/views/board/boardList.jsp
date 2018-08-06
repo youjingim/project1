@@ -33,14 +33,20 @@ border-top:1px solid black;
 border-bottom:1px solid black;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
 =======
 color:black;
 font-size:16px;
 >>>>>>> yujin
+<<<<<<< HEAD
 =======
 color:black;
 font-size:16px;
 >>>>>>> sjs
+=======
+>>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
 }
 div#main_container table#tbl-board td{
 padding:20px;
@@ -68,13 +74,19 @@ div#main_container table#tbl-board th:nth-of-type(3){
 width:45%;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
 }	
 div#main_container table#tbl-board th:nth-of-type(4){
 width:10%;
 }
 =======
+<<<<<<< HEAD
 =======
 >>>>>>> sjs
+=======
+>>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
 }   
 div#main_container table#tbl-board th:nth-of-type(4){
 width:10%;
@@ -83,9 +95,13 @@ div#main_container table#tbl-board td:nth-of-type(3){
 text-align:left;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> yujin
 =======
 >>>>>>> sjs
+=======
+>>>>>>> yujin
+>>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
 
 
 
@@ -94,6 +110,9 @@ text-align:left;
 <div id="main_container">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
 	<p> 총 ${totalCount }건의 게시물이 있습니다.</p>
 	<input type="button" value="글쓰기" id='btn-add' class='btn btn-default' onclick='fn_goboardForm();'/>
 	<script>
@@ -131,12 +150,16 @@ text-align:left;
 	${pageBar }
 	</span>
 =======
+<<<<<<< HEAD
 =======
 >>>>>>> sjs
+=======
+>>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
 <h1 style='color:black;margin-left:1%;'>자유게시판</h1>
 <br/>
    <p style="margin-left:1%;"> 총 ${totalCount }건의 게시물이 있습니다.</p>
    <input type="button" value="글쓰기" id='btn-add' class='btn btn-default' onclick='fn_goboardForm();'/>
+<<<<<<< HEAD
 <<<<<<< HEAD
    <script> 
       function fn_goboardForm(){
@@ -146,6 +169,11 @@ text-align:left;
       function fn_goboardForm(){
          location.href="${pageContext.request.contextPath}/board/boardForm.do";
 >>>>>>> sjs
+=======
+   <script> 
+      function fn_goboardForm(){
+         location.href="${pageContext.request.contextPath}/boardForm.do";
+>>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
       }
    </script>
    <table id='tbl-board' class='table'>
@@ -178,9 +206,13 @@ text-align:left;
    ${pageBar }
    </span>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> yujin
 =======
 >>>>>>> sjs
+=======
+>>>>>>> yujin
+>>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
 </div>
    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
