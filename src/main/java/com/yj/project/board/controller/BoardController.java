@@ -64,5 +64,11 @@ public class BoardController {
 		return mv;
 	}
 	
+	@RequestMapping("/boardForm.do")
+	public String boardForm() {
+		
+		return "board/boardForm";
+	}
+	
 
 }
