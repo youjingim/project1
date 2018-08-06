@@ -7,6 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> sjs
 import com.yj.project.board.model.vo.Board;
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -27,6 +31,7 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public Board boardView(int boardNo) {
+<<<<<<< HEAD
 		return sqlSession.selectOne("board.selectView",boardNo);
 	}
 
@@ -34,3 +39,10 @@ public class BoardDAOImpl implements BoardDAO{
 
 
 }
+=======
+		
+		return sqlSession.selectOne("board.selectView", boardNo);
+	}
+
+	}
+>>>>>>> sjs

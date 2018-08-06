@@ -32,10 +32,15 @@ text-align:center;
 border-top:1px solid black;
 border-bottom:1px solid black;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 color:black;
 font-size:16px;
 >>>>>>> yujin
+=======
+color:black;
+font-size:16px;
+>>>>>>> sjs
 }
 div#main_container table#tbl-board td{
 padding:20px;
@@ -62,11 +67,14 @@ width:10%;
 div#main_container table#tbl-board th:nth-of-type(3){
 width:45%;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }	
 div#main_container table#tbl-board th:nth-of-type(4){
 width:10%;
 }
 =======
+=======
+>>>>>>> sjs
 }   
 div#main_container table#tbl-board th:nth-of-type(4){
 width:10%;
@@ -74,21 +82,74 @@ width:10%;
 div#main_container table#tbl-board td:nth-of-type(3){
 text-align:left;
 }
+<<<<<<< HEAD
 >>>>>>> yujin
+=======
+>>>>>>> sjs
 
 
 
 </style>
 <section>
 <div id="main_container">
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	<p> 총 ${totalCount }건의 게시물이 있습니다.</p>
+	<input type="button" value="글쓰기" id='btn-add' class='btn btn-default' onclick='fn_goboardForm();'/>
+	<script>
+		function fn_goboardForm(){
+			location.href="${pageContext.request.contextPath}/board/boardForm.do";
+		}
+	</script>
+	<table id='tbl-board' class='table'>
+		<tr>
+			<th>번호</th>
+			<th>작성자</th>
+			<th>제목</th>
+			<th>조회수</th>
+			<th>첨부파일</th>
+			<th>작성일</th>		
+		</tr>
+		<c:if test="${not empty list }">
+			<c:forEach var='board' items='${list }' varStatus="vs">
+				<tr>
+					<td>${board.FREEBOARD_NUM}</td>
+					<td>${board.MEMBER_ID }</td>
+					<td><a href='${pageContext.request.contextPath}/board/boardView.do?no=${board.FREEBOARD_NUM }'>${board.FREEBOARD_TITLE}</a></td>
+					<td>${board.FREEBOARD_VIEW }</td>
+						<td align='center'><c:if test='${board.FREEBOARD_ATTACHMENT>0 }'>
+								<img alt="첨부파일"
+									src="${pageContext.request.contextPath }/resources/images/file.png"
+									width=16px>
+							</c:if></td>
+							<td>${board.FREEBOARD_DATE }</td>
+					</tr>
+			</c:forEach>
+		</c:if>
+	</table>
+	<span style="margin-left:50%;margin-top:100px;">
+	${pageBar }
+	</span>
+=======
+=======
+>>>>>>> sjs
+>>>>>>> bbe0dcb499eebb33c6f45f9c3e30d41511a58e88
 <h1 style='color:black;margin-left:1%;'>자유게시판</h1>
 <br/>
    <p style="margin-left:1%;"> 총 ${totalCount }건의 게시물이 있습니다.</p>
    <input type="button" value="글쓰기" id='btn-add' class='btn btn-default' onclick='fn_goboardForm();'/>
+<<<<<<< HEAD
    <script> 
       function fn_goboardForm(){
          location.href="${pageContext.request.contextPath}/boardForm.do";
+=======
+   <script>
+      function fn_goboardForm(){
+         location.href="${pageContext.request.contextPath}/board/boardForm.do";
+>>>>>>> sjs
       }
    </script>
    <table id='tbl-board' class='table'>
@@ -120,6 +181,13 @@ text-align:left;
    <span style="margin-left:50%;margin-top:100px;">
    ${pageBar }
    </span>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> yujin
+=======
+>>>>>>> sjs
+>>>>>>> bbe0dcb499eebb33c6f45f9c3e30d41511a58e88
 </div>
    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 

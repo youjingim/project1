@@ -4,6 +4,10 @@
 <typeAliases>
 <typeAlias type="com.yj.project.common.StringArrayTypeHandler" alias="StringArray"/>
 <typeAlias type="com.yj.project.board.model.vo.Board" alias="Board"/>
+<<<<<<< HEAD
+=======
+<typeAlias type="com.yj.project.notice.model.vo.Notice" alias="Notice"/>
+>>>>>>> sjs
 
 </typeAliases>
 
