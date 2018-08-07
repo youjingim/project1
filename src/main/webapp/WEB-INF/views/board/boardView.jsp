@@ -36,10 +36,7 @@ top:100px;
         <input type="text" class="form-control" placeholder="제목" name="boardTitle" id="boardTitle" value="${board.freeboard_title }" required>
         <input type="text" class="form-control" name="boardWriter" value="${memberLoggedIn.member_id}" readonly required>
 
-<<<<<<< HEAD
-=======
-       
->>>>>>> sjs
+
         
         <textarea class="form-control" name="boardContent" placeholder="내용" required>${board.freeboard_content }</textarea>
     </div>
