@@ -179,7 +179,7 @@ img.hover-shadow {
 
       <div class="w3-container w3-card w3-white w3-round w3-margin" style="height:800px;"><br>
         <div>
-        <h5 style="text-align:center;"><strong>MJ 보안동아리 사진목록</strong></h5> <hr>
+        <h5 style="text-align:center;"><strong><c:out value="${club.circle_name }"/> 사진첩</strong></h5> <hr>
         </div>
 
 <div class="row">

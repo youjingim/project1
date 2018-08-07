@@ -36,7 +36,7 @@
 
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <div style="height:50px;">
-        <h5 style="text-align:center;"><strong>MJ 보안동아리 예산관리</strong></h5>
+        <h5 style="text-align:center;"><strong><c:out value="${club.circle_name }"/> 예산관리</strong></h5>
         <button type="button" class="btn btn-default" style="float:right;" id="budget_button">예산관리 작성</button>
         </div>
         <hr>

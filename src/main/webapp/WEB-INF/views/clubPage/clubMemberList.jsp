@@ -37,7 +37,7 @@
 
       <div class="w3-container w3-card w3-white w3-round w3-margin" style="height:700px;"><br>
         <div>
-        <h5 style="text-align:center;"><strong>MJ 보안동아리 회원목록</strong></h5> <hr>
+        <h5 style="text-align:center;"><strong><c:out value="${club.circle_name }"/> 회원관리</strong></h5> <hr>
         </div>
         <div>
         <table class="w3-table">
