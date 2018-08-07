@@ -27,18 +27,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 	@Override
 	public Board boardView(int boardNo) {
-<<<<<<< HEAD
 
 		return boardDAO.boardView(boardNo);
 	}
 
-	
-
-
-	
-=======
-		return boardDAO.boardView(boardNo);
-	}
-
->>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
 }

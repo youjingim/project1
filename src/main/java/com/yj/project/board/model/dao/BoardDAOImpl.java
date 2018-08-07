@@ -7,10 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
 import com.yj.project.board.model.vo.Board;
 @Repository
 public class BoardDAOImpl implements BoardDAO{

@@ -59,17 +59,7 @@ function fnMove(seq){
     	  }
     	});
 
-      function myFunction(id) {
-          var x = document.getElementById(id);
-          if (x.className.indexOf("w3-show") == -1) {
-              x.className += " w3-show";
-              x.previousElementSibling.className += " w3-theme-d1";
-          } else {
-              x.className = x.className.replace("w3-show", "");
-              x.previousElementSibling.className =
-              x.previousElementSibling.className.replace(" w3-theme-d1", "");
-          }
-      }
+      
       $(document).ready(function(){
       $("#post_header").click(function(){
           $("#post").slideToggle();
@@ -80,6 +70,9 @@ function fnMove(seq){
         $("#post_comment").toggle();
     });
   });
+  function circle_budget(){
+	  location.href="${path}/circle_list.do?circle_num="+${club.circle_num};
+  }  
 </script>
 <style>
 body{
@@ -585,13 +578,13 @@ background-color:white;
       <!-- Profile -->
       <div class="w3-card w3-round w3-white" style="margin-top:16px;">
         <div class="w3-container">
-         <h4 class="w3-center">MJ정보보안 동아리</h4>
+         <h4 class="w3-center"><c:out value="${club.circle_name }"/></h4>
          <p class="w3-center"><img src="./title.jpg" class="w3-circle" style="height:106px;width:106px" alt="동아리 로고"></p>
          <hr>
-         <p><i class="fa fa-bookmark fa-fw w3-margin-right w3-text-theme"></i>홍익대학교</p>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>서울</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>2018.03.01</p>
-         <p><i class="fa fa-commenting fa-fw w3-margin-right w3-text-theme"></i>홍익대 컴퓨터공학과 정보동아리 페이지입니다. </p>
+         <p><i class="fa fa-bookmark fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.university }"/></p>
+         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.circle_location }"/> </p>
+         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i><fmt:formatDate type="date" value="${club.circle_enrolldate}" /> </p>
+         <p><i class="fa fa-commenting fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.circle_comment }"/></p>
         </div>
       </div><br>
 
@@ -602,7 +595,7 @@ background-color:white;
           <div id="Demo2" class="w3-hide w3-container">
             <p>Some other text..</p>
           </div>
-          <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-address-book-o fa-fw w3-margin-right"></i> 동아리 회원목록</button>
+          <button onclick="circle_budget()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-address-book-o fa-fw w3-margin-right"></i> 동아리 회원목록</button>
           <div id="Demo1" class="w3-hide w3-container">
             <p>Some text..</p>
           </div>
@@ -643,16 +636,9 @@ background-color:white;
         <div class="w3-container">
           <p>관련  태그</p>
           <p>
-            <span class="w3-tag w3-small w3-theme-d5">보안</span>
-            <span class="w3-tag w3-small w3-theme-d4">4차 산업</span>
-            <span class="w3-tag w3-small w3-theme-d3">컴퓨터</span>
-            <span class="w3-tag w3-small w3-theme-d2">홍익대</span>
-            <span class="w3-tag w3-small w3-theme-d1">정보통신</span>
-            <span class="w3-tag w3-small w3-theme">태크</span>
-            <span class="w3-tag w3-small w3-theme-l1">친목</span>
-            <span class="w3-tag w3-small w3-theme-l2">해킹</span>
-            <span class="w3-tag w3-small w3-theme-l3">컨퍼런스</span>
-
+          <c:forEach items="club.category" var='cal' varStatus="status">
+            <span class="w3-tag w3-small w3-theme-d5">cal</span>
+	   	</c:forEach>
           </p>
         </div>
       </div>

@@ -12,15 +12,10 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-<<<<<<< HEAD
 
-		<property name="username" value="test1"/>
-		<property name="password" value="test1"/>
-=======
 		<property name="username" value="campus"/>
 		<property name="password" value="campus"/>
 
->>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
 	</bean>
 	
 	<bean id="realDataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
