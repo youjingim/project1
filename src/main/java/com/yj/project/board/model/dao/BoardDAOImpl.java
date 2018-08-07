@@ -30,4 +30,14 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectOne("board.selectView",boardNo);
 	}
 
+	@Override
+	public int boardWrite(Board board) {
+		return sqlSession.insert("board.boardWrite",board);
+	}
+
+	@Override
+	public int viewCount(int boardNo) {
+		return sqlSession.update("board.boardViewUp",boardNo);
+	}
+
 }

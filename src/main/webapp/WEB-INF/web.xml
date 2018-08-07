@@ -45,7 +45,7 @@
    </filter>
    <filter-mapping>
    <filter-name>encodeFilter</filter-name>
-   <url-pattern>*.do</url-pattern>
+   <url-pattern>/*</url-pattern>
    </filter-mapping>
    <welcome-file-list>
    <welcome-file>index.jsp</welcome-file>
@@ -58,6 +58,8 @@
 <error-code>404</error-code>
 <location>/WEB-INF/views/common/errortwo.jsp</location>
 </error-page>
+
+
 
 
 

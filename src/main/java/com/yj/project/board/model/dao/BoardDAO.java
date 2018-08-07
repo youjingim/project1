@@ -9,5 +9,7 @@ public interface BoardDAO {
 	List<Board> selectBoardList(int cPage,int numPerPage);
 	int selectCount();
 	Board boardView(int boardNo);
+	int boardWrite(Board board);
+	int viewCount(int boardNo);
 
 }
