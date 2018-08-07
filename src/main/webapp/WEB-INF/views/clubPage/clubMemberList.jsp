@@ -5,9 +5,10 @@
 <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions' %>
 <c:set var = 'path' value='<%=request.getContextPath()%>'/>
 
-<jsp:include page="/WEB-INF/views/clubPage/common/header.jsp">
-   <jsp:param value=' ' name='pageTitle'/>
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+   <jsp:param value='club' name='pageTitle'/>
 </jsp:include>
+<jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/> 
 <style>
 /* 페이징 처리 css */
 /* Pagination links */
@@ -60,10 +61,23 @@
             </select></td>
           <td><c:out value="${m.member_phone }"/></td>
           <td><c:out value="${m.member_email }"/></td>
-          <th><button onclick="changeLevel()">등급수정</button>  <button onclick="deleteMember()">회원삭제</button></th>
+          <th><button onclick="changeLevel(${m.member_id});">등급수정</button>  <button onclick="deleteMember(${m.member_id});">회원삭제</button></th>
         </tr>
        </c:forEach>
       </table>
+      
+      <form name='circleDelFrm' action="deleteMember.do" method='post'>
+        	<input type='hidden' name='id'/>
+       </form>
+       <script>
+		function deleteMember(id)
+		{
+				var frm=document.circleDelFrm;
+				frm.id.value=id;
+				frm.submit();
+		}
+	</script>
+	
       <!-- 페이징 처리 -->
       <div class="pagination" style="display: table;margin-right: auto;margin-left: auto;">
         <a href="#">&laquo;</a>
@@ -80,4 +94,4 @@
     </div>
 
       
-<jsp:include page="/WEB-INF/views/clubPage/common/footer.jsp"/>      
+<jsp:include page="/WEB-INF/views/clubPage/common/aside2.jsp"/>      
