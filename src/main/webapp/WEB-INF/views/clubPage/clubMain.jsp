@@ -6,7 +6,7 @@
 <c:set var = 'path' value='<%=request.getContextPath()%>'/>
 
 <jsp:include page="/WEB-INF/views/clubPage/common/header.jsp">
-   <jsp:param value=' ' name='pageTitle'/>
+   <jsp:param value='index' name='pageTitle'/>
 </jsp:include>
 
 <!-- Middle Column -->

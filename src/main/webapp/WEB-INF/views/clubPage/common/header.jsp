@@ -81,11 +81,13 @@ height:auto;
 position:relative;
 }
 div#myNavbar a {
-font-size:20px;
+font-size:17px;
 color:black;
+font-family: 'Nanum Gothic Coding', monospace;
 }
 div#myNavbar ul li a:hover{
 color:gray;
+font-size:18px;
 }
 header{
 width:100%;
@@ -229,12 +231,12 @@ img {vertical-align: middle;}
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4}
+  from {opacity: .4} 
   to {opacity: 1}
 }
 
 @keyframes fade {
-  from {opacity: .4}
+  from {opacity: .4} 
   to {opacity: 1}
 }
 
@@ -492,7 +494,7 @@ div#img_slider{
 width:100%;
 height:500px;
 position:fixed;
-background-image:url('http://cfile28.uf.tistory.com/image/99E92C3359CA5D8E041582');
+background-image:url('${path}/resources/image/backgroundNew.jpg');
 background-size:cover;
 z-index:-1;
 top:80px;
@@ -509,7 +511,10 @@ margin-left:0.2%;
 margin-bottom:0px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 765px) {
+#navbar_set{
+background-color:white;
+}
 #info_span{
 right:60px;
 }
@@ -550,22 +555,27 @@ background-color:white;
          <li><a href="#" onclick="fnMove('1')">CampusPick</a></li>
         <li><a href="${path}/secondPage.do">동아리</a></li>
         <li><a href="#">동아리 개설</a></li>
-        <li><a href="${path}/calendar.do">With us</a></li>
+        <li><a href="${path}/calendar.do">With us</a></li> 
         <li><a href="${path }/board/boardList.do">자유게시판</a></li>
       </ul>
     </div>
   </div>
-  <div class="dropdown" id="info_span">
-  <a style="font-weight:900; color:black;font-size:20px;cursor:pointer;"><c:out value="${memberLoggedIn.member_id}"/>님</a>
-    <div class="dropdown-content">
-      <a href="#">마이페이지</a>
-      <a href="#">스크랩</a>
-      <a href="#">내 정보 수정</a>
-      <a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" type="button" onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a>
-    </div>
-  </div>
 
 </nav>
+		<div class="dropdown" id="info_span">
+		<a style="font-weight:600; color:white;font-size:15px;cursor:pointer;"><c:out value="${memberLoggedIn.member_id}"/>님</a>
+			
+			<div class="dropdown-content">
+			         
+        <a href="${path }/clubMain.do?member_id=${memberLoggedIn.member_id}">나의 동아리</a>
+				<a href="#">마이페이지</a>
+				<a href="#">쪽지함</a> 
+				<a href="${path}/member/memberUpdate.do">내 정보 수정</a>
+				<a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" type="button" onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a>
+
+				
+			</div>
+		</div>
 </header>
 
 <!-- Page Container -->
