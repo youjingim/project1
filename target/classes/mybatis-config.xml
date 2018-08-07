@@ -5,12 +5,17 @@
 <typeAlias type="com.yj.project.common.StringArrayTypeHandler" alias="StringArray"/>
 <typeAlias type="com.yj.project.board.model.vo.Board" alias="Board"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <typeAlias type="com.yj.project.notice.model.vo.Notice" alias="Notice"/>
 
 =======
 <typeAlias type="com.yj.project.notice.model.vo.Notice" alias="Notice"/>
 >>>>>>> 46aea74b81f9fae36c3302f59f767276b2242b7f
+=======
+<typeAlias type="com.yj.project.member.model.vo.Member" alias="Member"/>
+<typeAlias type="com.yj.project.club.model.vo.Club" alias="Club"/>
+>>>>>>> bonyeon
 </typeAliases>
 
 

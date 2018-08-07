@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club">
+	<select id="selectOne" resultType="Member">
+		select * from member where member_id=#{member_id}
+	</select>
+	<resultMap type="Club" id="clubMain">
+		
+	</resultMap>
+	<select id="selectClub" resultMap="clubMain">
+		select * from circle where circle_num=#{circle_num}
+	</select>
+	<resultMap type="com.yj.project.member.model.vo.Member" id="club"></resultMap>
+	<select id="selectMember" resultMap="club">
+		select * from member where circle1_num=#{circle_num}
+	</select>
+</mapper>
