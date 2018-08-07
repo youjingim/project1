@@ -30,5 +30,13 @@ public class BoardServiceImpl implements BoardService{
 
 		return boardDAO.boardView(boardNo);
 	}
+	@Override
+	public int boardWrite(Board board) {
+		return boardDAO.boardWrite(board);
+	}
+	@Override
+	public int viewCount(int boardNo) {
+		return boardDAO.viewCount(boardNo);
+	}
 
 }

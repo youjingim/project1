@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -56,8 +58,47 @@ public class BoardController {
 		return mv;
 	}
 	@RequestMapping("/board/boardView.do")
-	public ModelAndView boardView(@RequestParam(value="no") int boardNo) {
+	public ModelAndView boardView(@RequestParam(value="no") int boardNo,HttpServletRequest request,HttpServletResponse response) {
 
+		//조회수 증가!
+		Cookie[] cookie=request.getCookies();
+		String boardCookieVal="";
+		boolean hasRead=false;
+		//사이트 방문시에는 아무런 쿠키를 
+		//갖고있지 않으면 cookie값은 null이 나옴
+		if(cookie!=null)
+		{
+			outter:
+				for(Cookie c : cookie)
+				{
+					String name=c.getName();
+					String value=c.getValue();
+					
+					if("boardCookie".equals(name))
+					{
+						boardCookieVal=value;
+						if(value.contains("|"+boardNo+"|"))
+						{
+							hasRead=true;
+							break outter;
+						}
+					}
+				}
+		}
+		
+		if(!hasRead)
+		{
+
+			boardService.viewCount(boardNo);
+			Cookie c=new Cookie("boardCookie",boardCookieVal+"|"+boardNo+"|");
+			c.setMaxAge(-1);
+			//브라우저가 닫는 경우 삭제
+			response.addCookie(c);		
+		}
+		
+		
+		
+		
 		ModelAndView mv = new ModelAndView();
 		Board board = boardService.boardView(boardNo);
 		mv.addObject("board",board);
@@ -68,10 +109,30 @@ public class BoardController {
 	
 	@RequestMapping("/boardForm.do")
 	public String boardForm() {
-
 		
 		return "board/boardForm";
 	}
 	
+<<<<<<< HEAD
+=======
+	@RequestMapping("/board/boardWrite")
+	public ModelAndView boardWrite(Board board){
+		ModelAndView mv = new ModelAndView();
+		int result = boardService.boardWrite(board);
+		String msg="";
+		String loc="/board/boardList.do";
+		if(result>0) {
+			msg="게시물 등록 성공!";
+		}else {
+			msg="게시물 등록 실패!";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc",loc);
+		
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
+>>>>>>> yujin
 
 }

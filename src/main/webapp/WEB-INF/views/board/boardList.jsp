@@ -21,7 +21,7 @@ height:1200px;
 position:relative;
 z-index:10;
 background-color:white;
-top:100px;
+top:30px;
 }
    input#btn-add {float:right; margin:0 0 15px;}
 
@@ -34,8 +34,11 @@ border-bottom:1px solid black;
 color:black;
 font-size:16px;
 
+<<<<<<< HEAD
 color:black;
 font-size:16px;
+=======
+>>>>>>> yujin
 }
 div#main_container table#tbl-board td{
 padding:20px;
@@ -61,11 +64,22 @@ width:10%;
 }
 div#main_container table#tbl-board th:nth-of-type(3){
 width:45%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> yujin
 }	
 div#main_container table#tbl-board th:nth-of-type(4){
 width:10%;
 }
 
+<<<<<<< HEAD
+=======
+}   
+div#main_container table#tbl-board th:nth-of-type(4){
+width:10%;
+}
+>>>>>>> yujin
 div#main_container table#tbl-board td:nth-of-type(3){
 text-align:left;
 }
@@ -75,6 +89,7 @@ text-align:left;
 </style>
 <section>
 <div id="main_container">
+<<<<<<< HEAD
 
 
 <h1 style='color:black;margin-left:1%;'>자유게시판</h1>
@@ -115,6 +130,48 @@ text-align:left;
    <span style="margin-left:50%;margin-top:100px;">
    ${pageBar }
    </span>
+=======
+<br><br><br>
+   <br><span style="font-size:35px; font-weight:bold;color:black;margin-left:48%;        text-align:center;" >자유게시판</span>
+   <br><br><br>
+	<input type="button" value="글쓰기" id='btn-add' class='btn btn-default' onclick='fn_goboardForm();'/>
+	<script>
+		function fn_goboardForm(){
+			location.href="${pageContext.request.contextPath}/boardForm.do";
+		}
+	</script>
+	<table id='tbl-board' class='table'>
+		<tr>
+			<th>번호</th>
+			<th>작성자</th>
+			<th>제목</th>
+			<th>조회수</th>
+			<th>첨부파일</th>
+			<th>작성일</th>		
+		</tr>
+		<c:if test="${not empty list }">
+			<c:forEach var='board' items='${list }' varStatus="vs">
+				<tr>
+					<td>${vs.index+1}</td>
+					<td>${board.MEMBER_ID }</td>
+					<td><a href='${pageContext.request.contextPath}/board/boardView.do?no=${board.FREEBOARD_NUM }'>${board.FREEBOARD_TITLE}</a></td>
+					<td>${board.FREEBOARD_VIEW }</td>
+						<td align='center'><c:if test='${board.FREEBOARD_ATTACHMENT>0 }'>
+								<img alt="첨부파일"
+									src="${pageContext.request.contextPath }/resources/images/file.png"
+									width=16px>
+							</c:if></td>
+							<td>${board.FREEBOARD_DATE }</td>
+					</tr>
+			</c:forEach>
+		</c:if>
+	</table>
+	<span style="margin-left:50%;margin-top:100px;">
+	${pageBar }
+	</span>
+
+
+>>>>>>> yujin
 
 </div>
    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
