@@ -48,71 +48,21 @@
           <th>이메일</th>
           <th>수정 / 삭제</th>
         </tr>
+       <c:forEach items="${list }" var="m" varStatus="status">
         <tr>
-          <td>1</td>
-          <td>홍길동</td>
+          <td><c:out value="${status.count }"/></td>
+          <td><c:out value="${m.member_name }"/></td>
           <td><select>
-              <option value="0">일반회원</option>
-              <option value="1">총부</option>
-              <option value="2">부회장</option>
-              <option value="3">회장</option>
+              <option value="일반화원">일반회원</option>
+              <option value="총무">총부</option>
+              <option value="부회장">부회장</option>
+              <option value="회장">회장</option>
             </select></td>
-          <td>010-1234-5678</td>
-          <td>gildong@gmail.com</td>
-          <th><button>등급수정</button>  <button>회원삭제</button></th>
+          <td><c:out value="${m.member_phone }"/></td>
+          <td><c:out value="${m.member_email }"/></td>
+          <th><button onclick="changeLevel()">등급수정</button>  <button onclick="deleteMember()">회원삭제</button></th>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>홍길동</td>
-          <td><select>
-              <option value="0">일반회원</option>
-              <option value="1">총부</option>
-              <option value="2">부회장</option>
-              <option value="3">회장</option>
-            </select></td>
-          <td>010-1234-5678</td>
-          <td>gildong@gmail.com</td>
-          <th><button>등급수정</button>  <button>회원삭제</button></th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>홍길동</td>
-          <td><select>
-              <option value="0">일반회원</option>
-              <option value="1">총부</option>
-              <option value="2">부회장</option>
-              <option value="3">회장</option>
-            </select></td>
-          <td>010-1234-5678</td>
-          <td>gildong@gmail.com</td>
-          <th><button>등급수정</button>  <button>회원삭제</button></th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>홍길동</td>
-          <td><select>
-              <option value="0">일반회원</option>
-              <option value="1">총부</option>
-              <option value="2">부회장</option>
-              <option value="3">회장</option>
-            </select></td>
-          <td>010-1234-5678</td>
-          <td>gildong@gmail.com</td>
-          <th><button>등급수정</button>  <button>회원삭제</button></th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>홍길동</td>
-          <td><select>
-              <option value="0">일반회원</option>
-              <option value="1">총부</option>
-              <option value="2">부회장</option>
-              <option value="3">회장</option>
-            </select></td>
-          <td>010-1234-5678</td>
-          <td>gildong@gmail.com</td>
-          <th><button>등급수정</button>  <button>회원삭제</button></th>
-        </tr>
+       </c:forEach>
       </table>
       <!-- 페이징 처리 -->
       <div class="pagination" style="display: table;margin-right: auto;margin-left: auto;">
