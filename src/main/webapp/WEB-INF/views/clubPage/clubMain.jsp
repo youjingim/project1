@@ -5,8 +5,13 @@
 <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions' %>
 <c:set var = 'path' value='<%=request.getContextPath()%>'/>
 
+<<<<<<< HEAD
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value='club' name='pageTitle'/>
+=======
+<jsp:include page="/WEB-INF/views/clubPage/common/header.jsp">
+   <jsp:param value='index' name='pageTitle'/>
+>>>>>>> yujin
 </jsp:include>
 <jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/>    
 <!-- Middle Column -->
