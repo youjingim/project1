@@ -5,10 +5,10 @@
 <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions' %>
 <c:set var = 'path' value='<%=request.getContextPath()%>'/>
 
-<jsp:include page="/WEB-INF/views/clubPage/common/header.jsp">
-   <jsp:param value=' ' name='pageTitle'/>
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+   <jsp:param value='club' name='pageTitle'/>
 </jsp:include>
-
+<jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/>    
 <!-- Middle Column -->
     <div class="w3-col m7">
       <div class="w3-row-padding" style="margin-top:16px;">
@@ -89,4 +89,4 @@
     <!-- End Middle Column -->
     </div>
       
-<jsp:include page="/WEB-INF/views/clubPage/common/footer.jsp"/>      
+<jsp:include page="/WEB-INF/views/clubPage/common/aside2.jsp"/>      

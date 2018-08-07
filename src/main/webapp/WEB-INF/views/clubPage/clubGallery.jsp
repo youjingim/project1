@@ -5,10 +5,10 @@
 <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions' %>
 <c:set var = 'path' value='<%=request.getContextPath()%>'/>
 
-<jsp:include page="/WEB-INF/views/clubPage/common/header.jsp">
-   <jsp:param value=' ' name='pageTitle'/>
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+   <jsp:param value='club' name='pageTitle'/>
 </jsp:include>
-
+<jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/>      
 <style>
 /* 페이징 처리 css */
 /* Pagination links */
@@ -179,7 +179,7 @@ img.hover-shadow {
 
       <div class="w3-container w3-card w3-white w3-round w3-margin" style="height:800px;"><br>
         <div>
-        <h5 style="text-align:center;"><strong>MJ 보안동아리 회원목록</strong></h5> <hr>
+        <h5 style="text-align:center;"><strong>MJ 보안동아리 사진목록</strong></h5> <hr>
         </div>
 
 <div class="row">
@@ -296,4 +296,4 @@ function showSlides(n) {
     <!-- End Middle Column -->
     </div>
       
-<jsp:include page="/WEB-INF/views/clubPage/common/footer.jsp"/>      
+<jsp:include page="/WEB-INF/views/clubPage/common/aside2.jsp"/>      
