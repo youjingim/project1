@@ -81,18 +81,11 @@ border-bottom:1px solid black;
     <div>
      <input style='margin-left:95%;' type="button" value="목 록" id='btn-add' class='btn btn-default' onclick="location.href='${pageContext.request.contextPath}/board/boardList.do'"/>
     
-<<<<<<< HEAD
-    <div id="board-container">
-        <input type="text" class="form-control" placeholder="제목" name="boardTitle" id="boardTitle" value="${board.freeboard_title }" required>
-        <input type="text" class="form-control" name="boardWriter" value="${memberLoggedIn.member_id}" readonly required>
 
-=======
-    
-    </div>  
->>>>>>> yujin
 
         
     </div>
+</div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </section>

@@ -372,7 +372,7 @@ img {vertical-align: middle;}
 
 
 .dropdown .dropbtn {
-    font-size: 16px;    
+    font-size: 16px;
     border: none;
     outline: none;
     color: white;
@@ -554,7 +554,8 @@ background-color:white;
 		<a style="font-weight:600; color:white;font-size:15px;cursor:pointer;"><c:out value="${memberLoggedIn.member_id}"/>님</a>
 			
 			<div class="dropdown-content">
-				<a href="${path }/clubMain.do?member_id=${memberLoggedIn.member_id}">나의 동아리</a>
+			         
+        <a href="${path }/clubMain.do?member_id=${memberLoggedIn.member_id}">나의 동아리</a>
 				<a href="#">마이페이지</a>
 				<a href="#">쪽지함</a> 
 				<a href="${path}/member/memberUpdate.do">내 정보 수정</a>

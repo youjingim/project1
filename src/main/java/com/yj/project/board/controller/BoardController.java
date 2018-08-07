@@ -113,8 +113,6 @@ public class BoardController {
 		return "board/boardForm";
 	}
 	
-<<<<<<< HEAD
-=======
 	@RequestMapping("/board/boardWrite")
 	public ModelAndView boardWrite(Board board){
 		ModelAndView mv = new ModelAndView();
@@ -133,6 +131,5 @@ public class BoardController {
 		
 		return mv;
 	}
->>>>>>> yujin
 
 }
