@@ -36,7 +36,6 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public int insertBudget(Budget b) {
 		return clubDAO.insertBudget(sqlSession,b);
 	}
@@ -64,10 +63,10 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int updateBoard(Circle_board cb) {
 		return clubDAO.updateBoard(sqlSession,cb);
-=======
+	}
+	@Override
 	public List<Matching> selectMatching(int circle1_num) {
-		return clubDAO.selectMatching(sqlSession,circle1_num);
->>>>>>> 242f94d75172ce016f652882bbf477f4e0d174b5
+	return clubDAO.selectMatching(sqlSession,circle1_num);
 	}
 	
 	

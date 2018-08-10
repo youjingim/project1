@@ -21,11 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 import com.yj.project.board.controller.BoardController;
-<<<<<<< HEAD
 import com.yj.project.board.model.vo.Board;
-=======
 import com.yj.project.calendar.model.vo.Matching;
->>>>>>> 242f94d75172ce016f652882bbf477f4e0d174b5
 import com.yj.project.club.model.service.ClubService;
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.Circle_board;
@@ -42,7 +39,6 @@ public class ClubController {
 	
 	//동아리 메인페이지로 넘어가는 로직
 	@RequestMapping("clubMain.do")
-<<<<<<< HEAD
 	public String clubMain(String member_id, HttpSession session, Model model) {
 		Member member=clubService.selectOne(member_id);
 		Club club=clubService.selectClub(member.getCircle1_num());
@@ -51,15 +47,8 @@ public class ClubController {
 		List<String> a = new ArrayList();
 		List<Circle_board> list=clubService.selectBoardList(club.getCircle_num());
 		session.setAttribute("member", member);
-=======
-	public String clubMain(String member_id, HttpSession session ) {
-		Member member=clubService.selectOne(member_id);
-		Club club=clubService.selectClub(member.getCircle1_num());
 		List<Matching> matching = clubService.selectMatching(member.getCircle1_num());
-		System.out.println("동아리 정보"+club);
 		session.setAttribute("matching", matching);
-		System.out.println(matching);
->>>>>>> 242f94d75172ce016f652882bbf477f4e0d174b5
 		session.setAttribute("club", club);
 		model.addAttribute("BoardList", list);
 		model.addAttribute("categoryArr", array);
