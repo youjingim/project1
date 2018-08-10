@@ -125,8 +125,8 @@
           <p>관련  태그</p>
           <p>
          <c:forEach  var="ca" items="${categoryArr}">	
-            <span class="w3-tag w3-small w3-theme-d5">${ca }</span>
-            <!-- <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
+<%--             <span class="w3-tag w3-small w3-theme-d${}">${ca }</span>
+ --%>            <!-- <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
             <span class="w3-tag w3-small w3-theme-d3">Labels</span>
             <span class="w3-tag w3-small w3-theme-d2">Games</span>
             <span class="w3-tag w3-small w3-theme-d1">Friends</span>

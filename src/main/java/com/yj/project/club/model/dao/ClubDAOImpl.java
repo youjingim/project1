@@ -5,12 +5,10 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-<<<<<<< HEAD
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.Circle_board;
-=======
 import com.yj.project.calendar.model.vo.Matching;
->>>>>>> 242f94d75172ce016f652882bbf477f4e0d174b5
+
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.member.model.vo.Member;
 
@@ -33,7 +31,6 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public int insertBudget(SqlSessionTemplate sqlSession, Budget b) {
 		return sqlSession.insert("club.insertBudget", b);
 	}
@@ -61,10 +58,10 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public int updateBoard(SqlSessionTemplate sqlSession, Circle_board cb) {
 		return sqlSession.update("club.updateBoard",cb);
-=======
+	}
+	@Override
 	public List<Matching> selectMatching(SqlSessionTemplate sqlSession, int circle1_num) {
 		return sqlSession.selectList("club.selectMatching",circle1_num);
->>>>>>> 242f94d75172ce016f652882bbf477f4e0d174b5
 	}
 	
 
