@@ -1,6 +1,5 @@
 package com.yj.project.member.model.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,4 +13,12 @@ public interface MemberService {
 	String findId(Map<String, String> map);
 	int selectEmail(Map<String, String> map);
 	int selectId(Map<String, String> map);
+	int updatePw(Map<String, String> map);
+	int memberUpdate(Member member);
+	int memberDelete(String member_pw);
+	List<Member> selectMember(int cPage, int numPerPage);
+	int selectCount();
+	int levelChange(Map<String, String> map);
+	int checkEmail(Map<String, String> map);
+
 }
