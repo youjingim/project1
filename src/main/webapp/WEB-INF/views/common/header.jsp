@@ -541,13 +541,17 @@ background-color:white;
   </div>
 
 </nav>
-		<div class="dropdown" id="info_span">
-		<a style="font-weight:600; color:white;font-size:15px;cursor:pointer;"><c:out value="${memberLoggedIn.member_id}"/>님</a>
+		<div class="dropdown" id="info_span" style='margin-right:50px;'>
+		<a style="font-weight:600; color:white;font-size:15px;cursor:pointer;"><img src="${path}/resources/image/profile.png" style='width:30px; height:30px;'></a>
 			
 			<div class="dropdown-content">
-				<a href="#">마이페이지</a>
+			<c:out value="${memberLoggedIn.member_id}"/>님
+				<a href="${path }/member/mypage.do">마이페이지</a>
 				<a href="#">쪽지함</a> 
-				<a href="${path}/member/memberUpdate.do">내 정보 수정</a>
+				<a href="${path}/member/memberUpdate.do?member_id=${memberLoggedIn.member_id}">내 정보 수정</a>
+				<c:if test="${memberLoggedIn.member_id eq 'admin'}">
+				<a href="${path }/member/adminPage.do">관리자 페이지</a>
+				</c:if>
 				<a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" type="button" onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a>
 				
 			</div>

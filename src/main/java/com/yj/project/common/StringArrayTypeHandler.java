@@ -23,8 +23,11 @@ public class StringArrayTypeHandler implements TypeHandler<String []>{
 
 	@Override
 	public String[] getResult(ResultSet rs, String columnName) throws SQLException {
+		String [] result=null;
+		if(rs.getString(columnName)!=null) {
 		String columnValue=rs.getString(columnName);
-		String [] result=columnValue.split(",");
+		result=columnValue.split(",");
+		}
 		return result;
 	}
 	/*index로 resultSet에 있는 자료를 가져올때 설정*/

@@ -30,7 +30,6 @@ function check(){
     }
     if(form.authnum.value==authNum){
         alert("인증완료");    
-        $("#check",opener.document).html("인증완료");
         $("#chbtn",opener.document).css("display",'none');
         self.close();
     }
