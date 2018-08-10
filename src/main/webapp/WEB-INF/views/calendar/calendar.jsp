@@ -73,6 +73,26 @@ color:black;
 #calendarModal p{
 color:black;
 }
+.fc-title{
+cursor:pointer;
+}
+#matchingTable tr{
+height:50px;
+}
+#matchingTable td:nth-of-type(1){
+text-align:center;
+color:black;
+font-weight:bold;
+width:15%;
+}
+#matchingTable td:nth-of-type(2){
+color:black;
+width:85%;
+}
+#matchingTable{
+width:100%;
+}
+
 
 </style>
 
@@ -82,7 +102,8 @@ color:black;
    <jsp:param value="" name="pageTitle"/>
    </jsp:include>
    <section>
-   <br><span style="font-size:35px;color:gray;font-weight:bold;margin-left:3%;" data-toggle="modal" data-target="#matching">With Us</span>
+   <br><br>
+   <br><span style="font-size:35px;color:gray;font-weight:bold;margin-left:50%;" data-toggle="modal" data-target="#matching">With Us</span>
    <br><hr>
    <div id="search_b">
    <select id="category" name="category" class="form-control" style="width:200px;font-size:15px;display:inline-block;">
@@ -95,7 +116,9 @@ color:black;
    </select>
    <input type="button" class="btn btn-success" onclick="category()" value="검색" style="font-size:15px;display:inline-block;width:100px;">
    <br><br>
+   <c:if test="${memberLoggedIn.member_level eq 'L5'}">
    <button type="button" class="btn btn-info" style="margin-left:205px;cursor:pointer;" data-toggle="modal" data-target="#myModal">매칭 업로드</button>   
+   </c:if>
    </div>
    <script>
    function category(){
@@ -127,7 +150,7 @@ color:black;
       events: [
     	  <c:forEach var="c" items="${list}" varStatus="vs">
     	  {
-    		/*     <c:choose>
+    		     <c:choose>
     		    <c:when test="${memberLoggedIn.member_id eq c.member_id}">
 				color:'#7C96C9',
     		    </c:when>
@@ -135,9 +158,10 @@ color:black;
     		    <c:otherwise>
     		        color:'#A5DE9F',
     		    </c:otherwise>
-    			</c:choose> */
+    			</c:choose> 
     		  widthus_num: '${c.withus_num}',
-              title: '${c.withus_title}',
+              title: '${c.circle_name}',
+              widthus_title:'${c.withus_title}',
               start: '${c.matching_date}',
               modalContent:'${c.withus_content}',
               modalPlace:'${c.withus_place}',
@@ -146,25 +170,28 @@ color:black;
               member_id : '${c.member_id}',
               time1 : '${c.time1}',
               time2 : '${c.time2}',
-              register_circle : '${c.register_circle}'
+              register_circle : '${c.register_circle_num}'
 
             },
          </c:forEach>
                ],
         eventClick: function(event) {
-           if(event.start>${date}){
-
-           
-              $('#member_id_in').html('아이디 : '+ event.member_id);
-            $('#Title').html('제목 : '+ event.title);
-            $('#Content').html('내용 : ' + event.modalContent);
-             $('#Place').html('장소 : ' + event.modalPlace);
-             $('#Time1').html('시간 : '+event.time1+':00');
+        	var t1=JSON.stringify(event.start);
+        	t1=t1.replace(/\"/g,"");
+        
+        	if('${memberLoggedIn.member_level}'=='L5'){
+            $('#member_id_in').html(event.member_id);
+            $('#Title').html(event.widthus_title);
+            $('#Content').html(event.modalContent);
+             $('#Place').html(event.modalPlace);
+             $('#date_in').html(t1);
+             $('#Time1').html(event.time1+':00');
              $('#Time2').html(event.time2+':00');
-             $('#category_in').html('카테고리 : ' + event.withus_category);
+             $('#category_in').html(event.withus_category);
 
+             
             $('#calendarModal').modal();
-            $('#machingTitleIn').attr("value",event.title);
+            $('#machingTitleIn').attr("value",event.widthus_title);
             $('#machingContentIn').attr("value",event.modalContent);
             $('#machingPlaceIn').attr("value",event.modalPlace);
              $('#time1In').attr("value", event.time1);
@@ -173,6 +200,37 @@ color:black;
              $('#withus_num').attr("value",event.widthus_num);
              $('#member_id').attr("value",event.member_id);
              $('#register_circle_in').attr("value",event.register_circle);
+             $('#req_matching_date').attr("value",t1);
+             $('#req_withus_content').html(event.modalContent);
+             $('#sample6_address1').attr("value",event.modalPlace);
+             
+             $(document).ready(function(){
+
+            	  $('#re_time1').children().each(function(){
+            	    if($(this).val()==event.time1){
+
+            	      $(this).prop("selected",true); // attr적용안될경우 prop으로 
+
+            	    }
+
+            	  });
+
+            	});
+             $(document).ready(function(){
+
+         	  $('#re_time2').children().each(function(){
+         	    if($(this).val()==event.time2){
+
+         	      $(this).prop("selected",true); // attr적용안될경우 prop으로 
+
+         	    }
+
+         	  });
+
+         	});
+
+             
+             
             if($('#member_id').val()=='${memberLoggedIn.member_id}'){
               var btn2 = "<input type='button' value='삭제' class='btn btn-danger' onclick='deleteFrm()' style='width:250px;margin-right:170px;'>";
               $('#modal_foot').html(btn2);
@@ -215,11 +273,9 @@ color:black;
               map.setCenter(coords);
           } 
       });
-           }
-           else{
-        	   alert('지난 Matging은 신청할 수 없습니다.');
-        	   
-           }
+        	}else{
+        		alert('동아리 회장만 신청 가능합니다!');
+        	}
 
         },
         dayClick: function(date, allDay, jsEvent, view) {
@@ -296,7 +352,7 @@ color:black;
             </div>
             
       <p>내용 </p><br> <textarea name="withus_content" id="machingContent" class="form-control" style="width:98%;height:100px;" ></textarea><br>
-      <input type="hidden" name="register_circle" id="register_circle" value="${memberLoggedIn.circle1_num}">
+      <input type="hidden" name="register_circle_num" id="register_circle" value="${memberLoggedIn.circle1_num}">
 
       </form>
       
@@ -314,34 +370,57 @@ color:black;
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-            <h4 style="color:black;">Matching</h4>
+            <h4 style="color:black;margin-left:43%;font-weight:bold;">Matching</h4>
         </div>
         <div id="modalBody" class="modal-body">
            <form id="matchingFrm" method="get">
-           <h4 id="member_id_in" class="modal-title" style="color:black;"> </h4><br>
-           
-            <h4 id="category_in" class="modal-title" style="color:black;"> </h4><br>
-           
+           <table id='matchingTable'>
+           <tr>
+           <td>ID</td>
+           <td>
+           <h4 id="member_id_in" class="modal-title" style="color:black;"> </h4>
+           </td></tr>
+           <tr>
+           <td>카테고리</td>
+           <td>
+            <h4 id="category_in" class="modal-title" style="color:black;"> </h4>
+           </td></tr>
+           <tr>
+           <td>제목</td>
+           <td>
            <h4 id="Title" class="modal-title" style="color:black;"></h4>
            <input type="hidden" name="withus_title" id="machingTitleIn">
-           
-           <br>
-           <h4 id="Time1" class="modal-title" style="color:black;display:inline-block;"> </h4>
-            <input type="hidden" name="time1" id="time1In">
-            ~ <h4 id="Time2" class="modal-title" style="color:black;display:inline-block;"> </h4>
-             <input type="hidden" name="time2" id="time2In"><br>
-            <br>
+           </td>
+           <tr>
+           <td>내용</td>
+           <td>
             <h4 id="Content" class="modal-title" style="color:black;"> </h4>
-            <br><br>
-            <h4 id="Place" class="modal-title" style="color:black;"> </h4>
+            </td></tr>
+			<tr>
+			<td>날짜</td>
+			<td>
+           <span id="date_in" class="modal-title" style="color:black;"></span>
+			</td></tr>
+           <tr>
+           <td>시간</td>
+           <td>
+           <span id="Time1" class="modal-title" style="color:black;display:inline-block;"> </span>
+            <input type="hidden" name="time1" id="time1In">
+            ~ <span id="Time2" class="modal-title" style="color:black;display:inline-block;"> </span>
+             <input type="hidden" name="time2" id="time2In">
+             </td></tr>
+             <tr>
+             <td>장소</td>
+             <td>
+            <span id="Place" class="modal-title" style="color:black;"> </span>
             <input type="hidden" name="withus_place" id="machingPlaceIn">
-            <br>
+             </td></tr>    
+            </table>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f39f41093473cee9c7f1cf06be632c5f&libraries=services"></script>
                 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
                 <div style="font-weight:400; font-size:16px">
                 <div id="map" style="width:500px;height:250px;margin-left:35px;"></div>
-
-            <br>
+            <br><br>
             <input type="hidden" name="withus_content" id="machingContentIn">
             <br>
             </div>
@@ -350,60 +429,62 @@ color:black;
             <input type="hidden" name="withus_num" id="withus_num">
             <input type="hidden" name="member_id" id="member_id">
             <input type="hidden" name="register_circle" id="register_circle_in">
+            <input type='hidden' name='req_circle' value='${memberLoggedIn.circle1_num}'>
             <input type="hidden" id="chage_toggle" value="false">
-            <div id="update_info">
-            <br>
-            <p>변경할 날짜 </p> <input type="date" name="req_matching_date1" style="width:50%;" id="req_matching_date" class="form-control"><br>
-         <p>변경할 시간 </p> <select id = "re_time1" name="re_time11" style="width: 20%; display: inline-block;" class="form-control">
-                     <option value="null">00:00</option>
-                     <option value="08">08:00</option>
-                     <option value="09">09:00</option>
-                     <option value="10">10:00</option>
-                     <option value="11">11:00</option>
-                     <option value="12">12:00</option>
-                     <option value="13">13:00</option>
-                     <option value="14">14:00</option>
-                     <option value="15">15:00</option>
-                     <option value="16">16:00</option>
-                     <option value="17">17:00</option>
-                     <option value="18">18:00</option>
-                     <option value="19">19:00</option>
-                     <option value="20">20:00</option>
-                     <option value="21">21:00</option>
-                     <option value="22">22:00</option>
-                  </select> - <select id = "re_time2" name="re_time22" style="width:20%; display:inline-block;" class="form-control" >
-                     <option value="null">00:00</option>                     
-                     <option value="08">08:00</option>
-                     <option value="09">09:00</option>
-                     <option value="10">10:00</option>
-                     <option value="11">11:00</option>
-                     <option value="12">12:00</option>
-                     <option value="13">13:00</option>
-                     <option value="14">14:00</option>
-                     <option value="15">15:00</option>
-                     <option value="16">16:00</option>
-                     <option value="17">17:00</option>
-                     <option value="18">18:00</option>
-                     <option value="19">19:00</option>
-                     <option value="20">20:00</option>
-                     <option value="21">21:00</option>
-                     <option value="22">22:00</option>
-                  </select><br> <br>
-                  <div class="form-group">
-                      <p>변경할 주소 </p>
-                      <br /> <input type="text"
-                        class="form-control btn btn-outline" id="sample6_postcode1"
-                        name='member_addr1'
-                        style="width: 300px; background-color: white;"
-                        placeholder="우편번호" readonly> <input type="button"
-                        onclick="sample6_execDaumPostcode2()" class="btn" value="우편번호 찾기"><br>
-                     <input type="text" class="form-control btn btn-outline-secondary"
-                        id="sample6_address1" name="req_withus_place1"
-                        style="width: 300px; background-color: white;" placeholder="주소"
-                        readonly>
+             <div id="update_info">
+                  <br>
+                  <p style='margin-left:25px;font-weight:bold;'>변경할 날짜 </p> <input type="date" name="req_matching_date1" style="width:50%;margin-left:25px;" id="req_matching_date" class="form-control"><br>
+               <p style='margin-left:25px;font-weight:bold;'>변경할 시간 </p> <select id = "re_time1" name="re_time11" style="width: 20%;margin-left:25px; display: inline-block;" class="form-control">
+                           <option value="null">00:00</option>
+                           <option value="08">08:00</option>
+                           <option value="09">09:00</option>
+                           <option value="10">10:00</option>
+                           <option value="11">11:00</option>
+                           <option value="12">12:00</option>
+                           <option value="13">13:00</option>
+                           <option value="14">14:00</option>
+                           <option value="15">15:00</option>
+                           <option value="16">16:00</option>
+                           <option value="17">17:00</option>
+                           <option value="18">18:00</option>
+                           <option value="19">19:00</option>
+                           <option value="20">20:00</option>
+                           <option value="21">21:00</option>
+                           <option value="22">22:00</option>
+                        </select> - <select id = "re_time2" name="re_time22" style="width:20%; display:inline-block;" class="form-control" >
+                           <option value="null">00:00</option>                     
+                           <option value="08">08:00</option>
+                           <option value="09">09:00</option>
+                           <option value="10">10:00</option>
+                           <option value="11">11:00</option>
+                           <option value="12">12:00</option>
+                           <option value="13">13:00</option>
+                           <option value="14">14:00</option>
+                           <option value="15">15:00</option>
+                           <option value="16">16:00</option>
+                           <option value="17">17:00</option>
+                           <option value="18">18:00</option>
+                           <option value="19">19:00</option>
+                           <option value="20">20:00</option>
+                           <option value="21">21:00</option>
+                           <option value="22">22:00</option>
+                        </select><br> <br>
+                        <div class="form-group">
+                            <p style='margin-left:25px;font-weight:bold;'>변경할 주소 </p>
+                            <br /> <input type="text"
+                              class="form-control btn btn-outline" id="sample6_postcode1"
+                              name='member_addr1'
+                              style="width: 300px;margin-left:25px; background-color: white;"
+                              placeholder="우편번호" readonly> <input type="button"
+                              onclick="sample6_execDaumPostcode2()" class="btn" value="우편번호 찾기"><br>
+                           <input type="text" class="form-control btn btn-outline-secondary"
+                              id="sample6_address1" name="req_withus_place1"
+                              style="width: 300px;margin-left:25px; background-color: white;" placeholder="주소"
+                              readonly>
+                        </div>
+                  <p style='margin-left:25px;font-weight:bold;'>변경할 내용 </p> <textarea name="req_withus_content1" style="width:90%;height:150px;margin-left:25px;" id="req_withus_content" class="form-control"></textarea><br>
                   </div>
-            <p>변경할 내용 </p> <input type="text" name="req_withus_content1" style="width:50%;" id="req_withus_content" class="form-control"><br>
-            </div>
+                  
             
             
             
@@ -423,15 +504,18 @@ color:black;
 </div>
 
 <script>
+
+
+
+
 var flag=true;
    function chage_toggle(){
+	   $('#update_info').slideToggle();
       if(flag){
-      $('#update_info').css("display","block");
    $('#chage_toggle').attr("value",true);
    $('#change').html('변경취소');
       flag=false;
       }else{
-      $('#update_info').css("display","none");
    $('#chage_toggle').attr("value",false);
       flag=true;
       $('#change').html('변경하기');

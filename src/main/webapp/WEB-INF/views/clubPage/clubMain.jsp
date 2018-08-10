@@ -25,6 +25,7 @@ function updateBoard(no){
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value='club' name='pageTitle'/>
+
 </jsp:include>
 <jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/>    
 <!-- Middle Column -->

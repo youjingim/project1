@@ -15,11 +15,13 @@ public class Matching {
     private String withus_place;
 	
     private String req_circle;
+    private String circle_name;
+    private String circle_photo;
     private String req_id;
     private String req_withus_content;
     private Date req_matching_date;
-    private String re_time1;
-    private String re_time2;
+    private String req_time1;
+    private String req_time2;
     private String req_withus_place; 
     private String status;
 	
@@ -107,6 +109,22 @@ public class Matching {
 		this.req_circle = req_circle;
 	}
 
+	public String getCircle_name() {
+		return circle_name;
+	}
+
+	public void setCircle_name(String circle_name) {
+		this.circle_name = circle_name;
+	}
+
+	public String getCircle_photo() {
+		return circle_photo;
+	}
+
+	public void setCircle_photo(String circle_photo) {
+		this.circle_photo = circle_photo;
+	}
+
 	public String getReq_id() {
 		return req_id;
 	}
@@ -131,20 +149,20 @@ public class Matching {
 		this.req_matching_date = req_matching_date;
 	}
 
-	public String getRe_time1() {
-		return re_time1;
+	public String getReq_time1() {
+		return req_time1;
 	}
 
-	public void setRe_time1(String re_time1) {
-		this.re_time1 = re_time1;
+	public void setReq_time1(String req_time1) {
+		this.req_time1 = req_time1;
 	}
 
-	public String getRe_time2() {
-		return re_time2;
+	public String getReq_time2() {
+		return req_time2;
 	}
 
-	public void setRe_time2(String re_time2) {
-		this.re_time2 = re_time2;
+	public void setReq_time2(String req_time2) {
+		this.req_time2 = req_time2;
 	}
 
 	public String getReq_withus_place() {
@@ -165,8 +183,8 @@ public class Matching {
 
 	public Matching(int withus_num, String withus_title, String withus_content, String member_id,
 			String register_circle, Date matching_date, String time1, String time2, String withus_place,
-			String req_circle, String req_id, String req_withus_content, Date req_matching_date, String re_time1,
-			String re_time2, String req_withus_place, String status) {
+			String req_circle, String circle_name, String circle_photo, String req_id, String req_withus_content,
+			Date req_matching_date, String req_time1, String req_time2, String req_withus_place, String status) {
 		super();
 		this.withus_num = withus_num;
 		this.withus_title = withus_title;
@@ -178,11 +196,13 @@ public class Matching {
 		this.time2 = time2;
 		this.withus_place = withus_place;
 		this.req_circle = req_circle;
+		this.circle_name = circle_name;
+		this.circle_photo = circle_photo;
 		this.req_id = req_id;
 		this.req_withus_content = req_withus_content;
 		this.req_matching_date = req_matching_date;
-		this.re_time1 = re_time1;
-		this.re_time2 = re_time2;
+		this.req_time1 = req_time1;
+		this.req_time2 = req_time2;
 		this.req_withus_place = req_withus_place;
 		this.status = status;
 	}
@@ -192,10 +212,12 @@ public class Matching {
 		return "Matching [withus_num=" + withus_num + ", withus_title=" + withus_title + ", withus_content="
 				+ withus_content + ", member_id=" + member_id + ", register_circle=" + register_circle
 				+ ", matching_date=" + matching_date + ", time1=" + time1 + ", time2=" + time2 + ", withus_place="
-				+ withus_place + ", req_circle=" + req_circle + ", req_id=" + req_id + ", req_withus_content="
-				+ req_withus_content + ", req_matching_date=" + req_matching_date + ", re_time1=" + re_time1
-				+ ", re_time2=" + re_time2 + ", req_withus_place=" + req_withus_place + ", status=" + status + "]";
+				+ withus_place + ", req_circle=" + req_circle + ", circle_name=" + circle_name + ", circle_photo="
+				+ circle_photo + ", req_id=" + req_id + ", req_withus_content=" + req_withus_content
+				+ ", req_matching_date=" + req_matching_date + ", req_time1=" + req_time1 + ", req_time2=" + req_time2
+				+ ", req_withus_place=" + req_withus_place + ", status=" + status + "]";
 	}
-    
+
+
 
 }

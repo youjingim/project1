@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yj.project.calendar.model.vo.Matching;
 import com.yj.project.club.model.dao.ClubDAO;
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.Circle_board;
@@ -35,6 +36,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public int insertBudget(Budget b) {
 		return clubDAO.insertBudget(sqlSession,b);
 	}
@@ -62,6 +64,10 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int updateBoard(Circle_board cb) {
 		return clubDAO.updateBoard(sqlSession,cb);
+=======
+	public List<Matching> selectMatching(int circle1_num) {
+		return clubDAO.selectMatching(sqlSession,circle1_num);
+>>>>>>> 242f94d75172ce016f652882bbf477f4e0d174b5
 	}
 	
 	
