@@ -124,9 +124,19 @@
         <div class="w3-container">
           <p>관련  태그</p>
           <p>
-          <c:forEach items="club.category" var='cal' varStatus="status">
-            <span class="w3-tag w3-small w3-theme-d5">cal</span>
-	   	</c:forEach>
+         <c:forEach  var="ca" items="${categoryArr}">	
+            <span class="w3-tag w3-small w3-theme-d5">${ca }</span>
+            <!-- <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
+            <span class="w3-tag w3-small w3-theme-d3">Labels</span>
+            <span class="w3-tag w3-small w3-theme-d2">Games</span>
+            <span class="w3-tag w3-small w3-theme-d1">Friends</span>
+            <span class="w3-tag w3-small w3-theme">Games</span>
+            <span class="w3-tag w3-small w3-theme-l1">Friends</span>
+            <span class="w3-tag w3-small w3-theme-l2">Food</span>
+            <span class="w3-tag w3-small w3-theme-l3">Design</span>
+            <span class="w3-tag w3-small w3-theme-l4">Art</span>
+            <span class="w3-tag w3-small w3-theme-l5">Photos</span> -->
+		</c:forEach>
           </p>
         </div>
       </div>

@@ -41,10 +41,14 @@ public class ClubController {
 	public String clubMain(String member_id, HttpSession session, Model model) {
 		Member member=clubService.selectOne(member_id);
 		Club club=clubService.selectClub(member.getCircle1_num());
+		String [] as= {"5","4","3","2","1"};
+		String[] array=club.getCategory().split(",");
+		List<String> a = new ArrayList();
 		List<Circle_board> list=clubService.selectBoardList(club.getCircle_num());
 		session.setAttribute("member", member);
 		session.setAttribute("club", club);
 		model.addAttribute("BoardList", list);
+		model.addAttribute("categoryArr", array);
 		
 		return "clubPage/clubMain";
 	}
