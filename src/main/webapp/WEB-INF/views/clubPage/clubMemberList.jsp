@@ -28,7 +28,7 @@
 /* Add a grey background color on mouse-over */
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
-.w3-table th{
+th,td{
   text-align: center;
 }
 </style>
@@ -40,7 +40,7 @@
         <h5 style="text-align:center;"><strong><c:out value="${club.circle_name }"/> 회원관리</strong></h5> <hr>
         </div>
         <div>
-        <table class="w3-table">
+        <table class="table">
         <tr>
           <th>번호</th>
           <th>이름</th>

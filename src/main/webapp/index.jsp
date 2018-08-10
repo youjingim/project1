@@ -45,6 +45,7 @@ margin:0px;
 position:relative;
 top:80px;
 width:30%;
+
 height:600px;
 background: #ffffff; background: rgba(255, 255, 255, 0);
 left:60%;

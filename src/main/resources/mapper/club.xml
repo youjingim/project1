@@ -14,4 +14,19 @@
 	<select id="selectMember" resultMap="club">
 		select * from member where circle1_num=#{circle_num}
 	</select>
+	<insert id="insertBoard" parameterType="cBoard">
+		insert into circle_board values(CIRCLE_BOARD_SEQ.NEXTVAL,#{cb_title},#{cb_content},#{cb_attachment},0,#{member_id},#{circle_num},#{cb_attachment2},sysdate)
+	</insert>
+	<select id="selectBoardList" resultType="cBoard">
+		SELECT * FROM CIRCLE_BOARD WHERE CIRCLE_NUM=#{circle_num} ORDER BY CB_NUM DESC
+	</select>
+	<delete id="deleteBoard">
+		DELETE FROM CIRCLE_BOARD WHERE CB_NUM=#{cb_num}
+	</delete>
+	<select id="selectBoardOne" resultType="cBoard">
+		SELECT * FROM CIRCLE_BOARD WHERE CB_NUM=#{no}
+	</select>
+	<update id="updateBoard" parameterType="cBoard">
+	UPDATE CIRCLE_BOARD SET CB_TITLE=#{cb_title},CB_CONTENT=#{cb_content} WHERE CB_NUM=#{cb_num}
+	</update>
 </mapper>

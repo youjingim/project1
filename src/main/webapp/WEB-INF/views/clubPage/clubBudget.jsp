@@ -42,11 +42,13 @@
         <hr>
         <!-- 예산 관리 입력div -->
         <div id="budget_form" style="display:none;">
-          <form action="/circle/budget.do" method="post">
+          <form action="insert_budget.do" method="post">
           <label id="budget_date">입금/출금 날짜</label> <input for="budget_date" class="form-control" type="date" name="budget_date" placeholder="예산을  입력해주세요.">
           <label id="budget_output">출금액</label> <input for="budget_output" class="form-control" type="number" name="budget_output" placeholder="출금액을 입력해주세요.">
           <label id="budget_input">입금액</label> <input for="budget_input" class="form-control" type="number" name="budget_input" placeholder="입금액을 입력해주세요.">
           <label id="budget_content">내용</label> <input for="budget_content" class="form-control" type="text" name="budget_content" placeholder="내용을 입력해주세요.">
+          <input type="hidden" name="circle_num" value="${club.circle_num }"/>
+          <intput type="hidden" name="writer" value="${memberLoggedIn.member_id}"/>
           <div class="input-group-prepend" style="padding:0px;">
               <span class="input-group-text">영수증 첨부파일</span>
                         </div>
@@ -54,10 +56,15 @@
                             <input type="file" class="custom-file-input" name="upFile" id="upFile1">
 
                         </div>
-          <button type="button" class="btn btn-success" style="float:right; margin:5px;">작성완료</button><br><br>
+          <input type="submit" class="btn btn-success" value="제출"style="float:right; margin:5px;"/><br><br>
         </form><hr><br>
         </div>
 
+		<!-- 예산관리 ajax로직 작성 -->
+		<script>
+		
+		</script>
+		
         <!-- 예산 관리 테이블 -->
         <div>
           <table class="table table-bordered" id="budget_list">

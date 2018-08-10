@@ -62,7 +62,7 @@
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
-    <div class="w3-col m3">
+    <div class="w3-col m3" >
       <!-- Profile -->
       <div class="w3-card w3-round w3-white" style="margin-top:16px;">
         <div class="w3-container">

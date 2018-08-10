@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yj.project.club.model.dao.ClubDAO;
+import com.yj.project.club.model.vo.Budget;
+import com.yj.project.club.model.vo.Circle_board;
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.member.model.vo.Member;
 
@@ -30,6 +32,36 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<Member> selectMember(int circle_num) {
 		return clubDAO.selectMember(sqlSession,circle_num);
+	}
+
+	@Override
+	public int insertBudget(Budget b) {
+		return clubDAO.insertBudget(sqlSession,b);
+	}
+
+	@Override
+	public int insertBoard(Circle_board cb) {
+		return clubDAO.insertBoard(sqlSession,cb);
+	}
+
+	@Override
+	public List<Circle_board> selectBoardList(int circle_num) {
+		return clubDAO.selectBoardList(sqlSession,circle_num);
+	}
+
+	@Override
+	public int deleteBoard(int no) {
+		return clubDAO.deleteBoard(sqlSession,no);
+	}
+
+	@Override
+	public Circle_board selectBoardOne(int no) {
+		return clubDAO.selectBoardOne(sqlSession,no);
+	}
+
+	@Override
+	public int updateBoard(Circle_board cb) {
+		return clubDAO.updateBoard(sqlSession,cb);
 	}
 	
 	

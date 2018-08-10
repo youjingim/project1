@@ -116,6 +116,7 @@ public class BoardController {
 	@RequestMapping("/board/boardWrite")
 	public ModelAndView boardWrite(Board board){
 		ModelAndView mv = new ModelAndView();
+		
 		int result = boardService.boardWrite(board);
 		String msg="";
 		String loc="/board/boardList.do";
@@ -126,6 +127,7 @@ public class BoardController {
 		}
 		mv.addObject("msg",msg);
 		mv.addObject("loc",loc);
+		
 		
 		mv.setViewName("common/msg");
 		
