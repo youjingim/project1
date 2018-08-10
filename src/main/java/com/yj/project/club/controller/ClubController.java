@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yj.project.board.controller.BoardController;
+import com.yj.project.calendar.model.vo.Matching;
 import com.yj.project.club.model.service.ClubService;
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.member.model.vo.Member;
@@ -26,11 +27,13 @@ public class ClubController {
 	
 	//동아리 메인페이지로 넘어가는 로직
 	@RequestMapping("clubMain.do")
-	public String clubMain(String member_id, HttpSession session) {
+	public String clubMain(String member_id, HttpSession session ) {
 		Member member=clubService.selectOne(member_id);
 		Club club=clubService.selectClub(member.getCircle1_num());
-		System.out.println("동아리 정보"+club);		
-
+		List<Matching> matching = clubService.selectMatching(member.getCircle1_num());
+		System.out.println("동아리 정보"+club);
+		session.setAttribute("matching", matching);
+		System.out.println(matching);
 		session.setAttribute("club", club);
 		
 		return "clubPage/clubMain";

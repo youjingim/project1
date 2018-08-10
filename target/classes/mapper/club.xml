@@ -14,4 +14,8 @@
 	<select id="selectMember" resultMap="club">
 		select * from member where circle1_num=#{circle_num}
 	</select>
+	
+	<select id='selectMatching' parameterType="_int" resultType='com.yj.project.calendar.model.vo.Matching'>
+	select req_withus.*,circle.circle_name,circle.circle_photo  from req_withus full outer JOIN circle ON req_withus.REQ_CIRCLE=circle.circle_num where req_withus.REGISTER_CIRCLE=#{circle1_num}
+	</select>
 </mapper>

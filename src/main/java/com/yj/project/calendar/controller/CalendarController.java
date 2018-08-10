@@ -4,7 +4,9 @@ package com.yj.project.calendar.controller;
 
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.yj.project.calendar.model.service.MatchingService;
 import com.yj.project.calendar.model.vo.Calendar;
 import com.yj.project.calendar.model.vo.Matching;
@@ -51,8 +54,8 @@ public class CalendarController {
 		Member member = (Member)session.getAttribute("memberLoggedIn");
 		matching.setReq_id(member.getMember_id());
 		matching.setReq_matching_date(req_matching_date1);
-		matching.setRe_time1(re_time11);
-		matching.setRe_time2(re_time22);
+		matching.setReq_time1(re_time11);
+		matching.setReq_time2(re_time22);
 		matching.setReq_withus_place(req_withus_place1);
 		matching.setReq_withus_content(req_withus_content1);
 		Date d = new Date(date);
@@ -144,6 +147,22 @@ public class CalendarController {
 	@RequestMapping("/clubPage.do")
 	public String move() {
 		return "clubPage/club";
+	}
+	
+	@RequestMapping("/indexCheck.do")
+	public void indexNum(@RequestParam(value="num") int num,HttpServletResponse res) throws IOException {
+		res.setCharacterEncoding("UTF-8");
+		List<Matching> m = service.selectMatching();
+		
+		SimpleDateFormat st = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Matching matching = m.get(num);
+		
+		System.out.println(matching.getMatching_date());
+		
+		Gson gson=new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(matching,res.getWriter());
+		
 	}
 	
 	
