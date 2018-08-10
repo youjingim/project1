@@ -45,6 +45,7 @@ margin:0px;
 position:relative;
 top:80px;
 width:30%;
+
 height:600px;
 background: #ffffff; background: rgba(255, 255, 255, 0);
 left:60%;
@@ -177,7 +178,7 @@ margin:0 auto;
 <body>
 <section>
 <div id="login_container">
-<div class="main_logo">Campus Pick</div>
+<div class="main_logo">CampusPick</div>
 <form id="login_Frm" action="${pageContext.request.contextPath}/member/memberLogin.do" method="post">
 <span class="loginBar">
 <input type="text" class="form-control" id="login_id" name="member_id" placeholder="아이디" autofocus>
@@ -185,9 +186,14 @@ margin:0 auto;
 <input type="password" class="form-control" placeholder="비밀번호" id="login_pw" name="member_pw">
 <br><br>
   <button type="submit" class="btn btn-primary btn-block" onclick="login()">로 그 인</button>
+<<<<<<< HEAD
 
   
     <br><br>
+=======
+  <br><br>
+  
+>>>>>>> fd732e46c441d8bac5f9f887906651360741577f
  <span style="color:black;font-size:17px;margin-left:18%;">계정이 없으신가요? &nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#myModal" style="font-weight:bold;text-decoration:none;color:black;">가입하기</a></span><br><br>
  
  <span style="color:black;font-size:15px;margin-left:22%;"><a href="#" data-toggle="modal" data-target="#idModal" >아이디 찾기</a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#passwordModal" >비밀번호 찾기 </a></span>
@@ -231,7 +237,7 @@ function login(){
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                 <input type="text" name="fid_name" id="fid_name" placeholder="이름을 입력하세요" style='width:150px' class="form-control" required/>
                             </div>
-			
+
 							<div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 				<input type="text" class="form-control" id='fid_email1' name='member_email1' style='width:150px; display:inline-block'

@@ -8,7 +8,8 @@ public class Calendar {
     private String withus_title;
     private String withus_content;
     private String member_id;
-    private String register_circle;
+    private String register_circle_num;
+    private String circle_name;
     private Date matching_date;
     private Date enroll_date;
     private String withus_place;
@@ -63,13 +64,23 @@ public class Calendar {
 	}
 
 
-	public String getRegister_circle() {
-		return register_circle;
+	public String getRegister_circle_num() {
+		return register_circle_num;
 	}
 
 
-	public void setRegister_circle(String register_circle) {
-		this.register_circle = register_circle;
+	public void setRegister_circle_num(String register_circle_num) {
+		this.register_circle_num = register_circle_num;
+	}
+
+
+	public String getCircle_name() {
+		return circle_name;
+	}
+
+
+	public void setCircle_name(String circle_name) {
+		this.circle_name = circle_name;
 	}
 
 
@@ -143,25 +154,16 @@ public class Calendar {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Calendar [withus_num=" + withus_num + ", withus_title=" + withus_title + ", withus_content="
-				+ withus_content + ", member_id=" + member_id + ", register_circle=" + register_circle
-				+ ", matching_date=" + matching_date + ", enroll_date=" + enroll_date + ", withus_place=" + withus_place
-				+ ", withus_category=" + withus_category + ", time1=" + time1 + ", time2=" + time2 + ", status="
-				+ status + "]";
-	}
-
-
 	public Calendar(int withus_num, String withus_title, String withus_content, String member_id,
-			String register_circle, Date matching_date, Date enroll_date, String withus_place, String withus_category,
-			String time1, String time2, String status) {
+			String register_circle_num, String circle_name, Date matching_date, Date enroll_date, String withus_place,
+			String withus_category, String time1, String time2, String status) {
 		super();
 		this.withus_num = withus_num;
 		this.withus_title = withus_title;
 		this.withus_content = withus_content;
 		this.member_id = member_id;
-		this.register_circle = register_circle;
+		this.register_circle_num = register_circle_num;
+		this.circle_name = circle_name;
 		this.matching_date = matching_date;
 		this.enroll_date = enroll_date;
 		this.withus_place = withus_place;
@@ -170,5 +172,17 @@ public class Calendar {
 		this.time2 = time2;
 		this.status = status;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Calendar [withus_num=" + withus_num + ", withus_title=" + withus_title + ", withus_content="
+				+ withus_content + ", member_id=" + member_id + ", register_circle_num=" + register_circle_num
+				+ ", circle_name=" + circle_name + ", matching_date=" + matching_date + ", enroll_date=" + enroll_date
+				+ ", withus_place=" + withus_place + ", withus_category=" + withus_category + ", time1=" + time1
+				+ ", time2=" + time2 + ", status=" + status + "]";
+	}
+
+
 	
 }

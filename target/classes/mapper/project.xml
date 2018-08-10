@@ -11,7 +11,7 @@ insert into member values(#{member_id},#{member_pw},#{member_name},#{member_emai
 </resultMap>
 
 <select id="selectOne" parameterType="string" resultMap="selectMap">
-select * from member where member_id=#{member_id}
+select member.*, circle.circle_name from member FULL OUTER JOIN circle ON member.circle1_num=circle.circle_num where member.member_id=#{member_id}
 </select>
 
 <select id="selectCheck" parameterType="string" resultType="_int"> 

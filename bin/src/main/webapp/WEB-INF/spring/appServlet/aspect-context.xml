@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+<!-- 	aop:config 최상위 루트 안에 AOP관련 내용을 기술
+		aop:aspect를 선언 : aspect 객체를 불러오는 것  / bean을 등록하는것과 같음
+			(선언 위치와 실행되는 메서드가 aspect안에 있음)
+			pointcut : 실행 위치를 지정 설정 
+			advice : 실행하는 구문(메서드) 설정 -->
+		
+		<!-- aspect 객체 bean 으로 등록 -->
+<!-- 		<bean id="loggerAspect" class="com.yj.project.common.LoggerAspect"/>
+		
+		<aop:config>
+		<aop:aspect id="loggerAspect" ref="loggerAspect">
+		<aop:pointcut expression="execution(* com.yj.project..*(..))" id="forAll"/>
+		<aop:around method="loggerAdvice" pointcut-ref="forAll"/>
+		</aop:aspect>
+		</aop:config> -->
+		<!-- AOP 어노테이션 적용 -->
+		<aop:aspectj-autoproxy/>
+	
+</beans>

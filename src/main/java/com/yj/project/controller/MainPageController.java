@@ -45,13 +45,5 @@ public class MainPageController {
 		public String mainpagedo() {
 			return "mainPage/mainPage";
 		}
-	   
-	   
-	   
-
-		
-	
-		
-
 
 }

@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="matching">
 <insert id="upload" parameterType="com.yj.project.calendar.model.vo.Calendar">
-insert into withus_board values(withus_board_SEQ.nextval,#{withus_title},#{withus_content},#{member_id},#{register_circle},#{matching_date},sysdate,#{withus_place},#{withus_category},#{time1},#{time2},#{status})
+insert into withus_board values(withus_board_SEQ.nextval,#{withus_title},#{withus_content},#{member_id},#{register_circle_num},#{matching_date},sysdate,#{withus_place},#{withus_category},#{time1},#{time2},#{status})
 </insert>
 <resultMap type="com.yj.project.calendar.model.vo.Calendar" id="calendarMap">
 </resultMap>
 <select id="selectList" resultMap="calendarMap">
-select * from withus_board where  1=1<if test="category !='전체'">and withus_category=#{category} </if>
+select withus_board.*,circle.circle_name from withus_board full outer JOIN circle ON withus_board.REGISTER_CIRCLE_NUM=circle.circle_num where 1=1<if test="category !='전체'">and withus_board.withus_category=#{category} </if>
 </select>
 <insert id="reqMatching" parameterType="com.yj.project.calendar.model.vo.Matching">
-insert into req_withus values(#{withus_num},#{withus_title},#{withus_content},#{member_id},#{register_circle},#{matching_date},#{time1},#{time2},#{withus_place},#{req_circle},#{req_id},#{req_withus_content},#{req_matching_date},#{re_time1},#{re_time2},#{req_withus_place},#{status})
+insert into req_withus values(#{withus_num},#{withus_title},#{withus_content},#{member_id},#{register_circle},#{matching_date},#{time1},#{time2},#{withus_place},#{req_circle},#{req_id},#{req_withus_content},#{req_matching_date},#{req_time1},#{req_time2},#{req_withus_place},#{status})
 </insert>
 <select id="selectMatching" resultType="com.yj.project.calendar.model.vo.Matching">
 select * from req_withus

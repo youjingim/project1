@@ -20,6 +20,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding" rel="stylesheet">
+
+
+      <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
+
   
       <link rel="stylesheet" type="text/css" href="${path }/resources/css/component.css">
     <link rel="stylesheet" type="text/css" href="${path }/resources/css/default.css">
@@ -64,13 +73,13 @@ height:auto;
 position:relative;
 }
 div#myNavbar a {
-font-size:20px;
+font-size:17px;
 color:black;
 font-family: 'Nanum Gothic Coding', monospace;
 }
 div#myNavbar ul li a:hover{
 color:gray;
-font-size:21px;
+font-size:18px;
 }
 header{
 width:100%;
@@ -363,7 +372,7 @@ img {vertical-align: middle;}
 
 
 .dropdown .dropbtn {
-    font-size: 16px;    
+    font-size: 16px;
     border: none;
     outline: none;
     color: white;
@@ -545,14 +554,21 @@ background-color:white;
 		<a style="font-weight:600; color:white;font-size:15px;cursor:pointer;"><img src="${path}/resources/image/profile.png" style='width:30px; height:30px;'></a>
 			
 			<div class="dropdown-content">
+<<<<<<< HEAD
 			<c:out value="${memberLoggedIn.member_id}"/>님
 				<a href="${path }/member/mypage.do">마이페이지</a>
+=======
+			         
+        <a href="${path }/clubMain.do?member_id=${memberLoggedIn.member_id}">나의 동아리</a>
+				<a href="#">마이페이지</a>
+>>>>>>> fd732e46c441d8bac5f9f887906651360741577f
 				<a href="#">쪽지함</a> 
 				<a href="${path}/member/memberUpdate.do?member_id=${memberLoggedIn.member_id}">내 정보 수정</a>
 				<c:if test="${memberLoggedIn.member_id eq 'admin'}">
 				<a href="${path }/member/adminPage.do">관리자 페이지</a>
 				</c:if>
 				<a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" type="button" onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a>
+
 				
 			</div>
 		</div>
