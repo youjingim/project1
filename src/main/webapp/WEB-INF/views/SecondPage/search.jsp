@@ -181,22 +181,25 @@ section div#main_container div#rank_container {
 	<section>
 		<div id='main_container'>
 			<br><br><br> 
-			<span style='font-weight: bold; margin-top: 100px; margin-left: 5%; font-size: 30px; text-align: center;'>동아리랭킹(좋아요 순)</span> 
+			<span style='font-weight: bold; margin-top: 100px; margin-left: 5%; font-size: 30px; text-align: center;color:black;'>동아리랭킹(좋아요 순)</span> 
 			<br><br><br><br><br>
 			<div class='container'>
 				<c:set var="num" value="1"/>
 				<c:forEach var="circle" items="${list }" varStatus="status" begin="0" end="3">
 					<div class='mySlides'>
-						<a href="${pageContext.request.contextPath}/circleView.do">
+						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
 						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
-						</a>
-						
 						<div class="text-block">
 							<c:set var="count" value="${count + 1}" />
 							<h2 style="text-align: center; color:#100BA3" id='rank'>${count}등</h2>
 							<h3 style="text-align: center;font-weight: bold;color:#190710"> ${circle.circle_name} </h3>
 							<p style="text-align: center;font-weight: bold;color:#190710"> ${circle.circle_comment} </p>
-						</div>	
+ 						</div>
+						</a>
+						<style type="text/css">
+							a:hover{color:red; text-decoration:none;}
+						</style>
+						
 					</div>
 				</c:forEach>
 			
@@ -268,15 +271,17 @@ section div#main_container div#rank_container {
 					<div class="col-sm-9 col-xs-offset-2">
 						<h4 style="color: black">대학선택으로 검색</h4>
 						<div class="input-group-btn search-panel">
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+							<!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 								<span id="search_concept">선택</span> <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								<li><a href="${pageContext.request.contextPath}/search.do?university=서울대학교">서울대학교</a></li>
-								<li><a href="${pageContext.request.contextPath}/search.do?university=연세대학교">연세대학교</a></li>
-								<li><a href="${pageContext.request.contextPath}/search.do?university=고려대학교">고려대학교</a></li>
-								<li><a href="${pageContext.request.contextPath}/search.do?university=성균관대학교">성균관대학교</a></li>
-								<li><a href="${pageContext.request.contextPath}/search.do?university=홍익대학교">홍익대학교</a></li>
+							</button> -->
+							<button type="button" style="color:#1B13F3" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">선택 <span class="caret"></span></button>
+							<ul class="dropdown-menu" >
+							 	<li role="presentation" class="disabled"><a role="menuitem" tabindex="-1" href="#">선택</a></li>
+								<li><a href="${pageContext.request.contextPath}/search.do?university=서울대학교" style="color:#07B3F7">서울대학교</a></li>
+								<li><a href="${pageContext.request.contextPath}/search.do?university=연세대학교" style="color:#07B3F7">연세대학교</a></li>
+								<li><a href="${pageContext.request.contextPath}/search.do?university=고려대학교" style="color:#07B3F7">고려대학교</a></li>
+								<li><a href="${pageContext.request.contextPath}/search.do?university=성균관대학교" style="color:#07B3F7">성균관대학교</a></li>
+								<li><a href="${pageContext.request.contextPath}/search.do?university=홍익대학교" style="color:#07B3F7">홍익대학교</a></li>
 								<li class="divider"></li>
 								<li><p id="inputing"
 										style="color: black; font-size: 14px; cursor: pointer;"
@@ -286,8 +291,8 @@ section div#main_container div#rank_container {
 						<!-- 조건처리해서 안보이게끔 -->
 						<form action="${pageContext.request.contextPath }/search.do">
 							<div class="input-group" id='uni' style="display: none;">
-								<span class='green_window'>
-									<input type='text' class='input_text' name="Unsearch">
+								<span class='green_window' style="width:450px">
+									<input type='text' class='input_text' name="Unsearch" style="color:black;">
 								</span>
 								<button type='submit' id='sch_smit' class='btn btn-info btn-lg'>
 									<span class="glyphicon glyphicon-search"></span> Search 
@@ -304,8 +309,8 @@ section div#main_container div#rank_container {
 						<div class="col-sm-9 col-xs-offset-2">
 							<h4 style="color: black">동아리명으로 검색</h4>
 							<div class="input-group">
-								<span class='green_window'>
-									<input type='text' class='input_text' name="circle_name">
+								<span class='green_window' style="width:600px">
+									<input type='text' class='input_text' name="circle_name" style="color:black;">
 								</span>
 								<button type='submit' id='sch_smit' class='btn btn-info btn-lg'>
 									<span class="glyphicon glyphicon-search"></span> Search 
@@ -316,7 +321,7 @@ section div#main_container div#rank_container {
 				</div>
 			</div>
 		</div>
-		<span style='font-weight: bold; margin-top: 100px; margin-left: 5%; font-size: 30px; color: lightgray'>동아리홍보</span>
+		<span style='font-weight: bold; margin-top: 100px; margin-left: 5%; font-size: 30px; color: black;'>동아리홍보</span>
 		<div class="container" id="con1">
 			<div class="row">
 					<c:forEach var='circle' items='${list2}' varStatus="vs">

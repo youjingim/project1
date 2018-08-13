@@ -32,7 +32,6 @@ import com.yj.project.common.page.PageCreate;
 import com.yj.project.search.model.service.SearchService;
 import com.yj.project.search.model.vo.Circle;
 import com.yj.project.search.model.vo.Like;
-import com.yj.project.search.model.vo.PageVo;
 
 
 @Controller
@@ -163,7 +162,7 @@ public class SearchPageController {
 		
 		//int result=searchService.selectOne(circle_num,model);
 		
-		return "/"; //해당 동아리 페이지화면 표시 부분으로 리턴
+		return "/clubPage/clubMain"; //해당 동아리 페이지화면 표시 부분으로 리턴
 	}
 	
 	@RequestMapping("ListFinder.do")
