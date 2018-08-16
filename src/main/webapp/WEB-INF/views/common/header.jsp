@@ -122,7 +122,7 @@ position:absolute;
 right:30px;
 transition:0.5s;
 z-index:1001;
-top:25px;
+top:18px;
 }
 
 .login{
@@ -402,10 +402,6 @@ img {vertical-align: middle;}
     text-align: left;
 }
 
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
 .dropdown:hover .dropdown-content {
     display: block;
 }
@@ -502,6 +498,17 @@ border:none;
 margin-left:0.2%;
 margin-bottom:0px;
 }
+#infoTable tr{
+height:10px;
+}
+#infoTable td{
+text-align:center;
+color:black;
+padding:5px;
+}
+#infoTable tr:hover{
+background-color:white;
+}
 
 @media screen and (max-width: 765px) {
 #navbar_set{
@@ -529,7 +536,7 @@ background-color:white;
       <a href="#" onclick="fnMove('5')" style="opacity:1 !important;">CampusPick</a>
 </span>
 </div>
-  <div id="nav_move" class="container-fluid col-sm-9" style="margin-top:10px;margin-left:30%;">
+  <div id="nav_move" class="container-fluid col-sm-7" style="margin-top:10px;margin-left:30%;">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
@@ -542,31 +549,57 @@ background-color:white;
       	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
          <li><a href="#" onclick="fnMove('1')">CampusPick</a></li>
         <li><a href="${path}/secondPage.do">동아리</a></li>
-        <li><a href="#">동아리 개설</a></li>
+        <li><a href="${path}/createClub">동아리 개설</a></li>
         <li><a href="${path}/calendar.do">With us</a></li> 
         <li><a href="${path }/board/boardList.do">자유게시판</a></li>
       </ul>
     </div>
   </div>
 
-</nav>
-		<div class="dropdown" id="info_span" style='margin-right:50px;'>
-		<a style="font-weight:600; color:white;font-size:15px;cursor:pointer;"><img src="${path}/resources/image/profile.png" style='width:30px; height:30px;'></a>
+<div class="dropdown col-sm-2" id="info_span" >
+		<a style="font-weight:600; color:white;font-size:15px;cursor:pointer;margin-left:80%;"><img src="${path}/resources/image/profile.png" style='width:40px; height:40px;'></a>
 			
-			<div class="dropdown-content">
-			<c:out value="${memberLoggedIn.member_id}"/>님
-				<a href="${path }/member/mypage.do">마이페이지</a>
-        <a href="${path }/clubMain.do?member_id=${memberLoggedIn.member_id}">나의 동아리</a>
-				<a href="#">쪽지함</a> 
-				<a href="${path}/member/memberUpdate.do?member_id=${memberLoggedIn.member_id}">내 정보 수정</a>
+			<div class="dropdown-content" style='margin-left:50%;'>
+			<table class='table' id='infoTable'>
+			<tr>
+			<td>${memberLoggedIn.member_id}님</td>
+			</tr>
+			<tr>
+			<td><a href="${path }/member/mypage.do">마이페이지</a></td>
+			</tr>
+			<tr>
+			<td><a href="${path }/clubMain.do?member_id=${memberLoggedIn.member_id}">나의 동아리</a></td>
+			</tr>
+			<tr>
+			<td><a href="#">쪽지함</a> </td>
+			</tr>
+			<tr>
+			<td><a href="${path}/member/memberUpdate.do?member_id=${memberLoggedIn.member_id}">내 정보 수정</a></td>
+			</tr>
 				<c:if test="${memberLoggedIn.member_id eq 'admin'}">
-				<a href="${path }/member/adminPage.do">관리자 페이지</a>
-				</c:if>
-				<a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" type="button" onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a>
+			<tr>
+			<td><a href="${path }/member/adminPage.do">관리자 페이지</a></td>
+			</tr>
+			</c:if>
+			
+			<tr>
+			<td><a  onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a></td>
+			</tr>
+			
+			</table>
+			
+			
+			
+		
+			
 
 				
 			</div>
 		</div>
+
+
+</nav>
+		
 </header>
 
 

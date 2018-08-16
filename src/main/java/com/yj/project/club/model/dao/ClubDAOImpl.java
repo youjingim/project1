@@ -1,12 +1,15 @@
 package com.yj.project.club.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.Circle_board;
+import com.yj.project.calendar.model.vo.ClubNotice;
+import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.member.model.vo.Member;
@@ -61,6 +64,28 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public List<Matching> selectMatching(SqlSessionTemplate sqlSession, int circle1_num) {
 		return sqlSession.selectList("club.selectMatching",circle1_num);
+	}
+
+	@Override
+	public List<FinalWithus> selectClubMatching(SqlSessionTemplate sqlSession, int circle1_num) {
+		return sqlSession.selectList("club.selectFinal",circle1_num);
+	}
+
+	@Override
+	public List<ClubNotice> selectNotice(SqlSessionTemplate sqlSession, int circle1_num) {
+		return sqlSession.selectList("club.selectNotice",circle1_num);
+	}
+
+
+
+	@Override
+	public int countNotice(SqlSessionTemplate sqlSession, Map<String, Object> map) {
+		return sqlSession.selectOne("club.countNotice",map);
+	}
+
+	@Override
+	public int noticeUpdate(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.update("club.noticeUpdate",member_id);
 	}
 	
 

@@ -11,7 +11,6 @@
         <c:set var='path' value="${pageContext.request.contextPath}"/>
     <%
     Date d = new Date();
-    System.out.println(d);
     SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
     String date1 = sd.format(d);
    request.setAttribute("date",date1);
@@ -116,10 +115,17 @@ width:100%;
    </select>
    <input type="button" class="btn btn-success" onclick="category()" value="검색" style="font-size:15px;display:inline-block;width:100px;">
    <br><br>
+   <div style='margin-left:110px;'><span style='width:30px;height:15px;background-color:#7C96C9;display:inline-block;border-radius:10%;'></span> 나의 동아리 신청 매칭
+   <br>
+   <span style='width:30px;height:15px;background-color:#A5DE9F;display:inline-block;border-radius:10%;'></span> &nbsp;타&nbsp;&nbsp; 동아리 신청 매칭
+   <br><br>
    <c:if test="${memberLoggedIn.member_level eq 'L5'}">
-   <button type="button" class="btn btn-info" style="margin-left:205px;cursor:pointer;" data-toggle="modal" data-target="#myModal">매칭 업로드</button>   
+   <button type="button" class="btn btn-info" style="margin-left:90px;cursor:pointer;" data-toggle="modal" data-target="#myModal">매칭 업로드</button>   
    </c:if>
    </div>
+
+   </div>
+   <br><br><br>
    <script>
    function category(){
       location.href="${path}/calendar.do?category="+$('#category').val();
@@ -154,11 +160,15 @@ width:100%;
     		    <c:when test="${memberLoggedIn.member_id eq c.member_id}">
 				color:'#7C96C9',
     		    </c:when>
+    		  
 
     		    <c:otherwise>
     		        color:'#A5DE9F',
     		    </c:otherwise>
     			</c:choose> 
+
+
+    			
     		  widthus_num: '${c.withus_num}',
               title: '${c.circle_name}',
               widthus_title:'${c.withus_title}',
@@ -308,7 +318,8 @@ width:100%;
       <option value="연극">연극</option>
       </select><br>
       <p>제목 </p> <input type="text" name="withus_title" id="machingTitle" class="form-control" style="width:50%;" required><br>
-      <p>날짜 </p> <input type="date" name="matching_date" id="machingDate" class="form-control" style="width:50%;" required><br><br>
+      <p>날짜 </p> <input type="date" name="matching_date" id="machingDate" class="form-control" style="width:50%;" required><br>
+      <span style='color:red;' id='dateCheck'></span><br><br>
       <p>시간 </p> <select id="t1" name="time1" style="width:20%;display:inline-block;" class="form-control">
       <option value="08">08:00</option>
       <option value="09">09:00</option>
@@ -532,10 +543,6 @@ function matchingFrm(){
 
     
 
-   if('${memberLoggedIn.member_id}'==id){
-      alert('자신이 등록한 매칭은 신청할 수 없습니다.');
-      return false;
-   }
    if($('#chage_toggle').val()=='true'){
    if(d1<'${date}'){
       alert('날짜를 확인해주세요');
@@ -564,7 +571,8 @@ function uploadMatching(){
       async: false,
       success:function(data){
          if(data=='false'){
-            alert('해당 날짜에는 이미 매칭이 신청되어 있습니다.');
+            $('#dateCheck').html('해당 날짜에는 이미 매칭이 신청되어 있습니다.');
+            $('#machingDate').focus();
             f=true;
          }else{
             f=false;

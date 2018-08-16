@@ -46,6 +46,9 @@
   function circle_gallery(){
 	  location.href="${path}/circle_gallery.do?circle_num="+${club.circle_num};
   }
+  function circle_calendar(){
+	  location.href="${path}/circle_calendar.do?circle_num="+${club.circle_num}+"&member_id="+'${memberLoggedIn.member_id}';
+  }
 </script>
 <style>
 /* 댓글 범위를 나타내는 css*/
@@ -89,6 +92,10 @@
           </div>
           <button onclick="circle_budget()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-won fa-fw w3-margin-right"></i> 동아리 예산</button>
           <div id="Demo3" class="w3-hide w3-container">
+            <p>Some other text..</p>
+          </div>
+          <button onclick="circle_calendar()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> 동아리 일정 <c:if test='${total != 0}'><span style='margin-left:50%;'>new ${total}</span></c:if></button>
+          <div id="Demo5" class="w3-hide w3-container">
             <p>Some other text..</p>
           </div>
           <button onclick="circle_gallery()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> 동아리 사진첩</button>

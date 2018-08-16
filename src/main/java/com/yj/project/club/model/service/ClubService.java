@@ -1,9 +1,12 @@
 package com.yj.project.club.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.Circle_board;
+import com.yj.project.calendar.model.vo.ClubNotice;
+import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.member.model.vo.Member;
@@ -18,6 +21,9 @@ public interface ClubService {
 	public int deleteBoard(int no);//동아리 게시글 삭제 로직
 	public Circle_board selectBoardOne(int no);//동아리 게시글 수정에 필요한 게시글 정보 가져오기
 	public int updateBoard(Circle_board cb); //동아리 게시글 수정 로직
-
 	public List<Matching> selectMatching(int circle1_num);
+	public List<FinalWithus> selectClubMatching(int circle1_num);
+	public List<ClubNotice> selectNotice(int circle1_num);
+	public int countNotice(Map<String, Object> map);
+	public int noticeUpdate(String member_id);
 }
