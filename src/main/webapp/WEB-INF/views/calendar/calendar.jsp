@@ -245,7 +245,7 @@ width:100%;
               var btn2 = "<input type='button' value='삭제' class='btn btn-danger' onclick='deleteFrm()' style='width:250px;margin-right:170px;'>";
               $('#modal_foot').html(btn2);
            }else{
-               var btn4 = "<input type='button' value='매칭신청' class='btn btn-success' onclick='matchingFrm()' style='width:250px;margin-right:170px;'>";
+               var btn4 = "<button type='button' class='btn btn-success' onclick='return matchingFrm()' style='width:250px;margin-right:170px;'>매칭신청</button>";
               $('#modal_foot').html("<span id='change' style='cursor:pointer;color:black;position:absolute;left:15px;' onclick='chage_toggle()'> 변경하기 </span>"+btn4);
               
            }
@@ -444,7 +444,7 @@ width:100%;
             <input type="hidden" id="chage_toggle" value="false">
              <div id="update_info">
                   <br>
-                  <p style='margin-left:25px;font-weight:bold;'>변경할 날짜 </p> <input type="date" name="req_matching_date1" style="width:50%;margin-left:25px;" id="req_matching_date" class="form-control"><br>
+               <input type="hidden" name="req_matching_date1" style="width:50%;margin-left:25px;" id="req_matching_date" class="form-control"><br>
                <p style='margin-left:25px;font-weight:bold;'>변경할 시간 </p> <select id = "re_time1" name="re_time11" style="width: 20%;margin-left:25px; display: inline-block;" class="form-control">
                            <option value="null">00:00</option>
                            <option value="08">08:00</option>
@@ -535,27 +535,38 @@ var flag=true;
    
 
 function matchingFrm(){
-   
+   alert('아이고');
    var id = $('#member_id').val();
    var d1 = $('#req_matching_date').val();
    var t1 = $('#re_time1').val();
    var t2 = $('#re_time2').val();
 
-    
+   var f;
+   $.ajax({
+      url: "${path}/checkCalendar.do?matchingDate="+d1,
+      async: false,
+      type:'post',
+      success:function(data){
+         if(data=='true'){
+            alert('해당 날짜에는 이미 매칭이 신청되어 있습니다.');
+            f=true;
+         }else{
+            f=false;
+         }
+      }
 
-   if($('#chage_toggle').val()=='true'){
-   if(d1<'${date}'){
-      alert('날짜를 확인해주세요');
-      return false;
+   });
+   if(!f){
+		   if(t1>t2){
+		      alert('시간을 확인해주세요!');
+		   }else{
+			   $('#matchingFrm').attr("action","${path }/send_Matching.do");
+			   $('#matchingFrm').submit();
+		   }
+		   
    }
-   if(t1>t2){
-      alert('시간을 확인해주세요!');
-      return false;
-   }
-   }
-   $('#matchingFrm').attr("action","${path }/send_Matching.do");
-   $('#matchingFrm').submit();
-   
+    
+  
    }
 function uploadMatching(){
    var title = $('#machingTitle').val();
@@ -567,10 +578,10 @@ function uploadMatching(){
    var t2 = $('#t2').val();
    var f;
    $.ajax({
-      url: "${path}/checkCalendar?matchingDate="+d1,
+      url: "${path}/checkCalendar.do?matchingDate="+d1,
       async: false,
       success:function(data){
-         if(data=='false'){
+         if(data=='true'){
             $('#dateCheck').html('해당 날짜에는 이미 매칭이 신청되어 있습니다.');
             $('#machingDate').focus();
             f=true;

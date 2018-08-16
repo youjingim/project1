@@ -188,7 +188,7 @@ width:85%;
                   <input type='hidden' name='login_info' value='${memberLoggedIn.member_id}'>
                   <div id="update_info">
                   <br>
-                  <p style='margin-left:25px;font-weight:bold;'>변경할 날짜 </p> <input type="date" name="req_matching_date1" style="width:50%;margin-left:25px;" id="req_matching_date" class="form-control"><br>
+               <input type="hidden" name="req_matching_date1" style="width:50%;margin-left:25px;" id="req_matching_date" class="form-control"><br>
                <p style='margin-left:25px;font-weight:bold;'>변경할 시간 </p> <select id = "re_time1" name="re_time11" style="width: 20%;margin-left:25px; display: inline-block;" class="form-control">
                            <option value="null">00:00</option>
                            <option value="08">08:00</option>

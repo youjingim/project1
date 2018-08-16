@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +30,8 @@ import com.yj.project.calendar.model.vo.ClubNotice;
 import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
 import com.yj.project.member.model.vo.Member;
+
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 @Controller
 public class CalendarController {
 	@Autowired
@@ -98,6 +101,7 @@ public class CalendarController {
 	@RequestMapping("/calendar.do")
 	public String calendar(HttpServletRequest req,@RequestParam(value="category",required=false,defaultValue="전체")String category) {
 		
+		int result = service.updateDate();
 		List<Calendar> list = service.selectList(category);
 		List<Matching> matchingList = service.selectMatching();
 
@@ -136,19 +140,34 @@ public class CalendarController {
 		return "common/msg";
 	}
 	
-	@RequestMapping("/checkCalendar")
+	@RequestMapping(value="/checkCalendar.do",method={RequestMethod.POST,RequestMethod.GET})
 	public void matchingDate(@RequestParam(value="matchingDate")Date date,HttpServletResponse res,HttpServletRequest req) throws IOException {
+		System.out.println("들어옴");
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> map2 = new HashMap<String, Object>();
 
 		Member member = (Member)req.getSession().getAttribute("memberLoggedIn");
 		map.put("member_id", member.getMember_id());
 		map.put("date", date);
-		boolean check1 = service.selectDate(map)==0?true:false;
+		//withus_board
+		int result1 = service.selectDate(map);
 		map2.put("circle_num", member.getCircle1_num());
 		map2.put("date", date);
-		boolean check2 = service.selectDate2(map2)==0?true:false;
-		boolean check = check1 || check2;
+		//final
+		int result2 = service.selectDate2(map2);
+		//req_withus
+		int result3 = service.selectDate3(map2);
+		boolean check=false;
+		System.out.println("result1="+result1);
+		System.out.println("result2="+result2);
+		System.out.println("result3="+result3);
+		
+		if(result1>0 || result2>0 || result3>0) {
+			check=true;
+		}
+		
+		
 		res.getWriter().print(check);
 	}
 	@RequestMapping("/delete_Matching.do")

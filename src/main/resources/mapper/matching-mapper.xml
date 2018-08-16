@@ -21,6 +21,9 @@ select count(*) from withus_board where member_id=#{member_id} and matching_date
 <select id='selectDate2' parameterType="map" resultType='_int'>
 select count(*) from final_withus where REGISTER_CIRCLE=#{circle_num} and REQ_MATCHING_DATE=#{date}
 </select>
+<select id='selectDate3' parameterType="map" resultType='_int'>
+select count(*) from req_withus where MATCHING_DATE=#{date} and status in('S','C') and (REGISTER_CIRCLE=#{circle_num} or REQ_CIRCLE=#{circle_num})
+</select>
 <delete id="deleteMatching" parameterType="_int">
 delete from withus_board where withus_num=#{num}
 </delete>
@@ -42,4 +45,11 @@ insert into club_notice values(#{circle_num},#{content})
 <update id='updateNotice' parameterType="map">
 update member set member_notice = member_notice+1 where circle1_num in(#{circle1_num},#{circle2_num})
 </update>
+<update id='updateDate'>
+update withus_board set status='N' where matching_date <![CDATA[<]]> sysdate
+</update>
+<update id='updateDate2'>
+update req_withus set status='N' where matching_date <![CDATA[<]]> sysdate
+</update>
+
 </mapper>
