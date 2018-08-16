@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-        <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
-    <%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
-    <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
-    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-        <c:set var='path' value="${pageContext.request.contextPath}"/>
+	pageEncoding="UTF-8"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>	
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
+<%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<link href='resources/css/fullcalendar.min.css' rel='stylesheet' />
+<link href='resources/css/fullcalendar.print.min.css' rel='stylesheet'media='print' />
+<script src='resources/js/moment.min.js'></script>
+<script src='resources/js/fullcalendar.min.js'></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<c:set var='path' value="${pageContext.request.contextPath}"/>
+
     
     <style>
     #update_info{
@@ -77,10 +85,12 @@ width:85%;
           <span><strong>${m.circle_name }</strong></span>
           <br><br>
           <span style='cursor:pointer;' class='info_view'>상세보기
-          <input type='hidden' value='${vs.index}'/>
+          <input type='hidden' value='${m.withus_num}'/>
           </span>
-          <c:if test='${!(m.matching_date != m.req_matching_date) || !(m.time1 != m.req_time1) || !(m.time2 != m.req_time2) || !(m.withus_place != m.req_withus_place)}'><br><br>
+          <c:if test="${m.status eq 'C'}"><br><br>
           <span style='color:red;'>변경사항</span>
+          </c:if>
+          <c:if test="${m.status eq 'S'}"><br><br><br>
           </c:if>
           <div class="w3-row w3-opacity">
             <div class="w3-half">
@@ -100,6 +110,12 @@ width:85%;
       </div>
       </c:if>
       <br>
+      
+
+   
+
+      
+      
      
       <div id="matchingModal" class="modal">
       <div class="modal-dialog">
@@ -115,7 +131,6 @@ width:85%;
 	             <td>날짜</td>
 	             <td>
 	             <span id="date_in" class="modal-title" style="color:black;"></span>
-	             <input type="hidden" name="matching_date1" id="machingDateIn">
 	             </td></tr>
 	             <tr style='height:0px;'><td style='color:red;'></td><td>
 	             <span id='chage_in' class='modal-title' style='color:red;'></span>
@@ -170,6 +185,7 @@ width:85%;
                   <input type="hidden" name="register_circle" id="register_circle_in">
                   <input type='hidden' name='req_circle' value='${memberLoggedIn.circle1_num}'>
                   <input type="hidden" id="chage_toggle" value="false">
+                  <input type='hidden' name='login_info' value='${memberLoggedIn.member_id}'>
                   <div id="update_info">
                   <br>
                   <p style='margin-left:25px;font-weight:bold;'>변경할 날짜 </p> <input type="date" name="req_matching_date1" style="width:50%;margin-left:25px;" id="req_matching_date" class="form-control"><br>
@@ -235,9 +251,29 @@ width:85%;
               <div id="modal_foot" class="modal-footer">
               
               <span id='change' style='cursor:pointer;color:black;position:absolute;left:15px;' onclick='chage_toggle()'> 변경하기 </span>
-              <input type='button' value='매칭신청' class='btn btn-success' onclick='matchingFrm()' style='width:250px;margin-right:170px;'>
+              <span style='margin-right:120px;'>
+              <input type='button' value='수락' class='btn btn-success' onclick='matchingOK()' style='width:100px;'>
+              <input type='button' value='재신청' class='btn btn-warning' onclick='matchingFrm()' style='width:100px;'>
+              <input type='button' value='거절' class='btn btn-danger' onclick='matchingNO()' style='width:100px;'>
+              </span>
               </div>
       <script>
+      function matchingOK(){
+    	  var frm = $('#matchingFrm');
+		  var url = "${path}/successMatching";
+    	  frm.attr("action",url);
+    	  frm.submit();
+    	  
+      }
+      
+      function matchingNO(){
+    	  var frm = $('#matchingFrm');
+		  var url = "${path}/failMatching";
+    	  frm.attr("action",url);
+    	  frm.submit();
+    	  
+      }
+      
 
       function sample6_execDaumPostcode2() {
           new daum.Postcode({
@@ -303,6 +339,41 @@ width:85%;
 			   		   $('#req_matching_date').attr("value",data.req_matching_date);
 			   		   $('#req_withus_content').html(data.req_withus_content);
 			   		   $('#sample6_address1').attr("value",data.req_withus_place);
+			   		   
+			   		   
+			   		   
+			            $('#machingTitleIn').attr("value",data.withus_title);
+			            $('#machingContentIn').attr("value",data.withus_content);
+			            $('#machingPlaceIn').attr("value",data.withus_place);
+			            $('#time1In').attr("value", data.time1);
+			            $('#time2In').attr("value", data.time2);
+			            $('#machingDateIn').attr("value",data.matching_date);
+			            $('#withus_num').attr("value",data.withus_num);
+			            $('#member_id').attr("value",data.member_id);
+			            $('#register_circle_in').attr("value",data.req_circle);
+			   		   
+			   		   $(document).ready(function(){
+			           	  $('#re_time1').children().each(function(){
+			           	    if($(this).val()==data.req_time1){
+
+			           	      $(this).prop("selected",true); // attr적용안될경우 prop으로 
+
+			           	    }
+
+			           	  });
+
+			           	});
+			            $(document).ready(function(){
+
+			        	  $('#re_time2').children().each(function(){
+			        	    if($(this).val()==data.req_time2){
+
+			        	      $(this).prop("selected",true); // attr적용안될경우 prop으로 
+			        	    }
+
+			        	  });
+
+			        	});
 
 			   		   if(data.matching_date != data.req_matching_date){
 			   			   $('#chage_in').parent().siblings().first().html('변경날짜');
@@ -373,35 +444,6 @@ width:85%;
 
 			   });
 		 
-		 
-		 
-		 
-		      
-
-
-   		   
-   		   $(document).ready(function(){
-          	  $('#re_time1').children().each(function(){
-          	    if($(this).val()=='${matching[0].req_time1}'){
-
-          	      $(this).prop("selected",true); // attr적용안될경우 prop으로 
-
-          	    }
-
-          	  });
-
-          	});
-           $(document).ready(function(){
-
-       	  $('#re_time2').children().each(function(){
-       	    if($(this).val()=='${matching[0].req_time2}'){
-
-       	      $(this).prop("selected",true); // attr적용안될경우 prop으로 
-       	    }
-
-       	  });
-
-       	});
    		   
 	 });
               
