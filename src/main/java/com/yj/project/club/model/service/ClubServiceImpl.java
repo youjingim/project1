@@ -1,11 +1,14 @@
 package com.yj.project.club.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yj.project.calendar.model.vo.ClubNotice;
+import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
 import com.yj.project.club.model.dao.ClubDAO;
 import com.yj.project.club.model.vo.Budget;
@@ -64,6 +67,7 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int updateBoard(Circle_board cb) {
 		return clubDAO.updateBoard(sqlSession,cb);
+<<<<<<< HEAD
 
 	}
 	@Override	
@@ -99,6 +103,34 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<CB_Comment> commentList(int cb_num) {
 		return clubDAO.commentList(sqlSession,cb_num);
+=======
+	}
+	@Override
+	public List<Matching> selectMatching(int circle1_num) {
+	return clubDAO.selectMatching(sqlSession,circle1_num);
+	}
+
+	@Override
+	public List<FinalWithus> selectClubMatching(int circle1_num) {
+		return clubDAO.selectClubMatching(sqlSession,circle1_num);
+	}
+
+	@Override
+	public List<ClubNotice> selectNotice(int circle1_num) {
+		return clubDAO.selectNotice(sqlSession,circle1_num);
+	}
+
+
+
+	@Override
+	public int countNotice(Map<String, Object> map) {
+		return clubDAO.countNotice(sqlSession,map);
+	}
+
+	@Override
+	public int noticeUpdate(String member_id) {
+		return clubDAO.noticeUpdate(sqlSession,member_id);
+>>>>>>> 3f75b1efec7f3e43a9220e817bea8c7f88907544
 	}
 	
 	

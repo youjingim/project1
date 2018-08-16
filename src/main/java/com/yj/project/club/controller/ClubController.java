@@ -1,13 +1,18 @@
 package com.yj.project.club.controller;
 import java.io.File;
+
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
@@ -25,6 +31,11 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 import com.yj.project.common.page.CirclePageCreate;
 import com.yj.project.board.controller.BoardController;
 import com.yj.project.board.model.vo.Board;
+<<<<<<< HEAD
+=======
+import com.yj.project.calendar.model.vo.ClubNotice;
+import com.yj.project.calendar.model.vo.FinalWithus;
+>>>>>>> 3f75b1efec7f3e43a9220e817bea8c7f88907544
 import com.yj.project.calendar.model.vo.Matching;
 import com.yj.project.club.model.service.ClubService;
 import com.yj.project.club.model.vo.Budget;
@@ -54,10 +65,27 @@ public class ClubController {
 		List<Circle_board> list=clubService.selectBoardList(club.getCircle_num());
 		List<CB_Comment> clist=clubService.commentList(club.getCircle_num());
 		session.setAttribute("member", member);
+<<<<<<< HEAD
 		session.setAttribute("club", club);
 		session.setAttribute("BoardList", list);
 		session.setAttribute("array", array);
 		session.setAttribute("clist", clist);
+=======
+		List<Matching> matching = clubService.selectMatching(member.getCircle1_num());
+		List<ClubNotice> noticeList = clubService.selectNotice(member.getCircle1_num());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("circle_num", member.getCircle1_num());
+		int total=member.getMember_notice();
+		System.out.println("이거" + total);
+
+		session.setAttribute("matching", matching);
+		session.setAttribute("club", club);
+		session.setAttribute("total", total);
+		session.setAttribute("noticeList", noticeList);
+		model.addAttribute("BoardList", list);
+		model.addAttribute("categoryArr", array);
+		
+>>>>>>> 3f75b1efec7f3e43a9220e817bea8c7f88907544
 		return "clubPage/clubMain";
 	}
 	//동아리 회원 관리 페이지로 가는 로직
@@ -186,6 +214,7 @@ public class ClubController {
 		return mv;
 		
 	}
+<<<<<<< HEAD
 	//회원목록에서 동아리 회원 탈퇴시키는 로직
 	@RequestMapping("deleteCircleMember.do")
 	public ModelAndView deleteCircleMember(String id, int no) {
@@ -247,4 +276,46 @@ public class ClubController {
 		return "clubPage/commentAjax";
 	}
 
+=======
+	
+	@RequestMapping("circle_calendar.do")
+	public ModelAndView calendar(@RequestParam(value="circle_num")int circle_num,@RequestParam(value="member_id")String member_id,HttpSession session) {
+		Member member=clubService.selectOne(member_id);
+		List<FinalWithus> matchingList = clubService.selectClubMatching(circle_num);
+		List<Member> memberList = clubService.selectMember(circle_num);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("circle_num", circle_num);
+		int noticeCount = member.getMember_notice();
+		int result = clubService.noticeUpdate(member_id);
+		
+		if(result>0) {
+			logger.debug("notice 업데이트 성공");
+		}else {
+			logger.debug("notice 업데이트 실패");
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("noticeCount",noticeCount);
+		mv.addObject("list",matchingList);
+		mv.addObject("memberList",memberList);
+		mv.setViewName("clubPage/clubCalendar");
+		session.setAttribute("total", 0);
+		
+		return mv;
+		
+	}
+	
+	@RequestMapping("/createClub")
+	public String createClub() {
+		return "clubPage/createClub";
+	}
+	
+	@RequestMapping("/clubCreateEnd")
+	public ModelAndView createClubEnd(Club club,HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println(club);
+
+		return mv;
+	}
+>>>>>>> 3f75b1efec7f3e43a9220e817bea8c7f88907544
 }

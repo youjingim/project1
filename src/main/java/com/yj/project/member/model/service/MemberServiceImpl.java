@@ -1,6 +1,5 @@
 package com.yj.project.member.model.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +43,42 @@ public class MemberServiceImpl implements MemberService{
 	public int selectId(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		return memberDao.selectId(map);
+	}
+	@Override
+	public int updatePw(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return memberDao.updatePw(map);
+	}
+	
+	@Override
+	public int memberUpdate(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.memberUpdate(member);
+	}
+	@Override
+	public int memberDelete(String member_pw) {
+		// TODO Auto-generated method stub
+		return memberDao.memberDelete(member_pw);
+	}
+	@Override
+	public List<Member> selectMember(int cPage,int numPerPage) {
+		// TODO Auto-generated method stub
+		return memberDao.selectMember(cPage, numPerPage);
+	}
+	@Override
+	public int selectCount() {
+		// TODO Auto-generated method stub
+		return memberDao.selectCount();
+	}
+	@Override
+	public int levelChange(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return memberDao.levelChange(map);
+	}
+	@Override
+	public int checkEmail(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return memberDao.checkEmail(map);
 	}
 
 }

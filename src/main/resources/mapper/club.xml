@@ -31,8 +31,9 @@
 	</update>
 	
 	<select id='selectMatching' parameterType="_int" resultType='com.yj.project.calendar.model.vo.Matching'>
-	select req_withus.*,circle.circle_name,circle.circle_photo  from req_withus full outer JOIN circle ON req_withus.REQ_CIRCLE=circle.circle_num where req_withus.REGISTER_CIRCLE=#{circle1_num}
+	select req_withus.*,circle.circle_name,circle.circle_photo  from req_withus full outer JOIN circle ON req_withus.REQ_CIRCLE=circle.circle_num where req_withus.REGISTER_CIRCLE=#{circle1_num} and req_withus.status in('S','C')
 	</select>
+<<<<<<< HEAD
 	<update id="deleteMember">
 		UPDATE MEMBER SET CIRCLE1_NUM=0 WHERE MEMBER_ID=#{id} 
 	</update>
@@ -58,4 +59,20 @@
 	<select id="commentList" resultType="cb_comment">
 		SELECT * FROM CB_COMMENT WHERE CB_NUM=#{cb_num}
 	</select>
+=======
+	<select id='selectFinal' parameterType="_int" resultType='com.yj.project.calendar.model.vo.FinalWithus'>
+	select final_withus.*,circle.circle_name from final_withus full outer JOIN circle ON final_withus.req_CIRCLE=circle.circle_num where register_circle = #{circle1_num}
+	</select>
+	<select id='selectNotice' parameterType="_int" resultType='com.yj.project.calendar.model.vo.ClubNotice'>
+	select * from club_notice where circle_num = #{circle1_num} order by rownum desc
+	</select>
+
+	<select id='countNotice' parameterType="map" resultType="_int">
+	select count(*) from club_notice where circle_num = #{circle_num}
+	</select>
+	
+	<update id="noticeUpdate" parameterType="string">
+	update member set member_notice = 0 where member_id = #{member_id}
+	</update>
+>>>>>>> 3f75b1efec7f3e43a9220e817bea8c7f88907544
 </mapper>
