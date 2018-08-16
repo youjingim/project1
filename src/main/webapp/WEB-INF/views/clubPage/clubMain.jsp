@@ -7,7 +7,7 @@
 
 <script>
 function validate(){
-    var content = $("[name=boardContent]").val();
+    var content = $("[name=cb_content]").val();
     if(content.trim().length==0){
         alert("내용을 입력하세요");
         return false;
@@ -20,6 +20,28 @@ function deleteBoard(no,id){
 function updateBoard(no){
 	location.href="${path}/updateCircle_board.do?no="+no;
 }
+function like_button(){
+
+}
+
+	function insertComment(n){
+		console.log("ddddd");
+		var no = n;
+		var comment = $('#comment1').val();
+		var memberId = $('#memberId').val();
+		var allData={"no":no, "memberId":memberId,"comment":comment};
+		$.ajax({
+			url:"${path}/insertComment.do",
+			data:allData,
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				alert("댓글 등록!");
+				$('#comment1').val("");
+				$('#commentTable').html(data);
+			}
+		});
+	}
 
 </script>
 
@@ -91,24 +113,29 @@ function updateBoard(no){
 	            </div>
 			 </div>
 			 </c:if>
-	        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom" id="like_icon"><i class="fa fa-thumbs-up"></i> 좋아요 +50</button>
+	        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom" id="like_icon" onclick="like_button();"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
 	        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" id="circle_comment"><i class="fa fa-comment"></i> 댓글 +7</button>
 	        <div id="post_comment" >
 	          <input type="text" class="form-control" name="comment1" id="comment1" placeholder="댓글을 작성해주세요." style="display:inline-block; width:90%;"/>
-	          <button type="button" class="btn btn-primary">등록</button>
+	          <input type="hidden" id="memberId" value="${member.member_id }"/>
+	          <input type="hidden" id="no" value="${b.cb_num }"/>
+	          <button type="button" class="btn btn-primary" id="comment_button"onclick="insertComment(${b.cb_num})">등록</button>
+	         
 	          <div><hr>
-	            <table>
+	            <table id="commentTable">
+	            <c:forEach items="${clist}" var='cc' varStatus="cstatus">
 	              <tr >
-	                <td class="top"><strong>총동아리장</strong>  2018.03.05</td>
+	                <td class="top"><strong>${cc.member_id }</strong>  ${cc. cb_comment_date}</td>
 	                <td></td>
 	              </tr>
 	              <tr>
-	                <td class="top">오 이번에는 꼭 참석할게요!</td>
+	                <td class="top">${cc.cb_comment_content }</td>
 	                <c:if test="${member.member_id eq b.member_id}">
 	                <td><button type="button" class="btn btn-warning" style="margin-right:5px;">수정</button></td>
 	                <td><button type="button" class="btn btn-danger">삭제</button></td>
 	                </c:if>
 	              </tr>
+	              </c:forEach>
 	            </table><hr>
 	          </div>
 	          <p>댓글 더 보기</p>

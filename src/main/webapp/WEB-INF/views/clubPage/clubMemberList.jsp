@@ -8,7 +8,21 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value='club' name='pageTitle'/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/> 
+<jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/> \
+ <script>
+		function deleteMember(id,no)
+		{
+			var choose=confirm('동아리에서 탈퇴시키겠습니까?');
+			if(choose==true){
+				location.href="${path}/deleteCircleMember.do?id="+id+"&no="+no;
+			}
+			else{
+				alert('다시 동아리 회원관리 페이지로 넘어갑니다.');
+				history.go();
+			}
+			
+		}
+</script>
 <style>
 /* 페이징 처리 css */
 /* Pagination links */
@@ -42,8 +56,8 @@ th,td{
         <div>
         <table class="table">
         <tr>
-          <th>번호</th>
           <th>이름</th>
+          <th>생년월일</th>
           <th>회원등급</th>
           <th>전화번호</th>
           <th>이메일</th>
@@ -51,42 +65,37 @@ th,td{
         </tr>
        <c:forEach items="${list }" var="m" varStatus="status">
         <tr>
-          <td><c:out value="${status.count }"/></td>
           <td><c:out value="${m.member_name }"/></td>
+          <td><c:out value="${m.member_birth}"/></td>
           <td><select>
-              <option value="일반화원">일반회원</option>
+          	<c:choose>
+          	<c:when test="${m.member_level eq 'L2' }">
+              <option value="일반화원" selected>일반회원</option>
+           	</c:when>
+           	<c:when test="${m.member_level eq 'L3' }">
               <option value="총무">총부</option>
+            </c:when>
+            <c:when test="${m.member_level eq 'L4' }">
               <option value="부회장">부회장</option>
+           	</c:when>
+           	<c:when test="${m.member_level eq 'L5' }">
               <option value="회장">회장</option>
+             </c:when> 
+            </c:choose>  
             </select></td>
           <td><c:out value="${m.member_phone }"/></td>
           <td><c:out value="${m.member_email }"/></td>
-          <th><button onclick="changeLevel(${m.member_id});">등급수정</button>  <button onclick="deleteMember(${m.member_id});">회원삭제</button></th>
+          <td><button type="button" onclick="changeLevel('${m.member_id}',${club.circle_num });">등급수정</button>
+            <button type="button" onclick="deleteMember('${m.member_id}',${club.circle_num });">회원삭제</button>
+          </td>
         </tr>
        </c:forEach>
       </table>
       
-      <form name='circleDelFrm' action="deleteMember.do" method='post'>
-        	<input type='hidden' name='id'/>
-       </form>
-       <script>
-		function deleteMember(id)
-		{
-				var frm=document.circleDelFrm;
-				frm.id.value=id;
-				frm.submit();
-		}
-	</script>
 	
       <!-- 페이징 처리 -->
       <div class="pagination" style="display: table;margin-right: auto;margin-left: auto;">
-        <a href="#">&laquo;</a>
-        <a href="#">1</a>
-        <a class="active" href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">&raquo;</a>
+        ${pageBar }
       </div>
     </div>
       </div>
