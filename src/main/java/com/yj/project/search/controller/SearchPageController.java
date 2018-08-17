@@ -50,7 +50,9 @@ public class SearchPageController {
 		
 		List<Circle> list = searchService.circleList(circle);
 		List<Circle> list2 = searchService.circleList2(circle,cPage,numPerPage);
-
+		
+		List<Circle> circleenroll = searchService.circleenroll(circle);
+		
 		int totalCount = searchService.selectCount();
 		ModelAndView mav = new ModelAndView();
 
@@ -59,6 +61,7 @@ public class SearchPageController {
 		mav.addObject("pageBar",pageBar);
 		mav.addObject("list",list);
 		mav.addObject("list2",list2);
+		mav.addObject("circleenroll", circleenroll);
 		mav.addObject("totalCount",totalCount);
 		mav.addObject("cPage",cPage);
 		mav.setViewName("/SecondPage/search");

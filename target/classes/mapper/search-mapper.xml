@@ -9,6 +9,10 @@
   	select * from circle order by circle_like desc , circle_num asc
   </select>
   
+  <select id="circleenroll" resultMap="circleList">
+  	select * from circle order by circle_enrolldate desc, circle_like desc
+  </select>
+  
   <select id="circleList2" resultMap="circleList">
   	select * from circle order by circle_like asc , circle_num asc
   </select>
@@ -39,7 +43,7 @@
   <select id="selectLike" parameterType="map" resultType="_int">
   	select count(*) from like_table where circle_num=#{circle_num} AND member_id=#{member_id} 
   </select>
-  
+
  <!-- like테이블에서 해당id의 좋아요기록삭제 -->
  <delete id="likeDown" parameterType="map">
   		delete from like_table where member_id=#{member_id} and circle_num=#{circle_num}

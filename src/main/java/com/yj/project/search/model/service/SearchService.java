@@ -17,8 +17,12 @@ public interface SearchService {
 	List<Circle> searchCircle(String university,String circle_name,String Unsearch,int cPage,int numPerPage);
 	
 	
-	//좋아요 순 동아리 리스크
+	//좋아요 순 동아리 랭킹
 	List<Circle> circleList(Circle circle);
+	
+	
+	//생성일 순 동아리 랭킹
+	List<Circle> circleenroll(Circle circle);
 	
 	List<Circle> circleList2(Circle circle,int cPage,int numPerPage);
 

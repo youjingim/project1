@@ -52,7 +52,12 @@ public class SearchServiceImpl implements SearchService {
 		return searchDAO.circleList(sqlSession,circle);
 	}
 	
-	
+	//생성일 순 좋아요 랭킹
+	@Override
+	public List<Circle> circleenroll(Circle circle) {
+		return searchDAO.circleenroll(sqlSession,circle);
+	}
+
 	@Override
 	public List<Circle> circleList2(Circle circle,int cPage, int numPerPage) {
 		return searchDAO.circleList2(sqlSession,circle,cPage,numPerPage);
