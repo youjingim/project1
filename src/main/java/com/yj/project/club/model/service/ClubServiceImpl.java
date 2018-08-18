@@ -1,5 +1,6 @@
 package com.yj.project.club.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -67,12 +68,7 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int updateBoard(Circle_board cb) {
 		return clubDAO.updateBoard(sqlSession,cb);
-<<<<<<< HEAD
 
-	}
-	@Override	
-	public List<Matching> selectMatching(int circle1_num) {
-		return clubDAO.selectMatching(sqlSession,circle1_num);
 	}
 
 	@Override
@@ -101,9 +97,8 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public List<CB_Comment> commentList(int cb_num) {
-		return clubDAO.commentList(sqlSession,cb_num);
-=======
+	public List<CB_Comment> commentList() {
+		return clubDAO.commentList(sqlSession);
 	}
 	@Override
 	public List<Matching> selectMatching(int circle1_num) {
@@ -120,8 +115,6 @@ public class ClubServiceImpl implements ClubService {
 		return clubDAO.selectNotice(sqlSession,circle1_num);
 	}
 
-
-
 	@Override
 	public int countNotice(Map<String, Object> map) {
 		return clubDAO.countNotice(sqlSession,map);
@@ -130,8 +123,33 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int noticeUpdate(String member_id) {
 		return clubDAO.noticeUpdate(sqlSession,member_id);
->>>>>>> 3f75b1efec7f3e43a9220e817bea8c7f88907544
 	}
+
+	@Override
+	public List<Member> selectMember(int circle_num) {
+		return clubDAO.selectMember(sqlSession, circle_num);
+	}
+
+	@Override
+	public int selectGalleryList(int circle_num) {
+		return clubDAO.selectGalleryList(sqlSession,circle_num);
+	}
+
+	@Override
+	public List<String> selectG1(int circle_num) {
+		return clubDAO.selectG1(sqlSession,circle_num);
+	}
+
+	@Override
+	public List<String> selectG2(int circle_num) {
+		return clubDAO.selectG2(sqlSession,circle_num);
+	}
+
+	@Override
+	public int deleteComment(int no) {
+		return clubDAO.deleteComment(sqlSession,no);
+	}
+	
 	
 	
 }

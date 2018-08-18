@@ -98,14 +98,14 @@
           <div id="Demo3" class="w3-hide w3-container">
             <p>Some other text..</p>
           </div>
-<<<<<<< HEAD
+
           </c:if>
-=======
+
           <button onclick="circle_calendar()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> 동아리 일정 <c:if test='${total != 0}'><span style='margin-left:50%;'>new ${total}</span></c:if></button>
           <div id="Demo5" class="w3-hide w3-container">
             <p>Some other text..</p>
           </div>
->>>>>>> 3f75b1efec7f3e43a9220e817bea8c7f88907544
+
           <button onclick="circle_gallery()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> 동아리 사진첩</button>
           <div id="Demo4" class="w3-hide w3-container">
          <div class="w3-row-padding">

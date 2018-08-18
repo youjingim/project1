@@ -1,10 +1,12 @@
+<%@page import="com.yj.project.club.model.vo.CB_Comment"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt' %>
 <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions' %>
 <c:set var = 'path' value='<%=request.getContextPath()%>'/>
-
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 function validate(){
     var content = $("[name=cb_content]").val();
@@ -20,12 +22,12 @@ function deleteBoard(no,id){
 function updateBoard(no){
 	location.href="${path}/updateCircle_board.do?no="+no;
 }
-function like_button(){
-
+function deleteComment(no,id){
+	location.href="${path}/deleteComment.do?no="+no+"&id="+id;
 }
 
 	function insertComment(n){
-		console.log("ddddd");
+		console.log("게시글 번호:"+n);
 		var no = n;
 		var comment = $('#comment1').val();
 		var memberId = $('#memberId').val();
@@ -42,8 +44,37 @@ function like_button(){
 			}
 		});
 	}
-
+	/* 게시글 더보기 기능 */
+    $(function() {
+        $(".check1").slice(0, 5).show(); // 최초 10개 선택
+        $("#moreBoard").click(function(e) { // Load More를 위한 클릭 이벤트e
+           e.preventDefault();
+           $(".check1:hidden").slice(0, 5).show(); // 숨김 설정된 다음 10개를 선택하여 표시
+           if ($(".check1:hidden").length == 0) { // 숨겨진 DIV가 있는지 체크
+              $("#moreBoard").hide();
+           }
+        });
+     });
+    /*댓글 더보기 기능  */
+    $(function() {
+        $(".commentTable").slice(0, 2).show(); // 최초 10개 선택
+        $("#moreComment").click(function(e) { // Load More를 위한 클릭 이벤트e
+           e.preventDefault();
+           $(".commentTable:hidden").slice(0, 2).show(); // 숨김 설정된 다음 10개를 선택하여 표시
+           if ($(".commentTable:hidden").length == 0) { // 숨겨진 DIV가 있는지 체크
+              $("#moreComment").hide();
+           }
+        });
+     });
 </script>
+<style>
+.check1{
+	display: none;
+}
+.commentTable{
+	display: none;
+}
+</style>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value='club' name='pageTitle'/>
@@ -51,7 +82,7 @@ function like_button(){
 </jsp:include>
 <jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/>    
 <!-- Middle Column -->
-    <div class="w3-col m7">
+    <div class="w3-col m7" >
       <div class="w3-row-padding" style="margin-top:16px;">
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
@@ -72,14 +103,14 @@ function like_button(){
                             <span class="input-group-text">첨부파일1</span>
                         </div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="upFile" id="upFile1">
+                            <input type="file" class="custom-file-input" name="cb_attachment" id="cb_attachment" accept=".jpg, .png, .bmp">
 
                         </div>
                         <div class="input-group-prepend" style="padding:0px;">
                             <span class="input-group-text">첨부파일2</span>
                         </div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="upFile" id="upFile2">
+                            <input type="file" class="custom-file-input" name="cb_attachment2" id="cb_attachment2" accept=".jpg, .png, .bmp">
                         </div>
 
                     </div>
@@ -92,7 +123,7 @@ function like_button(){
       </div>
       <c:if test="${not empty BoardList }">
 	      <c:forEach items="${BoardList}" var='b' varStatus="status">
-	      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+	      <div class="w3-container w3-card w3-white w3-round w3-margin check1"><br>
 	        <p style="display:inline-block;"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>${b.member_id }</p>
 	        <c:if test="${member.member_id eq b.member_id}">
 	        <div style="flaot:right; display: inline-block;">
@@ -100,50 +131,53 @@ function like_button(){
 	        <button type="button" class="btn btn-danger" onclick="deleteBoard(${b.cb_num },'${b.member_id }')">삭제</button>
 	        </div>
 	        </c:if>
-	        <span class="w3-right w3-opacity">${b.cb_date }</span>
+	        <span class="w3-right w3-opacity"><fmt:formatDate type="both" value="${b.cb_date}" /></span>
 	        <h4><bold>${b.cb_title }</bold></h4>
 	        <hr class="w3-clear">
 	        <p>
 	        ${b.cb_content }
 	        </p><br>
-	        <c:if test="${b.cb_attachment ne 'notFoundFile' }">
+	        <c:if test="${not empty b.cb_attachment }">
 	          <div class="w3-row-padding" style="margin:0 -16px" id="img_container">
-	            <div class="w3-half">
-	              <img src="board.jpg" style="width:200px; height:200px;" alt="게시글 사진1" class="w3-margin-bottom">
-	            </div>
+	           
+	              <img src="${path }/resources/upload/club/${b.cb_reattachment }" style="width:300px; height:300px; display: inline-block;" alt="게시글 사진1" class="w3-margin-bottom">
+	              <c:if test="${not empty b.cb_attachment2 }">
+	              <img src="${path }/resources/upload/club/${b.cb_reattachment2 }" style="width:300px; height:300px; display: inline-block;" alt="게시글 사진1" class="w3-margin-bottom">
+	          		</c:if>
 			 </div>
 			 </c:if>
 	        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom" id="like_icon" onclick="like_button();"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
-	        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" id="circle_comment"><i class="fa fa-comment"></i> 댓글 +7</button>
+	        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" id="circle_comment"><i class="fa fa-comment"></i> 댓글 </button>
 	        <div id="post_comment" >
 	          <input type="text" class="form-control" name="comment1" id="comment1" placeholder="댓글을 작성해주세요." style="display:inline-block; width:90%;"/>
-	          <input type="hidden" id="memberId" value="${member.member_id }"/>
 	          <input type="hidden" id="no" value="${b.cb_num }"/>
-	          <button type="button" class="btn btn-primary" id="comment_button"onclick="insertComment(${b.cb_num})">등록</button>
-	         
+	          <input type="hidden" id="memberId" value="${member.member_id }"/>
+	          <button type="button" class="btn btn-primary" id="comment_button" onclick="insertComment(${b.cb_num})">등록</button>
 	          <div><hr>
-	            <table id="commentTable">
 	            <c:forEach items="${clist}" var='cc' varStatus="cstatus">
-	              <tr >
-	                <td class="top"><strong>${cc.member_id }</strong>  ${cc. cb_comment_date}</td>
+	         	<c:if test="${b.cb_num eq cc.cb_num }">
+	            <table class="commentTable">
+	              <tr>
+	                <td class="top"><strong>${cc.member_id }</strong> <fmt:formatDate type="both" value="${cc.cb_comment_date}" /></td>
 	                <td></td>
 	              </tr>
 	              <tr>
 	                <td class="top">${cc.cb_comment_content }</td>
-	                <c:if test="${member.member_id eq b.member_id}">
-	                <td><button type="button" class="btn btn-warning" style="margin-right:5px;">수정</button></td>
-	                <td><button type="button" class="btn btn-danger">삭제</button></td>
+	                <c:if test="${member.member_id eq b.member_id}">	                
+	                <td><button type="button" class="btn btn-danger" onclick="deleteComment(${cc.cb_commentno},'${member.member_id }');">삭제</button></td>
 	                </c:if>
 	              </tr>
-	              </c:forEach>
 	            </table><hr>
+		          </c:if>
+	              </c:forEach>
+	         	
+	         		<button type="button" class="btn btn-default" id="moreComment"> 댓글 더 보기</button>
 	          </div>
-	          <p>댓글 더 보기</p>
 	          <br>
 	        </div>
 	      </div>
-	            <button type="button" class="btn btn-default btn-block" style="margin:0px 30px 0px 16px; width:96%;">더 보기</button>
 	      </c:forEach>
+	    <button type="button" class="btn btn-default btn-block" id="moreBoard" style="margin:0px 30px 0px 16px; width:96%;" >더 보기</button>
 	    </c:if> 
     <!-- End Middle Column -->
     </div>

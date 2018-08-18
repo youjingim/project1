@@ -8,7 +8,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value='club' name='pageTitle'/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/> \
+<jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/>
  <script>
 		function deleteMember(id,no)
 		{
@@ -21,6 +21,9 @@
 				history.go();
 			}
 			
+		}
+		function changeLevel(id){
+			location.href="${path}/changeGrade.do?id="+id;
 		}
 </script>
 <style>
@@ -67,25 +70,35 @@ th,td{
         <tr>
           <td><c:out value="${m.member_name }"/></td>
           <td><c:out value="${m.member_birth}"/></td>
-          <td><select>
-          	<c:choose>
-          	<c:when test="${m.member_level eq 'L2' }">
-              <option value="일반화원" selected>일반회원</option>
-           	</c:when>
-           	<c:when test="${m.member_level eq 'L3' }">
-              <option value="총무">총부</option>
-            </c:when>
-            <c:when test="${m.member_level eq 'L4' }">
-              <option value="부회장">부회장</option>
-           	</c:when>
-           	<c:when test="${m.member_level eq 'L5' }">
-              <option value="회장">회장</option>
-             </c:when> 
-            </c:choose>  
+          <td><select name="memberGrade">         	
+          	<c:if test="${m.member_level eq 'L2' }">
+              <option value="L2" selected>일반회원</option>
+              <option value="L3">총부</option>
+              <option value="L4">부회장</option>
+              <option value="L5">회장</option>
+          	</c:if>
+           	<c:if test="${m.member_level eq 'L3' }">
+              <option value="L2" >일반회원</option>
+              <option value="L3" selected>총부</option>
+              <option value="L4">부회장</option>
+              <option value="L5">회장</option>
+            </c:if>
+            <c:if test="${m.member_level eq 'L4' }">
+              <option value="L2" >일반회원</option>
+              <option value="L3">총부</option>
+              <option value="L4" selected>부회장</option>
+              <option value="L5">회장</option>
+           	</c:if>
+           	<c:if test="${m.member_level eq 'L5' }">
+              <option value="L2" >일반회원</option>
+              <option value="L3">총부</option>
+              <option value="L4">부회장</option>
+              <option value="L5" selected>회장</option>
+         	</c:if>
             </select></td>
           <td><c:out value="${m.member_phone }"/></td>
           <td><c:out value="${m.member_email }"/></td>
-          <td><button type="button" onclick="changeLevel('${m.member_id}',${club.circle_num });">등급수정</button>
+          <td><button type="button" onclick="changeLevel('${m.member_id}')">등급수정</button>
             <button type="button" onclick="deleteMember('${m.member_id}',${club.circle_num });">회원삭제</button>
           </td>
         </tr>

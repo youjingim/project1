@@ -25,7 +25,12 @@ $("#budget_button").click(function(){
 	}
 });
 });
-</script>
+    function fileDownload(oName, rName){
+        //한글파일명이 있을 수 있으므로, 명시적으로 encoding
+	    oName = encodeURIComponent(oName);
+        location.href="${pageContext.request.contextPath}/budgetDownload.do?oName="+oName+"&rName="+rName;
+  }
+ </script>
 <style>
 /* 페이징 처리 css */
 /* Pagination links */
@@ -59,7 +64,7 @@ $("#budget_button").click(function(){
         <hr>
         <!-- 예산 관리 입력div -->
         <div id="budget_form" style="display:none;">
-          <form action="insert_budget.do" method="post">
+          <form action="insert_budget.do" method="post" enctype="multipart/form-data">
           <label id="budget_date">입금/출금 날짜</label> <input for="budget_date" class="form-control" type="date" name="used_date" placeholder="예산을  입력해주세요.">
           <label id="budget_output">출금액</label> <input for="budget_output" class="form-control" type="number" name="budget_output" placeholder="출금액을 입력해주세요.">
           <label id="budget_input">입금액</label> <input for="budget_input" class="form-control" type="number" name="budget_input" placeholder="입금액을 입력해주세요.">
@@ -68,11 +73,10 @@ $("#budget_button").click(function(){
           <input type="hidden" name="member_id" value="${member_id}"/>
           <div class="input-group-prepend" style="padding:0px;">
               <span class="input-group-text">영수증 첨부파일</span>
-                        </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="upFile" id="upFile1">
-
-                        </div>
+          </div>
+          <div class="custom-file">
+          <input type="file" class="custom-file-input" name="upFile" id="upFile1">
+          </div>
           <input type="submit" class="btn btn-success" value="제출"style="float:right; margin:5px;"/><br><br>
         </form><hr><br>
         </div>
@@ -104,7 +108,11 @@ $("#budget_button").click(function(){
                 <td style="text-align:right;"><fmt:formatNumber value="${b.budget_input }" pattern="#,###"/></td>
                 <td style="text-align:right;"><fmt:formatNumber value="${b.budget_output }" pattern="#,###"/></td>
                 <td style="text-align:right;">220,000</td>
-                <td></td>
+                <td align='center'>
+                <c:if test='${not empty b.attachment }'>
+							<img alt="첨부파일" src="${pageContext.request.contextPath }/resources/image/file.png" width=16px; onclick="fileDownload('${b.attachment}','${b.reattachment }');">
+						</c:if>
+                </td>
                 <td>${b.member_id }</td>
               </tr>
              </c:forEach> 

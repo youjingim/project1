@@ -15,7 +15,19 @@
 		select * from member where circle1_num=#{circle_num}
 	</select>
 	<insert id="insertBoard" parameterType="cBoard">
-		insert into circle_board values(CIRCLE_BOARD_SEQ.NEXTVAL,#{cb_title},#{cb_content},#{cb_attachment},0,#{member_id},#{circle_num},#{cb_attachment2},sysdate)
+		insert into circle_board values(
+			CIRCLE_BOARD_SEQ.NEXTVAL,
+			#{cb_title},
+			#{cb_content},
+			#{cb_attachment},
+			0,
+			#{member_id},
+			#{circle_num},
+			#{cb_attachment2},
+			sysdate,
+			#{cb_reattachment},
+			#{cb_reattachment2}
+		)
 	</insert>
 	<select id="selectBoardList" resultType="cBoard">
 		SELECT * FROM CIRCLE_BOARD WHERE CIRCLE_NUM=#{circle_num} ORDER BY CB_NUM DESC
@@ -33,18 +45,20 @@
 	<select id='selectMatching' parameterType="_int" resultType='com.yj.project.calendar.model.vo.Matching'>
 	select req_withus.*,circle.circle_name,circle.circle_photo  from req_withus full outer JOIN circle ON req_withus.REQ_CIRCLE=circle.circle_num where req_withus.REGISTER_CIRCLE=#{circle1_num} and req_withus.status in('S','C')
 	</select>
-<<<<<<< HEAD
+
 	<update id="deleteMember">
 		UPDATE MEMBER SET CIRCLE1_NUM=0 WHERE MEMBER_ID=#{id} 
 	</update>
-	<insert id="insertBudget">
-		INSERT INTO CIRCLE_BUDGET VALUES(CIRCLE_BUDGET_SEQ.NEXTVAL,#{circle_num},#{member_id},#{budget_content},null,#{budget_input},#{budget_output},#{used_date},sysdate)
+	<insert id="insertBudget" parameterType="budget">
+		INSERT INTO CIRCLE_BUDGET VALUES(CIRCLE_BUDGET_SEQ.NEXTVAL,#{circle_num},#{member_id},#{budget_content},#{attachment},#{budget_input},#{budget_output},#{used_date},sysdate,#{reattachment})
 	</insert>
 	<resultMap type="budget" id="insertBud">
 		<id property="budget_no" column="budget_num"/>
+		<result property="attachment" column="budget_attachment"/>
+		<result property="reattachment" column="budget_reattachment"/>
 	</resultMap>
 	<select id="selectBudgetList" resultMap="insertBud">
-		SELECT * FROM CIRCLE_BUDGET WHERE CIRCLE_NUM=#{circle_num}
+		SELECT * FROM CIRCLE_BUDGET WHERE CIRCLE_NUM=#{circle_num} ORDER BY BUDGET_NUM DESC
 	</select>
 	<select id="selectMemberCount" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER WHERE CIRCLE1_NUM=#{circle_num}
@@ -57,9 +71,9 @@
 	</insert>
 	
 	<select id="commentList" resultType="cb_comment">
-		SELECT * FROM CB_COMMENT WHERE CB_NUM=#{cb_num}
+		SELECT * FROM CB_COMMENT ORDER BY CB_COMMENTNO DESC
 	</select>
-=======
+
 	<select id='selectFinal' parameterType="_int" resultType='com.yj.project.calendar.model.vo.FinalWithus'>
 	select final_withus.*,circle.circle_name from final_withus full outer JOIN circle ON final_withus.req_CIRCLE=circle.circle_num where register_circle = #{circle1_num}
 	</select>
@@ -74,5 +88,16 @@
 	<update id="noticeUpdate" parameterType="string">
 	update member set member_notice = 0 where member_id = #{member_id}
 	</update>
->>>>>>> 3f75b1efec7f3e43a9220e817bea8c7f88907544
+	<select id="selectGalleryList" resultType="_int">
+		SELECT COUNT(CB_ATTACHMENT)
+	</select>
+	<select id="selectG1" resultType="string" >
+		SELECT CB_REATTACHMENT FROM CIRCLE_BOARD WHERE CIRCLE_NUM=#{circle_num}
+	</select>
+	<select id="selectG2" resultType="string" >
+		SELECT CB_REATTACHMENT2 FROM CIRCLE_BOARD WHERE CIRCLE_NUM=#{circle_num}
+	</select>
+	<delete id="deleteComment">
+		DELETE FROM CB_COMMENT WHERE CB_COMMENTNO=#{no}
+	</delete>
 </mapper>

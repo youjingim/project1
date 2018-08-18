@@ -12,13 +12,14 @@ public class Budget {
 	private int budget_output;
 	private Date used_date;
 	private Date write_date;
+	private String reattachment;
 	
 	public Budget() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Budget(int budget_no, int circle_num, String member_id, String budget_content, String attachment,
-			int budget_input, int budget_output, Date used_date, Date write_date) {
+			int budget_input, int budget_output, Date used_date, Date write_date, String reattachment) {
 		super();
 		this.budget_no = budget_no;
 		this.circle_num = circle_num;
@@ -29,6 +30,7 @@ public class Budget {
 		this.budget_output = budget_output;
 		this.used_date = used_date;
 		this.write_date = write_date;
+		this.reattachment = reattachment;
 	}
 
 	public int getBudget_no() {
@@ -103,11 +105,20 @@ public class Budget {
 		this.write_date = write_date;
 	}
 
+	public String getReattachment() {
+		return reattachment;
+	}
+
+	public void setReattachment(String reattachment) {
+		this.reattachment = reattachment;
+	}
+
 	@Override
 	public String toString() {
 		return "Budget [budget_no=" + budget_no + ", circle_num=" + circle_num + ", member_id=" + member_id
 				+ ", budget_content=" + budget_content + ", attachment=" + attachment + ", budget_input=" + budget_input
-				+ ", budget_output=" + budget_output + ", used_date=" + used_date + ", write_date=" + write_date + "]";
+				+ ", budget_output=" + budget_output + ", used_date=" + used_date + ", write_date=" + write_date
+				+ ", reattachment=" + reattachment + "]";
 	}
-	
+
 }

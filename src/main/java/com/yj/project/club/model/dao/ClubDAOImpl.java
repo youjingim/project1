@@ -1,5 +1,6 @@
 package com.yj.project.club.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,14 +11,14 @@ import org.springframework.stereotype.Repository;
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
-<<<<<<< HEAD
+
 import com.yj.project.calendar.model.vo.Matching;
 
-=======
+
 import com.yj.project.calendar.model.vo.ClubNotice;
 import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
->>>>>>> 3f75b1efec7f3e43a9220e817bea8c7f88907544
+
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.member.model.vo.Member;
 
@@ -75,7 +76,7 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public int deleteCircleMember(SqlSessionTemplate sqlSession, String id) {
 		return sqlSession.update("club.deleteMember", id);
 	}
@@ -102,9 +103,10 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-	public List<CB_Comment> commentList(SqlSessionTemplate sqlSession, int cb_num) {
-		return sqlSession.selectList("club.commentList", cb_num);
-=======
+	public List<CB_Comment> commentList(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("club.commentList");
+	}
+	@Override
 	public List<FinalWithus> selectClubMatching(SqlSessionTemplate sqlSession, int circle1_num) {
 		return sqlSession.selectList("club.selectFinal",circle1_num);
 	}
@@ -114,8 +116,6 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.selectList("club.selectNotice",circle1_num);
 	}
 
-
-
 	@Override
 	public int countNotice(SqlSessionTemplate sqlSession, Map<String, Object> map) {
 		return sqlSession.selectOne("club.countNotice",map);
@@ -124,8 +124,34 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public int noticeUpdate(SqlSessionTemplate sqlSession, String member_id) {
 		return sqlSession.update("club.noticeUpdate",member_id);
->>>>>>> 3f75b1efec7f3e43a9220e817bea8c7f88907544
+
 	}
+
+	@Override
+	public List<Member> selectMember(SqlSessionTemplate sqlSession, int circle_num) {
+		return sqlSession.selectList("club.selectMember", circle_num);
+	}
+
+	@Override
+	public int selectGalleryList(SqlSessionTemplate sqlSession, int circle1_num) {
+		return sqlSession.selectOne("club.selectGalleryList", circle1_num);
+	}
+
+	@Override
+	public List<String> selectG1(SqlSessionTemplate sqlSession, int circle_num) {
+		return sqlSession.selectList("club.selectG1", circle_num);
+	}
+
+	@Override
+	public List<String> selectG2(SqlSessionTemplate sqlSession, int circle_num) {
+		return sqlSession.selectList("club.selectG2", circle_num);
+	}
+
+	@Override
+	public int deleteComment(SqlSessionTemplate sqlSession, int no) {
+		return sqlSession.delete("club.deleteComment", no);
+	}
+	
 	
 
 }
