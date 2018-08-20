@@ -8,7 +8,20 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value='club' name='pageTitle'/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/>      
+<jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/>  
+<script>
+
+$(function() {
+    $(".gal").slice(0, 8).show(); // 최초 10개 선택
+    $("#moreBoard").click(function(e) { // Load More를 위한 클릭 이벤트e
+       e.preventDefault();
+       $(".gal:hidden").slice(0, 8).show(); // 숨김 설정된 다음 10개를 선택하여 표시
+       if ($(".gal:hidden").length == 0) { // 숨겨진 DIV가 있는지 체크
+          $("#moreBoard").hide();
+       }
+    });
+ });
+</script>    
 <style>
 /* 페이징 처리 css */
 /* Pagination links */
@@ -171,7 +184,10 @@ img.hover-shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .mySlides{
-  height: 450px;
+  height: 600px;
+}
+.gal{
+display: none;
 }
 </style>
   <!-- Middle Column -->
@@ -183,45 +199,24 @@ img.hover-shadow {
         </div>
 
 <div class="row">
-  <div class="column">
-    <img src="d1.jpg" style="width:100%; height:100%;" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
+<c:forEach items="${gallery}" var='g' varStatus="gg">
+  <div class="column gal" style="margin-bottom:5%;">
+    <img src="${path}/resources/upload/club/${g }" style="width:100%; height:100%;" onclick="openModal();currentSlide(${gg.count})" class="hover-shadow cursor">
   </div>
-  <div class="column">
-    <img src="d2.jpg" style="width:100%; height:100%;" onclick="openModal();currentSlide(2)" class="hover-shadow cursor">
-  </div>
-  <div class="column">
-    <img src="d3.jpg" style="width:100%; height:100%;" onclick="openModal();currentSlide(3)" class="hover-shadow cursor">
-  </div>
-  <div class="column">
-    <img src="d4.jpg" style="width:100%; height:100%;" onclick="openModal();currentSlide(4)" class="hover-shadow cursor">
-  </div>
+</c:forEach>
 </div>
 
 
 <div id="myModal" class="modal">
   <span class="close cursor" onclick="closeModal()">&times;</span>
   <div class="modal-content">
-
+	<c:forEach items="${gallery}" var='g' varStatus="gg">
     <div class="mySlides">
-      <div class="numbertext">1 / 4</div>
-      <img src="d1.jpg" style="width:100%; height:100%;">
+      <div class="numbertext">사진첩</div>
+      <img src="${path}/resources/upload/club/${g }" style="width:100%; height:100%;">
     </div>
-
-    <div class="mySlides">
-      <div class="numbertext">2 / 4</div>
-      <img src="d2.jpg" style="width:100%; height:100%;">
-    </div>
-
-    <div class="mySlides">
-      <div class="numbertext">3 / 4</div>
-      <img src="d3.jpg" style="width:100%; height:100%;">
-    </div>
-
-    <div class="mySlides">
-      <div class="numbertext">4 / 4</div>
-      <img src="d4.jpg" style="width:100%; height:100%;">
-    </div>
-
+	</c:forEach>
+   
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
@@ -229,19 +224,11 @@ img.hover-shadow {
       <p id="caption"></p>
     </div>
 
-
+	<%-- <c:forEach items="${gallery}" var='g' varStatus="gg">
     <div class="column">
-      <img class="demo cursor" src="d1.jpg" style="width:100%; height:100%;" onclick="currentSlide(1)">
+      <img class="demo cursor" src="${path}/resources/upload/club/${g }" style="width:100%; height:100%;" onclick="currentSlide()">
     </div>
-    <div class="column">
-      <img class="demo cursor" src="d2.jpg" style="width:100%; height:100%;" onclick="currentSlide(2)">
-    </div>
-    <div class="column">
-      <img class="demo cursor" src="d3.jpg" style="width:100%; height:100%;" onclick="currentSlide(3)">
-    </div>
-    <div class="column">
-      <img class="demo cursor" src="d4.jpg" style="width:100%; height:100%;" onclick="currentSlide(4)">
-    </div>
+    </c:forEach> --%>
   </div>
 </div>
 
@@ -283,15 +270,7 @@ function showSlides(n) {
   captionText.innerHTML = dots[slideIndex-1].alt;
 }
 </script>
-        <div class="pagination" style="display: table;margin-right: auto;margin-left: auto;">
-          <a href="#">&laquo;</a>
-          <a href="#">1</a>
-          <a class="active" href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">&raquo;</a>
-        </div>
+       <button type="button" class="btn btn btn-block" id="moreBoard" style="margin:0px 30px 0px 16px; width:96%;" >더 보기</button>
       </div>
     <!-- End Middle Column -->
     </div>

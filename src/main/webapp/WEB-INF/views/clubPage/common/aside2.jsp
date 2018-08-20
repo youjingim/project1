@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-        <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
-    <%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
-    <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
-    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-        <c:set var='path' value="${pageContext.request.contextPath}"/>
+	pageEncoding="UTF-8"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>	
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
+<%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<link href='resources/css/fullcalendar.min.css' rel='stylesheet' />
+<link href='resources/css/fullcalendar.print.min.css' rel='stylesheet'media='print' />
+<script src='resources/js/moment.min.js'></script>
+<script src='resources/js/fullcalendar.min.js'></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<c:set var='path' value="${pageContext.request.contextPath}"/>
+
     
     <style>
     #update_info{
@@ -49,6 +57,7 @@ width:85%;
 		width:260px;
 		height:300px;
 	}
+
     </style>
     
     
@@ -74,22 +83,19 @@ width:85%;
           <h5><strong><i class="fa fa-handshake-o fa-fw w3-margin-right w3-text-theme"></i>매칭 시스템</strong></h5><hr>
           <img src="${pageContext.request.contextPath}/resources/image/${m.circle_photo}" alt="Avatar" style="width:80%;height:150px;" class='img-rounded'><br>
           <br>
-          <span><strong>${m.circle_name }</strong></span>
+          <span><strong>${m.circle_name }</strong></span><br>
+          <span>No.${m.withus_num } ${m.matching_date }</span>
           <br><br>
           <span style='cursor:pointer;' class='info_view'>상세보기
-          <input type='hidden' value='${vs.index}'/>
+          <input type='hidden' value='${m.withus_num}'/>
+          <input type='hidden' value='${m.req_circle}'/>        
           </span>
-          <c:if test='${!(m.matching_date != m.req_matching_date) || !(m.time1 != m.req_time1) || !(m.time2 != m.req_time2) || !(m.withus_place != m.req_withus_place)}'><br><br>
+          <c:if test="${m.status eq 'C'}"><br><br>
           <span style='color:red;'>변경사항</span>
           </c:if>
-          <div class="w3-row w3-opacity">
-            <div class="w3-half">
-              <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
-            </div>
-            <div class="w3-half">
-              <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
-            </div>
-          </div>
+          <c:if test="${m.status eq 'S'}"><br><br><br>
+          </c:if>
+
           </li>
           </c:forEach>
           </ul>
@@ -100,6 +106,12 @@ width:85%;
       </div>
       </c:if>
       <br>
+      
+
+   
+
+      
+      
      
       <div id="matchingModal" class="modal">
       <div class="modal-dialog">
@@ -112,10 +124,16 @@ width:85%;
                  <form id="matchingFrm" method="get">
 	             <table id='tableContainer'>
 	             <tr>
+	             <td>신청인</td>
+	             <td>
+	             <span id="req_member_id" class="modal-title" style="color:black;">
+	             </span> <a href='#'><i class="fa fa fa-envelope-o fa-fw w3-margin-right"></i></a>
+	             </td>
+	             </tr>
+	             <tr>
 	             <td>날짜</td>
 	             <td>
 	             <span id="date_in" class="modal-title" style="color:black;"></span>
-	             <input type="hidden" name="matching_date1" id="machingDateIn">
 	             </td></tr>
 	             <tr style='height:0px;'><td style='color:red;'></td><td>
 	             <span id='chage_in' class='modal-title' style='color:red;'></span>
@@ -130,7 +148,9 @@ width:85%;
                    <input type="hidden" name="time2" id="time2In">
                   </td></tr>
                   <tr style='height:0px;'><td style='color:red;'></td><td>
-                  <span id='chage_time1' class='modal-title' style='color:red;'></span> <span id='chage_time2' class='modal-title' style='color:red;'></span></td>
+                  <span id='chage_time1' class='modal-title' style='color:red;'></span> <span id='chage_time2' class='modal-title' style='color:red;'></span>
+                  <input type='hidden' id='re_time_check1' name='re_time1'><input type='hidden' id='re_time_check2' name='re_time2'>
+                  </td>
                   </tr>
                   <tr>
                   <td>제목</td>
@@ -151,7 +171,7 @@ width:85%;
                   </td></tr>
                   <tr style='height:0px;'><td style='color:red;'></td><td>
                   <span id="Place_in" class="modal-title" style='color:red;'> </span>
-                  
+                  <input type='hidden' id='re_place' name='re_place'>
                   </td></tr>
                   </table>
                   <br>
@@ -163,69 +183,15 @@ width:85%;
                   <input type="hidden" name="withus_content" id="machingContentIn">
                   <br>
                   </div>
-
-                  <input type="hidden" name="matching_date1" id="machingDateIn">
+					
+			      <input type="hidden" name="req_member_id" id="req_member_idIn">
+                  <input type="hidden" name="matching_date" id="machingDateIn">
                   <input type="hidden" name="withus_num" id="withus_num">
                   <input type="hidden" name="member_id" id="member_id">
                   <input type="hidden" name="register_circle" id="register_circle_in">
                   <input type='hidden' name='req_circle' value='${memberLoggedIn.circle1_num}'>
                   <input type="hidden" id="chage_toggle" value="false">
-                  <div id="update_info">
-                  <br>
-                  <p style='margin-left:25px;font-weight:bold;'>변경할 날짜 </p> <input type="date" name="req_matching_date1" style="width:50%;margin-left:25px;" id="req_matching_date" class="form-control"><br>
-               <p style='margin-left:25px;font-weight:bold;'>변경할 시간 </p> <select id = "re_time1" name="re_time11" style="width: 20%;margin-left:25px; display: inline-block;" class="form-control">
-                           <option value="null">00:00</option>
-                           <option value="08">08:00</option>
-                           <option value="09">09:00</option>
-                           <option value="10">10:00</option>
-                           <option value="11">11:00</option>
-                           <option value="12">12:00</option>
-                           <option value="13">13:00</option>
-                           <option value="14">14:00</option>
-                           <option value="15">15:00</option>
-                           <option value="16">16:00</option>
-                           <option value="17">17:00</option>
-                           <option value="18">18:00</option>
-                           <option value="19">19:00</option>
-                           <option value="20">20:00</option>
-                           <option value="21">21:00</option>
-                           <option value="22">22:00</option>
-                        </select> - <select id = "re_time2" name="re_time22" style="width:20%; display:inline-block;" class="form-control" >
-                           <option value="null">00:00</option>                     
-                           <option value="08">08:00</option>
-                           <option value="09">09:00</option>
-                           <option value="10">10:00</option>
-                           <option value="11">11:00</option>
-                           <option value="12">12:00</option>
-                           <option value="13">13:00</option>
-                           <option value="14">14:00</option>
-                           <option value="15">15:00</option>
-                           <option value="16">16:00</option>
-                           <option value="17">17:00</option>
-                           <option value="18">18:00</option>
-                           <option value="19">19:00</option>
-                           <option value="20">20:00</option>
-                           <option value="21">21:00</option>
-                           <option value="22">22:00</option>
-                        </select><br> <br>
-                        <div class="form-group">
-                            <p style='margin-left:25px;font-weight:bold;'>변경할 주소 </p>
-                            <br /> <input type="text"
-                              class="form-control btn btn-outline" id="sample6_postcode1"
-                              name='member_addr1'
-                              style="width: 300px;margin-left:25px; background-color: white;"
-                              placeholder="우편번호" readonly> <input type="button"
-                              onclick="sample6_execDaumPostcode2()" class="btn" value="우편번호 찾기"><br>
-                           <input type="text" class="form-control btn btn-outline-secondary"
-                              id="sample6_address1" name="req_withus_place1"
-                              style="width: 300px;margin-left:25px; background-color: white;" placeholder="주소"
-                              readonly>
-                        </div>
-                  <p style='margin-left:25px;font-weight:bold;'>변경할 내용 </p> <textarea name="req_withus_content1" style="width:90%;height:150px;margin-left:25px;" id="req_withus_content" class="form-control"></textarea><br>
-                  </div>
-                  
-                  
-                  
+                  <input type='hidden' name='login_info' value='${memberLoggedIn.member_id}'>
 
                   </form>
                   
@@ -234,10 +200,54 @@ width:85%;
                </div>
               <div id="modal_foot" class="modal-footer">
               
-              <span id='change' style='cursor:pointer;color:black;position:absolute;left:15px;' onclick='chage_toggle()'> 변경하기 </span>
-              <input type='button' value='매칭신청' class='btn btn-success' onclick='matchingFrm()' style='width:250px;margin-right:170px;'>
+              <span style='margin-right:130px;'>
+              <input type='button' value='수락' class='btn btn-success' onclick='matchingOK()' style='width:150px;'>
+              <input type='button' value='거절' class='btn btn-danger' onclick='matchingNO()' style='width:150px;'>
+              </span>
               </div>
       <script>
+      function matchingOK(){
+    	  var t1 = $('#re_time_check1').val();
+    	  var t2 = $('#re_time_check2').val();
+    	  var rt1 = $('#time1In').val();
+    	  var rt2 = $('#time2In').val();
+    	  var addr = $('#re_place').val();
+    	  var readdr = $('#machingPlaceIn').val();
+
+    	  
+    	  
+    	  if(t1!=rt1 || t2!=rt2 || addr!=readdr){
+    	  
+    		  var check = confirm('변경된 내용으로 수락 하시겠습니까?');
+    		  if(check){
+    	  var frm = $('#matchingFrm');
+		  var url = "${path}/successMatching";
+    	  frm.attr("action",url);
+    	  frm.submit();
+    		  }
+    	  }else{
+    		  var check = confirm('매칭신청을 수락 하시겠습니까?');
+    		  if(check){
+    	  var frm = $('#matchingFrm');
+		  var url = "${path}/successMatching";
+    	  frm.attr("action",url);
+    	  frm.submit();
+    		  }
+    	  }
+    	  
+      }
+      
+      function matchingNO(){
+		  var check = confirm('매칭신청을 거절 하시겠습니까?');
+    	  if(check){
+		  var frm = $('#matchingFrm');
+		  var url = "${path}/failMatching";
+    	  frm.attr("action",url);
+    	  frm.submit();
+    	  }
+      }
+
+      
 
       function sample6_execDaumPostcode2() {
           new daum.Postcode({
@@ -286,11 +296,13 @@ width:85%;
 
  <script>
 	 $('.info_view').click(function(){
-		 var number=$(this).children('input').attr("value");
+		 var number=$(this).children('input').eq(0).attr("value");
+		 var req_num=$(this).children('input').eq(1).attr("value");
+
 
 		   $.ajax({
 			      url: "${path}/indexCheck.do",
-			      data:{"num":number},
+			      data:{"num":number,"req_num":req_num},
 			      dataType:"json",
 			      success:function(data){
 			       	  $('#matchingModal').modal();
@@ -303,6 +315,24 @@ width:85%;
 			   		   $('#req_matching_date').attr("value",data.req_matching_date);
 			   		   $('#req_withus_content').html(data.req_withus_content);
 			   		   $('#sample6_address1').attr("value",data.req_withus_place);
+			   		   $('#req_member_id').html(data.req_member_id);
+
+			   		   $('#req_member_idIn').attr("value",data.req_member_id);
+			   		   $('#re_time_check1').attr("value",data.req_time1);
+			   		   $('#re_time_check2').attr("value",data.req_time2);
+			   		   $('#re_place').attr("value",data.req_withus_place);
+			            $('#machingTitleIn').attr("value",data.withus_title);
+			            $('#machingContentIn').attr("value",data.withus_content);
+			            $('#machingPlaceIn').attr("value",data.withus_place);
+			            $('#time1In').attr("value", data.time1);
+			            $('#time2In').attr("value", data.time2);
+			            $('#machingDateIn').attr("value",data.matching_date);
+			            $('#withus_num').attr("value",data.withus_num);
+			            $('#member_id').attr("value",data.member_id);
+			            $('#register_circle_in').attr("value",data.req_circle);
+			   		   
+
+
 
 			   		   if(data.matching_date != data.req_matching_date){
 			   			   $('#chage_in').parent().siblings().first().html('변경날짜');
@@ -373,35 +403,6 @@ width:85%;
 
 			   });
 		 
-		 
-		 
-		 
-		      
-
-
-   		   
-   		   $(document).ready(function(){
-          	  $('#re_time1').children().each(function(){
-          	    if($(this).val()=='${matching[0].req_time1}'){
-
-          	      $(this).prop("selected",true); // attr적용안될경우 prop으로 
-
-          	    }
-
-          	  });
-
-          	});
-           $(document).ready(function(){
-
-       	  $('#re_time2').children().each(function(){
-       	    if($(this).val()=='${matching[0].req_time2}'){
-
-       	      $(this).prop("selected",true); // attr적용안될경우 prop으로 
-       	    }
-
-       	  });
-
-       	});
    		   
 	 });
               
@@ -410,19 +411,7 @@ width:85%;
 	  		
 
       
-      var flag=true;
-      function chage_toggle(){
-   	   $('#update_info').slideToggle();
-         if(flag){
-      $('#chage_toggle').attr("value",true);
-      $('#change').html('변경취소');
-         flag=false;
-         }else{
-      $('#chage_toggle').attr("value",false);
-         flag=true;
-         $('#change').html('변경하기');
-         }
-      }
+
       
       
 		var num = 1;

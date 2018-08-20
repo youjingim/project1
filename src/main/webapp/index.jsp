@@ -1,20 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
-    <%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
-    <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
-    <c:set var='path' value="${pageContext.request.contextPath}"/>
-    
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-	
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
+<%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
+<c:set var='path' value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>	
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>		
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
@@ -186,8 +182,14 @@ margin:0 auto;
 <input type="password" class="form-control" placeholder="비밀번호" id="login_pw" name="member_pw">
 <br><br>
   <button type="submit" class="btn btn-primary btn-block" onclick="login()">로 그 인</button>
+<<<<<<< HEAD
   <br><br>
   
+=======
+
+  
+    <br><br>
+>>>>>>> 7999ce0a54501955eea136d0f79b163225b6dd96
  <span style="color:black;font-size:17px;margin-left:18%;">계정이 없으신가요? &nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#myModal" style="font-weight:bold;text-decoration:none;color:black;">가입하기</a></span><br><br>
  
  <span style="color:black;font-size:15px;margin-left:22%;"><a href="#" data-toggle="modal" data-target="#idModal" >아이디 찾기</a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#passwordModal" >비밀번호 찾기 </a></span>

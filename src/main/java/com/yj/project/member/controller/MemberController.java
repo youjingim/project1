@@ -65,7 +65,7 @@ public class MemberController {
 		System.out.println("암호화 전 비번 : " + oripw);
 		member.setMember_pw(bcrypt.encode(oripw));
 		System.out.println("암호화 후 비번 : " + member.getMember_pw());
-
+		member.setMember_notice(0);
 		int result = service.insertMember(member);
 
 		String msg = "";

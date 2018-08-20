@@ -20,6 +20,7 @@ public class Member {
    private String university;
    private int circle1_num;
    private String circle_name;
+   private int member_notice;
 
    
    public Member() {}
@@ -155,9 +156,30 @@ public void setCircle_name(String circle_name) {
 }
 
 
+public int getMember_notice() {
+	return member_notice;
+}
+
+
+public void setMember_notice(int member_notice) {
+	this.member_notice = member_notice;
+}
+
+
+@Override
+public String toString() {
+	return "Member [member_id=" + member_id + ", member_pw=" + member_pw + ", member_name=" + member_name
+			+ ", member_email=" + member_email + ", member_phone=" + member_phone + ", member_addr=" + member_addr
+			+ ", enroll_category=" + Arrays.toString(enroll_category) + ", enroll_date=" + enroll_date
+			+ ", member_birth=" + member_birth + ", member_level=" + member_level + ", university=" + university
+			+ ", circle1_num=" + circle1_num + ", circle_name=" + circle_name + ", member_notice=" + member_notice
+			+ "]";
+}
+
+
 public Member(String member_id, String member_pw, String member_name, String member_email, String member_phone,
 		String member_addr, String[] enroll_category, Date enroll_date, Date member_birth, String member_level,
-		String university, int circle1_num, String circle_name) {
+		String university, int circle1_num, String circle_name, int member_notice) {
 	super();
 	this.member_id = member_id;
 	this.member_pw = member_pw;
@@ -172,17 +194,10 @@ public Member(String member_id, String member_pw, String member_name, String mem
 	this.university = university;
 	this.circle1_num = circle1_num;
 	this.circle_name = circle_name;
+	this.member_notice = member_notice;
 }
 
 
-@Override
-public String toString() {
-	return "Member [member_id=" + member_id + ", member_pw=" + member_pw + ", member_name=" + member_name
-			+ ", member_email=" + member_email + ", member_phone=" + member_phone + ", member_addr=" + member_addr
-			+ ", enroll_category=" + Arrays.toString(enroll_category) + ", enroll_date=" + enroll_date
-			+ ", member_birth=" + member_birth + ", member_level=" + member_level + ", university=" + university
-			+ ", circle1_num=" + circle1_num + ", circle_name=" + circle_name + "]";
-}
 
 
 }

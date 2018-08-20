@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="search">
+
+  <resultMap type="map" id="circle">
+  </resultMap>
+  
+  <select id="circleList" resultMap="circleList">
+  	select * from circle order by circle_like desc , circle_num asc
+  </select>
+  
+  <select id="circleenroll" resultMap="circleList">
+  	select * from circle order by circle_enrolldate desc, circle_like desc
+  </select>
+  
+  <select id="circleList2" resultMap="circleList">
+  	select * from circle order by circle_like asc , circle_num asc
+  </select>
+  
+  <resultMap type="circle" id="circleList">
+  </resultMap> 
+  
+  <insert id="likeup" parameterType="map">
+  	insert into like_table values(#{member_id},#{circle_num},1)
+  	<!-- //insert into like_table values(?,?,1) -->
+  </insert>
+  
+  <!-- circle테이블의 각 동아리당 like숫자카운트 -->
+  <select id="likeCount" parameterType="_int" resultType="_int">
+  	select count(#{circle_like}) from like_table where circle_num=#{circle_num}
+  </select>
+  
+  <!--좋아요 like_table에 추가된후 circle테이블의 like갯수 업데이트  -->
+  <update id="updateLike" parameterType="map">
+  	update circle set circle_like=#{count} where circle_num=#{circle_num}
+  </update>
+ 
+ <!-- 좋아요 기록 삭제된 후 업데이트 -->
+ <update id="deleteLike" parameterType="map">
+  	update circle set circle_like=#{count} where circle_num=#{circle_num} 
+ </update>
+  
+  <select id="selectLike" parameterType="map" resultType="_int">
+  	select count(*) from like_table where circle_num=#{circle_num} AND member_id=#{member_id} 
+  </select>
+
+ <!-- like테이블에서 해당id의 좋아요기록삭제 -->
+ <delete id="likeDown" parameterType="map">
+  		delete from like_table where member_id=#{member_id} and circle_num=#{circle_num}
+ </delete> 
+ 
+  
+  <select id="selectOne" parameterType="string" resultType="circle">
+  	select * from circle where circle_num=${circle_num} <!-- 바꿔야됨 -->
+  </select>
+  
+  <select id="searchUniversity" parameterType="string" resultType="circle" resultMap="circleList">
+  	select * from circle where university like #{university} order by circle_num desc
+  </select>
+  <select id="searchUnsearch" parameterType="string" resultType="circle" resultMap="circleList">
+  	select * from circle where university like #{Unsearch} order by circle_num desc
+  </select>
+  <select id="searchCircleName" parameterType="string" resultType="circle" resultMap="circleList">
+  	select * from circle where circle_name like #{circle_name} order by circle_num desc
+  </select>
+  
+ 
+  
+  <!-- <select id="selectIDLike" parameterType="string" resultType="like_tab">
+  	select * from like_table where member_id=#{member_id}
+  </select> -->
+  
+  <!-- 좋아요 역순 정렬(홍보) -->
+  <select id="circlePromotion" >
+  	select * from circle order by circle_like asc
+  </select>
+  
+  
+  <select id="selectCount" resultType="_int">		
+	select count(*) from circle
+  </select>
+  
+  <select id="selectCount2" parameterType="map" resultType="_int">
+  	select 
+  		CASE
+  		count(WHEN #{university} is not null 
+  			THEN 1 END),
+  		count(WHEN #{Unsearch} is not null
+  			THEN 1 END),
+  		count(WHEN #{circle_name} is not null)THEN 1 END)
+  	from circle 
+  </select>
+  
+  
+  <select id="selectOneCircle" parameterType="_int" resultType="circle">
+  	select * from circle where circle_num=#{circle_num}
+  </select>
+  
+  <select id="selectUniversity" parameterType="string" resultType="_int">
+	select count(*) from circle where university=#{university}
+  </select>
+  
+  <select id="selectUnsearch" parameterType="string" resultType="_int">
+  	select count(*) from circle where university like #{Unsearch}
+  </select>
+  	
+  <select id="selectCircleName" parameterType="string" resultType="_int">
+  	select count(*) from circle where circle_name like #{circle_name}
+  </select>
+</mapper>
+
+
+
+
+
