@@ -612,9 +612,9 @@ font-family: 'Gothic A1', sans-serif;
 
       </div>
               <div class="modal-footer">
-                    <span style='margin-right:18%;'><button class='btn btn-default' id='before'><</button>&nbsp;&nbsp;
+                    <span style='margin-right:18%;'><button style='cursor:pointer;' class='btn btn-default' id='before'><</button>&nbsp;&nbsp;
       <span id='current' style='color:black;'></span>
-    &nbsp;&nbsp;<button class='btn btn-default' id='after'>></button></span>
+    &nbsp;&nbsp;<button class='btn btn-default' id='after' style='cursor:pointer;'>></button></span>
               <button type='button' class='btn btn-default' data-dismiss="modal" aria-label="Close" style='width:100px;height:40px;'>닫기</button>
 </div>
       </div>
@@ -827,7 +827,7 @@ function uploadMatching(){
        }).open();
    }
    $(document).ready(function() {
-	    if(${tCheck}==true){ 
+	    if(${tCheck}==true){
 	   var c1 = confirm('매칭 기능에 대하여 설명을 보시겠습니까?');
 	   if(c1){
 	   $('#Explanation').modal();

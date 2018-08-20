@@ -97,7 +97,7 @@ public class CalendarController {
 	}
 	
 	@RequestMapping("/calendar.do")
-	public String calendar(HttpServletRequest request,@RequestParam(value="category",required=false,defaultValue="전체")String category,HttpServletResponse response) {
+	public String calendar(HttpSession session,HttpServletRequest request,@RequestParam(value="category",required=false,defaultValue="전체")String category,HttpServletResponse response) {
 		Cookie[] cookie=request.getCookies();
 		String tCookieVal="tCheck";
 		boolean tCheck = false;
@@ -111,6 +111,8 @@ public class CalendarController {
 				{
 					String name=c.getName();
 					String value=c.getValue();
+					System.out.println(name);
+					System.out.println(value);
 					
 					if("tCheck".equals(name))
 					{
@@ -137,7 +139,6 @@ public class CalendarController {
 		}
 		
 		
-		
 		int result = service.updateDate();
 		List<Calendar> list = service.selectList(category);
 		List<Matching> matchingList = service.selectMatching();
@@ -145,8 +146,7 @@ public class CalendarController {
 		request.setAttribute("matchingList", matchingList);
 		request.setAttribute("list", list);
 		request.setAttribute("category",category );
-		request.setAttribute("tCheck", tCheck);
-		System.out.println(list);
+		session.setAttribute("tCheck", tCheck);
 		return "calendar/calendar";
 		
 	}
