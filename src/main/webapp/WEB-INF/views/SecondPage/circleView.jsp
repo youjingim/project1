@@ -52,15 +52,24 @@ top:50px;
 	outline: none;
 }
 
+.blue_window{
+	border-top-left-radius : 10px;
+	border-bottom-left-radius : 10px;
+}
+
 #sch_smit {
 	width: 130px; height: 40px;
-	margin: 0; border: 0;
 	vertical-align: top;
 	background: #5858FA;
 	color: white;
 	font-weight: bold;
-	border-radius: 1px;
 	cursor: pointer;
+	border-top-right-radius : 10px;
+	border-bottom-right-radius : 10px;
+	position:relative;
+	right:7.5px;
+	border-top-left-radius : 0px;
+	border-bottom-left-radius : 0px;
 }
 
 #sch_smit:hover {
@@ -92,6 +101,15 @@ td{
 	position:relative;
 	margin-left:2.5%;
 	margin-right:2.5%;
+}
+
+#searchType{
+	border-radius:5px;
+	height:35px;
+	position:relative;
+	left:3px;
+	bottom:1.5px;
+	outline:none;
 }
 </style>
 <section>
