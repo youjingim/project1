@@ -113,6 +113,7 @@ section div#main_container div#rank_container {
 	cursor: pointer;
 	border-top-right-radius:20px;
 	border-bottom-right-radius:20px;
+	outline:none;
 }
 
 #sch_smit:hover {
@@ -197,13 +198,14 @@ section div#main_container div#rank_container {
 	font-weight:bold;
 }
 
+a:hover{color:red; text-decoration:none;}
 </style>
 </head>
 <body>
 
 	<section>
-		<div style="background-image: url(/project/resources/image/circlebanner3.jpg);background-repeat:no-repeat;background-size: 1700px 1200px">
-		<div id='main_container' style="background-image: url(/project/resources/image/circlebanner2.jpg);background-repeat:no-repeat;background-size: 1700px 1200px">
+		<div style="background-image: url(/project/resources/image/circlebanner3.jpg);background-repeat:no-repeat;background-size: 100% 1100px;opacity:0.95;">
+		<div id='main_container' style="background-image: url(/project/resources/image/circlebanner2.jpg);background-repeat:no-repeat;background-size: 100% 1100px;opacity:0.95;">
 			<br><br><br> 
 			<span style='font-weight: bold; margin-top: 100px; margin-left: 5%; font-size: 30px; text-align: center;color:black;'>동아리 랭킹</span> 
 			<br><br><br><br><br>
@@ -235,7 +237,7 @@ section div#main_container div#rank_container {
 				<c:forEach var="circle" items="${list}" varStatus="status" begin="0" end="3">
 					<div class='mySlides myS1'>
 						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
-						<img src="/project/resources/image/${circle.circle_photo }" style="width: 70%;height: 400px;margin-left: auto; margin-right: auto; display: block;" class='image' alt="${circle.circle_comment }"> 
+						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
 						</a>
 						<div class="text-block">
 							<c:set var="count" value="${count + 1}" />
@@ -243,10 +245,6 @@ section div#main_container div#rank_container {
 							<h3 style="text-align: center;font-weight: bold;color:#190710"> ${circle.circle_name} </h3>
 							<p style="text-align: center;font-weight: bold;color:#190710"> ${circle.circle_comment} </p>
  						</div>
-						
-						<style type="text/css">
-							a:hover{color:red; text-decoration:none;}
-						</style>
 						
 					</div>
 				</c:forEach>
@@ -289,10 +287,6 @@ section div#main_container div#rank_container {
 							<h3 style="text-align: center;font-weight: bold;color:#190710"> ${circle.circle_name} </h3>
 							<p style="text-align: center;font-weight: bold;color:#190710"> ${circle.circle_comment} </p>
  						</div>
-						
-						<style type="text/css">
-							a:hover{color:red; text-decoration:none;}
-						</style>	
 					</div>
 				</c:forEach>
 				<a class="prev" onclick="plusSlides1(-1)">
@@ -391,7 +385,7 @@ section div#main_container div#rank_container {
   		}
     </script>
 		</div>
-		<div class="jumbotron" style="background-image: url(/project/resources/image/circlebanner.jpg);background-repeat:no-repeat;background-size: 100% 100%;opacity:0.9;">
+		<div class="jumbotron" style="background-image: url(/project/resources/image/circlebanner.jpg);background-repeat:no-repeat;background-size: 100% 100%;opacity:0.95;">
 			<h2 style="text-align: center; color: black; font-family: 'Do Hyeon', sans-serif;">통합 검색 시스템</h2>
 			<div class="row">
 				<div class="col-xs-9 col-xs-offset-2">
@@ -450,7 +444,7 @@ section div#main_container div#rank_container {
 			</div>
 		</div>
 		<!-- <div style="background-image: url(/project/resources/image/circlebanner3.jpg);background-repeat:no-repeat;background-size: 100% 100%;opacity:0.9;"> -->
-		<span style='font-weight: bold; margin-top: 100px; margin-left: 5%; font-size: 30px; color: black;'>동아리홍보</span>
+		<span id="promotion" style='font-weight: bold; margin-top: 100px; margin-left: 5%; font-size: 30px; color: black;'>동아리홍보</span>
 		<div class="container" id="con1">
 			<div class="row">
 					<c:forEach var='circle' items='${list2}' varStatus="vs">
@@ -544,4 +538,4 @@ section div#main_container div#rank_container {
 		</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
-	</section>
+</section>
