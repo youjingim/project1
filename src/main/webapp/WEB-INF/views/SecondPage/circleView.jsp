@@ -79,13 +79,16 @@ top:50px;
 <div id='#main_container'>
 <div class="col-xm-10" id="main_title" style="margin-top: 300px;color:#161616;">
      <hr>
-     <h1 style="text-align:center">총 ${totalCount }개의 동아리가 검색되었습니다.</h1>
+     <div id='searchresult' style="background-image:url(/project/resources/image/searchresult.png);background-repeat:no-repeat;background-position: center;background-size: 1200px 200px;width: 100%; height: 200px;">
+     </div>
+     <!-- <img src="/project/resources/image/searchresult.png" style="width:80%;height:300px;position:relative;left:200px"> -->
+     <h1 style="text-align:center;position:relative;margin-left:-600px;bottom:100px;font-size:29px">총 <span style="color: red;">${totalCount }</span>개의 동아리가 검색되었습니다.</h1>
           <hr>
           <div class="boardR">
           <section id="board-container">
         <table class="table table-striped table-hover table-bordered">
           <thead>
-            <tr>
+            <tr style="background-color:#00FFFF">
               <th class="th-lg">동아리번호<i class="fa fa-sort ml-1"></i></th>
               <th class="th-lg">대학교<i class="fa fa-sort ml-1"></i></th>
               <th class="th-lg">동아리명<i class="fa fa-sort ml-1"></i></th>

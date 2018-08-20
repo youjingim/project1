@@ -32,7 +32,6 @@ import com.yj.project.common.page.PageCreate;
 import com.yj.project.search.model.service.SearchService;
 import com.yj.project.search.model.vo.Circle;
 import com.yj.project.search.model.vo.Like;
-import com.yj.project.search.model.vo.PageVo;
 
 
 @Controller
@@ -51,7 +50,9 @@ public class SearchPageController {
 		
 		List<Circle> list = searchService.circleList(circle);
 		List<Circle> list2 = searchService.circleList2(circle,cPage,numPerPage);
-
+		
+		List<Circle> circleenroll = searchService.circleenroll(circle);
+		
 		int totalCount = searchService.selectCount();
 		ModelAndView mav = new ModelAndView();
 
@@ -60,6 +61,7 @@ public class SearchPageController {
 		mav.addObject("pageBar",pageBar);
 		mav.addObject("list",list);
 		mav.addObject("list2",list2);
+		mav.addObject("circleenroll", circleenroll);
 		mav.addObject("totalCount",totalCount);
 		mav.addObject("cPage",cPage);
 		mav.setViewName("/SecondPage/search");
@@ -163,7 +165,11 @@ public class SearchPageController {
 		
 		//int result=searchService.selectOne(circle_num,model);
 		
+<<<<<<< HEAD
 		return "clubPage/clubMain"; //해당 동아리 페이지화면 표시 부분으로 리턴
+=======
+		return "/clubPage/clubMain"; //해당 동아리 페이지화면 표시 부분으로 리턴
+>>>>>>> CKS2
 	}
 	
 	@RequestMapping("ListFinder.do")

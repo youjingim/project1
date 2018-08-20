@@ -33,7 +33,13 @@ public interface SearchDAO {
 	
 	List<Circle> circleRank(SqlSessionTemplate sqlSession,Circle circle);
 
+	//좋아요 순 동아리 랭킹
 	List<Circle> circleList(SqlSessionTemplate sqlSession, Circle circle);
+	
+	//생성일 순 동아리 랭킹
+	List<Circle> circleenroll(SqlSessionTemplate sqlSession, Circle circle);
+	
+	
 	
 	//동아리 홍보(좋아요 역순으로 정렬)
 	List<Circle> circlePromotion(SqlSessionTemplate sqlSession,Circle circle);
