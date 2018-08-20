@@ -165,11 +165,8 @@ public class SearchPageController {
 		
 		//int result=searchService.selectOne(circle_num,model);
 		
-<<<<<<< HEAD
 		return "clubPage/clubMain"; //해당 동아리 페이지화면 표시 부분으로 리턴
-=======
-		return "/clubPage/clubMain"; //해당 동아리 페이지화면 표시 부분으로 리턴
->>>>>>> CKS2
+
 	}
 	
 	@RequestMapping("ListFinder.do")

@@ -208,13 +208,6 @@ section div#main_container div#rank_container {
 			<span style='font-weight: bold; margin-top: 100px; margin-left: 5%; font-size: 30px; text-align: center;color:black;'>동아리 랭킹</span> 
 			<br><br><br><br><br>
 			<div class='container'>
-<<<<<<< HEAD
-				<c:set var="num" value="1"/>
-				<c:forEach var="circle" items="${list }" varStatus="status" begin="0" end="3">
-					<div class='mySlides'>
-						<a href="${pageContext.request.contextPath}/search/circleView.do?no=${circle.circle_num }">
-						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
-=======
 			  <ul class="nav nav-pills" style="float:right">
 			    <li class="active"><a href="#like" aria-controls="home" data-toggle="pill" onclick="mains1()" class='glosbe'>좋아요 순</a></li>
 			    <li><a href="#desc" aria-controls="messages" data-toggle="pill"  onclick="mains2()" class='glosbe'>생성일 순</a></li>
@@ -243,7 +236,6 @@ section div#main_container div#rank_container {
 					<div class='mySlides myS1'>
 						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
 						<img src="/project/resources/image/${circle.circle_photo }" style="width: 70%;height: 400px;margin-left: auto; margin-right: auto; display: block;" class='image' alt="${circle.circle_comment }"> 
->>>>>>> CKS2
 						</a>
 						<div class="text-block">
 							<c:set var="count" value="${count + 1}" />
