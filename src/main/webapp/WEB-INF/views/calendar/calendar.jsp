@@ -273,8 +273,8 @@ font-family: 'Gothic A1', sans-serif;
 
          	  });
 
-         	});
-
+         	}); 
+			
              
              
             if($('#member_id').val()=='${memberLoggedIn.member_id}'){
@@ -283,7 +283,9 @@ font-family: 'Gothic A1', sans-serif;
            }else{
                var btn4 = "<button type='button' class='btn btn-success' onclick='return matchingFrm()' style='width:250px;margin-right:170px;'>매칭신청</button>";
               $('#modal_foot').html("<span id='change' style='cursor:pointer;color:black;position:absolute;left:15px;' onclick='chage_toggle()'> 변경하기 </span>"+btn4);
+              var send = " <a href='#'><i class='fa fa fa-envelope-o fa-fw w3-margin-right'></i></a>";
               
+              $('#member_id_in').append(send);
            }
             
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -425,7 +427,7 @@ font-family: 'Gothic A1', sans-serif;
            <tr>
            <td>ID</td>
            <td>
-           <span id="member_id_in" class="modal-title" style="color:black;"> </span> <a href='#'><i class="fa fa fa-envelope-o fa-fw w3-margin-right"></i></a>
+           <span id="member_id_in" class="modal-title" style="color:black;"> </span> 
            </td></tr>
            <tr>
            <td>카테고리</td>
