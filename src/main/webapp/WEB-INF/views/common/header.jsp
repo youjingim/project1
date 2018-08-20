@@ -482,10 +482,12 @@ div#img_slider{
 width:100%;
 height:500px;
 position:fixed;
-background-image:url('${path}/resources/image/backgroundNew.jpg');
-background-size:cover;
 z-index:-1;
 top:80px;
+}
+div#img_slider img{
+width:100%;
+height:500px;
 }
 #navbar_set{
 position:fixed;
@@ -550,7 +552,7 @@ background-color:white;
          <li><a href="#" onclick="fnMove('1')">CampusPick</a></li>
         <li><a href="${path}/secondPage.do">동아리</a></li>
         <li><a href="${path}/createClub">동아리 개설</a></li>
-        <li><a href="${path}/calendar.do">With us</a></li> 
+        <li><a href="${path}/calendar.do">With us</a></li>
         <li><a href="${path }/board/boardList.do">자유게시판</a></li>
       </ul>
     </div>
@@ -597,6 +599,7 @@ background-color:white;
 
 <c:if test="${param.pageState != 'index'}">
 <div id="img_slider">
+<img src='${path}/resources/image/back1.jpg'>
 </div>
 </c:if>
 

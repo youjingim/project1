@@ -1,6 +1,5 @@
 package com.yj.project.calendar.model.service;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +74,16 @@ public class MatchingServiceImpl implements MatchingService{
 	@Override
 	public int selectDate2(Map<String, Object> map2) {
 		return matchingDAO.selectDate2(map2);
+	}
+
+	@Override
+	public int updateDate() {
+		return matchingDAO.updateDate();
+	}
+
+	@Override
+	public int selectDate3(Map<String, Object> map2) {
+		return matchingDAO.selectDate3(map2);
 	}
 
 }
