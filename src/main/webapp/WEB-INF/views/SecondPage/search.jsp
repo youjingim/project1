@@ -149,6 +149,11 @@ section div#main_container div#rank_container {
 .nav-pills li a:active{
 	background-color:#59EAEF;
 	color:black;
+	border-top-left-radius : 5px;
+	border-top-right-radius : 5px;
+	border-bottom-left-radius : 5px;
+	border-bottom-right-radius : 5px;
+	
 }
 
 #search1{
@@ -184,6 +189,13 @@ section div#main_container div#rank_container {
 	z-index=1;
 }
 
+#sang{
+	outline:none;
+}
+
+.glosbe{
+	font-weight:bold;
+}
 
 </style>
 </head>
@@ -197,8 +209,8 @@ section div#main_container div#rank_container {
 			<br><br><br><br><br>
 			<div class='container'>
 			  <ul class="nav nav-pills" style="float:right">
-			    <li class="active"><a href="#like" aria-controls="home" data-toggle="pill" onclick="mains1()">좋아요 순</a></li>
-			    <li><a href="#desc" aria-controls="messages" data-toggle="pill"  onclick="mains2()">생성일 순</a></li>
+			    <li class="active"><a href="#like" aria-controls="home" data-toggle="pill" onclick="mains1()" class='glosbe'>좋아요 순</a></li>
+			    <li><a href="#desc" aria-controls="messages" data-toggle="pill"  onclick="mains2()" class='glosbe'>생성일 순</a></li>
 			  </ul>
 			  <br><br><br>
 			  
@@ -223,7 +235,7 @@ section div#main_container div#rank_container {
 				<c:forEach var="circle" items="${list}" varStatus="status" begin="0" end="3">
 					<div class='mySlides myS1'>
 						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
-						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
+						<img src="/project/resources/image/${circle.circle_photo }" style="width: 70%;height: 400px;margin-left: auto; margin-right: auto; display: block;" class='image' alt="${circle.circle_comment }"> 
 						</a>
 						<div class="text-block">
 							<c:set var="count" value="${count + 1}" />
@@ -269,6 +281,7 @@ section div#main_container div#rank_container {
 					<div class='mySlides myS2'>
 						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
 						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
+						
 						</a>
 						<div class="text-block">
 							<c:set var="count2" value="${count2 + 1}" />
@@ -298,9 +311,9 @@ section div#main_container div#rank_container {
 					</div>
 					
 					<div class='row'>
-					<c:forEach var="circle" items="${circleenroll }" varStatus="status" begin="0" end="3">
+					<c:forEach var="circle" items="${circleenroll }" varStatus="status1" begin="0" end="3">
 						<div class='column' id='slider2'>
-							<img class='demo cursor dem2' src="/project/resources/image/${circle.circle_photo}" style="width: 100%; height: 200px; cursor: pointer;" onclick='currentSlide(${status.count})'>
+							<img class='demo cursor dem2' src="/project/resources/image/${circle.circle_photo}" style="width: 100%; height: 200px; cursor: pointer;" onclick='currentSlide1(${status1.count})'>
 						</div>
 					</c:forEach>
 					</div>
@@ -322,16 +335,19 @@ section div#main_container div#rank_container {
 
 
     	function currentSlide(n) {
-    	var imgText = document.getElementById("imgtext");
-    	showSlides(slideIndex = n);
-    	  imgText.innerHTML = imgs.alt;
+    		var imgText = document.getElementById("imgtext");
+    		showSlides(slideIndex = n);
+    	    imgText.innerHTML = imgs.alt;
+    	}
+    	
+    	function currentSlide1(n) {
+    		var imgText = document.getElementById("imgtext");
+    		showSlides1(slideIndex = n);
+    	    imgText.innerHTML = imgs.alt;
     	}
     	
     	function showSlides(n) {
     		  var i;
-    		  /* var slides = document.getElementsByClassName("mySlides");
-    		  var dots = document.getElementsByClassName("demo");
-    		  var captionText = document.getElementById("caption"); */
     		  var slides = document.getElementsByClassName("myS1");
     		  var dots = document.getElementsByClassName("dem1");
     		  var captionText = document.getElementById("caption1");
@@ -364,7 +380,7 @@ section div#main_container div#rank_container {
   		      slides[i].style.display = "none";
   		  }
   		  for (i = 0; i < dots.length; i++) {
-  		      dots[i].className = dots[i].className.replace(" active", "");
+  		      dots[i].className = dots[i].className.replace("active", "");
   		  }
   		  
   		  slides[slideIndex-1].style.display = "block";
@@ -441,19 +457,24 @@ section div#main_container div#rank_container {
 					<c:if test="${not empty list2}">
 						<div class="col-sm-4">
 							<div class="panel panel-primary">
-								<div class="panel-heading" style="text-align: center">${circle.circle_name}</div>
+								<div class="panel-heading" style="text-align: center">
+									${circle.circle_name}
+									<br>
+									<span class='badge'>${circle.category}</span>
+								</div>
 								<div class="panel-body">
 									<a href='${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }'>
 										<img src="/project/resources/image/${circle.circle_photo }" class="img-responsive" style="width: 100%; height: 17.4%" alt="Image">
 									</a>
+									
 								</div>
 								<div class="panel-footer" >
-									<button class='btn btn-link' type='button' value='상세보기' style="cursor: pointer" onclick="search()">상세보기</button>
+									<button id='sang' class='btn btn-link' type='button' value='상세보기' style="cursor: pointer" onclick="search()">상세보기</button>
 									
 									<span class='likeImg' style="cursor: pointer">
-									<!-- <img src='/project/resources/image/like5.png' class='likImg' style="width: 50px; height: 45px; position: relative; right: 35px"> -->
-									<img src='https://c.motorgraph.com/files/attach/images//877/767/543edf39f81d6ae4282de20807fe284e.gif' class='likImg' style="width: 50px; height: 45px; position: relative; right: 35px">
-									<input type='hidden' id="circle_num" value="${circle.circle_num }">
+									<img src='/project/resources/image/like5.png' class='likImg' style="width: 50px; height: 45px; position: relative; right: 35px"> 
+<!-- 									<img src='https://c.motorgraph.com/files/attach/images//877/767/543edf39f81d6ae4282de20807fe284e.gif' class='likImg' style="width: 50px; height: 45px; position: relative; right: 35px">
+ -->									<input type='hidden' id="circle_num" value="${circle.circle_num }">
 									</span>
 									
 									<span style="position:relative;right:10px;width:33px;height:33px;bottom:15px;display:inline-block" class='speech'>
@@ -510,7 +531,7 @@ section div#main_container div#rank_container {
 										} */
 									},
 									error:function(error){
-										alert("에러가 발생하였습니다. 관리자에게 문의하세요");
+										alert("다시 시도 하거나 관리자에게 문의하세요.");
 									}
 								});
 							})
