@@ -825,12 +825,12 @@ function uploadMatching(){
        }).open();
    }
    $(document).ready(function() {
-	   /* if(${tCheck}==true){ */
+	    if(${tCheck}==true){ 
 	   var c1 = confirm('매칭 기능에 대하여 설명을 보시겠습니까?');
 	   if(c1){
 	   $('#Explanation').modal();
 	   }
-	   /* } */
+	    } 
    });
    
    var num = 1;

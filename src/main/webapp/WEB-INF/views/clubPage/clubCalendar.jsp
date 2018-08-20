@@ -264,7 +264,7 @@ border-bottom:1px solid lightgray;
            <tr>
            <td>ID</td>
            <td>
-           <span id="req_member_id" class="modal-title" style="color:black;"> </span>
+           <span id="req_member_id" class="modal-title" style="color:black;"> </span> <a href='#'><i class="fa fa fa-envelope-o fa-fw w3-margin-right"></i></a>
            </td></tr>
            <tr>
            <td>제목</td>
