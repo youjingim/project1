@@ -14,6 +14,7 @@ public class Matching {
     private String time2;
     private String withus_place;
 	
+    private String req_member_id;
     private String req_circle;
     private String circle_name;
     private String circle_photo;
@@ -101,6 +102,14 @@ public class Matching {
 		this.withus_place = withus_place;
 	}
 
+	public String getReq_member_id() {
+		return req_member_id;
+	}
+
+	public void setReq_member_id(String req_member_id) {
+		this.req_member_id = req_member_id;
+	}
+
 	public String getReq_circle() {
 		return req_circle;
 	}
@@ -183,8 +192,9 @@ public class Matching {
 
 	public Matching(int withus_num, String withus_title, String withus_content, String member_id,
 			String register_circle, Date matching_date, String time1, String time2, String withus_place,
-			String req_circle, String circle_name, String circle_photo, String req_id, String req_withus_content,
-			Date req_matching_date, String req_time1, String req_time2, String req_withus_place, String status) {
+			String req_member_id, String req_circle, String circle_name, String circle_photo, String req_id,
+			String req_withus_content, Date req_matching_date, String req_time1, String req_time2,
+			String req_withus_place, String status) {
 		super();
 		this.withus_num = withus_num;
 		this.withus_title = withus_title;
@@ -195,6 +205,7 @@ public class Matching {
 		this.time1 = time1;
 		this.time2 = time2;
 		this.withus_place = withus_place;
+		this.req_member_id = req_member_id;
 		this.req_circle = req_circle;
 		this.circle_name = circle_name;
 		this.circle_photo = circle_photo;
@@ -212,12 +223,13 @@ public class Matching {
 		return "Matching [withus_num=" + withus_num + ", withus_title=" + withus_title + ", withus_content="
 				+ withus_content + ", member_id=" + member_id + ", register_circle=" + register_circle
 				+ ", matching_date=" + matching_date + ", time1=" + time1 + ", time2=" + time2 + ", withus_place="
-				+ withus_place + ", req_circle=" + req_circle + ", circle_name=" + circle_name + ", circle_photo="
-				+ circle_photo + ", req_id=" + req_id + ", req_withus_content=" + req_withus_content
-				+ ", req_matching_date=" + req_matching_date + ", req_time1=" + req_time1 + ", req_time2=" + req_time2
-				+ ", req_withus_place=" + req_withus_place + ", status=" + status + "]";
+				+ withus_place + ", req_member_id=" + req_member_id + ", req_circle=" + req_circle + ", circle_name="
+				+ circle_name + ", circle_photo=" + circle_photo + ", req_id=" + req_id + ", req_withus_content="
+				+ req_withus_content + ", req_matching_date=" + req_matching_date + ", req_time1=" + req_time1
+				+ ", req_time2=" + req_time2 + ", req_withus_place=" + req_withus_place + ", status=" + status + "]";
 	}
 
+	
 
 
 }

@@ -98,7 +98,7 @@ top:50px;
 			<tr>
 					<td style="width:10%">${circle.circle_num }</td>
 					<td style="width:15%">${circle.university }</td>
-					<td class="text-warning"><a href='${pageContext.request.contextPath}/circle/circleView.do?no=${circle.circle_num }' style="color:black;font:bold;">${circle.circle_name }</a></td>
+					<td class="text-warning"><a href='${pageContext.request.contextPath}/search/circleView.do?no=${circle.circle_num }' style="color:black;font:bold;">${circle.circle_name }</a></td>
 					<td style="width:15%">${circle.member_id }</td>
 					<td style="width:10%">${circle.circle_like }</td>
 			</tr>	

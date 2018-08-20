@@ -163,7 +163,7 @@ public class SearchPageController {
 		
 		//int result=searchService.selectOne(circle_num,model);
 		
-		return "/"; //해당 동아리 페이지화면 표시 부분으로 리턴
+		return "clubPage/clubMain"; //해당 동아리 페이지화면 표시 부분으로 리턴
 	}
 	
 	@RequestMapping("ListFinder.do")

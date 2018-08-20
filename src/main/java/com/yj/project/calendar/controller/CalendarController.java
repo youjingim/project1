@@ -4,13 +4,12 @@ package com.yj.project.calendar.controller;
 
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +29,7 @@ import com.yj.project.calendar.model.vo.ClubNotice;
 import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
 import com.yj.project.member.model.vo.Member;
+
 @Controller
 public class CalendarController {
 	@Autowired
@@ -96,14 +97,55 @@ public class CalendarController {
 	}
 	
 	@RequestMapping("/calendar.do")
-	public String calendar(HttpServletRequest req,@RequestParam(value="category",required=false,defaultValue="전체")String category) {
+	public String calendar(HttpServletRequest request,@RequestParam(value="category",required=false,defaultValue="전체")String category,HttpServletResponse response) {
+		Cookie[] cookie=request.getCookies();
+		String tCookieVal="tCheck";
+		boolean tCheck = false;
+		boolean hasRead=false;
+		//사이트 방문시에는 아무런 쿠키를 
+		//갖고있지 않으면 cookie값은 null이 나옴
+		if(cookie!=null)
+		{
+			outter:
+				for(Cookie c : cookie)
+				{
+					String name=c.getName();
+					String value=c.getValue();
+					
+					if("tCheck".equals(name))
+					{
+						tCookieVal=value;
+						if(value.contains("|"+"tCheck"+"|"))
+						{
+							hasRead=true;
+							break outter;
+						}
+					}
+				}
+		}
 		
+		if(!hasRead)
+		{
+
+			tCheck = true;
+			Cookie c=new Cookie("tCheck",tCookieVal+"|"+"tCheck"+"|");
+			c.setMaxAge(-1);
+			//브라우저가 닫는 경우 삭제
+			response.addCookie(c);		
+		}else {
+			tCheck = false;
+		}
+		
+		
+		
+		int result = service.updateDate();
 		List<Calendar> list = service.selectList(category);
 		List<Matching> matchingList = service.selectMatching();
 
-		req.setAttribute("matchingList", matchingList);
-		req.setAttribute("list", list);
-		req.setAttribute("category",category );
+		request.setAttribute("matchingList", matchingList);
+		request.setAttribute("list", list);
+		request.setAttribute("category",category );
+		request.setAttribute("tCheck", tCheck);
 		System.out.println(list);
 		return "calendar/calendar";
 		
@@ -136,19 +178,32 @@ public class CalendarController {
 		return "common/msg";
 	}
 	
-	@RequestMapping("/checkCalendar")
+	@RequestMapping(value="/checkCalendar.do",method={RequestMethod.POST,RequestMethod.GET})
 	public void matchingDate(@RequestParam(value="matchingDate")Date date,HttpServletResponse res,HttpServletRequest req) throws IOException {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> map2 = new HashMap<String, Object>();
 
 		Member member = (Member)req.getSession().getAttribute("memberLoggedIn");
 		map.put("member_id", member.getMember_id());
 		map.put("date", date);
-		boolean check1 = service.selectDate(map)==0?true:false;
+		//withus_board
+		int result1 = service.selectDate(map);
 		map2.put("circle_num", member.getCircle1_num());
 		map2.put("date", date);
-		boolean check2 = service.selectDate2(map2)==0?true:false;
-		boolean check = check1 || check2;
+		//final
+		int result2 = service.selectDate2(map2);
+		//req_withus
+		int result3 = service.selectDate3(map2);
+		boolean check=false;
+
+		
+		
+		if(result1>0 || result2>0 || result3>0) {
+			check=true;
+		}
+		
+		
 		res.getWriter().print(check);
 	}
 	@RequestMapping("/delete_Matching.do")
@@ -172,7 +227,9 @@ public class CalendarController {
 	}
 	
 	@RequestMapping("/indexCheck.do")
-	public void indexNum(@RequestParam(value="num") int num,HttpServletResponse res) throws IOException {
+	public void indexNum(@RequestParam(value="num") int num,
+			@RequestParam(value="req_num")int req_num
+			,HttpServletResponse res) throws IOException {
 		res.setCharacterEncoding("UTF-8");
 		List<Matching> m = service.selectMatching();
 		
@@ -180,7 +237,7 @@ public class CalendarController {
 		Matching matching = new Matching();
 		
 		for(Matching m1 : m) {
-			if(m1.getWithus_num() == num) {
+			if(m1.getWithus_num() == num && Integer.parseInt(m1.getReq_circle()) == req_num) {
 				matching = m1;
 			}
 		}
@@ -192,19 +249,18 @@ public class CalendarController {
 		
 	}
 	@RequestMapping("/successMatching")
-	public ModelAndView successMatching(Matching m,@RequestParam(value="matching_date1") Date date
-			,@RequestParam(value="req_matching_date1",required=false,defaultValue="2000-01-01") Date req_matching_date1
-			,@RequestParam(value="re_time11",required=false,defaultValue="") String re_time11
-			,@RequestParam(value="re_time22",required=false,defaultValue="") String re_time22
-			,@RequestParam(value="req_withus_place1",required=false,defaultValue="") String req_withus_place1
-			,@RequestParam(value="req_withus_content1",required=false,defaultValue="") String req_withus_content1
+	public ModelAndView successMatching(Matching m,@RequestParam(value="matching_date") Date date
+			,@RequestParam(value="re_time1",required=false,defaultValue="") String re_time11
+			,@RequestParam(value="re_time2",required=false,defaultValue="") String re_time22
+			,@RequestParam(value="re_place",required=false,defaultValue="") String req_withus_place1
+			,@RequestParam(value="withus_content",required=false,defaultValue="") String req_withus_content1
 			,@RequestParam(value="login_info") String id
 			
 			) {
 		ModelAndView mv = new ModelAndView();
 		String msg="";
 		String loc="/clubMain.do?member_id="+id;
-		m.setReq_matching_date(req_matching_date1);
+		m.setReq_matching_date(date);
 		m.setReq_time1(re_time11);
 		m.setReq_time2(re_time22);
 		m.setReq_withus_place(req_withus_place1);
@@ -221,6 +277,7 @@ public class CalendarController {
 		finalWithus.setReq_matching_date(m.getReq_matching_date());
 		finalWithus.setReq_matching_time(m.getReq_time1()+":00 ~ "+m.getReq_time2()+":00");
 		finalWithus.setReq_withus_place(m.getReq_withus_place());
+		finalWithus.setReq_member_id(m.getMember_id());
 		ClubNotice notice = new ClubNotice();
 		notice.setCircle_num(Integer.parseInt(m.getRegister_circle()));
 		notice.setContent(m.getReq_matching_date()+" 에 신청된 매칭이 수락 되었습니다!");
@@ -231,6 +288,7 @@ public class CalendarController {
 		if(result>0) {
 			finalWithus.setRegister_circle(m.getReq_circle());
 			finalWithus.setReq_circle(m.getRegister_circle());
+			finalWithus.setReq_member_id(m.getReq_member_id());
 			result = service.successMatching(finalWithus);
 			result2 = service.chageState(m.getWithus_num());
 			notice.setCircle_num(Integer.parseInt(m.getReq_circle()));
@@ -252,16 +310,22 @@ public class CalendarController {
 	}
 	
 	@RequestMapping("/failMatching")
-	public ModelAndView fail(@RequestParam(value="withus_num")int withus_num,@RequestParam(value="register_circle")int circle_num,@RequestParam(value="login_info")String id) {
+	public ModelAndView fail(Matching m,@RequestParam(value="withus_num")int withus_num,@RequestParam(value="register_circle")int circle_num,@RequestParam(value="login_info")String id) {
 		ModelAndView mv = new ModelAndView();
 		Map<String, Object> map = new HashMap<String, Object>();
 		String msg="";
 		String loc="/clubMain.do?member_id="+id;
-		
+		ClubNotice notice = new ClubNotice();
+		notice.setCircle_num(Integer.parseInt(m.getRegister_circle()));
+		notice.setContent(m.getMatching_date()+" 에 신청된 매칭이 거절 되었습니다!");
 		map.put("withus_num", withus_num);
 		map.put("circle_num", circle_num);
 		
 		int result = service.failMatching(map);
+		int result2 = service.noticeInsert(notice);
+		int result3 = service.updateNotice(Integer.parseInt(m.getRegister_circle()),Integer.parseInt(m.getReq_circle()));
+		notice.setCircle_num(Integer.parseInt(m.getReq_circle()));
+		result3 = service.noticeInsert(notice);
 		if(result>0) {
 			msg="매칭신청을 거절하셨습니다.";
 		}else {
@@ -273,9 +337,8 @@ public class CalendarController {
 		
 		return mv;
 		
-		
-		
 	}
+
 	
 	
 	

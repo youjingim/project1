@@ -28,20 +28,23 @@
         $("#post_comment").toggle();
     });
   });
-    //budget_form
-    $(document).ready(function(){
-    $("#budget_button").click(function(){
-        $("#budget_form").toggle();
-    });
-  });
+
   function circle_home(){
 	  location.href="${path}/clubMain.do?member_id="+'${memberLoggedIn.member_id}';
   }  
-  function circle_list(){
+  function circle_list(level){
+	  var grade=level;
+	  if(grade!=='L2'){
 	  location.href="${path}/circle_list.do?circle_num="+${club.circle_num};
+	  }
+	  else{
+		  alert('접근권한이 없는 페이지입니다.');
+		  history.go();
+	  }
   }  
-  function circle_budget(){
-	  location.href="${path}/circle_budget.do?circle_num="+${club.circle_num};
+  function circle_budget(level,id){
+	  location.href="${path}/circle_budget.do?circle_num="+${club.circle_num}+"&id="+id;
+	 
   }
   function circle_gallery(){
 	  location.href="${path}/circle_gallery.do?circle_num="+${club.circle_num};
@@ -70,7 +73,7 @@
       <div class="w3-card w3-round w3-white" style="margin-top:16px;">
         <div class="w3-container">
          <h4 class="w3-center"><c:out value="${club.circle_name }"/></h4>
-         <p class="w3-center"><img src="./title.jpg" class="w3-circle" style="height:106px;width:106px" alt="동아리 로고"></p>
+         <p class="w3-center"><img src="${pageContext.request.contextPath}/resources/image/${club.circle_photo}" class="w3-circle" style="height:106px;width:106px" alt="동아리 로고"></p>
          <hr>
          <p><i class="fa fa-bookmark fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.university }"/></p>
          <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.circle_location }"/> </p>
@@ -86,18 +89,23 @@
           <div id="Demo2" class="w3-hide w3-container">
             <p>Some other text..</p>
           </div>
-          <button onclick="circle_list()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-address-book-o fa-fw w3-margin-right"></i> 동아리 회원목록</button>
+          <c:if test="${club.circle_num eq memberLoggedIn.circle1_num }">
+          <button onclick="circle_list('${memberLoggedIn.member_level}')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-address-book-o fa-fw w3-margin-right"></i> 동아리 회원목록</button>
           <div id="Demo1" class="w3-hide w3-container">
             <p>Some text..</p>
           </div>
-          <button onclick="circle_budget()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-won fa-fw w3-margin-right"></i> 동아리 예산</button>
+          <button onclick="circle_budget('${memberLoggedIn.member_level}','${memberLoggedIn.member_id }')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-won fa-fw w3-margin-right"></i> 동아리 예산</button>
           <div id="Demo3" class="w3-hide w3-container">
             <p>Some other text..</p>
           </div>
+
+          </c:if>
+
           <button onclick="circle_calendar()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> 동아리 일정 <c:if test='${total != 0}'><span style='margin-left:50%;'>new ${total}</span></c:if></button>
           <div id="Demo5" class="w3-hide w3-container">
             <p>Some other text..</p>
           </div>
+
           <button onclick="circle_gallery()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> 동아리 사진첩</button>
           <div id="Demo4" class="w3-hide w3-container">
          <div class="w3-row-padding">
@@ -131,18 +139,9 @@
         <div class="w3-container">
           <p>관련  태그</p>
           <p>
-         <c:forEach  var="ca" items="${categoryArr}">	
-            <span class="w3-tag w3-small w3-theme-d5">${ca }</span>
-            <!-- <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
-            <span class="w3-tag w3-small w3-theme-d3">Labels</span>
-            <span class="w3-tag w3-small w3-theme-d2">Games</span>
-            <span class="w3-tag w3-small w3-theme-d1">Friends</span>
-            <span class="w3-tag w3-small w3-theme">Games</span>
-            <span class="w3-tag w3-small w3-theme-l1">Friends</span>
-            <span class="w3-tag w3-small w3-theme-l2">Food</span>
-            <span class="w3-tag w3-small w3-theme-l3">Design</span>
-            <span class="w3-tag w3-small w3-theme-l4">Art</span>
-            <span class="w3-tag w3-small w3-theme-l5">Photos</span> -->
+         <c:forEach  var="ca" items="${array}">	
+            <span class="w3-tag w3-small w3-theme-d1">#${ca }</span>
+
 		</c:forEach>
           </p>
         </div>

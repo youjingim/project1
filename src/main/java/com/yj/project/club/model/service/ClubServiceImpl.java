@@ -1,5 +1,6 @@
 package com.yj.project.club.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
 import com.yj.project.club.model.dao.ClubDAO;
 import com.yj.project.club.model.vo.Budget;
+import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.member.model.vo.Member;
@@ -34,8 +36,8 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public List<Member> selectMember(int circle_num) {
-		return clubDAO.selectMember(sqlSession,circle_num);
+	public List<Member> selectMember(int circle_num,int cPage, int numPerPage) {
+		return clubDAO.selectMember(sqlSession,circle_num,cPage,numPerPage);
 	}
 
 	@Override
@@ -66,6 +68,37 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int updateBoard(Circle_board cb) {
 		return clubDAO.updateBoard(sqlSession,cb);
+
+	}
+
+	@Override
+	public int deleteCircleMember(String id) {
+		return clubDAO.deleteCircleMember(sqlSession,id);
+	}
+
+	@Override
+	public List<Budget> selectBudgetList(int circle_num,int cPage, int numPerPage) {
+		return clubDAO.selectBudgetList(sqlSession,circle_num,cPage,numPerPage);
+	}
+
+	@Override
+	public int selectMemberCount(int circle_num) {
+		return clubDAO.selectMemberCount(sqlSession,circle_num);
+	}
+
+	@Override
+	public int selectCountBudget(int circle_num) {
+		return clubDAO.selectCountBudget(sqlSession,circle_num);
+	}
+
+	@Override
+	public int insertComment(CB_Comment c) {
+		return clubDAO.insertComment(sqlSession,c);
+	}
+
+	@Override
+	public List<CB_Comment> commentList() {
+		return clubDAO.commentList(sqlSession);
 	}
 	@Override
 	public List<Matching> selectMatching(int circle1_num) {
@@ -82,8 +115,6 @@ public class ClubServiceImpl implements ClubService {
 		return clubDAO.selectNotice(sqlSession,circle1_num);
 	}
 
-
-
 	@Override
 	public int countNotice(Map<String, Object> map) {
 		return clubDAO.countNotice(sqlSession,map);
@@ -93,6 +124,32 @@ public class ClubServiceImpl implements ClubService {
 	public int noticeUpdate(String member_id) {
 		return clubDAO.noticeUpdate(sqlSession,member_id);
 	}
+
+	@Override
+	public List<Member> selectMember(int circle_num) {
+		return clubDAO.selectMember(sqlSession, circle_num);
+	}
+
+	@Override
+	public int selectGalleryList(int circle_num) {
+		return clubDAO.selectGalleryList(sqlSession,circle_num);
+	}
+
+	@Override
+	public List<String> selectG1(int circle_num) {
+		return clubDAO.selectG1(sqlSession,circle_num);
+	}
+
+	@Override
+	public List<String> selectG2(int circle_num) {
+		return clubDAO.selectG2(sqlSession,circle_num);
+	}
+
+	@Override
+	public int deleteComment(int no) {
+		return clubDAO.deleteComment(sqlSession,no);
+	}
+	
 	
 	
 }

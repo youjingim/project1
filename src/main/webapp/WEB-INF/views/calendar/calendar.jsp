@@ -24,12 +24,42 @@
 <script src='resources/js/moment.min.js'></script>
 <script src='resources/js/fullcalendar.min.js'></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
-   
-   
-   
+<script type="text/javascript" src="resources/js/lang-all.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">   
    
 <style>
+.fc-title:hover{
+font-size:14px;
+}
+
+#tutoreal{
+width:80%;
+margin-left:10%;
+}
+
+
+	#slidebox {
+		position:relative;
+		width:500px;
+		height:740px;
+		overflow:hidden;
+		white-space:nowrap;
+		left:35px;
+	}
+	#slidebox ul#slider {
+		list-style:none;
+		margin:0;
+		padding:0;
+	}
+	#slidebox ul li {
+		position:absolute;
+		width:740px;
+		height:600px;
+	}
+	#slidebox ul li img {
+		width:500px;
+		height:600px;
+	}
 
 #calendar {
    margin: 0 auto;
@@ -91,7 +121,10 @@ width:85%;
 #matchingTable{
 width:100%;
 }
-
+#modal_body_tutoreal{
+height:800px;
+font-family: 'Gothic A1', sans-serif;
+}
 
 </style>
 
@@ -102,8 +135,8 @@ width:100%;
    </jsp:include>
    <section>
    <br><br>
-   <br><span style="font-size:35px;color:gray;font-weight:bold;margin-left:50%;" data-toggle="modal" data-target="#matching">With Us</span>
-   <br><hr>
+   <br><span style="font-size:40px;color:gray;font-weight:bold;margin-left:13%;color:black;" data-toggle="modal" data-target="#matching">With Us</span>
+   <br>
    <div id="search_b">
    <select id="category" name="category" class="form-control" style="width:200px;font-size:15px;display:inline-block;">
    <option value="전체" <c:if test="${category == '전체'}">selected</c:if>>전체</option>
@@ -115,17 +148,18 @@ width:100%;
    </select>
    <input type="button" class="btn btn-success" onclick="category()" value="검색" style="font-size:15px;display:inline-block;width:100px;">
    <br><br>
-   <div style='margin-left:110px;'><span style='width:30px;height:15px;background-color:#7C96C9;display:inline-block;border-radius:10%;'></span> 나의 동아리 신청 매칭
+   <div style='margin-left:50px;'><span style='margin-left:10px;width:30px;height:15px;background-color:#7C96C9;display:inline-block;border-radius:10%;margin-left:55px;'></span> 나의 동아리 신청 매칭
    <br>
-   <span style='width:30px;height:15px;background-color:#A5DE9F;display:inline-block;border-radius:10%;'></span> &nbsp;타&nbsp;&nbsp; 동아리 신청 매칭
-   <br><br>
+   <span style='width:30px;height:15px;background-color:#A5DE9F;display:inline-block;border-radius:10%;margin-left:55px;'></span> &nbsp;타&nbsp;&nbsp; 동아리 신청 매칭
+   <br>
+   <br>
    <c:if test="${memberLoggedIn.member_level eq 'L5'}">
-   <button type="button" class="btn btn-info" style="margin-left:90px;cursor:pointer;" data-toggle="modal" data-target="#myModal">매칭 업로드</button>   
+   <button type="button" class="btn btn-info" style="margin-left:90px;cursor:pointer;margin-left:150px;" data-toggle="modal" data-target="#myModal">매칭 업로드</button>   
    </c:if>
    </div>
 
    </div>
-   <br><br><br>
+   <br><br><br><br>
    <script>
    function category(){
       location.href="${path}/calendar.do?category="+$('#category').val();
@@ -149,10 +183,12 @@ width:100%;
         center: 'title',
         right: ''
       },
+      
       defaultDate: '${date}',
       navLinks: true, // can click day/week names to navigate views
       editable: false,
       eventLimit: true, // allow "more" link when too many events
+      
       events: [
     	  <c:forEach var="c" items="${list}" varStatus="vs">
     	  {
@@ -237,17 +273,19 @@ width:100%;
 
          	  });
 
-         	});
-
+         	}); 
+			
              
              
             if($('#member_id').val()=='${memberLoggedIn.member_id}'){
               var btn2 = "<input type='button' value='삭제' class='btn btn-danger' onclick='deleteFrm()' style='width:250px;margin-right:170px;'>";
               $('#modal_foot').html(btn2);
            }else{
-               var btn4 = "<input type='button' value='매칭신청' class='btn btn-success' onclick='matchingFrm()' style='width:250px;margin-right:170px;'>";
+               var btn4 = "<button type='button' class='btn btn-success' onclick='return matchingFrm()' style='width:250px;margin-right:170px;'>매칭신청</button>";
               $('#modal_foot').html("<span id='change' style='cursor:pointer;color:black;position:absolute;left:15px;' onclick='chage_toggle()'> 변경하기 </span>"+btn4);
+              var send = " <a href='#'><i class='fa fa fa-envelope-o fa-fw w3-margin-right'></i></a>";
               
+              $('#member_id_in').append(send);
            }
             
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -389,7 +427,7 @@ width:100%;
            <tr>
            <td>ID</td>
            <td>
-           <h4 id="member_id_in" class="modal-title" style="color:black;"> </h4>
+           <span id="member_id_in" class="modal-title" style="color:black;"> </span> 
            </td></tr>
            <tr>
            <td>카테고리</td>
@@ -435,16 +473,17 @@ width:100%;
             <input type="hidden" name="withus_content" id="machingContentIn">
             <br>
             </div>
-
+			
             <input type="hidden" name="matching_date1" id="machingDateIn">
             <input type="hidden" name="withus_num" id="withus_num">
             <input type="hidden" name="member_id" id="member_id">
             <input type="hidden" name="register_circle" id="register_circle_in">
             <input type='hidden' name='req_circle' value='${memberLoggedIn.circle1_num}'>
+            <input type='hidden' name='req_member_id' value='${memberLoggedIn.member_id}'>
             <input type="hidden" id="chage_toggle" value="false">
              <div id="update_info">
                   <br>
-                  <p style='margin-left:25px;font-weight:bold;'>변경할 날짜 </p> <input type="date" name="req_matching_date1" style="width:50%;margin-left:25px;" id="req_matching_date" class="form-control"><br>
+               <input type="hidden" name="req_matching_date1" style="width:50%;margin-left:25px;" id="req_matching_date" class="form-control"><br>
                <p style='margin-left:25px;font-weight:bold;'>변경할 시간 </p> <select id = "re_time1" name="re_time11" style="width: 20%;margin-left:25px; display: inline-block;" class="form-control">
                            <option value="null">00:00</option>
                            <option value="08">08:00</option>
@@ -514,8 +553,100 @@ width:100%;
 
 </div>
 
-<script>
+<div id="Explanation" class="modal" role="dialog">
+  <div class="modal-dialog">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      
+      <div class="modal-body" id='modal_body_tutoreal'>
+      <div id='slidebox'>
+        <ul id="slider">
+        <li>
+        <div class='tutoreal'>
+        <br>
+        <img src='${path }/resources/image/t6.JPG' style='height:400px !important;'>
+        <div style='color:black;margin-left:30px;font-size:16px;'><br><span style='font-weight:bold;font-size:20px;'>CampusPick with us을 이용해주셔서 감사합니다!</span><br>
+        <br>
+        <span style='font-weight:bold;font-size:18px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with us란?</span><br><br>타 학교 동아리와 매칭을 통해 함께 활동할 수 있는 게시판입니다.
+        <br><br><span style='color:red;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;※매칭 신청은 동아리 회장만 가능합니다!</span></div>
+        </div>
+        </li>
+        <li>
+        <div class='tutoreal'>
+        <br>
+        <img src='${path }/resources/image/t1.JPG'>
+        <div style='color:black;margin-left:120px;'><br>우측 상단의 매칭신청 버튼을 통해 <br>원하는 날짜에 매칭 신청을 해보세요!<br><br><span style='color:red;'>※하루에 한개의 매칭만 신청 가능합니다.</span></div>
+        </div>
+        </li>
+        <li>
+		<div class='tutoreal'>
+		<br><br><br>
+        <img src='${path }/resources/image/t2.JPG'>
+        <div style='color:black;margin-left:90px;'><br>켈린더에서 원하시는 날짜의 매칭을 신청해보세요!</div>
+		</div>
+        </li>
+        <li>
+        <div class='tutoreal'>
+        <br><br><br>
+        <img src='${path }/resources/image/t3.JPG'>
+        <div style='color:black;margin-left:70px;'><br>시간과 장소를 확인해보고 매칭 신청 버튼을 눌러주세요!</div>
+        </div>
+        </li>
+        <li>
+        <div class='tutoreal'>
+        <br><br><br>
+        <img src='${path }/resources/image/t4.JPG'>
+        <div style='color:black;margin-left:120px;'><br>시간과 장소를 변경하고 싶은 경우에는<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 변경하기 버튼을 클릭해주세요!</div>
+        </div>
+        </li>
+                <li>
+        <div class='tutoreal'>
+        <br><br>
+        <img src='${path }/resources/image/t5.jpg'>
+        <div style='color:black;margin-left:120px;'> <br><br>매칭을 통해 여러 동아리와 소통 해보세요!<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이용해주셔서 감사합니다!</div>
+        </div>
+        </li>
+      </ul>
+      </div>
+
+      </div>
+              <div class="modal-footer">
+                    <span style='margin-right:18%;'><button class='btn btn-default' id='before'><</button>&nbsp;&nbsp;
+      <span id='current' style='color:black;'></span>
+    &nbsp;&nbsp;<button class='btn btn-default' id='after'>></button></span>
+              <button type='button' class='btn btn-default' data-dismiss="modal" aria-label="Close" style='width:100px;height:40px;'>닫기</button>
+</div>
+      </div>
+      </div>
+      </div>
+
+<script>
+var f1;
+
+$('#machingDate').change(function(){
+	   $.ajax({
+		      url: "${path}/checkCalendar.do?matchingDate="+$(this).val(),
+		      async: false,
+		      success:function(data){
+		         if(data=='true'){
+		            $('#dateCheck').html('해당 날짜에는 이미 매칭이 진행중 입니다.');
+		            $('#dateCheck').css("color","red");
+		            f1=true;
+		         }else if('${date}'>$('#machingDate').val()){
+		             $('#dateCheck').html('지난 날짜에 매칭 신청은 불가능 합니다.');
+		             $('#dateCheck').css("color","red");
+		            f1=true;
+		        	 }else{
+		        	$('#dateCheck').html('매칭 신청이 가능한 날짜 입니다.');
+			        $('#dateCheck').css("color","green");
+			        f1=false;
+		        	 }
+		         }
+		      
+
+		   });
+});
 
 
 
@@ -535,44 +666,18 @@ var flag=true;
    
 
 function matchingFrm(){
-   
    var id = $('#member_id').val();
    var d1 = $('#req_matching_date').val();
    var t1 = $('#re_time1').val();
    var t2 = $('#re_time2').val();
 
-    
-
-   if($('#chage_toggle').val()=='true'){
-   if(d1<'${date}'){
-      alert('날짜를 확인해주세요');
-      return false;
-   }
-   if(t1>t2){
-      alert('시간을 확인해주세요!');
-      return false;
-   }
-   }
-   $('#matchingFrm').attr("action","${path }/send_Matching.do");
-   $('#matchingFrm').submit();
-   
-   }
-function uploadMatching(){
-   var title = $('#machingTitle').val();
-   var d1 = $('#machingDate').val();
-   var place = $('#machingPlace').val()
-   var content = $('#machingContent').val();
-   var circle = $('#register_circle').val();
-   var t1 = $('#t1').val();
-   var t2 = $('#t2').val();
-   var f;
    $.ajax({
-      url: "${path}/checkCalendar?matchingDate="+d1,
+      url: "${path}/checkCalendar.do?matchingDate="+d1,
       async: false,
+      type:'post',
       success:function(data){
-         if(data=='false'){
-            $('#dateCheck').html('해당 날짜에는 이미 매칭이 신청되어 있습니다.');
-            $('#machingDate').focus();
+         if(data=='true'){
+            alert('해당 날짜에는 이미 매칭이 신청되어 있습니다.');
             f=true;
          }else{
             f=false;
@@ -580,7 +685,29 @@ function uploadMatching(){
       }
 
    });
-   if(f){
+   if(!f){
+		   if(t1>t2){
+		      alert('시간을 확인해주세요!');
+		   }else{
+			   $('#matchingFrm').attr("action","${path }/send_Matching.do");
+			   $('#matchingFrm').submit();
+		   }
+		   
+   }
+    
+  
+   }
+function uploadMatching(){
+   var title = $('#machingTitle').val();
+   var place = $('#machingPlace').val()
+   var content = $('#machingContent').val();
+   var circle = $('#register_circle').val();
+   var t1 = $('#t1').val();
+   var t2 = $('#t2').val();
+
+   if(f1){
+	   alert('날짜를 다시 선택 해주세요.');
+	   $('#machingDate').focus();
       return false;
    }
    
@@ -589,7 +716,7 @@ function uploadMatching(){
       alert('제목을 입력해주세요');
       return false;
    }
-   if(d1<'${date}'){
+   if($('#machingDate').val()<'${date}'){
       alert('지난 날짜는 선택할 수 없습니다!');
       return false;
    }
@@ -699,6 +826,56 @@ function uploadMatching(){
            }
        }).open();
    }
-      
+   $(document).ready(function() {
+	    if(${tCheck}==true){ 
+	   var c1 = confirm('매칭 기능에 대하여 설명을 보시겠습니까?');
+	   if(c1){
+	   $('#Explanation').modal();
+	   }
+	    } 
+   });
+   
+   var num = 1;
+   var x = 500;
+   var before = document.getElementById("before");
+   var after = document.getElementById("after");
+   var slider = document.getElementById("slider");
+   var slideArray = slider.getElementsByTagName("li");
+   var slideMax = slideArray.length - 1;
+   var curSlideNo = 0;
+   $('#current').html(curSlideNo+1+'/'+(slideMax+1));
+   var changeSlide1 = function(){
+       for (i = 0; i <= slideMax; i++) {
+           if (i == curSlideNo) slideArray[i].style.left = 0;
+           else slideArray[i].style.left = -x + "px";
+       }
+   }
+   changeSlide1();
+   after.addEventListener('click', function () {
+       curSlideNo = curSlideNo + 1;
+       if(num<=slideMax){
+       num++;}
+       $('#current').html(num+'/'+(slideMax+1));
+       if ( curSlideNo > slideMax ) curSlideNo = slideMax;
+       changeSlide1();
+   }, false);
+
+
+
+   var changeSlide2 = function(){
+       for (i = 0; i <= slideMax; i++) {
+           if (i == curSlideNo) slideArray[i].style.left = 0;
+           else slideArray[i].style.left = -x + "px";
+       }
+   }
+   changeSlide2();
+   before.addEventListener('click', function () {
+       curSlideNo = curSlideNo - 1;
+       if(num>1){
+           num--;}            $('#current').html(num+'/'+(slideMax+1));
+       if ( curSlideNo < 0 ) curSlideNo = 0;
+       changeSlide2();
+   }, false);
+
 
 </script>

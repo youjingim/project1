@@ -99,6 +99,24 @@ public class MatchingDAOImpl implements MatchingDAO{
 	}
 
 
+	@Override
+	public int updateDate() {
+		int result = sqlSession.update("matching.updateDate");
+		int result2 = 0;
+		if(result>0) {
+			result2=sqlSession.update("matching.updateDate2");
+		}
+		return result2;
+		
+	}
+
+
+	@Override
+	public int selectDate3(Map<String, Object> map2) {
+		return sqlSession.selectOne("matching.selectDate3",map2);
+	}
+
+
 
 
 }

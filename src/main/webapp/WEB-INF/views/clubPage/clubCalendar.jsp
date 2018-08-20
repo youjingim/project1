@@ -84,6 +84,7 @@ border-bottom:1px solid lightgray;
 			<span style='font-size:30px;margin-left:30%;font-weight:bold;'>Matching Information</span>
 			<br><br><br>
 			<table class='table' id='noticeTable'>
+			<c:if test='${not empty noticeList}'>
 			<c:forEach var="n" items="${noticeList}" varStatus="vs">
 			<tr ${(noticeCount-1) >= vs.index ? "style='background-color:#9DCFFF;font-weight:bold;'":""} ${vs.index>=5 ? "style='display:none;width:100%;'":''}>
 			<td style='height:50px;padding:20px;font-size:18px;width:100%;'>
@@ -95,6 +96,10 @@ border-bottom:1px solid lightgray;
 			${n.content }</td>
 			</tr>
 			</c:forEach>
+			</c:if>
+			<c:if test='${empty noticeList}'>
+			<tr style='text-align:center;font-weight:bold;'><td>소식이 없습니다</td></tr>
+			</c:if>
 			</table>
 			<button class='btn btn-default' style='width:100%' onclick='moreInfo()'>더 보 기</button>
 			</div>
@@ -117,11 +122,11 @@ border-bottom:1px solid lightgray;
     	   in4+=5;
     	   in5+=5;
     	   console.log(table1);
-    	   table1.eq(in1).css("display","inline-block");
-    	   table1.eq(in2).css("display","inline-block");
-    	   table1.eq(in3).css("display","inline-block");
-    	   table1.eq(in4).css("display","inline-block");
-    	   table1.eq(in5).css("display","inline-block");
+    	   table1.eq(in1).css("display","");
+    	   table1.eq(in2).css("display","");
+    	   table1.eq(in3).css("display","");
+    	   table1.eq(in4).css("display","");
+    	   table1.eq(in5).css("display","");
     	   
 
     	   
@@ -164,8 +169,8 @@ border-bottom:1px solid lightgray;
               content : '${c.req_withus_content}',
               time : '${c.req_matching_time}',
               place : '${c.req_withus_place}',
-              check : 'C'
-
+              check : 'C',
+			  req_member_id:'${c.req_member_id}'
             },
          </c:forEach>
             
@@ -187,6 +192,8 @@ border-bottom:1px solid lightgray;
              $('#Place1').html(event.place);
              $('#date_in1').html(t1);
              $('#Time').html(event.time);
+             $('#req_member_id').html(event.req_member_id);
+             
 
              
             $('#clubCalendarModal').modal();
@@ -257,7 +264,7 @@ border-bottom:1px solid lightgray;
            <tr>
            <td>ID</td>
            <td>
-           <h4 id="member_id_in1" class="modal-title" style="color:black;"> </h4>
+           <span id="req_member_id" class="modal-title" style="color:black;"> </span> <a href='#'><i class="fa fa fa-envelope-o fa-fw w3-margin-right"></i></a>
            </td></tr>
            <tr>
            <td>제목</td>

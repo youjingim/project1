@@ -187,7 +187,7 @@ section div#main_container div#rank_container {
 				<c:set var="num" value="1"/>
 				<c:forEach var="circle" items="${list }" varStatus="status" begin="0" end="3">
 					<div class='mySlides'>
-						<a href="${pageContext.request.contextPath}/circleView.do">
+						<a href="${pageContext.request.contextPath}/search/circleView.do?no=${circle.circle_num }">
 						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
 						</a>
 						

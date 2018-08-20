@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
+<settings>
+	<setting name="jdbcTypeForNull" value="NULL"/>
+</settings>
 <typeAliases>
 <typeAlias type="com.yj.project.common.StringArrayTypeHandler" alias="StringArray"/>
 <typeAlias type="com.yj.project.board.model.vo.Board" alias="Board"/>
@@ -16,6 +19,7 @@
 <typeAlias type="com.yj.project.club.model.vo.Club" alias="Club"/>
 <typeAlias type="com.yj.project.club.model.vo.Budget" alias="budget"/>
 <typeAlias type="com.yj.project.club.model.vo.Circle_board" alias="cBoard"/>
+<typeAlias type="com.yj.project.club.model.vo.CB_Comment" alias="cb_comment"/>
 </typeAliases>
 
 
