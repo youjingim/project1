@@ -58,7 +58,7 @@ public class MemberController {
 		System.out.println("취미:" + member.getEnroll_category());
 		member.setMember_phone(p1 + p2 + p3);
 		member.setMember_email(e1 + "@" + e2);
-		member.setMember_addr(add1 + add2 + add3);
+		member.setMember_addr(add1 + add2+ add3);
 		member.setMember_level(level);
 		model.addAttribute("member", member);
 		String oripw = member.getMember_pw();
@@ -154,10 +154,7 @@ public class MemberController {
 			@RequestParam(value = "member_email2") String e2) throws IOException {
 		System.out.println("이메일2:"+e2);
 		String email = e1 + "@" + e2;
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("member_name", member_name);
-		map.put("email", email);
-		int result = service.checkEmail(map);
+		int result = service.checkEmail(email);
 		if(result>0) {
 			System.out.println("중복");
 		} else {
@@ -170,6 +167,7 @@ public class MemberController {
 	public void findId(HttpServletRequest req, HttpServletResponse res,
 			@RequestParam(value = "fid_name") String fid_name, @RequestParam(value = "member_email1") String e1,
 			@RequestParam(value = "member_email2") String e2) throws IOException {
+		int idlength;
 		String fid_email = e1 + "@" + e2;
 		Map<String, String> map = new HashMap<String, String>();
 		String msg = "";
@@ -177,14 +175,15 @@ public class MemberController {
 		map.put("fid_name", fid_name);
 		map.put("fid_email", fid_email);
 		String fid = service.findId(map);
-		int idlength = fid.length();
-		// eeun95 6개
-		int showid = idlength - 2;
-		String id = fid.substring(0, showid) + "**";
-		if (id == null) {
+		System.out.println("여기" +fid);
+		if (fid == null) {
 			msg = "null";
 			res.getWriter().print(msg);
 		} else {
+			idlength = fid.length();
+			// eeun95 6개
+			int showid = idlength - 2;
+			String id = fid.substring(0, showid) + "**";
 			res.getWriter().print(id);
 		}
 
@@ -370,7 +369,7 @@ public class MemberController {
 		req.setAttribute("e1", e1);
 		req.setAttribute("e2", e2);
 
-		int b = m.getMember_addr().lastIndexOf(")");
+		int b = m.getMember_addr().lastIndexOf(",");
 		String a1 = m.getMember_addr().substring(0, 5);
 		String a2 = m.getMember_addr().substring(5, b + 1);
 		String a3 = m.getMember_addr().substring(b + 1);
@@ -424,17 +423,17 @@ public class MemberController {
 		return "common/msg";
 	}
 
-	@RequestMapping("member/mypage.do")
+	@RequestMapping("/member/mypage.do")
 	public String mypage() {
 		return "member/mypage";
 	}
 
-	@RequestMapping("member/memberDelete.do")
+	@RequestMapping("/member/memberDelete.do")
 	public String memberDelete() {
 		return "member/memberDelete";
 	}
 
-	@RequestMapping("member/memberDeleteEnd.do")
+	@RequestMapping("/member/memberDeleteEnd.do")
 	public String memberDeleteEnd(@RequestParam(value = "member_id") String member_id,
 			@RequestParam(value = "member_pw") String member_pw, HttpServletRequest req) {
 		Member m = service.loginCheck(member_id);
@@ -456,7 +455,7 @@ public class MemberController {
 		return "common/msg";
 	}
 
-	@RequestMapping("member/adminPage.do")
+	@RequestMapping("/member/adminPage.do")
 	public ModelAndView adminPage(HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		int cPage;
@@ -488,7 +487,7 @@ public class MemberController {
 		return mv;
 	}
 
-	@RequestMapping("member/levelChange.do")
+	@RequestMapping("/member/levelChange.do")
 	public String levelChange(HttpServletRequest req, String member_id, String level) {
 		System.out.println(member_id);
 		System.out.println(level);
@@ -499,4 +498,35 @@ public class MemberController {
 		System.out.println(result);
 		return "member/adminpage";
 	}
+	@RequestMapping("member/memberFinder.do")
+	public ModelAndView memberFinder(HttpServletRequest req, String searchKeyword) {
+		ModelAndView mv = new ModelAndView();
+		int cPage;
+		try {
+			cPage = Integer.parseInt(req.getParameter("cPage"));
+		} catch (NumberFormatException e) {
+			cPage = 1;
+		}
+		int numPerPage;
+		try {
+			numPerPage = Integer.parseInt(req.getParameter("numPerPage"));
+		} catch (NumberFormatException e) {
+			numPerPage = 10;
+		}
+
+		List<Member> list=service.findById(cPage, numPerPage,searchKeyword);
+		for (Member m : list) {
+			System.out.println(m);
+		}
+		int totalMember = service.selectCount();
+		
+		String pageBar = new PageCreate().getPageBar(cPage, numPerPage, totalMember, "member/memberFinder.do");
+		mv.addObject("list", list);
+		mv.addObject("cPage", cPage);
+		mv.addObject("totalMember", totalMember);
+		mv.addObject("pageBar", pageBar);
+		mv.setViewName("member/memberFinder");
+
+		return mv;	
+		}
 }

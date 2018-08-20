@@ -554,14 +554,9 @@ background-color:white;
 		<a style="font-weight:600; color:white;font-size:15px;cursor:pointer;"><img src="${path}/resources/image/profile.png" style='width:30px; height:30px;'></a>
 			
 			<div class="dropdown-content">
-<<<<<<< HEAD
 			<c:out value="${memberLoggedIn.member_id}"/>님
-				<a href="${path }/member/mypage.do">마이페이지</a>
-=======
-			         
+				<a href="${path }/member/mypage.do">마이페이지</a>			         
         <a href="${path }/clubMain.do?member_id=${memberLoggedIn.member_id}">나의 동아리</a>
-				<a href="#">마이페이지</a>
->>>>>>> fd732e46c441d8bac5f9f887906651360741577f
 				<a href="#">쪽지함</a> 
 				<a href="${path}/member/memberUpdate.do?member_id=${memberLoggedIn.member_id}">내 정보 수정</a>
 				<c:if test="${memberLoggedIn.member_id eq 'admin'}">

@@ -83,9 +83,15 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.update("project.levelChange",map);
 	}
 	@Override
-	public int checkEmail(Map<String, String> map) {
+	public int checkEmail(String email) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("project.checkEmail",map);
+		return sqlSession.selectOne("project.checkEmail",email);
+	}
+	@Override
+	public List<Member> findById(int cPage, int numPerPage, String searchKeyword) {
+		// TODO Auto-generated method stub
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("project.findById",searchKeyword,rb);
 	}
 
 	

@@ -76,9 +76,14 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.levelChange(map);
 	}
 	@Override
-	public int checkEmail(Map<String, String> map) {
+	public int checkEmail(String email) {
 		// TODO Auto-generated method stub
-		return memberDao.checkEmail(map);
+		return memberDao.checkEmail(email);
+	}
+	@Override
+	public List<Member> findById(int cPage, int numPerPage, String searchKeyword) {
+		// TODO Auto-generated method stub
+		return memberDao.findById(cPage,numPerPage,searchKeyword);
 	}
 
 }

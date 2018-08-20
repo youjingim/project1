@@ -6,7 +6,7 @@
     <%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
     <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
     
-    <%List<Member> memberList=(List<Member>)request.getAttribute("memberList"); %>
+    <%List<Member> list=(List<Member>)request.getAttribute("list"); %>
     
     <c:set var='path' value="${pageContext.request.contextPath}"/>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -73,7 +73,6 @@ border-bottom:3px solid black;
       <hr />
 <br><br>
 	
-    <form action="${path }/member/memberFinder.do">
 	<select name='level' class='form-control'style='width:150px; margin-left:35%; display:inline-block'>
 	<option value=''>등급 선택</option>
 	<option value='L5'>회장</option>
@@ -82,6 +81,7 @@ border-bottom:3px solid black;
 	<option value='L2'>일반</option>
 	</select>
 	<div id="search-userId" style=' display:inline-block'>
+            <form action="${path }/member/memberFinder.do">
                 <input type='text' class='form-control' name="searchKeyword" size='25' placeholder="검색할 회원ID를 입력하세요." style="width: 300px; display:inline-block;" >
                 <button class="btn btn-info" type='submit' style=" display:inline-block;">검색</button>
             </form>
@@ -113,7 +113,7 @@ border-bottom:3px solid black;
 		<td>회원 강등</td>	
 	</tr>
 	
-	<%for(Member m:memberList) {
+	<%for(Member m:list) {
 		if(!m.getMember_id().equals("admin")){%>
 	<tr id='line'>
 		<td><%=m.getMember_id() %></td>
@@ -130,7 +130,8 @@ border-bottom:3px solid black;
 		<%} } %>
 		</td>
 		<td><%=m.getEnroll_date() %></td>
-		<td class='s'><%=m.getMember_level() %> </td>
+		<td class='s'><%=m.getMember_level() %>
+	 </td>
 		<td style='text-align:center;'><button class='btn btn-danger btn-sm'>탈퇴</button></td>
 	</tr>
 	<%} }%>

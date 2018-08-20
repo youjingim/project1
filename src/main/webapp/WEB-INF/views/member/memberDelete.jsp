@@ -92,11 +92,24 @@ z-index:10;
 }
 section div#Enroll_container{
 width:100%;
-height:1200px;
+height:800px;
 position:relative;
 z-index:10;
 background-color:white;
 
+}
+table {
+margin:0 auto;
+border-collapse:collapse;
+}
+#delete_table {
+margin:0 auto;
+width:50%;
+color:black;
+}
+th,td {
+text-align:center;
+padding:10px;
 }
 	</style>
 <section>
@@ -107,7 +120,27 @@ background-color:white;
       <br>
       <hr />
 <br><br>
-
+	<div id='delete_table'>
+	※회원 탈퇴 서비스를 위한 개인정보 수집 및 이용 동의※
+	<table border="1px solid black">
+	<tr>
+		<th>구분</th>
+		<th>내용</th>
+	</tr>
+	<tr>
+		<td>수집 항목</td>
+		<td>이름, 이메일, 연락처</td>
+	</tr>
+	<tr>
+		<td>처리 목적</td>
+		<td>사용자의 실명인증 및 본인 확인, 웹사이트 이용내역 확인, 웹사이트 회원탈퇴 민원처리</td>
+	</tr>
+	<tr>
+		<td>이용 및 보유 기간</td>
+		<td>민원처리 종료 후 다음 년도 12월 31일까지 보유</td>
+	</tr>
+	</table>
+	<br>
       <div class="col-sm-6 col-md-offset-3" style='margin-left:30%;'>
          <form action='${path }/member/memberDeleteEnd.do' method='post'>
              <input type='text' class='form-control' name='member_id' value="${memberLoggedIn.member_id}" style="display:none" >
@@ -126,11 +159,30 @@ background-color:white;
                   <span id='pwcheck2' style='margin:10px;'></span>
                   
             </div>
+            	<span style='font-size:13px;'>위 조건에 따른 개인정보 처리에 동의하십니까?<br>
+	(동의를 거부하시는 경우에는 탈퇴가 불가합니다.)<br></span>
+            
 		      <div class="checkbox" style="display:inline-block;">
-                  <label for='enroll_category10' style='color:black'> <input type="checkbox" name='enroll_category' id='enroll_category10' value="dance" > <span
-                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 댄스
+                  <label style='color:black'> <input type="checkbox" name='agree' value="agree" onclick="doOpenCheck(this);" > <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 동의함
+                  </label>
+                  </div>
+   		      <div class="checkbox" style="display:inline-block;">
+                  <label style='color:black'> <input type="checkbox" name='agree' value="disagree"onclick="doOpenCheck(this);"> <span
+                     class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 동의하지 않음
                   </label>
                </div>
+               <script>
+	               function doOpenCheck(chk){
+	    var obj = document.getElementsByName("agree");
+	    for(var i=0; i<obj.length; i++){
+	        if(obj[i] != chk){
+	            obj[i].checked = false;
+	       	 	}
+		    }
+		}	
+               </script>
+
             <div class="form-group" style='margin:0 0 10% 10%'>
                <button type="submit" id="delete-submit" class="btn btn-primary" >
                   탈퇴하기<i class="fa fa-check spaceLeft"></i>
@@ -142,6 +194,7 @@ background-color:white;
             </div>
          </form>
        </div>
+</div>
 </div>
 </div>
   	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
@@ -178,6 +231,13 @@ background-color:white;
             return false;
         }
 
+    });
+    $('#delete-submit').click(function(e){
+
+    if($("[name=agree]").is(":checked") == false){
+        alert('탈퇴에 동의하셔야 합니다');
+        return false;      
+  	}
     });
    
 </script>

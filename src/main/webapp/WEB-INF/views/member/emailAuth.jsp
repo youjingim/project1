@@ -29,7 +29,8 @@ function check(){
         return false;
     }
     if(form.authnum.value==authNum){
-        alert("인증완료");    
+        alert("인증완료");
+        $("#member_email1",opener.document).prop("readonly",true);
         $("#chbtn",opener.document).css("display",'none');
         self.close();
     }

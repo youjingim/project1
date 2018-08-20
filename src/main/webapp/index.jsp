@@ -108,7 +108,7 @@ overflow:scroll;
 position:relative;
 top:30px;
 width:700px;
-height:500px;
+height:350px;
 background: white;
 overflow:scroll;
 margin:0 auto;
@@ -186,14 +186,8 @@ margin:0 auto;
 <input type="password" class="form-control" placeholder="비밀번호" id="login_pw" name="member_pw">
 <br><br>
   <button type="submit" class="btn btn-primary btn-block" onclick="login()">로 그 인</button>
-<<<<<<< HEAD
-
-  
-    <br><br>
-=======
   <br><br>
   
->>>>>>> fd732e46c441d8bac5f9f887906651360741577f
  <span style="color:black;font-size:17px;margin-left:18%;">계정이 없으신가요? &nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#myModal" style="font-weight:bold;text-decoration:none;color:black;">가입하기</a></span><br><br>
  
  <span style="color:black;font-size:15px;margin-left:22%;"><a href="#" data-toggle="modal" data-target="#idModal" >아이디 찾기</a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#passwordModal" >비밀번호 찾기 </a></span>
@@ -232,7 +226,6 @@ function login(){
            <span style="display:inline-block;position:absolute;right:30px;"></span>
 
       <div id="checkedId" class="col-sm-6 col-md-offset-3" style='width:630px; margin-left:5%; display:inline-block;'>
-    
 				            <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                 <input type="text" name="fid_name" id="fid_name" placeholder="이름을 입력하세요" style='width:150px' class="form-control" required/>
@@ -241,7 +234,7 @@ function login(){
 							<div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 				<input type="text" class="form-control" id='fid_email1' name='member_email1' style='width:150px; display:inline-block'
-                  placeholder="이메일 ID를 입력해주세요" required><span style="display:inline-block">@</span>
+                  placeholder="이메일 ID를 입력해주세요" required><span style="display:inline-block; float:left;">@</span>
                   <input type='text' class='form-control' id='fid_email2' name='member_email2'  style='width:150px;display:inline-block' readonly>
                   <select id='fid_select' class="form-control" style='width:150px; display:inline-block;'>
                        <option value="" selected>선택하세요</option>
@@ -252,17 +245,24 @@ function login(){
                   </select>                            
                   </div>
                <button type='button' class="btn" style='display:inline-block' onclick="fn_fidcheck();" id='fidbtn'>이메일인증</button>
-                                
 			<br>
-				<button class="btn btn-success" type='submit' style='margin-left:45%'onclick="idView()">확인</button>
+				<button class="btn btn-success" type='submit' style='margin-left:45%'onclick="return idView()">확인</button>
 				<script>
 				var searchID=$('#idsearch').html();
 				function idView(){
-					
+					if($("#fid_name").val()==''){
+				        alert('이름을 입력하세요');
+				        return false;      
+				  	}
+					if($("#fid_email1").val()==''){
+				        alert('이메일을 입력하세요');
+				        return false;      
+				  	}
 		    		$.ajax({
 		    			url:"${path}/member/findId.do",
 		    			data:{"fid_name":$('#fid_name').val(),"member_email1":$('#fid_email1').val(),"member_email2":$('#fid_email2').val()},
 		    			type:'get',
+		    			async:false,
 		    			success:function(data){
 		    				if(data!="null"){
 		    					$('#checkedId').html("아이디 찾기 결과 : "+data);	
@@ -270,11 +270,11 @@ function login(){
 		    					$('#checkedId').html("찾으시는 아이디가 없습니다."+"<button class='btn' type='button' onclick='back()'>뒤로</button>");
 		    				}
 				}
-		    		})
+		    		});
 				} 
 				
 				function back(){
-					$('#checkedId').html(searchID);
+					
 				}
 				</script>
 		</div>
@@ -307,7 +307,7 @@ function login(){
 							<div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 				<input type="text" class="form-control" id='fpw_email1' name='member_email1' style='width:150px; display:inline-block'
-                  placeholder="이메일 ID를 입력해주세요" required>@
+                  placeholder="이메일 ID를 입력해주세요" required><span style="display:inline-block; float:left;">@</span>
                   <input type='text' class='form-control' id='fpw_email2' name='member_email2'  style='width:150px;display:inline-block' readonly>
                   <select id='fpw_select' class="form-control" style='width:150px; display:inline-block;'>
                        <option value="" selected>선택하세요</option>
@@ -320,12 +320,24 @@ function login(){
                   </div>
                                 
 			
-				<button name='next' class="btn btn-success" type='submit' style='margin-left:45%'>확인</button>
+				<button name='next' class="btn btn-success" type='submit' style='margin-left:45%' onclick="return pwCheck()">확인</button>
 		</form>
 		</div>
 		</div>
 		</div>
 		</div>
+		<script>
+		function pwCheck(){
+
+		if($("#fid_name").val()==''){
+	        alert('이름을 입력하세요');
+	        return false;      
+	  	}
+		if($("#fid_email1").val()==''){
+	        alert('이메일을 입력하세요');
+	        return false;      
+	  	}
+		</script>
 <div class="modal fade" id="myModal" role="dialog">
     <div id="modal_move" class="modal-dialog" style="margin-left:310px;">
     
@@ -414,7 +426,8 @@ function login(){
                        <option value='daum.net'>daum.net</option>
                        <option value='1'>직접입력</option>
                   </select><br>
-                  
+             
+             <span id='check' hidden></span>
             <button type="button" style="margin:10px 10px 10px 70% ;"onclick="fn_emailcheck();" class="btn" id='chbtn'>인증번호 받기</button><br>
             <span id='emailcheck' style='margin:10px;'></span>
             
@@ -905,7 +918,7 @@ function sample6_execDaumPostcode() {
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
-            document.getElementById('sample6_address').value = fullAddr;
+            document.getElementById('sample6_address').value = fullAddr+",";
 
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById('sample6_address2').focus();
@@ -1071,13 +1084,13 @@ function sample6_execDaumPostcode() {
             $("#member_email2").focus();
             return false
         }
-        var emailcheck=$('#check').html();
+        /* var emailcheck=$('#check').html();
 	      if(emailcheck!="인증완료"){
 	         alert("이메일 인증이 필요합니다.");
 	         return false;
-	      }
+	      } */
 	      if(!emailflag) {
-	    	   alert('해당 이름의 이메일이 있습니다');
+	    	   alert('해당 이메일이 있습니다');
 	           $("#member_email1").focus();
 	           return false;
 	       }
@@ -1174,6 +1187,7 @@ $(function() {
             } 
          }); 
       });
+		
 </script>
 </body>
 </html>

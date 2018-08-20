@@ -20,6 +20,7 @@ public interface MemberDao {
 	List<Member> selectMember(int cPage, int numPerPage);
 	int selectCount();
 	int levelChange(Map<String, String> map);
-	int checkEmail(Map<String, String> map);
+	int checkEmail(String email);
+	List<Member> findById(int cPage, int numPerPage,String searchKeyword);
 
 }

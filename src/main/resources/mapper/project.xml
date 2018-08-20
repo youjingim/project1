@@ -30,8 +30,8 @@ SELECT member_id FROM MEMBER WHERE MEMBER_NAME=#{fid_name} and MEMBER_EMAIL=#{fi
 select count(*) from member where member_email=#{fpw_email} 
 </select>
 
-<select id='checkEmail' parameterType="java.util.Map" resultType="_int">
-SELECT count(*) FROM MEMBER WHERE MEMBER_NAME=#{member_name} and MEMBER_EMAIL=#{email}
+<select id='checkEmail' parameterType="string" resultType="_int">
+SELECT count(*) FROM MEMBER WHERE MEMBER_EMAIL=#{email}
 </select>
 
 <select id="selectId" parameterType="java.util.Map" resultType="_int"> 
@@ -61,5 +61,10 @@ select count(*) from member
 <update id="levelChange" parameterType="java.util.Map">
 update member set member_level=#{level} where member_id=#{member_id}
 </update>
+
+<select id="findById" parameterType="string" resultMap="selectMap">
+select * from member where member_id like '%'||#{searchKeyword}||'%'
+</select>
+
 
 </mapper>
