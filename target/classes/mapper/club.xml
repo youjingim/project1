@@ -100,4 +100,10 @@
 	<delete id="deleteComment">
 		DELETE FROM CB_COMMENT WHERE CB_COMMENTNO=#{no}
 	</delete>
+	<update id="like_check" parameterType="HashMap">
+		UPDATE INNERLIKE SET CB_LIKE_CHECK=CB_LIKE_CHECK + 1 WHERE MEMBER_ID=#{member_id} AND CB_NO=#{cb_no}
+	</update>
+	<update id="like_check_cancel" parameterType="HashMap">
+		UPDATE INNERLIKE SET CB_LIKE_CHECK=0 WHERE MEMBER_ID=#{member_id} AND CB_NO=#{cb_no}
+	</update>
 </mapper>

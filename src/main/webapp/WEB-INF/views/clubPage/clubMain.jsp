@@ -66,6 +66,9 @@ function deleteComment(no,id){
            }
         });
      });
+function like_func(){
+
+}    
 </script>
 <style>
 .check1{
@@ -146,7 +149,14 @@ function deleteComment(no,id){
 	          		</c:if>
 			 </div>
 			 </c:if>
-	        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom" id="like_icon" onclick="like_button();"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
+	        <c:choose>
+	        	<c:when test="${member.member_id ne null }">
+	        		<button type="button" class="w3-button w3-indigo w3-margin-bottom" id="like_icon" onclick="like_func();"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
+	        	</c:when>
+	        	<c:otherwise>
+	        		<button type="button" class="w3-button w3-red w3-margin-bottom" id="like_icon" onclick="login_need();"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
+	        	</c:otherwise>
+	        </c:choose>
 	        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" id="circle_comment"><i class="fa fa-comment"></i> 댓글 </button>
 	        <div id="post_comment" >
 	          <input type="text" class="form-control" name="comment1" id="comment1" placeholder="댓글을 작성해주세요." style="display:inline-block; width:90%;"/>
@@ -170,8 +180,9 @@ function deleteComment(no,id){
 	            </table><hr>
 		          </c:if>
 	              </c:forEach>
-	         	
+	         		<c:if test="not empty ${clist }">
 	         		<button type="button" class="btn btn-default" id="moreComment"> 댓글 더 보기</button>
+	         		</c:if>
 	          </div>
 	          <br>
 	        </div>

@@ -105,8 +105,8 @@ $("#budget_button").click(function(){
               <tr>
                 <td>${b.used_date }</td>
                 <td>${b.budget_content }</td>
-                <td style="text-align:right;"><fmt:formatNumber value="${b.budget_input }" pattern="#,###"/></td>
-                <td style="text-align:right;"><fmt:formatNumber value="${b.budget_output }" pattern="#,###"/></td>
+                <td style="text-align:right; color:blue;"><fmt:formatNumber value="${b.budget_input }" pattern="#,###"/></td>
+                <td style="text-align:right; color:red;"><fmt:formatNumber value="${b.budget_output }" pattern="#,###"/></td>
                 <td style="text-align:right;">220,000</td>
                 <td align='center'>
                 <c:if test='${not empty b.attachment }'>

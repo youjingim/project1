@@ -118,6 +118,7 @@ public class ClubController {
 		Club club=clubService.selectClub(circle_num);
 		int numPerPage=10;
 		List<Budget> list=clubService.selectBudgetList(circle_num,cPage,numPerPage);
+		
 		int totalCount=clubService.selectCountBudget(circle_num);
 		String pageBar=new CirclePageCreate().getPageBar(cPage,numPerPage,totalCount,"circle_budget.do",circle_num);
 
@@ -349,8 +350,13 @@ public class ClubController {
 		b.setBudget_content(budget_content);
 		b.setCircle_num(circle_num);
 		b.setMember_id(member_id);
-/*		b.setAttachment(null);
-		b.setReattachment(null);*/
+		int balance=0;
+		if(b.getBudget_input()>b.getBudget_output()) {
+			balance=b.getBudget_input()-b.getBudget_output();
+			
+		}else {
+			balance=b.getBudget_output()-b.getBudget_input();
+		}
 		
 		if(upFile != null) {
 	         
