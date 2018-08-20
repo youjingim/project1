@@ -63,7 +63,13 @@ public class SearchDAOImpl implements SearchDAO {
 		return sqlSession.selectList("search.circleList",circle);
 	}
 
-	
+	@Override
+	public List<Circle> circleenroll(SqlSessionTemplate sqlSession, Circle circle) {
+		System.out.println("1");
+		return sqlSession.selectList("search.circleenroll",circle);
+	}
+
+
 	@Override
 	public List<Circle> searchCircle(SqlSessionTemplate sqlSession,String university,String circle_name,String Unsearch,int cPage,int numPerPage) {
 		

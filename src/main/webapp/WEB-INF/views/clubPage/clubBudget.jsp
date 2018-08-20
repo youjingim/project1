@@ -9,6 +9,28 @@
    <jsp:param value='club' name='pageTitle'/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/>      
+<script>
+//budget_form
+$(document).ready(function(){
+$("#budget_button").click(function(){
+	var level='${memberLoggedIn.member_level}';
+	
+	if(level!=='L2'){
+    $("#budget_form").show();
+	}
+	else{
+		alert('당신은 권한이 없습니다.');
+		$("#budget_form").hide();
+		history.go();
+	}
+});
+});
+    function fileDownload(oName, rName){
+        //한글파일명이 있을 수 있으므로, 명시적으로 encoding
+	    oName = encodeURIComponent(oName);
+        location.href="${pageContext.request.contextPath}/budgetDownload.do?oName="+oName+"&rName="+rName;
+  }
+ </script>
 <style>
 /* 페이징 처리 css */
 /* Pagination links */
@@ -42,20 +64,19 @@
         <hr>
         <!-- 예산 관리 입력div -->
         <div id="budget_form" style="display:none;">
-          <form action="insert_budget.do" method="post">
-          <label id="budget_date">입금/출금 날짜</label> <input for="budget_date" class="form-control" type="date" name="budget_date" placeholder="예산을  입력해주세요.">
+          <form action="insert_budget.do" method="post" enctype="multipart/form-data">
+          <label id="budget_date">입금/출금 날짜</label> <input for="budget_date" class="form-control" type="date" name="used_date" placeholder="예산을  입력해주세요.">
           <label id="budget_output">출금액</label> <input for="budget_output" class="form-control" type="number" name="budget_output" placeholder="출금액을 입력해주세요.">
           <label id="budget_input">입금액</label> <input for="budget_input" class="form-control" type="number" name="budget_input" placeholder="입금액을 입력해주세요.">
           <label id="budget_content">내용</label> <input for="budget_content" class="form-control" type="text" name="budget_content" placeholder="내용을 입력해주세요.">
           <input type="hidden" name="circle_num" value="${club.circle_num }"/>
-          <intput type="hidden" name="writer" value="${memberLoggedIn.member_id}"/>
+          <input type="hidden" name="member_id" value="${member_id}"/>
           <div class="input-group-prepend" style="padding:0px;">
               <span class="input-group-text">영수증 첨부파일</span>
-                        </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="upFile" id="upFile1">
-
-                        </div>
+          </div>
+          <div class="custom-file">
+          <input type="file" class="custom-file-input" name="upFile" id="upFile1">
+          </div>
           <input type="submit" class="btn btn-success" value="제출"style="float:right; margin:5px;"/><br><br>
         </form><hr><br>
         </div>
@@ -80,45 +101,27 @@
               </tr>
             </thead>
             <tbody>
+            <c:forEach items="${list }" var='b' varStatus="status">
               <tr>
-                <td>2018.03.24</td>
-                <td>동아리 회식비</td>
-                <td style="text-align:right;">0</td>
-                <td style="text-align:right;">120,000</td>
+                <td>${b.used_date }</td>
+                <td>${b.budget_content }</td>
+                <td style="text-align:right; color:blue;"><fmt:formatNumber value="${b.budget_input }" pattern="#,###"/></td>
+                <td style="text-align:right; color:red;"><fmt:formatNumber value="${b.budget_output }" pattern="#,###"/></td>
                 <td style="text-align:right;">220,000</td>
-                <td></td>
-                <td></td>
+                <td align='center'>
+                <c:if test='${not empty b.attachment }'>
+							<img alt="첨부파일" src="${pageContext.request.contextPath }/resources/image/file.png" width=16px; onclick="fileDownload('${b.attachment}','${b.reattachment }');">
+						</c:if>
+                </td>
+                <td>${b.member_id }</td>
               </tr>
-              <tr>
-                <td>2018.03.10</td>
-                <td>동아리 회비 입금</td>
-                <td style="text-align:right;">200,000</td>
-                <td style="text-align:right;">0</td>
-                <td style="text-align:right;">340,000</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>2018.03.02</td>
-                <td>신입생 환영식 비용</td>
-                <td style="text-align:right;">0</td>
-                <td style="text-align:right;">100,000</td>
-                <td style="text-align:right;">140,000</td>
-                <td></td>
-                <td></td>
-              </tr>
+             </c:forEach> 
             </tbody>
           </table>
           <!-- 페이징 처리 -->
-          <div class="pagination" style="display: table;margin-right: auto;margin-left: auto;">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a class="active" href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">&raquo;</a>
-          </div>
+	      <div class="pagination" style="display: table;margin-right: auto;margin-left: auto;">
+	        ${pageBar }
+	      </div>
           <div>
           <h6 style="float:right; color:blue;"><strong>현재 잔액 : 220.000원</strong></h6>
           </div>

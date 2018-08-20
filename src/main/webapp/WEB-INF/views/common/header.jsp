@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding" rel="stylesheet">
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
       <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
@@ -586,16 +586,8 @@ background-color:white;
 			
 			<tr>
 			<td><a  onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a></td>
-			</tr>
-			
+			</tr>			
 			</table>
-			
-			
-			
-		
-			
-
-				
 			</div>
 		</div>
 
