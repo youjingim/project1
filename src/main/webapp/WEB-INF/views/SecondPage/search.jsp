@@ -197,6 +197,7 @@ section div#main_container div#rank_container {
 	font-weight:bold;
 }
 
+a:hover{color:red; text-decoration:none;}
 </style>
 </head>
 <body>
@@ -235,7 +236,7 @@ section div#main_container div#rank_container {
 				<c:forEach var="circle" items="${list}" varStatus="status" begin="0" end="3">
 					<div class='mySlides myS1'>
 						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
-						<img src="/project/resources/image/${circle.circle_photo }" style="width: 70%;height: 400px;margin-left: auto; margin-right: auto; display: block;" class='image' alt="${circle.circle_comment }"> 
+						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
 						</a>
 						<div class="text-block">
 							<c:set var="count" value="${count + 1}" />
@@ -243,10 +244,6 @@ section div#main_container div#rank_container {
 							<h3 style="text-align: center;font-weight: bold;color:#190710"> ${circle.circle_name} </h3>
 							<p style="text-align: center;font-weight: bold;color:#190710"> ${circle.circle_comment} </p>
  						</div>
-						
-						<style type="text/css">
-							a:hover{color:red; text-decoration:none;}
-						</style>
 						
 					</div>
 				</c:forEach>
@@ -289,10 +286,6 @@ section div#main_container div#rank_container {
 							<h3 style="text-align: center;font-weight: bold;color:#190710"> ${circle.circle_name} </h3>
 							<p style="text-align: center;font-weight: bold;color:#190710"> ${circle.circle_comment} </p>
  						</div>
-						
-						<style type="text/css">
-							a:hover{color:red; text-decoration:none;}
-						</style>	
 					</div>
 				</c:forEach>
 				<a class="prev" onclick="plusSlides1(-1)">
@@ -342,7 +335,7 @@ section div#main_container div#rank_container {
     	
     	function currentSlide1(n) {
     		var imgText = document.getElementById("imgtext");
-    		showSlides1(slideIndex = n);
+    		showSlides(slideIndex = n);
     	    imgText.innerHTML = imgs.alt;
     	}
     	
@@ -544,4 +537,4 @@ section div#main_container div#rank_container {
 		</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
-	</section>
+</section>
