@@ -53,6 +53,7 @@ background-color:white;
 		  <td>아이디</td><td><input type='text' name='member_id' value='${memberLoggedIn.member_id}' class="form-control" readonly/></td>
 		  </tr>
 		  
+		  
 		  <tr>
 		  <td>소속 대학</td>
 		  <td><input type='text' name='university' value='${memberLoggedIn.university}' class="form-control" readonly/></td>
@@ -65,7 +66,7 @@ background-color:white;
 		  <tr>
 		  <td>동아리 대표사진</td>
 		  <td>
-		  <input type="file" name="filename1" value="" >
+		  <input type="file" name="circle_photo" value="" >
           <div id="filephoto1" style="position:absolute;top:1020px;left:268px; background-color:white; width:150px;"></div>
           <input type="hidden" name="oldfile1" value="">
 		  

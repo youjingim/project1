@@ -44,6 +44,7 @@ import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
 import com.yj.project.club.model.vo.Club;
+import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.member.model.vo.Member;
 
 @Controller
@@ -458,9 +459,9 @@ public class ClubController {
 	}
 	
 	@RequestMapping("/clubCreateEnd")
-	public ModelAndView createClubEnd(Club club,HttpServletRequest request) {
+	public ModelAndView createClubEnd(ReqCircle club,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println(club);
+		System.out.println("이거다 이거"+club);
 
 		return mv;
 	}
