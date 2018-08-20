@@ -12,6 +12,7 @@ public class FinalWithus {
 	private String req_matching_time;
 	private String req_withus_place;
 	private String circle_name;
+	private String req_member_id;
 	
 	public FinalWithus() {
 		// TODO Auto-generated constructor stub
@@ -89,17 +90,26 @@ public class FinalWithus {
 		this.circle_name = circle_name;
 	}
 
+	public String getReq_member_id() {
+		return req_member_id;
+	}
+
+	public void setReq_member_id(String req_member_id) {
+		this.req_member_id = req_member_id;
+	}
+
 	@Override
 	public String toString() {
 		return "FinalWithus [withus_num=" + withus_num + ", register_circle=" + register_circle + ", req_circle="
 				+ req_circle + ", withus_title=" + withus_title + ", req_withus_content=" + req_withus_content
 				+ ", req_matching_date=" + req_matching_date + ", req_matching_time=" + req_matching_time
-				+ ", req_withus_place=" + req_withus_place + ", circle_name=" + circle_name + "]";
+				+ ", req_withus_place=" + req_withus_place + ", circle_name=" + circle_name + ", req_member_id="
+				+ req_member_id + "]";
 	}
 
 	public FinalWithus(int withus_num, String register_circle, String req_circle, String withus_title,
 			String req_withus_content, Date req_matching_date, String req_matching_time, String req_withus_place,
-			String circle_name) {
+			String circle_name, String req_member_id) {
 		super();
 		this.withus_num = withus_num;
 		this.register_circle = register_circle;
@@ -110,8 +120,8 @@ public class FinalWithus {
 		this.req_matching_time = req_matching_time;
 		this.req_withus_place = req_withus_place;
 		this.circle_name = circle_name;
+		this.req_member_id = req_member_id;
 	}
 
-
-
+	
 }

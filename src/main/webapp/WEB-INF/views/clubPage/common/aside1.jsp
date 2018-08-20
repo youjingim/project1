@@ -70,7 +70,7 @@
       <div class="w3-card w3-round w3-white" style="margin-top:16px;">
         <div class="w3-container">
          <h4 class="w3-center"><c:out value="${club.circle_name }"/></h4>
-         <p class="w3-center"><img src="./title.jpg" class="w3-circle" style="height:106px;width:106px" alt="동아리 로고"></p>
+         <p class="w3-center"><img src="${pageContext.request.contextPath}/resources/image/${club.circle_photo}" class="w3-circle" style="height:106px;width:106px" alt="동아리 로고"></p>
          <hr>
          <p><i class="fa fa-bookmark fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.university }"/></p>
          <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.circle_location }"/> </p>

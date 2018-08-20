@@ -10,7 +10,7 @@ insert into withus_board values(withus_board_SEQ.nextval,#{withus_title},#{withu
 select withus_board.*,circle.circle_name from withus_board full outer JOIN circle ON withus_board.REGISTER_CIRCLE_NUM=circle.circle_num where withus_board.status='S'<if test="category !='전체'">and withus_board.withus_category=#{category} </if>
 </select>
 <insert id="reqMatching" parameterType="com.yj.project.calendar.model.vo.Matching">
-insert into req_withus values(#{withus_num},#{withus_title},#{withus_content},#{member_id},#{register_circle},#{matching_date},#{time1},#{time2},#{withus_place},#{req_circle},#{req_id},#{req_withus_content},#{req_matching_date},#{req_time1},#{req_time2},#{req_withus_place},#{status})
+insert into req_withus values(#{withus_num},#{withus_title},#{withus_content},#{member_id},#{register_circle},#{matching_date},#{time1},#{time2},#{withus_place},#{req_circle},#{req_id},#{req_withus_content},#{req_matching_date},#{req_time1},#{req_time2},#{req_withus_place},#{status},#{req_member_id})
 </insert>
 <select id="selectMatching" resultType="com.yj.project.calendar.model.vo.Matching">
 select * from req_withus
@@ -28,7 +28,7 @@ select count(*) from req_withus where MATCHING_DATE=#{date} and status in('S','C
 delete from withus_board where withus_num=#{num}
 </delete>
 <insert id="successMatching" parameterType="com.yj.project.calendar.model.vo.FinalWithus">
-insert into final_withus values(#{withus_num},#{register_circle},#{req_circle},#{withus_title},#{req_withus_content},#{req_matching_date},#{req_matching_time},#{req_withus_place})
+insert into final_withus values(#{withus_num},#{register_circle},#{req_circle},#{withus_title},#{req_withus_content},#{req_matching_date},#{req_matching_time},#{req_withus_place},#{req_member_id})
 </insert>
 <update id='chageState1' parameterType="_int">
 update withus_board set STATUS = 'N' where WITHUS_NUM = #{num}
