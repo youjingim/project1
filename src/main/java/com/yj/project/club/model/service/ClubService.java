@@ -41,4 +41,6 @@ public interface ClubService {
 	public List<String> selectG2(int circle_num);
 	public int deleteComment(int no);
 	public int createClub(ReqCircle club);
+	public List<ReqCircle> selectClubCreate();
+	
 }

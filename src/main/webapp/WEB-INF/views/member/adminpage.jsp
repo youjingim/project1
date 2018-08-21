@@ -54,6 +54,7 @@ width:90%;
 th,td {
 text-align:center;
 padding:10px;
+color:black;
 }
 #line {
 border-bottom:1px solid black;
@@ -61,14 +62,65 @@ border-bottom:1px solid black;
 #linetop {
 border-bottom:3px solid black;
 }
+#adminMenu{
+width:300px;
+height:300px;
+position:absolute;
+top:100px;
+left:20px;
+}
+div#adminMenu table{
+}
+div#adminMenu table tr td{
+font-size:20px;
+font-weight:bold;
+padding:30px;
+
+}
+div#adminMenu table tr{
+height:80px;
+
+}
+div#adminMenu table tr td:hover{
+width:310px;
+height:90px;
+}
+div#adminMenu table tr td a{
+text-decoration:none;
+color:black;
+}
+div#adminMenu table tr td a:hover{
+text-decoration:none;
+color:gray;
+}
 
 
 	</style>
 <section>
 <div id="Enroll_container">
+<div id='adminMenu'>
+<table class='table'>
+<tr>
+<td>
+<a href='${path }/member/adminPage.do'>회원관리</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href='${path }/clubManagement.do'>동아리 개설관리</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href='#'>회원관리 관리</a>
+</td>
+</tr>
+</table>
+
+</div>
   <br>
       <br> <span
-         style='font-size: 30px; font-weight: bold; margin-left: 50px;'>관리자 페이지</span>
+         style='font-size: 30px; font-weight: bold; margin-left: 45%;color:black;'>관리자 페이지</span>
       <br>
       <hr />
 <br><br>
@@ -131,7 +183,7 @@ border-bottom:3px solid black;
 		</td>
 		<td><%=m.getEnroll_date() %></td>
 		<td class='s'><%=m.getMember_level() %> </td>
-		<td style='text-align:center;'><button class='btn btn-danger btn-sm'>탈퇴</button></td>
+		<td style='text-align:center;'><button class='btn btn-danger btn-sm deleteMember' name="<%=m.getMember_id()%>">탈퇴</button></td>
 	</tr>
 	<%} }%>
 </table>
@@ -145,6 +197,15 @@ $(function(){
 		
 		location.href='${path}/member/levelChange.do?member_id='+selectValue+'&level='+level;
 		});
+	
+	$(".deleteMember").click(function () {
+		var member_id = $(this).attr("name");
+		if(confirm($(this).attr("name")+"님을 탈퇴 시키시겠습니까?")){
+			locatin.href="${path}/deleteMember.do?member_id="+member_id;
+		}
+	});
+	
+	
 	});	
 </script>
 <div style="margin-left:48%">

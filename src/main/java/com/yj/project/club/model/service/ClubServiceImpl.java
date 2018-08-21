@@ -155,6 +155,11 @@ public class ClubServiceImpl implements ClubService {
 	public int createClub(ReqCircle club) {
 		return clubDAO.createClub(sqlSession,club);
 	}
+
+	@Override
+	public List<ReqCircle> selectClubCreate() {
+		return clubDAO.selectClubCreate(sqlSession);
+	}
 	
 	
 	

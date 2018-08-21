@@ -1,6 +1,5 @@
 package com.yj.project.club.model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,4 +42,5 @@ public interface ClubDAO {
 	public List<String> selectG2(SqlSessionTemplate sqlSession,int circle_num);
 	public int deleteComment(SqlSessionTemplate sqlSession,int no);
 	public int createClub(SqlSessionTemplate sqlSession,ReqCircle club);
+	public List<ReqCircle> selectClubCreate(SqlSessionTemplate sqlSession);
 }
