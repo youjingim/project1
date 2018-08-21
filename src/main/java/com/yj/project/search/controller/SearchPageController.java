@@ -28,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.sun.org.glassfish.gmbal.ParameterNames;
-import com.yj.project.common.page.PageCreate;
+import com.yj.project.common.page.SearchPageCreate;
 import com.yj.project.search.model.service.SearchService;
 import com.yj.project.search.model.vo.Circle;
 import com.yj.project.search.model.vo.Like;
@@ -66,7 +66,7 @@ public class SearchPageController {
 		
 		int totalCount = searchService.selectCount();
 
-		String pageBar=new PageCreate().getPageBar(cPage,numPerPage,totalCount,"secondPage.do");
+		String pageBar=new SearchPageCreate().getPageBar(cPage,numPerPage,totalCount,"secondPage.do");
 
 		mav.addObject("pageBar",pageBar);
 		mav.addObject("list",list);
@@ -149,13 +149,13 @@ public class SearchPageController {
 		ModelAndView mav = new ModelAndView();
 		String pageBar=null;
 		if(university!=null) {
-			pageBar=new PageCreate().getPageBar1(cPage,numPerPage,totalCount,university,"search.do");
+			pageBar=new SearchPageCreate().getPageBar1(cPage,numPerPage,totalCount,university,"search.do");
 		}else if(Unsearch!=null) {
 			Unsearch = Unsearch.replace("%", "");
-			pageBar=new PageCreate().getPageBar2(cPage,numPerPage,totalCount,Unsearch,"search.do");
+			pageBar=new SearchPageCreate().getPageBar2(cPage,numPerPage,totalCount,Unsearch,"search.do");
 		}else {
 			circle_name = circle_name.replace("%", "");
-			pageBar=new PageCreate().getPageBar3(cPage,numPerPage,totalCount,circle_name,"search.do");
+			pageBar=new SearchPageCreate().getPageBar3(cPage,numPerPage,totalCount,circle_name,"search.do");
 		}
 		
 		mav.addObject("pageBar",pageBar);
@@ -189,10 +189,10 @@ public class SearchPageController {
 		String pageBar=null;
 		if(Unsearch!=null) {
 			Unsearch = Unsearch.replace("%", "");
-			pageBar=new PageCreate().getPageBar5(cPage,numPerPage,totalCount,searchType,Unsearch,"ListFinder.do");
+			pageBar=new SearchPageCreate().getPageBar5(cPage,numPerPage,totalCount,searchType,Unsearch,"ListFinder.do");
 		}else { //searchType,keyword도 넘겨줘야함 페이징 처리에서 
 			circle_name = circle_name.replace("%", "");
-			pageBar=new PageCreate().getPageBar6(cPage,numPerPage,totalCount,searchType,circle_name,"ListFinder.do");
+			pageBar=new SearchPageCreate().getPageBar6(cPage,numPerPage,totalCount,searchType,circle_name,"ListFinder.do");
 		}
 		
 		System.out.println("totalCount : "+totalCount);

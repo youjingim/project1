@@ -514,7 +514,7 @@ a:hover{color:red; text-decoration:none;}
 										var path='/project/resources/image/';
 									},
 									error:function(error){
-										alert("다시 시도 하거나 관리자에게 문의하세요.");
+										alert("다시 시도 하거나 재 로그인이 필요합니다.");
 									}
 								});
 							})

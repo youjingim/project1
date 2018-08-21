@@ -10,7 +10,7 @@
   </select>
   
   <select id="circleenroll" resultMap="circleList">
-  	select * from circle order by circle_enrolldate desc, circle_like desc
+  	select * from circle order by circle_enrolldate asc, circle_like desc
   </select>
   
   <select id="circleList2" resultMap="circleList">

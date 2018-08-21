@@ -124,9 +124,9 @@ td{
         <table id='table' class="table table-striped table-hover table-bordered">
           <thead>
             <tr id='tr1'>
-              <th class="th-lg">동아리No</th>
+              <th class="th-lg">동아리No.</th>
               <th class="th-lg">대학교<i class="fa fa-sort ml-1"></i></th>
-              <th class="th-lg">동아리명<i class="fa fa-sort ml-1"></i></th>
+              <th class="th-lg">동아리명(카테고리)<i class="fa fa-sort ml-1"></i></th>
               <th class="th-lg">동아리회장<i class="fa fa-sort ml-1"></i></th>
               <th class="th-lg">좋아요<i class="fa fa-sort ml-1"></i></th>
             </tr>
@@ -136,9 +136,12 @@ td{
 			<tr>
 					<td style="width:15%;">${circle.circle_num }</td>
 					<td style="width:20%">${circle.university }</td>
-					<td class="text-warning" style="font-weight:600;"><a href='${pageContext.request.contextPath}/search/circleView.do?no=${circle.circle_num }' style="color:black;font:bold;">${circle.circle_name }</a></td>
+					<td class="text-warning" style="font-weight:600;">
+					<a href='${pageContext.request.contextPath}/search/circleView.do?no=${circle.circle_num }' style="color:black;font:bold;">${circle.circle_name }</a>
+					<span class='badge'>${circle.category}</span>
+					</td>
 					<td style="width:20%">${circle.member_id }</td>
-					<td style="width:15%">${circle.circle_like }</td>
+					<td style="width:15%"><img src='/project/resources/image/like4.png' style="width:10%;height:5%;">${circle.circle_like }</td>
 			</tr>	
 		  </c:forEach>
 		  </c:if>
@@ -147,7 +150,7 @@ td{
 		
 		<form class="example" action="${path }/ListFinder.do">
      	<div id="search-container" style="position:relative;left:700px">
-        <select id="searchType" >
+        <select id="searchType">
         	<option disabled="disabled"  value="">선택</option>
             <option value="university" id="uni">대학</option>	
             <option value="circleName" id="name">동아리명</option>
@@ -191,7 +194,7 @@ td{
 		</div>
         </form>
 		
-        <div class="pagination" id="page" style="position: relative;left:890px;">
+        <div class="pagination" id="page" style="position: relative;left:850px;">
 				${pageBar }
 		</div>
         </section>
