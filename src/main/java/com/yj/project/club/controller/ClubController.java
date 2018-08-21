@@ -461,8 +461,7 @@ public class ClubController {
 	@RequestMapping("/clubCreateEnd")
 	public ModelAndView createClubEnd(ReqCircle club,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("이거다 이거"+club);
-
+		int result = clubService.createClub(club);
 		return mv;
 	}
 	//댓글 삭제 로직

@@ -63,6 +63,7 @@ background-color:white;
 		  <td>전화번호</td><td><input type='text' name='circle_phone' value='${memberLoggedIn.member_phone}' class="form-control" readonly/></td>
 		  </tr>
 		  
+		  
 		  <tr>
 		  <td>동아리 대표사진</td>
 		  <td>

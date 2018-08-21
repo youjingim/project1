@@ -106,4 +106,8 @@
 	<update id="like_check_cancel" parameterType="HashMap">
 		UPDATE INNERLIKE SET CB_LIKE_CHECK=0 WHERE MEMBER_ID=#{member_id} AND CB_NO=#{cb_no}
 	</update>
+	<insert id='createClub' parameterType="com.yj.project.club.model.vo.ReqCircle">
+	insert into circle_register values(circle_register_seq.nextval,#{circle_name},#{university},#{circle_adviser},#{member_id},'L2',#{circle_phone},sysdate,#{circle_photo},#{category},#{circle_comment},0)
+	</insert>
+	
 </mapper>
