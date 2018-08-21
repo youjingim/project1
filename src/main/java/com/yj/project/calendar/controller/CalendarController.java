@@ -19,10 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-<<<<<<< HEAD
-=======
 import org.springframework.web.servlet.ModelAndView;
->>>>>>> 7999ce0a54501955eea136d0f79b163225b6dd96
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

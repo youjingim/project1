@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="project">
+
 <insert id="insertMember" parameterType="com.yj.project.member.model.vo.Member">
 insert into member values(#{member_id},#{member_pw},#{member_name},#{member_email},#{member_birth},#{university},#{member_addr},#{member_level},#{member_phone},sysdate,#{enroll_category,typeHandler=StringArray},#{circle1_num})
 </insert>
+
 <resultMap type="com.yj.project.member.model.vo.Member" id="selectMap">
-<result column="hobby" property="hobby" typeHandler="com.yj.project.common.StringArrayTypeHandler"/>
+<result column="enroll_category" property="enroll_category" typeHandler="com.yj.project.common.StringArrayTypeHandler"/>
 </resultMap>
+
 <select id="selectOne" parameterType="string" resultMap="selectMap">
-select * from member where member_id=#{member_id}
+select member.*, circle.circle_name from member FULL OUTER JOIN circle ON member.circle1_num=circle.circle_num where member.member_id=#{member_id}
 </select>
 
 <select id="selectCheck" parameterType="string" resultType="_int"> 
@@ -27,8 +30,41 @@ SELECT member_id FROM MEMBER WHERE MEMBER_NAME=#{fid_name} and MEMBER_EMAIL=#{fi
 select count(*) from member where member_email=#{fpw_email} 
 </select>
 
+<select id='checkEmail' parameterType="string" resultType="_int">
+SELECT count(*) FROM MEMBER WHERE MEMBER_EMAIL=#{email}
+</select>
+
 <select id="selectId" parameterType="java.util.Map" resultType="_int"> 
 select count(*) from member where member_id=#{fpw_id} and member_name=#{fpw_name}
 </select>
+
+<update parameterType="java.util.Map" id="updatePw">
+update member set member_pw=#{fpw_pw} where member_id=#{fpw_id} and member_name=#{fpw_name}
+</update>
+
+<update parameterType="java.util.Map" id="memberUpdate">
+update member set member_pw=#{member_pw},member_phone=#{member_phone} ,member_addr=#{member_addr}, enroll_category=#{enroll_category,typeHandler=StringArray} where member_id=#{member_id} and member_name=#{member_name}
+</update>
+
+<delete parameterType="string" id="memberDelete">
+delete from member where member_id=#{member_id}
+</delete>
+
+<select id="selectMember" resultMap="selectMap">
+select * from member
+</select>
+
+<select id="selectCount" resultType="_int">
+select count(*) from member
+</select>
+
+<update id="levelChange" parameterType="java.util.Map">
+update member set member_level=#{level} where member_id=#{member_id}
+</update>
+
+<select id="findById" parameterType="string" resultMap="selectMap">
+select * from member where member_id like '%'||#{searchKeyword}||'%'
+</select>
+
 
 </mapper>

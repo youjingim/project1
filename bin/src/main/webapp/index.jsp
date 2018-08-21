@@ -1,20 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
-    <%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
-    <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
-    <c:set var='path' value="${pageContext.request.contextPath}"/>
-    
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-	
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
+<%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
+<c:set var='path' value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>	
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>		
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
@@ -45,6 +41,7 @@ margin:0px;
 position:relative;
 top:80px;
 width:30%;
+
 height:600px;
 background: #ffffff; background: rgba(255, 255, 255, 0);
 left:60%;
@@ -107,7 +104,7 @@ overflow:scroll;
 position:relative;
 top:30px;
 width:700px;
-height:500px;
+height:350px;
 background: white;
 overflow:scroll;
 margin:0 auto;
@@ -185,8 +182,14 @@ margin:0 auto;
 <input type="password" class="form-control" placeholder="비밀번호" id="login_pw" name="member_pw">
 <br><br>
   <button type="submit" class="btn btn-primary btn-block" onclick="login()">로 그 인</button>
+<<<<<<< HEAD
   <br><br>
   
+=======
+
+  
+    <br><br>
+>>>>>>> 7999ce0a54501955eea136d0f79b163225b6dd96
  <span style="color:black;font-size:17px;margin-left:18%;">계정이 없으신가요? &nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#myModal" style="font-weight:bold;text-decoration:none;color:black;">가입하기</a></span><br><br>
  
  <span style="color:black;font-size:15px;margin-left:22%;"><a href="#" data-toggle="modal" data-target="#idModal" >아이디 찾기</a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#passwordModal" >비밀번호 찾기 </a></span>
@@ -217,7 +220,7 @@ function login(){
          <div id="find_container">
   <br>
       <br> <span
-         style='font-size: 30px; font-weight: bold; margin-left: 50px;'>아이디 찾기</span>
+         style='font-size: 30px; font-weight: bold; margin-left: 40%;'>아이디 찾기</span>
       <br>
       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
       <hr />
@@ -225,8 +228,6 @@ function login(){
            <span style="display:inline-block;position:absolute;right:30px;"></span>
 
       <div id="checkedId" class="col-sm-6 col-md-offset-3" style='width:630px; margin-left:5%; display:inline-block;'>
-    
-    <form id = "idsearch" action="<%=request.getContextPath()%>/member/findId.do" method="post" >
 				            <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                 <input type="text" name="fid_name" id="fid_name" placeholder="이름을 입력하세요" style='width:150px' class="form-control" required/>
@@ -235,7 +236,7 @@ function login(){
 							<div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 				<input type="text" class="form-control" id='fid_email1' name='member_email1' style='width:150px; display:inline-block'
-                  placeholder="이메일 ID를 입력해주세요" required><span style="display:inline-block">@</span>
+                  placeholder="이메일 ID를 입력해주세요" required><span style="display:inline-block; float:left;">@</span>
                   <input type='text' class='form-control' id='fid_email2' name='member_email2'  style='width:150px;display:inline-block' readonly>
                   <select id='fid_select' class="form-control" style='width:150px; display:inline-block;'>
                        <option value="" selected>선택하세요</option>
@@ -245,20 +246,25 @@ function login(){
                        <option value='1'>직접입력</option>
                   </select>                            
                   </div>
-               <button class="btn" style='display:inline-block' onclick="fn_fidcheck();" id='fidbtn'>이메일인증</button>
-                                
+               <button type='button' class="btn" style='display:inline-block' onclick="fn_fidcheck();" id='fidbtn'>이메일인증</button>
 			<br>
-				<button class="btn btn-success" type='submit' onclick="idView()">확인</button>
-				</form>
-			
+				<button class="btn btn-success" type='submit' style='margin-left:45%'onclick="return idView()">확인</button>
 				<script>
 				var searchID=$('#idsearch').html();
 				function idView(){
-					
+					if($("#fid_name").val()==''){
+				        alert('이름을 입력하세요');
+				        return false;      
+				  	}
+					if($("#fid_email1").val()==''){
+				        alert('이메일을 입력하세요');
+				        return false;      
+				  	}
 		    		$.ajax({
 		    			url:"${path}/member/findId.do",
 		    			data:{"fid_name":$('#fid_name').val(),"member_email1":$('#fid_email1').val(),"member_email2":$('#fid_email2').val()},
 		    			type:'get',
+		    			async:false,
 		    			success:function(data){
 		    				if(data!="null"){
 		    					$('#checkedId').html("아이디 찾기 결과 : "+data);	
@@ -266,11 +272,11 @@ function login(){
 		    					$('#checkedId').html("찾으시는 아이디가 없습니다."+"<button class='btn' type='button' onclick='back()'>뒤로</button>");
 		    				}
 				}
-		    		})
+		    		});
 				} 
 				
 				function back(){
-					$('#checkedId').html(searchID);
+					
 				}
 				</script>
 		</div>
@@ -283,7 +289,7 @@ function login(){
          <div id="find_container">
   <br>
       <br> <span
-         style='font-size: 30px; font-weight: bold; margin-left: 50px;'>비밀번호 찾기</span>
+         style='font-size: 30px; font-weight: bold; margin-left: 40%;'>비밀번호 찾기</span>
       <br>
       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
       <hr />
@@ -295,17 +301,15 @@ function login(){
     <form action="<%=request.getContextPath()%>/member/findPw.do" method="post" >
 				<div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="text" name="fpw_id"  value='' placeholder="ID를 입력하세요" style='width:150px;' class="form-control" required/>
-                            </div>
-                            <div class="input-group">
+                                <input type="text" name="fpw_id"  value='' placeholder="ID를 입력하세요" style='width:150px; display:inline-block;' class="form-control" required/>
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                <input type="text" name="fpw_name" value='' placeholder="이름을 입력하세요" style='width:150px;' class="form-control" required/>
+                                <input type="text" name="fpw_name" value='' placeholder="이름을 입력하세요" style='width:150px; display:inline-block;' class="form-control" required/>
                             </div>
 			
 							<div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 				<input type="text" class="form-control" id='fpw_email1' name='member_email1' style='width:150px; display:inline-block'
-                  placeholder="이메일 ID를 입력해주세요" required>@
+                  placeholder="이메일 ID를 입력해주세요" required><span style="display:inline-block; float:left;">@</span>
                   <input type='text' class='form-control' id='fpw_email2' name='member_email2'  style='width:150px;display:inline-block' readonly>
                   <select id='fpw_select' class="form-control" style='width:150px; display:inline-block;'>
                        <option value="" selected>선택하세요</option>
@@ -313,17 +317,29 @@ function login(){
                        <option value='gmail.com'>gmail.com</option>
                        <option value='daum.net'>daum.net</option>
                        <option value='1'>직접입력</option>
-                  </select>                            
-                                <button type="button" class="btn" style='display:inline-block' onclick="fn_fpwcheck();" id='fpwbtn'>이메일인증</button>
+                  </select>                         
+                                <button type="button" class="btn" style='display:inline-block; ' onclick="fn_fpwcheck();" id='fpwbtn'>이메일인증</button>
                   </div>
                                 
 			
-				<button name='next' class="btn btn-success" type='submit'>확인</button>
+				<button name='next' class="btn btn-success" type='submit' style='margin-left:45%' onclick="return pwCheck()">확인</button>
 		</form>
 		</div>
 		</div>
 		</div>
 		</div>
+		<script>
+		function pwCheck(){
+
+		if($("#fid_name").val()==''){
+	        alert('이름을 입력하세요');
+	        return false;      
+	  	}
+		if($("#fid_email1").val()==''){
+	        alert('이메일을 입력하세요');
+	        return false;      
+	  	}
+		</script>
 <div class="modal fade" id="myModal" role="dialog">
     <div id="modal_move" class="modal-dialog" style="margin-left:310px;">
     
@@ -405,7 +421,6 @@ function login(){
                   (*)</span><br> <input type="text" class="form-control" id="member_email1" name='member_email1' style='width:150px; display:inline-block'
                   placeholder="이메일 ID를 입력해주세요">@
                   <input type='text' class='form-control' name='member_email2' id='member_email2' style='width:150px;display:inline-block' readonly>
-            <span style="margin:10px 10px 10px 70% ;" id='check'></span>
                   <select id='email_select' name='email_select' class="form-control" style='width:150px; display:inline-block;'>
                        <option value="" selected>선택하세요</option>
                        <option value='naver.com'>naver.com</option>
@@ -413,8 +428,11 @@ function login(){
                        <option value='daum.net'>daum.net</option>
                        <option value='1'>직접입력</option>
                   </select><br>
-                  
-            <button type="button" style="margin:10px 10px 10px 70% ;"onclick="fn_emailcheck();" class="btn" id='chbtn'>인증번호 받기</button> 
+             
+             <span id='check' hidden></span>
+            <button type="button" style="margin:10px 10px 10px 70% ;"onclick="fn_emailcheck();" class="btn" id='chbtn'>인증번호 받기</button><br>
+            <span id='emailcheck' style='margin:10px;'></span>
+            
             </div> 
 
             <div class="form-group">
@@ -422,8 +440,8 @@ function login(){
                   (*)</span><br/> 
                   <input type="text" class="form-control btn btn-outline" id="sample6_postcode"  name='member_addr1' style="width:300px; background-color:white;" placeholder="우편번호"  readonly>
                   <input type="button" onclick="sample6_execDaumPostcode()" class="btn" value="우편번호 찾기"><br>
-                  <input type="text" class="form-control btn btn-outline-secondary"id="sample6_address" name='member_addr2' style="width:300px; background-color:white;" placeholder="주소"readonly>
-                  <input type="text"class="form-control btn btn-outline-secondary" id="sample6_address2" name='member_addr3' style="width:300px" placeholder="상세주소">
+                  <input type="text" class="form-control btn btn-outline-secondary"id="sample6_address" name='member_addr2' style="width:500px; background-color:white;" placeholder="주소"readonly>
+                  <input type="text"class="form-control btn btn-outline-secondary" id="sample6_address2" name='member_addr3' style="width:500px" placeholder="상세주소">
             </div>
 
             <div class="form-group">
@@ -431,53 +449,53 @@ function login(){
             </div>
             <div class="col-sm-12">
                <div class="checkbox" style="display:inline-block;">
-                  <label for='enroll_category1'> <input type="checkbox"name='enroll_category' id='enroll_category1' value="sport"> <span
+                  <label for='enroll_category1'> <input type="checkbox"name='enroll_category' id='enroll_category1' value="운동"> <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 운동</label>
             
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label for='enroll_category2'> <input type="checkbox" name='enroll_category'  id='enroll_category2' value="help" > <span
+                  <label for='enroll_category2'> <input type="checkbox" name='enroll_category'  id='enroll_category2' value="봉사" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 봉사
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label for='enroll_category3'> <input type="checkbox" name='enroll_category' id='enroll_category3' value="book" > <span
+                  <label for='enroll_category3'> <input type="checkbox" name='enroll_category' id='enroll_category3' value="독서" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 독서
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label for='enroll_category4'> <input type="checkbox" name='enroll_category' id='enroll_category4'  value="trip" > <span
+                  <label for='enroll_category4'> <input type="checkbox" name='enroll_category' id='enroll_category4'  value="여행" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 여행
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label for='enroll_category5'> <input type="checkbox" name='enroll_category' id='enroll_category5' value="study" > <span
+                  <label for='enroll_category5'> <input type="checkbox" name='enroll_category' id='enroll_category5' value="학습" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 학습
                   </label>
                </div>
                <br>
                <div class="checkbox" style="display:inline-block;">
-                  <label for='enroll_category6'> <input type="checkbox" name='enroll_category' id='enroll_category6' value="religion" > <span
+                  <label for='enroll_category6'> <input type="checkbox" name='enroll_category' id='enroll_category6' value="종교" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 종교
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label for='enroll_category7'> <input type="checkbox" name='enroll_category' id='enroll_category7' value="photo" > <span
+                  <label for='enroll_category7'> <input type="checkbox" name='enroll_category' id='enroll_category7' value="사진" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 사진
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label for='enroll_category8'> <input type="checkbox" name='enroll_category' id='enroll_category8' value="music" > <span
+                  <label for='enroll_category8'> <input type="checkbox" name='enroll_category' id='enroll_category8' value="음악" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 음악
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label for='enroll_category9'> <input type="checkbox" name='enroll_category' id='enroll_category9' value="game" > <span
+                  <label for='enroll_category9'> <input type="checkbox" name='enroll_category' id='enroll_category9' value="게임" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 게임
                   </label>
                </div>
                <div class="checkbox" style="display:inline-block;">
-                  <label for='enroll_category10'> <input type="checkbox" name='enroll_category' id='enroll_category10' value="dance" > <span
+                  <label for='enroll_category10'> <input type="checkbox" name='enroll_category' id='enroll_category10' value="댄스" > <span
                      class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> 댄스
                   </label>
                </div>
@@ -902,7 +920,7 @@ function sample6_execDaumPostcode() {
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
-            document.getElementById('sample6_address').value = fullAddr;
+            document.getElementById('sample6_address').value = fullAddr+",";
 
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById('sample6_address2').focus();
@@ -913,6 +931,7 @@ function sample6_execDaumPostcode() {
 
   $(function(){
     // 회원 가입 처리
+    
      var flag=true;
      $('#member_id').keyup(function(){
     		$.ajax({
@@ -944,6 +963,8 @@ function sample6_execDaumPostcode() {
     		
     		});
     	});
+      emailflag=true;
+	
     		var chkValId = function(id) {
     			var check = new RegExp(/^[a-z0-9_]+$/);
     			return check.test(id);
@@ -1065,18 +1086,24 @@ function sample6_execDaumPostcode() {
             $("#member_email2").focus();
             return false
         }
-        var emailcheck=$('#check').html();
+        /* var emailcheck=$('#check').html();
 	      if(emailcheck!="인증완료"){
 	         alert("이메일 인증이 필요합니다.");
 	         return false;
-	      }
+	      } */
+	      if(!emailflag) {
+	    	   alert('해당 이메일이 있습니다');
+	           $("#member_email1").focus();
+	           return false;
+	       }
+    
         if($("#agree").is(":checked") == false){
             alert('약관에 동의하셔야 합니다');
             return false;      
        }
     });
   });
-   
+
 function checkKeysInt(e,event) {
      if(event.keyCode) {
        var code = event.keyCode;
@@ -1102,11 +1129,28 @@ $(function() {
     $('#email_select').change(function(){ 
           if($(this).val()== '1'){ 
              $("#member_email2").val('');
-             $("member_email2").prop("readonly",false); 
+             $("#member_email2").prop("readonly",false); 
           }else{ 
              $("#member_email2").val($('#email_select').val());
              $("#member_email2").prop("readonly",true); 
           } 
+          
+          $.ajax({
+  			url:"${path}/member/checkEmail.do",
+  			data:{"member_name":$("#member_name").val(),"member_email1":$("#member_email1").val(),"member_email2":$("#member_email2").val()},
+  			type:'post',
+  			success:function(data){
+  				if(data=="0"){
+					$('#emailcheck').html("사용 가능한 이메일입니다");
+					$('#emailcheck').css('color','blue');
+  					emailflag=true;
+  				}else {
+					$('#emailcheck').html("사용 불가능한 이메일입니다");
+					$('#emailcheck').css('color','red');
+  					emailflag=false;
+  				}
+  			}
+  		});
        }); 
     });
 
@@ -1145,6 +1189,7 @@ $(function() {
             } 
          }); 
       });
+		
 </script>
 </body>
 </html>

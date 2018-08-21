@@ -561,14 +561,7 @@ background-color:white;
 <div class="dropdown col-sm-2" id="info_span" >
 		<a style="font-weight:600; color:white;font-size:15px;cursor:pointer;margin-left:80%;"><img src="${path}/resources/image/profile.png" style='width:40px; height:40px;'></a>
 			
-<<<<<<< HEAD
-			<div class="dropdown-content">
-			<c:out value="${memberLoggedIn.member_id}"/>님
-				<a href="${path }/member/mypage.do">마이페이지</a>			         
-        <a href="${path }/clubMain.do?member_id=${memberLoggedIn.member_id}">나의 동아리</a>
-				<a href="#">쪽지함</a> 
-				<a href="${path}/member/memberUpdate.do?member_id=${memberLoggedIn.member_id}">내 정보 수정</a>
-=======
+
 			<div class="dropdown-content" style='margin-left:50%;'>
 			<table class='table' id='infoTable'>
 			<tr>
@@ -586,7 +579,6 @@ background-color:white;
 			<tr>
 			<td><a href="${path}/member/memberUpdate.do?member_id=${memberLoggedIn.member_id}">내 정보 수정</a></td>
 			</tr>
->>>>>>> 7999ce0a54501955eea136d0f79b163225b6dd96
 				<c:if test="${memberLoggedIn.member_id eq 'admin'}">
 			<tr>
 			<td><a href="${path }/member/adminPage.do">관리자 페이지</a></td>

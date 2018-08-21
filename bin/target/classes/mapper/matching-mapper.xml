@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="matching">
 <insert id="upload" parameterType="com.yj.project.calendar.model.vo.Calendar">
-insert into withus_board values(withus_board_SEQ.nextval,#{withus_title},#{withus_content},#{member_id},#{register_circle},#{matching_date},sysdate,#{withus_place},#{withus_category},#{time1},#{time2},#{status})
+insert into withus_board values(withus_board_SEQ.nextval,#{withus_title},#{withus_content},#{member_id},#{register_circle_num},#{matching_date},sysdate,#{withus_place},#{withus_category},#{time1},#{time2},#{status})
 </insert>
 <resultMap type="com.yj.project.calendar.model.vo.Calendar" id="calendarMap">
 </resultMap>
 <select id="selectList" resultMap="calendarMap">
-select * from withus_board where  1=1<if test="category !='전체'">and withus_category=#{category} </if>
+select withus_board.*,circle.circle_name from withus_board full outer JOIN circle ON withus_board.REGISTER_CIRCLE_NUM=circle.circle_num where withus_board.status='S'<if test="category !='전체'">and withus_board.withus_category=#{category} </if>
 </select>
 <insert id="reqMatching" parameterType="com.yj.project.calendar.model.vo.Matching">
-insert into req_withus values(#{withus_num},#{withus_title},#{withus_content},#{member_id},#{register_circle},#{matching_date},#{time1},#{time2},#{withus_place},#{req_circle},#{req_id},#{req_withus_content},#{req_matching_date},#{re_time1},#{re_time2},#{req_withus_place},#{status})
+insert into req_withus values(#{withus_num},#{withus_title},#{withus_content},#{member_id},#{register_circle},#{matching_date},#{time1},#{time2},#{withus_place},#{req_circle},#{req_id},#{req_withus_content},#{req_matching_date},#{req_time1},#{req_time2},#{req_withus_place},#{status},#{req_member_id})
 </insert>
 <select id="selectMatching" resultType="com.yj.project.calendar.model.vo.Matching">
 select * from req_withus
@@ -18,7 +18,38 @@ select * from req_withus
 <select id="selectDate" parameterType="java.util.Map" resultType="_int">
 select count(*) from withus_board where member_id=#{member_id} and matching_date=#{date}
 </select>
+<select id='selectDate2' parameterType="map" resultType='_int'>
+select count(*) from final_withus where REGISTER_CIRCLE=#{circle_num} and REQ_MATCHING_DATE=#{date}
+</select>
+<select id='selectDate3' parameterType="map" resultType='_int'>
+select count(*) from req_withus where MATCHING_DATE=#{date} and status in('S','C') and (REGISTER_CIRCLE=#{circle_num} or REQ_CIRCLE=#{circle_num})
+</select>
 <delete id="deleteMatching" parameterType="_int">
 delete from withus_board where withus_num=#{num}
 </delete>
+<insert id="successMatching" parameterType="com.yj.project.calendar.model.vo.FinalWithus">
+insert into final_withus values(#{withus_num},#{register_circle},#{req_circle},#{withus_title},#{req_withus_content},#{req_matching_date},#{req_matching_time},#{req_withus_place},#{req_member_id})
+</insert>
+<update id='chageState1' parameterType="_int">
+update withus_board set STATUS = 'N' where WITHUS_NUM = #{num}
+</update>
+<update id='chageState2' parameterType="_int">
+update req_withus set STATUS = 'N' where WITHUS_NUM = #{num}
+</update>
+<delete id="failMatching" parameterType="map">
+delete from req_withus where withus_num = #{withus_num} and req_circle=#{circle_num}
+</delete>
+<insert id='insertNotice' parameterType="com.yj.project.calendar.model.vo.ClubNotice">
+insert into club_notice values(#{circle_num},#{content})
+</insert>
+<update id='updateNotice' parameterType="map">
+update member set member_notice = member_notice+1 where circle1_num in(#{circle1_num},#{circle2_num})
+</update>
+<update id='updateDate'>
+update withus_board set status='N' where matching_date <![CDATA[<]]> sysdate
+</update>
+<update id='updateDate2'>
+update req_withus set status='N' where matching_date <![CDATA[<]]> sysdate
+</update>
+
 </mapper>

@@ -5,7 +5,6 @@
 	<groupId>com.yj</groupId>
 	<artifactId>project</artifactId>
 	<name>project1</name>
-	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.8</java-version>
@@ -27,7 +26,13 @@
 	
 	
 	<dependencies>
-	
+	<!-- https://mvnrepository.com/artifact/org.gosu-lang.goson/goson -->
+
+	<dependency>
+	<groupId>com.google.code.gson</groupId>
+	 <artifactId>gson</artifactId>
+	 <version>2.8.0</version>
+</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 <dependency>
@@ -38,7 +43,6 @@
 	
 	
 	<!-- jackson -->
-	
 	
 	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 <dependency>

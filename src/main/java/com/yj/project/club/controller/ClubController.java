@@ -78,10 +78,8 @@ public class ClubController {
 
 		List<Matching> matchings = clubService.selectMatching(member.getCircle1_num());
 		List<ClubNotice> noticeList = clubService.selectNotice(member.getCircle1_num());
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("circle_num", member.getCircle1_num());
+
 		int total=member.getMember_notice();
-		System.out.println("이거" + total);
 
 		session.setAttribute("matching", matching);
 		session.setAttribute("club", club);

@@ -47,18 +47,19 @@ height:320px;
      <div id="main_container">
 
      <div id="board-continer">
-<form class="form-horizontal">
+<form class="form-horizontal" action='${path}/board/boardWrite' method='post'>
 		<table class='table'>
 		<tr>
-		<td style='text-align:center;width:7%;'>제목</td><td><input type='text' class="form-control"></td>
+		<td style='text-align:center;width:7%;'>제목</td><td><input type='text' class="form-control" name='freeboard_title'></td>
 		</tr>
 		<tr><td colspan='2'>
-          <textarea name="content" id="content" class="summernote"></textarea>
+          <textarea name="freeboard_content" id="content" class="summernote"></textarea>
 		</td></tr>
         <tr><td colspan='2' style='text-align:center;'>
           <button type="submit" class="btn btn-default">Save</button>
         </td></tr>
       </table>
+      <input type='hidden' value='${memberLoggedIn.member_id}' name='member_id'>
     </form>
 
   <script>

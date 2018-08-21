@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding" rel="stylesheet">
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
       <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
@@ -122,7 +122,7 @@ position:absolute;
 right:30px;
 transition:0.5s;
 z-index:1001;
-top:25px;
+top:18px;
 }
 
 .login{
@@ -372,7 +372,7 @@ img {vertical-align: middle;}
 
 
 .dropdown .dropbtn {
-    font-size: 16px;    
+    font-size: 16px;
     border: none;
     outline: none;
     color: white;
@@ -400,10 +400,6 @@ img {vertical-align: middle;}
     text-decoration: none;
     display: block;
     text-align: left;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
 }
 
 .dropdown:hover .dropdown-content {
@@ -486,10 +482,12 @@ div#img_slider{
 width:100%;
 height:500px;
 position:fixed;
-background-image:url('${path}/resources/image/backgroundNew.jpg');
-background-size:cover;
 z-index:-1;
 top:80px;
+}
+div#img_slider img{
+width:100%;
+height:500px;
 }
 #navbar_set{
 position:fixed;
@@ -501,6 +499,17 @@ background: #ffffff; background: rgba(255, 255, 255, 0);
 border:none;
 margin-left:0.2%;
 margin-bottom:0px;
+}
+#infoTable tr{
+height:10px;
+}
+#infoTable td{
+text-align:center;
+color:black;
+padding:5px;
+}
+#infoTable tr:hover{
+background-color:white;
 }
 
 @media screen and (max-width: 765px) {
@@ -529,7 +538,7 @@ background-color:white;
       <a href="#" onclick="fnMove('5')" style="opacity:1 !important;">CampusPick</a>
 </span>
 </div>
-  <div id="nav_move" class="container-fluid col-sm-9" style="margin-top:10px;margin-left:30%;">
+  <div id="nav_move" class="container-fluid col-sm-7" style="margin-top:10px;margin-left:30%;">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
@@ -542,32 +551,64 @@ background-color:white;
       	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
          <li><a href="#" onclick="fnMove('1')">CampusPick</a></li>
         <li><a href="${path}/secondPage.do">동아리</a></li>
-        <li><a href="#">동아리 개설</a></li>
-        <li><a href="${path}/calendar.do">With us</a></li> 
+        <li><a href="${path}/createClub">동아리 개설</a></li>
+        <li><a href="${path}/calendar.do">With us</a></li>
         <li><a href="${path }/board/boardList.do">자유게시판</a></li>
       </ul>
     </div>
   </div>
 
-</nav>
-		<div class="dropdown" id="info_span">
-		<a style="font-weight:600; color:white;font-size:15px;cursor:pointer;"><c:out value="${memberLoggedIn.member_id}"/>님</a>
+<div class="dropdown col-sm-2" id="info_span" >
+		<a style="font-weight:600; color:white;font-size:15px;cursor:pointer;margin-left:80%;"><img src="${path}/resources/image/profile.png" style='width:40px; height:40px;'></a>
 			
+<<<<<<< HEAD
 			<div class="dropdown-content">
-				<a href="${path }/clubMain.do?member_id=${memberLoggedIn.member_id}">나의 동아리</a>
-				<a href="#">마이페이지</a>
+			<c:out value="${memberLoggedIn.member_id}"/>님
+				<a href="${path }/member/mypage.do">마이페이지</a>			         
+        <a href="${path }/clubMain.do?member_id=${memberLoggedIn.member_id}">나의 동아리</a>
 				<a href="#">쪽지함</a> 
-				<a href="${path}/member/memberUpdate.do">내 정보 수정</a>
-				<a class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" type="button" onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a>
-
-				
+				<a href="${path}/member/memberUpdate.do?member_id=${memberLoggedIn.member_id}">내 정보 수정</a>
+=======
+			<div class="dropdown-content" style='margin-left:50%;'>
+			<table class='table' id='infoTable'>
+			<tr>
+			<td>${memberLoggedIn.member_id}님</td>
+			</tr>
+			<tr>
+			<td><a href="${path }/member/mypage.do">마이페이지</a></td>
+			</tr>
+			<tr>
+			<td><a href="${path }/clubMain.do?member_id=${memberLoggedIn.member_id}">나의 동아리</a></td>
+			</tr>
+			<tr>
+			<td><a href="#">쪽지함</a> </td>
+			</tr>
+			<tr>
+			<td><a href="${path}/member/memberUpdate.do?member_id=${memberLoggedIn.member_id}">내 정보 수정</a></td>
+			</tr>
+>>>>>>> 7999ce0a54501955eea136d0f79b163225b6dd96
+				<c:if test="${memberLoggedIn.member_id eq 'admin'}">
+			<tr>
+			<td><a href="${path }/member/adminPage.do">관리자 페이지</a></td>
+			</tr>
+			</c:if>
+			
+			<tr>
+			<td><a  onclick="location.href='${path }/member/memberLogout.do'" style='cursor:pointer;'>로그아웃</a></td>
+			</tr>			
+			</table>
 			</div>
 		</div>
+
+
+</nav>
+		
 </header>
 
 
 <c:if test="${param.pageState != 'index'}">
 <div id="img_slider">
+<img src='${path}/resources/image/back1.jpg'>
 </div>
 </c:if>
 
