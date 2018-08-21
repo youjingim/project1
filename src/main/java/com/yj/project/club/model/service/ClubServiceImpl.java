@@ -16,6 +16,7 @@ import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
 import com.yj.project.club.model.vo.Club;
+import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.member.model.vo.Member;
 
 @Service
@@ -148,6 +149,11 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int deleteComment(int no) {
 		return clubDAO.deleteComment(sqlSession,no);
+	}
+
+	@Override
+	public int createClub(ReqCircle club) {
+		return clubDAO.createClub(sqlSession,club);
 	}
 	
 	

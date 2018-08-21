@@ -44,6 +44,7 @@ import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
 import com.yj.project.club.model.vo.Club;
+import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.member.model.vo.Member;
 
 @Controller
@@ -458,10 +459,9 @@ public class ClubController {
 	}
 	
 	@RequestMapping("/clubCreateEnd")
-	public ModelAndView createClubEnd(Club club,HttpServletRequest request) {
+	public ModelAndView createClubEnd(ReqCircle club,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println(club);
-
+		int result = clubService.createClub(club);
 		return mv;
 	}
 	//댓글 삭제 로직

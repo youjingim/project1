@@ -24,7 +24,7 @@
 <script src='resources/js/moment.min.js'></script>
 <script src='resources/js/fullcalendar.min.js'></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="resources/js/lang-all.js"></script>
+<script type="text/javascript" src="resources/js/locale-all.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">   
    
 <style>
@@ -188,7 +188,7 @@ font-family: 'Gothic A1', sans-serif;
       navLinks: true, // can click day/week names to navigate views
       editable: false,
       eventLimit: true, // allow "more" link when too many events
-      
+      locale : "ko",
       events: [
     	  <c:forEach var="c" items="${list}" varStatus="vs">
     	  {

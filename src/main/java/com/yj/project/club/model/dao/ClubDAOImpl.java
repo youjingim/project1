@@ -20,6 +20,7 @@ import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
 
 import com.yj.project.club.model.vo.Club;
+import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.member.model.vo.Member;
 
 @Repository
@@ -150,6 +151,11 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public int deleteComment(SqlSessionTemplate sqlSession, int no) {
 		return sqlSession.delete("club.deleteComment", no);
+	}
+
+	@Override
+	public int createClub(SqlSessionTemplate sqlSession, ReqCircle club) {
+		return sqlSession.insert("club.createClub",club);
 	}
 	
 	

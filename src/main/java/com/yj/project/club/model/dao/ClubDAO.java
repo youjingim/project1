@@ -13,6 +13,7 @@ import com.yj.project.calendar.model.vo.ClubNotice;
 import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
 import com.yj.project.club.model.vo.Club;
+import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.member.model.vo.Member;
 
 public interface ClubDAO {
@@ -41,4 +42,5 @@ public interface ClubDAO {
 	public List<String> selectG1(SqlSessionTemplate sqlSession,int circle_num);
 	public List<String> selectG2(SqlSessionTemplate sqlSession,int circle_num);
 	public int deleteComment(SqlSessionTemplate sqlSession,int no);
+	public int createClub(SqlSessionTemplate sqlSession,ReqCircle club);
 }

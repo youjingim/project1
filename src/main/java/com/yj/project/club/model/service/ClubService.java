@@ -11,6 +11,7 @@ import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
 import com.yj.project.club.model.vo.Club;
+import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.member.model.vo.Member;
 
 public interface ClubService {
@@ -39,5 +40,5 @@ public interface ClubService {
 	public List<String> selectG1(int circle_num);
 	public List<String> selectG2(int circle_num);
 	public int deleteComment(int no);
-	
+	public int createClub(ReqCircle club);
 }

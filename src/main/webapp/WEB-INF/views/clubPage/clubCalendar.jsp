@@ -18,6 +18,8 @@ request.setAttribute("date",date1);
 <script src='resources/js/moment.min.js'></script>
 <script src='resources/js/fullcalendar.min.js'></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="resources/js/locale-all.js"></script>
+
 
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -160,6 +162,7 @@ border-bottom:1px solid lightgray;
       navLinks: true, // can click day/week names to navigate views
       editable: false,
       eventLimit: true, // allow "more" link when too many events
+      locale : "ko",
       events: [
     	  <c:forEach var="c" items="${list}" varStatus="vs">
     	  {
