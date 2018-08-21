@@ -44,9 +44,20 @@ public class SearchPageController {
 	private SearchService searchService;
 	
 	@RequestMapping("secondPage.do")
-	public ModelAndView goSecond(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage,String member_id,Circle circle) throws IOException {
+	public ModelAndView goSecond(@RequestParam(value="cPage",required=false, defaultValue="0") int cPage,String member_id,Circle circle) throws IOException {
 		//페이징 처리
 		int numPerPage=6;
+
+		ModelAndView mav = new ModelAndView();
+		
+		if(cPage==0)
+		{
+			mav.addObject("flag","0");
+			cPage=1;			
+		}
+		else {
+			mav.addObject("flag","1");
+		}
 		
 		List<Circle> list = searchService.circleList(circle);
 		List<Circle> list2 = searchService.circleList2(circle,cPage,numPerPage);
@@ -54,10 +65,9 @@ public class SearchPageController {
 		List<Circle> circleenroll = searchService.circleenroll(circle);
 		
 		int totalCount = searchService.selectCount();
-		ModelAndView mav = new ModelAndView();
 
 		String pageBar=new PageCreate().getPageBar(cPage,numPerPage,totalCount,"secondPage.do");
-		
+
 		mav.addObject("pageBar",pageBar);
 		mav.addObject("list",list);
 		mav.addObject("list2",list2);
@@ -134,8 +144,6 @@ public class SearchPageController {
 		}*/
 		System.out.println("totalCount:"+totalCount);
 		
-		//페이징처리할 부분
-		
 		
 		
 		ModelAndView mav = new ModelAndView();
@@ -163,7 +171,6 @@ public class SearchPageController {
 		
 		model.addAttribute("circle",searchService.selectOneCircle(circle_num));
 		
-		//int result=searchService.selectOne(circle_num,model);
 		
 		return "clubPage/clubMain"; //해당 동아리 페이지화면 표시 부분으로 리턴
 
