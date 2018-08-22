@@ -161,10 +161,7 @@ public class ClubServiceImpl implements ClubService {
 	public List<ReqCircle> selectClubCreate() {
 		return clubDAO.selectClubCreate(sqlSession);
 	}
-<<<<<<< HEAD
-=======
 	@Override
->>>>>>> second
 	public int pushLike(InnerLike like) {
 		return clubDAO.pushLike(sqlSession,like);
 	}
