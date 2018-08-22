@@ -20,6 +20,7 @@ import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
 
 import com.yj.project.club.model.vo.Club;
+import com.yj.project.club.model.vo.InnerLike;
 import com.yj.project.member.model.vo.Member;
 
 @Repository
@@ -151,6 +152,37 @@ public class ClubDAOImpl implements ClubDAO {
 	public int deleteComment(SqlSessionTemplate sqlSession, int no) {
 		return sqlSession.delete("club.deleteComment", no);
 	}
+
+	@Override
+	public int pushLike(SqlSessionTemplate sqlSession, InnerLike like) {
+		return sqlSession.insert("club.like_check", like);
+	}
+
+	@Override
+	public InnerLike selectLike(SqlSessionTemplate sqlSession, InnerLike like) {
+		return sqlSession.selectOne("club.selectLike", like);
+	}
+
+	@Override
+	public int updateDislike(SqlSessionTemplate sqlSession, InnerLike like) {
+		return sqlSession.update("club.updateDislike", like);
+	}
+
+	@Override
+	public int updateLike(SqlSessionTemplate sqlSession, InnerLike like) {
+		return sqlSession.update("club.updateLike", like);
+	}
+
+	@Override
+	public List<InnerLike> selectLikeList(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.selectList("club.selectLikeList", member_id);
+	}
+
+	@Override
+	public int updateLevel(SqlSessionTemplate sqlSession, Member mm) {
+		return sqlSession.update("club.updateLevel", mm);
+	}
+	
 	
 	
 

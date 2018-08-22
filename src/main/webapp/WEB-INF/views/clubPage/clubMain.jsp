@@ -28,18 +28,21 @@ function deleteComment(no,id){
 
 	function insertComment(n){
 		console.log("게시글 번호:"+n);
+		console.log();
 		var no = n;
-		var comment = $('#comment1').val();
+		var comment = $('input[value='+n+']').prev('input').val();
 		var memberId = $('#memberId').val();
+		console.log("댓글 내용 : "+comment);
+		console.log("회원 아이디 : "+memberId);
 		var allData={"no":no, "memberId":memberId,"comment":comment};
 		$.ajax({
 			url:"${path}/insertComment.do",
 			data:allData,
-			type:"post",
+			type:"get",
 			dataType:"html",
 			success:function(data){
 				alert("댓글 등록!");
-				$('#comment1').val("");
+				$('#comment1').val(""); 
 				$('#commentTable').html(data);
 			}
 		});
@@ -66,9 +69,47 @@ function deleteComment(no,id){
            }
         });
      });
-function like_func(){
+    /*좋아요 ajax구현  */
+function like_func(id,no,event){
+	console.log(id);
+	console.log(no); 
+	
+	var obj=event.target;
+ 	if(obj.tagName!='BUTTON')
+ 	{
+		obj=obj.parentElement;
+ 	}
+	console.log(obj);
+	var cl=obj.getAttribute('class');
+	var allData={"id":id,"no":no};
+	$.ajax({
+		url:"${path}/likeButton.do",
+		data:allData,
+		type:"get",
+		dataType:'JSON',
+		success: function(data){
+			
+			if(data==1)
+			{
+				cl=cl.replace('w3-indigo','w3-red');
+				obj.removeAttribute('class');
+				obj.setAttribute('class',cl);
+			}
+			else
+			{	
+				
+				cl=cl.replace('w3-red','w3-indigo');
+				obj.removeAttribute('class');
+				obj.setAttribute('class',cl);
+			}
+		},
+		error:function(data)
+		{
+			console.log(data);
+		}
+	})
+};
 
-}    
 </script>
 <style>
 .check1{
@@ -149,15 +190,15 @@ function like_func(){
 	          		</c:if>
 			 </div>
 			 </c:if>
-	        <c:choose>
-	        	<c:when test="${member.member_id ne null }">
-	        		<button type="button" class="w3-button w3-indigo w3-margin-bottom" id="like_icon" onclick="like_func();"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
-	        	</c:when>
-	        	<c:otherwise>
-	        		<button type="button" class="w3-button w3-red w3-margin-bottom" id="like_icon" onclick="login_need();"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
-	        	</c:otherwise>
-	        </c:choose>
-	        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" id="circle_comment"><i class="fa fa-comment"></i> 댓글 </button>
+			 <c:if test="${not empty likeList }">	
+			 	<c:forEach items="${likeList }" var='ll' varStatus="llstatus">
+			 		<c:if test="${ll.member_id eq member.member_id and ll.cb_no eq b.cb_num and ll.cb_like_check eq 1 }">		 	
+	        		<button type="button" class="w3-button w3-red w3-margin-bottom like_icon" id="like_icon" onclick="like_func('${member.member_id}','${b.cb_num }',event);"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
+	        		</c:if>
+	        	</c:forEach>
+	        		<button type="button" class="w3-button w3-indigo w3-margin-bottom like_icon1" id="like_icon1" onclick="like_func('${member.member_id}','${b.cb_num }',event);"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
+	        </c:if>	
+	        		<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" id="circle_comment"><i class="fa fa-comment"></i> 댓글 </button>
 	        <div id="post_comment" >
 	          <input type="text" class="form-control" name="comment1" id="comment1" placeholder="댓글을 작성해주세요." style="display:inline-block; width:90%;"/>
 	          <input type="hidden" id="no" value="${b.cb_num }"/>
@@ -177,12 +218,10 @@ function like_func(){
 	                <td><button type="button" class="btn btn-danger" onclick="deleteComment(${cc.cb_commentno},'${member.member_id }');">삭제</button></td>
 	                </c:if>
 	              </tr>
-	            </table><hr>
-		          </c:if>
-	              </c:forEach>
-	         		<c:if test="not empty ${clist }">
-	         		<button type="button" class="btn btn-default" id="moreComment"> 댓글 더 보기</button>
-	         		</c:if>
+	            </table>
+		         </c:if>
+	           </c:forEach>
+	         		<button type="button" class="btn btn-default" id="moreComment"> 댓글 더 보기</button>	     
 	          </div>
 	          <br>
 	        </div>
