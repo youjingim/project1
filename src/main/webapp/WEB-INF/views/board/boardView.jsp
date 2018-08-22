@@ -87,7 +87,8 @@ font-size:17px !important;
 <td>${board.freeboard_title }
 <input type='hidden' value='${board.freeboard_num}' id='boardNum'></td>
 <td>${board.member_id }
-<input type='hidden' value='${board.member_id}' id='memberId'></td>
+<input type='hidden' value='${board.member_id}' id='memberId'>
+</td>
 
 </tr>
 <tr>
@@ -133,15 +134,20 @@ font-size:17px !important;
     </div>
      
 </div>
-<div style='width:100%;height:200px;'></div>
+<div style='width:100%;height:200px;'>
+
+<input type='hidden' value='${memberLoggedIn.member_id}' id='member'/>
+</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </section>
 
 <script>
 function fn_commentInsert(){
+	
 	var comment=$("#comment").val();
+	if(comment != ''){
 	var boardNum=$('#boardNum').val();
-	var memberId=$('#memberId').val();
+	var memberId=$('#member').val();
 	var tableText = $('#comment_table').html();
 	var commentResult = {"comment":comment,"boardNum":boardNum,"memberId":memberId};
 	var check = confirm('등록할까요?');
@@ -160,7 +166,10 @@ function fn_commentInsert(){
 		}
 	})
 	}
-	
+	}else{
+		alert('내용을 입력해주세요!');
+		
+	}
 }
 
 var in1=0;

@@ -45,11 +45,8 @@ import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
 import com.yj.project.club.model.vo.Club;
-<<<<<<< HEAD
 import com.yj.project.club.model.vo.ReqCircle;
-=======
 import com.yj.project.club.model.vo.InnerLike;
->>>>>>> bonyeon
 import com.yj.project.member.model.vo.Member;
 
 @Controller

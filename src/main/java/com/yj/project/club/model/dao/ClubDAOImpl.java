@@ -20,11 +20,8 @@ import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
 
 import com.yj.project.club.model.vo.Club;
-<<<<<<< HEAD
 import com.yj.project.club.model.vo.ReqCircle;
-=======
 import com.yj.project.club.model.vo.InnerLike;
->>>>>>> bonyeon
 import com.yj.project.member.model.vo.Member;
 
 @Repository
@@ -158,7 +155,6 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public int createClub(SqlSessionTemplate sqlSession, ReqCircle club) {
 		return sqlSession.insert("club.createClub",club);
 	}
@@ -167,7 +163,7 @@ public class ClubDAOImpl implements ClubDAO {
 	public List<ReqCircle> selectClubCreate(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("club.selectClubCreate");
 	}
-=======
+	@Override
 	public int pushLike(SqlSessionTemplate sqlSession, InnerLike like) {
 		return sqlSession.insert("club.like_check", like);
 	}
@@ -197,7 +193,6 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.update("club.updateLevel", mm);
 	}
 	
->>>>>>> bonyeon
 	
 	
 
