@@ -35,6 +35,8 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 
 import com.yj.project.common.page.CirclePageCreate;
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.yj.project.board.controller.BoardController;
 import com.yj.project.board.model.vo.Board;
 import com.yj.project.calendar.model.vo.ClubNotice;
@@ -456,8 +458,8 @@ public class ClubController {
 	//게시글 댓글 작성 로직
 	@RequestMapping("insertComment.do")
 	@ResponseBody
-	public ModelAndView insertComment(int no, String comment,String memberId) {
-		ModelAndView mv=new ModelAndView();
+	public void insertComment(int no, String comment,String memberId,HttpServletResponse response) throws JsonIOException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		System.out.println(no);
 		System.out.println(comment);
 		System.out.println(memberId);
@@ -466,20 +468,11 @@ public class ClubController {
 		c.setCb_comment_content(comment);
 		c.setCb_num(no);
 		int result=clubService.insertComment(c);
+		CB_Comment com=clubService.selectComment(no);
+		System.out.println("출력될 댓글들"+com);
+	    new Gson().toJson(com,response.getWriter());
 	
 
-		String msg="";
-		if(result>0) {
-			msg="게시글 수정 성공하였습니다";
-		}
-		else {
-			msg="수정을 실패하였습니다. 다시확인해주세요";
-		}
-		mv.addObject("msg",msg);
-		mv.addObject("loc", "clubMain.do?member_id="+memberId);
-		
-		mv.setViewName("common/msg");
-		return mv;
 	}
 
 

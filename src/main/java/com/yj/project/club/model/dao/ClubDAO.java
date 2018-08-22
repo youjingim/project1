@@ -50,4 +50,5 @@ public interface ClubDAO {
 	public int updateLike(SqlSessionTemplate sqlSession,InnerLike like);
 	public List<InnerLike> selectLikeList(SqlSessionTemplate sqlSession,String member_id);
 	public int updateLevel(SqlSessionTemplate sqlSession,Member mm);
+	public CB_Comment selectComment(SqlSessionTemplate sqlSession,int no);
 }

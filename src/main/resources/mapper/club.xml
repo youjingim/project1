@@ -124,5 +124,7 @@
 	<select id='selectClubCreate' resultType="com.yj.project.club.model.vo.ReqCircle">
 	select * from circle_register order by circle_num asc
 	</select>
-	
+	<select id="selectComment" resultType="cb_comment">
+		SELECT * FROM CB_COMMENT WHERE CB_NUM=#{no} and CB_COMMENTNO = (select MAX(CB_COMMENTNO) from CB_COMMENT where CB_NUM=#{cb_num})
+	</select>
 </mapper>
