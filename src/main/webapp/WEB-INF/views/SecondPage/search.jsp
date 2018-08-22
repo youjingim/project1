@@ -19,18 +19,18 @@ section {
    width: 100%;
    height: 800px;
    position: relative;
-   top: 150px;
+   top: 580px;
    background-color: white;
    z-index: 10;
 }
 
 div#img_slider img{
-   display:none;
+	height:500px;
 }
 
 section div#main_container {
 	width: 100%;
-	height: 1200px;
+	height: 880px;
 	position: relative;
 	z-index: 10;
 	background-color: white;
@@ -41,7 +41,9 @@ section div#main_container div#rank_container {
 	height: 400px;
 	position: relative;
 	left: 10%;
-	top: 90px;
+}
+.container{
+	height:700px;
 }
 
 .column {
@@ -88,13 +90,13 @@ section div#main_container div#rank_container {
 	transition: transform .10s;
 }
 
-.green_window {
+.blue_window {
 	display: inline-block;
-	width: 366px; height: 40px;
-	border: 3px solid #2db400;
+	width: 620px; height: 40px;
+	border: 1px solid #6CC0FF;
 	background: white;
-	border-top-left-radius : 20px;
-	border-bottom-left-radius : 20px;
+	border-top-left-radius : 10px;
+	border-bottom-left-radius : 10px;
 }
 
 .input_text {
@@ -109,8 +111,10 @@ section div#main_container div#rank_container {
 #sch_smit {
 	width: 130px; height: 40px;
 	margin: 0; border: 0;
+	position:relative;
+	right:10px;
 	vertical-align: top;
-	background: #2db400;
+	background: #6CC0FF;
 	color: white;
 	font-weight: bold;
 	border-radius: 1px;
@@ -124,20 +128,15 @@ section div#main_container div#rank_container {
 	background: #5882FA;
 }
 .panel-heading{
-	border-top-left-radius : 20px;
-	border-top-right-radius : 20px;
+	border : 1px solid lightgray;
 }
 
 .panel-footer{
-	border-bottom-left-radius : 20px;
-	border-bottom-right-radius : 20px;
+	border : 1px solid lightgray;
 }
 
 .panel{
-	border-top-left-radius : 20px;
-	border-top-right-radius : 20px;
-	border-bottom-left-radius : 20px;
-	border-bottom-right-radius : 20px;
+	border : 1px solid lightgray;
 }
 
 .siblings * { 
@@ -191,9 +190,13 @@ section div#main_container div#rank_container {
 }
 
 .jumbotron{
-	z-index=1;
+	position:relative;
+	z-index=-1;
+	margin-bottom:0;
 }
-
+.row{
+	z-index=1000;
+}
 #sang{
 	outline:none;
 }
@@ -203,20 +206,45 @@ section div#main_container div#rank_container {
 }
 
 a:hover{color:red; text-decoration:none;}
+
+.prev{
+	font-size: 50px;
+	position:relative;
+	bottom:320px;
+}
+
+.next{
+	font-size: 50px;
+	position:relative;
+	bottom:320px;
+	left:950px;
+	
+}
+
+#searchType{
+	width:100px;
+	border-radius : 10px;
+	height:40px;
+	position:relative;
+	top:2px;
+	left:6px;
+	outline:none;
+	color:black;
+}
 </style>
 </head>
 <body>
 
 	<section>
-		<div style="background-image: url(/project/resources/image/circlebanner3.jpg);background-repeat:no-repeat;background-size: 100% 1100px;opacity:0.95;">
-		<div id='main_container' style="background-image: url(/project/resources/image/circlebanner5.png);background-repeat:no-repeat;background-size: 100% 1400px;opacity:0.95;">
+
+		<div id='main_container'>
 			<br><br><br> 
 			<span style='font-weight: bold; margin-top: 100px; margin-left: 5%; font-size: 30px; text-align: center;color:black;'>동아리 랭킹</span> 
 			<br><br><br><br><br>
 			<div class='container'>
 			  <ul class="nav nav-pills" style="float:right">
 			    <li class="active"><a href="#like" aria-controls="home" data-toggle="pill" onclick="mains1()" class='glosbe'>좋아요 순</a></li>
-			    <li><a href="#desc" aria-controls="messages" data-toggle="pill"  onclick="mains2()" class='glosbe'>생성일 순</a></li>
+			    <li><a href="#desc" aria-controls="messages" data-toggle="pill"  onclick="mains2()" class='glosbe'>최신순</a></li>
 			  </ul>
 			  <br><br><br>
 			  
@@ -242,7 +270,7 @@ a:hover{color:red; text-decoration:none;}
 					<div class='mySlides myS1'>
 						
 						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
-						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
+						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image'> 
 						</a>
 						<div class="text-block">
 							<c:set var="count" value="${count + 1}" />
@@ -253,7 +281,7 @@ a:hover{color:red; text-decoration:none;}
 						
 					</div>
 				</c:forEach>
-				<a class="prev" onclick="plusSlides(-1)">
+				<a class="prev" onclick="plusSlides(-1)" >
 					<input type="hidden" class="prev" id='prev' value="-1">
 					<span class="glyphicon glyphicon-chevron-left" style="color: orange"></span>
 					</a>
@@ -268,7 +296,7 @@ a:hover{color:red; text-decoration:none;}
 						<p id="caption1"></p>
 					</div>
 					
-					<div class='row' id='slider'>
+					<div class='row' id='slider' style="display:none">
 					<c:forEach var="circle" items="${list}" varStatus="status" begin="0" end="3">
 						<div class='column'>
 							<img class='demo cursor dem1' src="/project/resources/image/${circle.circle_photo }" style="width: 100%; height: 200px; cursor: pointer;" onclick='currentSlide(${status.count})'>
@@ -288,7 +316,6 @@ a:hover{color:red; text-decoration:none;}
 						</a>
 						<div class="text-block">
 							<c:set var="count2" value="${count2 + 1}" />
-							<h2 style="text-align: center; color:#100BA3" id='rank'>${count2}등</h2>
 							<h3 style="text-align: center;font-weight: bold;color:#190710"> ${circle.circle_name} </h3>
 							<p style="text-align: center;font-weight: bold;color:#190710"> ${circle.circle_comment} </p>
  						</div>
@@ -309,7 +336,7 @@ a:hover{color:red; text-decoration:none;}
 						<p id="caption2"></p>
 					</div>
 					
-					<div class='row'>
+					<div class='row' style="display:none">
 					<c:forEach var="circle" items="${circleenroll }" varStatus="status1" begin="0" end="3">
 						<div class='column' id='slider2'>
 							<img class='demo cursor dem2' src="/project/resources/image/${circle.circle_photo}" style="width: 100%; height: 200px; cursor: pointer;" onclick='currentSlide1(${status1.count})'>
@@ -390,94 +417,83 @@ a:hover{color:red; text-decoration:none;}
   		}
     </script>
 		</div>
-		<div class="jumbotron" style="background-image: url(/project/resources/image/circlebanner.jpg);background-repeat:no-repeat;background-size: 100% 100%;opacity:0.95;">
-			<h2 style="text-align: center; color: black; font-family: 'Do Hyeon', sans-serif;">통합 검색 시스템</h2>
-			<div class="row">
+		
+			<div class="jumbotron">
+				<span id="promotion" style='font-weight: bold; font-size: 30px; color: black;position:relative;left:100px'>동아리목록</span>
+			<div class="row" style="position:relative;bottom:100px;left:100px;">
 				<div class="col-xs-9 col-xs-offset-2">
-					<h2 style="color: black;font-weight:bold;position:relative;right:235px;bottom:50px;">조건별 검색</h2>
-					<div class="col-sm-9 col-xs-offset-2">
-						<strong><h4 style="color: black;font-weight:bold;">대학선택으로 검색</h4></strong>
-						<div class="input-group-btn search-panel" >
-							<!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-								<span id="search_concept">선택</span> <span class="caret"></span>
-							</button> -->
-							<button type="button" style="color:#1B13F3;z-index=1;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">선택 <span class="caret"></span></button>
-							<ul class="dropdown-menu">
-							 	<!-- <li role="presentation" class="disabled"><a role="menuitem" tabindex="-1" href="#">선택</a></li> -->
-								<li><a href="${pageContext.request.contextPath}/search.do?university=서울대학교" style="color:#FF4848">서울대학교</a></li>
-								<li><a href="${pageContext.request.contextPath}/search.do?university=연세대학교" style="color:#FF4848">연세대학교</a></li>
-								<li><a href="${pageContext.request.contextPath}/search.do?university=고려대학교" style="color:#FF4848">고려대학교</a></li>
-								<li><a href="${pageContext.request.contextPath}/search.do?university=성균관대학교" style="color:#FF4848">성균관대학교</a></li>
-								<li><a href="${pageContext.request.contextPath}/search.do?university=홍익대학교" style="color:#FF4848">홍익대학교</a></li>
-								<li class="divider"></li>
-								<li><p id="inputing"
-										style="color: black; font-size: 12px; cursor: pointer;"
-										onclick="university();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;직접입력</p></li>
-							</ul>
-						</div>
-						
-						<!-- 조건처리해서 안보이게끔 -->
-						<form action="${pageContext.request.contextPath }/search.do">
-							<div class="input-group" id='uni' style="display: none;">
-								<span class='green_window' style="width:450px">
-									<input type='text' class='input_text' name="Unsearch" style="color:black;width:400px" placeholder="찾으시는 대학명을 입력하세요.">
+					<form class="example" action="${path }/ListFinder.do">
+				     	<div id="search-container" style="position:relative;left:100px;top:60px;">
+				        <select id="searchType">
+				        	<option disabled="disabled" selected="selected">선택</option>
+				            <option value="university" id="uni">대학</option>	
+				            <option value="circleName" id="name">동아리명</option>
+				        </select>
+				        <div id="search_university">
+				            <form action="${path }/ListFinder.do">
+				                <input type="hidden" name="searchType" value="university"/>
+				               	<span class='blue_window'>
+									<input type='text' class='input_text' name='Unsearch'  placeholder="대학 이름 입력">
 								</span>
 								<button type='submit' id='sch_smit' class='btn btn-info btn-lg'>
 									<span class="glyphicon glyphicon-search"></span> Search 
-								</button>
-							</div>
-						</form>
-					<script>
-						function university(){
-							$('#uni').show();
-						}
-					</script>
-					</div>
-					<form action="${pageContext.request.contextPath }/search.do">
-						<div class="col-sm-9 col-xs-offset-2" id='search2'>
-							<h4 style="color: black;font-weight:bold;">동아리명으로 검색</h4>
-							<div class="input-group">
-								<span class='green_window' style="width:600px">
-									<input type='text' class='input_text' name="circle_name" style="color:black;" placeholder="찾으시는 동아리명을 입력하세요!">
+								</button>			
+				            </form>	
+				        </div>
+				        <div id="search_circleName">
+				            <form action="${path }/ListFinder.do">
+				                <input type="hidden" name="searchType" value="circleName"/>
+				                <span class='blue_window'>
+									<input type='text' class='input_text' name='circle_name' placeholder="동아리명 입력">
 								</span>
 								<button type='submit' id='sch_smit' class='btn btn-info btn-lg'>
 									<span class="glyphicon glyphicon-search"></span> Search 
-								</button>
-							</div>
+								</button>			
+				            </form>	
+				        </div> 
+				        <script>        
+						window.onload = function() {
+						var stitle = document.querySelector("#search_university");
+						var sname = document.querySelector("#search_circleName");
+						var searchType = document.querySelector("#searchType");
+						stitle.style.display = "inline-block";
+						sname.style.display = "none";
+						searchType.addEventListener("change",function() {
+											stitle.style.display = "none";
+											sname.style.display = "none";
+											(document.querySelector("#search_" + this.value)).style.display = 'inline-block';
+										});
+						} 
+						</script>
 						</div>
-					</form>
+				        </form>
 				</div>
 			</div>
-		</div>
-		
-		<span id="promotion" style='font-weight: bold; margin-top: 100px; margin-left: 5%; font-size: 30px; color: black;'>동아리홍보</span>
-		<div class="container" id="con1">
+		<div class="container" id="con1" >
 			<div class="row">
 					<c:forEach var='circle' items='${list2}' varStatus="vs">
 					<c:if test="${not empty list2}">
 						<div class="col-sm-4">
-							<div class="panel panel-primary">
-								<div class="panel-heading" style="text-align: center">
+							<div class="panel panel-default">
+								<div class="panel-heading" style="text-align: center;background-color:white;height:70px;color:black;font-weight:bold;font-size:18px;">
 									${circle.circle_name}
 									<br>
-									<span class='badge'>${circle.category}</span>
 								</div>
 								<div class="panel-body">
 									<a href='${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }'>
-										<img src="/project/resources/image/${circle.circle_photo }" class="img-responsive" style="width: 100%; height: 17.4%" alt="Image">
+										<img src="/project/resources/image/${circle.circle_photo }" class="img-responsive" style="width: 100%; height: 150px;" alt="Image">
 									</a>
-									
 								</div>
-								<div class="panel-footer" >
+								<div class="panel-footer" style="background-color: white;height:55px">
 									<button id='sang' class='btn btn-link' type='button' value='상세보기' style="cursor: pointer" onclick="search()">상세보기</button>
 									
 									<span class='likeImg' style="cursor: pointer">
-									<img src='/project/resources/image/like5.png' class='likImg' style="width: 50px; height: 45px; position: relative; right: 35px"> 
+									<img src='/project/resources/image/like3.png' class='likImg' style="width: 40px; height: 35px; position: relative; right: 35px"> 
 									<input type='hidden' id="circle_num" value="${circle.circle_num }">
 									</span>
 									
-									<span style="position:relative;right:10px;width:33px;height:33px;bottom:15px;display:inline-block" class='speech'>
-									<img src='/project/resources/image/speech33.ico' >
+									<span style="position:relative;left:300px;width:33px;height:33px;bottom:15px;display:inline-block" class='speech'>
+									<!-- <img src='/project/resources/image/speech33.ico' > -->
 									<p class="img_center">${circle.circle_like }</p>
 									</span>
 								<style>
@@ -525,7 +541,7 @@ a:hover{color:red; text-decoration:none;}
 							})
 						</script>
 				
-			<div class="pagination" id="page" style="position: relative;left:100px">
+			<div class="pagination" id="page" style="position: relative;left:20px">
 				${pageBar}
 			</div>
 						
@@ -542,5 +558,4 @@ a:hover{color:red; text-decoration:none;}
 		</div>
 		</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
-	</div>
 </section>

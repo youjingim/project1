@@ -1,6 +1,6 @@
 package com.yj.project.search.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Circle {
 
