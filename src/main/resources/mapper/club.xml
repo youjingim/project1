@@ -109,5 +109,8 @@
 	<insert id='createClub' parameterType="com.yj.project.club.model.vo.ReqCircle">
 	insert into circle_register values(circle_register_seq.nextval,#{circle_name},#{university},#{circle_adviser},#{member_id},'L2',#{circle_phone},sysdate,#{circle_photo},#{category},#{circle_comment},0)
 	</insert>
+	<select id='selectClubCreate' resultType="com.yj.project.club.model.vo.ReqCircle">
+	select * from circle_register order by circle_num asc
+	</select>
 	
 </mapper>

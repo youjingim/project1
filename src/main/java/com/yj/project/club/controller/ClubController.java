@@ -453,7 +453,6 @@ public class ClubController {
 		c.setCb_num(no);
 		int result=clubService.insertComment(c);
 	
-		System.out.println(result);
 
 		
 		
@@ -494,9 +493,19 @@ public class ClubController {
 	}
 	
 	@RequestMapping("/clubCreateEnd")
-	public ModelAndView createClubEnd(ReqCircle club,HttpServletRequest request) {
+	public ModelAndView createClubEnd(ReqCircle club,HttpServletRequest request,@RequestParam(value="member_id")String member_id,@RequestParam(value="member_pw")String member_pw) {
 		ModelAndView mv = new ModelAndView();
 		int result = clubService.createClub(club);
+		String msg = "";
+		String loc = "mainPage/mainPage.jsp";
+		if(result > 0) {
+			msg="개설 신청 성공!";
+		}else {
+			msg="개설 신청 실패!";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc",loc);
+		mv.setViewName("common/msg");
 		return mv;
 	}
 	//댓글 삭제 로직
@@ -578,5 +587,16 @@ public class ClubController {
 		System.out.println("회원 아이디 : "+id);
 		System.out.println("변경할 등급 : "+grade);
 		return "";
+	}
+	
+	@RequestMapping("/clubManagement.do")
+	public ModelAndView clubManagement() {
+		ModelAndView mv = new ModelAndView();
+		List<ReqCircle> circleList = clubService.selectClubCreate();
+		mv.addObject("circleList",circleList);
+		mv.setViewName("member/adminClub");
+		return mv;
+	
+		
 	}
 }

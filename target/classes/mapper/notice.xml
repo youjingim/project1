@@ -3,6 +3,7 @@
 <mapper namespace="notice">
 <resultMap type="map" id="notice">
 </resultMap>
+
 <select id="selectNoticeList" resultMap="notice">
 select * from notice
 </select>
@@ -10,7 +11,23 @@ select * from notice
 select count(*) from notice
 </select>
 <select id="selectView" resultType="Notice" parameterType="_int">
-select * from notice where notice_no=#{noticeNo}
+select notice_no,
+	   notice_title,
+	   notice_content,
+	   member_id,
+	   notice_view,
+	   notice_date from notice where notice_no=#{noticeNo}
 </select>
+<insert id='noticeWrite' parameterType="com.yj.project.notice.model.vo.Notice">
+insert into notice values(notice_seq.nextval,#{notice_title},#{notice_content},#{member_id},0,sysdate)
+</insert>
+
+<update id="noticeViewUp" parameterType="_int">
+update notice set NOTICE_VIEW=NOTICE_VIEW+1 where NOTICE_NO = #{noticeNo}
+
+</update>
+<delete id="noticeDelete" parameterType="_int"> DELETE FROM notice WHERE notice_no=#{noticeNo} </delete>
+
+<update id="noticeUpdateEnd" parameterType="com.yj.project.notice.model.vo.Notice"> update notice set notice_title=#{notice_title},notice_content=#{notice_content} where notice_no=#{notice_no} </update>
 
 </mapper>

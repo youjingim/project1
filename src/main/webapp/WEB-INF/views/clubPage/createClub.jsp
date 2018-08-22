@@ -92,7 +92,11 @@ background-color:white;
 		  </tr>
 		  <tr>
 		  
-		  <td colspan='2' style='text-align:center;'><button type='submit' class='btn btn-success'>제출</button></td>
+		  <td colspan='2' style='text-align:center;'><button type='submit' class='btn btn-success'>제출</button>
+		  <input type='hidden' value="${memberLoggedIn.member_pw }" name='member_pw'/>
+		  </td>
+		  
+		  
 		  </tr>
 		  </table>
 		  

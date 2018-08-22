@@ -157,6 +157,11 @@ public class ClubDAOImpl implements ClubDAO {
 	public int createClub(SqlSessionTemplate sqlSession, ReqCircle club) {
 		return sqlSession.insert("club.createClub",club);
 	}
+
+	@Override
+	public List<ReqCircle> selectClubCreate(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("club.selectClubCreate");
+	}
 	
 	
 

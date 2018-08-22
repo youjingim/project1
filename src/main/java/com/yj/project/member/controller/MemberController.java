@@ -91,7 +91,7 @@ public class MemberController {
 		String msg = "";
 		String loc = "/";
 		String view = "/common/msg";
-
+		System.out.println("아 못하ㅔㅈ바ㅐㅈㄷ바ㅐㅔㅏㄷ젭"+password);
 		if (m != null) {
 			/*
 			 * if(m.getPassword().equals(password)) {
