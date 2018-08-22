@@ -33,7 +33,7 @@ top:50px;
 .note-editable{
 height:320px;
 }
-   div#board-continer{width:70%;height:800px;margin:0 auto;position:absolute; left:15%;top:310px;}
+   div#board-continer{width:70%;height:800px;margin:0 auto;position:absolute; left:15%;top:160px;}
    div#board-continer input{margin-bottom:15px;}
 
    div#board-continer table td{
@@ -45,22 +45,24 @@ height:320px;
 
  <section>
      <div id="main_container">
+   <br><span style="font-size:35px; font-weight:bold;color:black; margin-left:45%; text-align:center;">writing</span>
 
      <div id="board-continer">
-<form class="form-horizontal" action='${path}/notice/noticeWrite' method='post'>
+<form class="form-horizontal" action="${path }/notice/noticeUpdateEnd.do" method='post'>
       <table class='table'>
       <tr>
-      <td style='text-align:center;width:7%;'>제목</td><td><input type='text' class="form-control" name='notice_title'></td>
+      <td style='text-align:center;width:7%;'>제목</td><td><input type='text' class="form-control" name="notice_title" value='${notice.notice_title}'></td>
       </tr>
       <tr><td colspan='2'>
-          <textarea name="notice_content" id="content" class="summernote" ></textarea>
+          <textarea name="notice_content" id="content" class="summernote">${notice.notice_content}</textarea>
       </td></tr>
         <tr><td colspan='2' style='text-align:center;'>
-          <button type="submit" class="btn btn-default" style="border-color:black;" >확인</button>
+          <button type="submit" class="btn btn-default" >등록</button>
         </td></tr>
-
       </table>
-              <input type='hidden' value='${memberLoggedIn.member_id}' name='member_id'>
+         <input type='hidden' value='${notice.notice_no }' name="notice_no">
+      
+         <input type='hidden' value='${notice.member_id }' name="member_id">
     </form>
 
   <script>

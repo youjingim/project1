@@ -31,6 +31,24 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		return noticeDAO.noticeView(noticeNo);
 	}
+	@Override
+	public int noticeWrite(Notice notice) {
+		
+		return noticeDAO.noticeWrite(notice);
+	}
+	   @Override
+	   public int viewCount(int noticeNo) {
+	      return noticeDAO.viewCount(noticeNo);
+	   }
 
-	
+
+	   @Override
+	   public int noticeDelete(int noticeNo) {
+		  return noticeDAO.noticeDelete(noticeNo);
+	}
+
+	   @Override
+	   public int noticeUpdateEnd(Notice notice) {
+		 return noticeDAO.noticeUpdateEnd(notice);
+	}
 }

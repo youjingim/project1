@@ -56,7 +56,7 @@ height:320px;
           <textarea name="notice_content" id="content" class="summernote" ></textarea>
       </td></tr>
         <tr><td colspan='2' style='text-align:center;'>
-          <button type="submit" class="btn btn-default" style="border-color:black;" >확인</button>
+          <button type="submit" class="btn btn-default">Save</button>
         </td></tr>
 
       </table>
