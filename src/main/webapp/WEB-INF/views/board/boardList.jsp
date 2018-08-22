@@ -116,7 +116,7 @@ text-align:left;
       </c:if>
    </table>
    <span style="margin-left:50%;margin-top:100px;">
-   ${pageBar }
+   ${pageBar}
    </span>
 
 

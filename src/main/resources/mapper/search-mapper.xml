@@ -22,7 +22,6 @@
   
   <insert id="likeup" parameterType="map">
   	insert into like_table values(#{member_id},#{circle_num},1)
-  	<!-- //insert into like_table values(?,?,1) -->
   </insert>
   
   <!-- circle테이블의 각 동아리당 like숫자카운트 -->

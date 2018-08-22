@@ -16,12 +16,16 @@
 </jsp:include>
 <style>
 section {
-	width: 100%;
-	height: 800px;
-	position: relative;
-	top: 300px;
-	background-color: white;
-	z-index: 10;
+   width: 100%;
+   height: 800px;
+   position: relative;
+   top: 150px;
+   background-color: white;
+   z-index: 10;
+}
+
+div#img_slider img{
+   display:none;
 }
 
 section div#main_container {
@@ -236,6 +240,7 @@ a:hover{color:red; text-decoration:none;}
 			    <c:set var="num" value="1"/>
 				<c:forEach var="circle" items="${list}" varStatus="status" begin="0" end="3">
 					<div class='mySlides myS1'>
+						
 						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
 						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
 						</a>

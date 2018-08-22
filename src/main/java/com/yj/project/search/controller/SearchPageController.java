@@ -166,15 +166,16 @@ public class SearchPageController {
 		return mav;
 	}
 
-	@RequestMapping("search/circleView.do")
-	public String selectOne(@RequestParam(value="no") int circle_num,Model model) {
-		
+/*	@RequestMapping("search/circleView.do")
+	public String selectOne(@RequestParam(value="no") int circle_num,@RequestParam(value="id") String member_id,Model model) {
+		System.out.println("num :"+circle_num);
+		System.out.println("id : "+member_id);
 		model.addAttribute("circle",searchService.selectOneCircle(circle_num));
 		
 		
 		return "clubPage/clubMain"; //해당 동아리 페이지화면 표시 부분으로 리턴
 
-	}
+	}*/
 	
 	@RequestMapping("ListFinder.do")
 	public ModelAndView findOne(String searchType,String Unsearch,String circle_name,@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
