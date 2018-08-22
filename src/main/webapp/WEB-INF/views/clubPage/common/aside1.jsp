@@ -89,11 +89,13 @@
           <div id="Demo2" class="w3-hide w3-container">
             <p>Some other text..</p>
           </div>
-          <c:if test="${club.circle_num eq memberLoggedIn.circle1_num }">
+          <c:if test="${club.circle_num eq memberLoggedIn.circle1_num  and memberLoggedIn.member_level ne 'L2'}">
           <button onclick="circle_list('${memberLoggedIn.member_level}')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-address-book-o fa-fw w3-margin-right"></i> 동아리 회원목록</button>
           <div id="Demo1" class="w3-hide w3-container">
             <p>Some text..</p>
           </div>
+          </c:if>
+          <c:if test="${club.circle_num eq memberLoggedIn.circle1_num }">
           <button onclick="circle_budget('${memberLoggedIn.member_level}','${memberLoggedIn.member_id }')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-won fa-fw w3-margin-right"></i> 동아리 예산</button>
           <div id="Demo3" class="w3-hide w3-container">
             <p>Some other text..</p>
