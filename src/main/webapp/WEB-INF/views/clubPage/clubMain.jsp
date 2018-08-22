@@ -39,11 +39,13 @@ function deleteComment(no,id){
 			url:"${path}/insertComment.do",
 			data:allData,
 			type:"get",
-			dataType:"html",
+			dataType:"json",
 			success:function(data){
 				alert("댓글 등록!");
-				$('#comment1').val(""); 
-				$('#commentTable').html(data);
+				console.log(data);
+				$('#commentTable').prepend("<tr><td>"+data.member_id+"</td><td>"+data.cb_comment_date+"</td></tr><tr><td>"+data.cb_comment_content+"</td><td></td></tr>");
+				
+				$("#comment1").prop("value","");
 			}
 		});
 	}
@@ -60,13 +62,14 @@ function deleteComment(no,id){
      });
     /*댓글 더보기 기능  */
     $(function() {
-        $(".commentTable").slice(0, 2).show(); // 최초 10개 선택
+        $(".commentTable").slice(0, 3).show(); // 최초 10개 선택
         $("#moreComment").click(function(e) { // Load More를 위한 클릭 이벤트e
            e.preventDefault();
-           $(".commentTable:hidden").slice(0, 2).show(); // 숨김 설정된 다음 10개를 선택하여 표시
-           if ($(".commentTable:hidden").length == 0) { // 숨겨진 DIV가 있는지 체크
+           $(".commentTable:hidden").slice(0, 3).show(); // 숨김 설정된 다음 10개를 선택하여 표시
+           if ($(".commentTable:hidden").length == 0 ) { // 숨겨진 DIV가 있는지 체크
               $("#moreComment").hide();
            }
+          
         });
      });
     /*좋아요 ajax구현  */
@@ -206,7 +209,7 @@ function like_func(id,no,event){
 	          <button type="button" class="btn btn-primary" id="comment_button" onclick="insertComment(${b.cb_num})">등록</button>
 	          <div><hr>
 	            <c:forEach items="${clist}" var='cc' varStatus="cstatus">
-	         	<c:if test="${b.cb_num eq cc.cb_num }">
+	            <c:if test="${cc.cb_num eq b.cb_num }">
 	            <table class="commentTable">
 	              <tr>
 	                <td class="top"><strong>${cc.member_id }</strong> <fmt:formatDate type="both" value="${cc.cb_comment_date}" /></td>
@@ -219,7 +222,7 @@ function like_func(id,no,event){
 	                </c:if>
 	              </tr>
 	            </table>
-		         </c:if>
+	            </c:if>
 	           </c:forEach>
 	         		<button type="button" class="btn btn-default" id="moreComment"> 댓글 더 보기</button>	     
 	          </div>

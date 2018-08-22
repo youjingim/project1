@@ -49,5 +49,6 @@ public interface ClubService {
 	public int updateLike(InnerLike like);
 	public List<InnerLike> selectLikeList(String member_id);
 	public int updateLevel(Member mm);
+	public CB_Comment selectComment(int no);
 	
 }

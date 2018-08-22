@@ -190,6 +190,11 @@ public class ClubServiceImpl implements ClubService {
 	public int updateLevel(Member mm) {
 		return clubDAO.updateLevel(sqlSession,mm);
 	}
+
+	@Override
+	public CB_Comment selectComment(int no) {
+		return clubDAO.selectComment(sqlSession,no);
+	}
 	
 	
 	

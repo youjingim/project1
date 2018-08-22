@@ -192,6 +192,11 @@ public class ClubDAOImpl implements ClubDAO {
 	public int updateLevel(SqlSessionTemplate sqlSession, Member mm) {
 		return sqlSession.update("club.updateLevel", mm);
 	}
+
+	@Override
+	public CB_Comment selectComment(SqlSessionTemplate sqlSession, int no) {
+		return sqlSession.selectOne("club.selectComment", no);
+	}
 	
 	
 	
