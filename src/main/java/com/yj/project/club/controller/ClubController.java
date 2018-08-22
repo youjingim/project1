@@ -25,6 +25,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,7 +45,11 @@ import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
 import com.yj.project.club.model.vo.Club;
+<<<<<<< HEAD
 import com.yj.project.club.model.vo.ReqCircle;
+=======
+import com.yj.project.club.model.vo.InnerLike;
+>>>>>>> bonyeon
 import com.yj.project.member.model.vo.Member;
 
 @Controller
@@ -100,17 +105,21 @@ public class ClubController {
 	    System.out.println("동아리 정보"+club);
 	    session.setAttribute("matching", matching);
 		String[] array=club.getCategory().split(",");
-		
+		List<InnerLike> likeList=clubService.selectLikeList(member.getMember_id());
 		List<Circle_board> list=clubService.selectBoardList(club.getCircle_num());
 		List<CB_Comment> clist=clubService.commentList();
 		System.out.println("게시글 목록: "+list);
 		System.out.println("댓글 목록: "+clist);
+		for(InnerLike i : likeList) {
+			System.out.println(member.getMember_id()+"님의 좋아요 목록:"+i);
+		}
 		session.setAttribute("member", member);
 
 		session.setAttribute("club", club);
 		session.setAttribute("BoardList", list);
 		session.setAttribute("array", array);
 		session.setAttribute("clist", clist);
+		session.setAttribute("likeList", likeList);
 
 		List<Matching> matchings = clubService.selectMatching(member.getCircle1_num());
 		List<ClubNotice> noticeList = clubService.selectNotice(member.getCircle1_num());
@@ -442,7 +451,7 @@ public class ClubController {
 	//게시글 댓글 작성 로직
 	@RequestMapping("insertComment.do")
 	@ResponseBody
-	public String insertComment(int no, String comment,String memberId,Model model) {
+	public ModelAndView insertComment(int no, String comment,String memberId) {
 		ModelAndView mv=new ModelAndView();
 		System.out.println(no);
 		System.out.println(comment);
@@ -454,9 +463,18 @@ public class ClubController {
 		int result=clubService.insertComment(c);
 	
 
+		String msg="";
+		if(result>0) {
+			msg="게시글 수정 성공하였습니다";
+		}
+		else {
+			msg="수정을 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "clubMain.do?member_id="+memberId);
 		
-		
-		return "clubPage/commentAjax";
+		mv.setViewName("common/msg");
+		return mv;
 	}
 
 
@@ -581,12 +599,68 @@ public class ClubController {
 		}
 	}
 	@RequestMapping("changeGrade.do")
-	public String chageGrade(String id,
-			@RequestParam(value="memberGrade",defaultValue="L2",required=false) String grade
-			) {
+	public ModelAndView chageGrade(String id,String grade,int no){
+		ModelAndView mv=new ModelAndView();
 		System.out.println("회원 아이디 : "+id);
 		System.out.println("변경할 등급 : "+grade);
-		return "";
+		System.out.println("동아리 번호:"+no);
+		Member mm=new Member();
+		mm.setMember_id(id);
+		mm.setMember_level(grade);
+
+		int result=clubService.updateLevel(mm);
+		System.out.println("회원등급 변경 : "+result);
+		String msg="";
+		if(result>0) {
+			msg="등급변경을 성공하였습니다";
+		}
+		else {
+			msg="등급변경에 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "circle_list.do?circle_num="+no);
+		
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	//좋아요 로직 구현
+	@RequestMapping("/likeButton.do")
+	public void likeButton(HttpServletRequest req,HttpServletResponse res) throws IOException{
+		int no=Integer.parseInt(req.getParameter("no"));
+		String id=req.getParameter("id");
+		System.out.println("게시글 번호 : "+no);
+		System.out.println("사용자 아이디 : "+id);
+		InnerLike like=new InnerLike();
+		like.setCb_no(no);
+		like.setMember_id(id);
+		int result=0;
+		int likeNum=0;
+		int change=0;
+		//좋아요 전체 가져오기
+		InnerLike selectLike=clubService.selectLike(like);
+		if(selectLike==null) {
+			result=clubService.pushLike(like);
+			System.out.println("실행결과 : "+result);
+			likeNum=1;
+		}
+		else {
+			System.out.println("가져오는 좋아요 : "+selectLike);
+			
+			if(selectLike.getCb_like_check()==1) {
+				change=clubService.updateDislike(selectLike);
+				selectLike=clubService.selectLike(like);
+				System.out.println("변경된 좋아요 : "+selectLike.getCb_like_check());
+				likeNum=2;// 좋아요 취소 로직
+			}else {
+				change=clubService.updateLike(selectLike);
+				selectLike=clubService.selectLike(like);
+				System.out.println("변경된 좋아요 : "+selectLike.getCb_like_check());
+				likeNum=1;//좋아요 설정 로직
+			}
+		}
+
+		res.getWriter().print(Integer.valueOf(likeNum));
+		
 	}
 	
 	@RequestMapping("/clubManagement.do")

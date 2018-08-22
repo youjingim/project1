@@ -16,7 +16,11 @@ import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
 import com.yj.project.club.model.vo.Club;
+<<<<<<< HEAD
 import com.yj.project.club.model.vo.ReqCircle;
+=======
+import com.yj.project.club.model.vo.InnerLike;
+>>>>>>> bonyeon
 import com.yj.project.member.model.vo.Member;
 
 @Service
@@ -152,6 +156,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public int createClub(ReqCircle club) {
 		return clubDAO.createClub(sqlSession,club);
 	}
@@ -160,6 +165,37 @@ public class ClubServiceImpl implements ClubService {
 	public List<ReqCircle> selectClubCreate() {
 		return clubDAO.selectClubCreate(sqlSession);
 	}
+=======
+	public int pushLike(InnerLike like) {
+		return clubDAO.pushLike(sqlSession,like);
+	}
+
+	@Override
+	public InnerLike selectLike(InnerLike like) {
+		return clubDAO.selectLike(sqlSession,like);
+	}
+
+	@Override
+	public int updateDislike(InnerLike like) {
+		return clubDAO.updateDislike(sqlSession,like);
+	}
+
+	@Override
+	public int updateLike(InnerLike like) {
+		return clubDAO.updateLike(sqlSession,like);
+	}
+
+	@Override
+	public List<InnerLike> selectLikeList(String member_id) {
+		return clubDAO.selectLikeList(sqlSession,member_id);
+	}
+
+	@Override
+	public int updateLevel(Member mm) {
+		return clubDAO.updateLevel(sqlSession,mm);
+	}
+	
+>>>>>>> bonyeon
 	
 	
 	

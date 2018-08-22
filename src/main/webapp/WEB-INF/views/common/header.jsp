@@ -571,7 +571,19 @@ background-color:white;
 			<td><a href="${path }/member/mypage.do">마이페이지</a></td>
 			</tr>
 			<tr>
-			<td><a href="${path }/clubMain.do?member_id=${memberLoggedIn.member_id}">나의 동아리</a></td>
+
+			<td><a onclick="myCircleFunc('${memberLoggedIn.member_id}',${memberLoggedIn.circle1_num})">나의 동아리</a></td>
+	
+			<script>
+				function myCircleFunc(id,no){
+					if(no==0){
+						alert(id+'님은 가입된 동아리가 없습니다. 동아리 가입 후 이용해주세요');
+					}
+					else{
+						location.href="${path }/clubMain.do?member_id="+id;
+					}
+				}
+			</script>
 			</tr>
 			<tr>
 			<td><a href="#">쪽지함</a> </td>

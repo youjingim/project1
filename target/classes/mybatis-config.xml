@@ -19,6 +19,7 @@
 <typeAlias type="com.yj.project.club.model.vo.Budget" alias="budget"/>
 <typeAlias type="com.yj.project.club.model.vo.Circle_board" alias="cBoard"/>
 <typeAlias type="com.yj.project.club.model.vo.CB_Comment" alias="cb_comment"/>
+<typeAlias type="com.yj.project.club.model.vo.InnerLike" alias="innerlike"/>
 </typeAliases>
 
 

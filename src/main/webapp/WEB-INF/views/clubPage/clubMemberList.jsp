@@ -22,8 +22,16 @@
 			}
 			
 		}
-		function changeLevel(id){
-			location.href="${path}/changeGrade.do?id="+id;
+		function changeLevel(id,no){
+			var grade=$("[name='memberGrade']").val();
+			var choose=confirm(id+'님의 등급을 변경하시겠습니까?');
+			if(choose==true){
+				location.href="${path}/changeGrade.do?id="+id+"&grade="+grade+"&no="+no;
+			}
+			else{
+				alert('다시 동아리 회원관리 페이지로 넘어갑니다.');
+				history.go();
+			}
 		}
 </script>
 <style>
@@ -98,7 +106,7 @@ th,td{
             </select></td>
           <td><c:out value="${m.member_phone }"/></td>
           <td><c:out value="${m.member_email }"/></td>
-          <td><button type="button" onclick="changeLevel('${m.member_id}')">등급수정</button>
+          <td><button type="button" onclick="changeLevel('${m.member_id}',${club.circle_num });">등급수정</button>
             <button type="button" onclick="deleteMember('${m.member_id}',${club.circle_num });">회원삭제</button>
           </td>
         </tr>
