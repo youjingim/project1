@@ -163,6 +163,10 @@ public class ClubDAOImpl implements ClubDAO {
 	public List<ReqCircle> selectClubCreate(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("club.selectClubCreate");
 	}
+<<<<<<< HEAD
+=======
+	@Override
+>>>>>>> second
 	public int pushLike(SqlSessionTemplate sqlSession, InnerLike like) {
 		return sqlSession.insert("club.like_check", like);
 	}

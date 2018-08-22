@@ -48,25 +48,23 @@ height:320px;
    <br><span style="font-size:35px; font-weight:bold;color:black; margin-left:45%; text-align:center;">writing</span>
 
      <div id="board-continer">
-<form class="form-horizontal" action="${path }/board/boardWrite" method='post'>
+<form class="form-horizontal" action="${path }/board/boardUpdateEnd.do" method='post'>
       <table class='table'>
       <tr>
-      <td style='text-align:center;width:7%;'>제목</td><td><input type='text' class="form-control" name="freeboard_title"></td>
+      <td style='text-align:center;width:7%;'>제목</td><td><input type='text' class="form-control" name="freeboard_title" value='${board.freeboard_title}'></td>
       </tr>
       <tr><td colspan='2'>
-          <textarea name="freeboard_content" id="content" class="summernote"></textarea>
+          <textarea name="freeboard_content" id="content" class="summernote">${board.freeboard_content}</textarea>
       </td></tr>
-   		<tr><td colspan='2' style='text-align:right;'>
-   		<
         <tr><td colspan='2' style='text-align:center;'>
-        
-          <button type="submit" class="btn btn-default">등록</button>
+          <button type="submit" class="btn btn-default" >등록</button>
         </td></tr>
-        
       </table>
-         <input type='hidden' value='${memberLoggedIn.member_id }' name="member_id">
+         <input type='hidden' value='${board.freeboard_num }' name="freeboard_num">
+      
+         <input type='hidden' value='${board.member_id }' name="member_id">
     </form>
-   
+
   <script>
     $(document).ready(function() {
         $('.summernote').summernote();
