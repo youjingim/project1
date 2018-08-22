@@ -42,8 +42,10 @@ function deleteComment(no,id){
 			dataType:"json",
 			success:function(data){
 				alert("댓글 등록!");
-				console.log(data);
-				$('#commentTable').prepend("<tr><td>"+data.member_id+"</td><td>"+data.cb_comment_date+"</td></tr><tr><td>"+data.cb_comment_content+"</td><td></td></tr>");
+				alert(data.member_id);
+				alert(data.cb_comment_date);
+				alert(data.cb_comment_content);
+				$('.comment-container').prepend("<table><tr><td>"+data.member_id+"</td><td></td><tr/><tr><td>"+data.cb_comment_content+"</td></tr></table>");
 				
 				$("#comment1").prop("value","");
 			}
@@ -207,7 +209,7 @@ function like_func(id,no,event){
 	          <input type="hidden" id="no" value="${b.cb_num }"/>
 	          <input type="hidden" id="memberId" value="${member.member_id }"/>
 	          <button type="button" class="btn btn-primary" id="comment_button" onclick="insertComment(${b.cb_num})">등록</button>
-	          <div><hr>
+	          <div class="comment-container"><hr>
 	            <c:forEach items="${clist}" var='cc' varStatus="cstatus">
 	            <c:if test="${cc.cb_num eq b.cb_num }">
 	            <table class="commentTable">
