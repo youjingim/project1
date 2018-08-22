@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: bonyeon
 Build-Jdk: 1.8.0_101
-=======
-Built-By: LENOVO
-Build-Jdk: 1.8.0_161
->>>>>>> second
 Created-By: Maven Integration for Eclipse
 

@@ -16,12 +16,16 @@
 </jsp:include>
 <style>
 section {
-	width: 100%;
-	height: 800px;
-	position: relative;
-	top: 300px;
-	background-color: white;
-	z-index: 10;
+   width: 100%;
+   height: 800px;
+   position: relative;
+   top: 150px;
+   background-color: white;
+   z-index: 10;
+}
+
+div#img_slider img{
+   display:none;
 }
 
 section div#main_container {
@@ -205,7 +209,7 @@ a:hover{color:red; text-decoration:none;}
 
 	<section>
 		<div style="background-image: url(/project/resources/image/circlebanner3.jpg);background-repeat:no-repeat;background-size: 100% 1100px;opacity:0.95;">
-		<div id='main_container' style="background-image: url(/project/resources/image/circlebanner2.jpg);background-repeat:no-repeat;background-size: 100% 1100px;opacity:0.95;">
+		<div id='main_container' style="background-image: url(/project/resources/image/circlebanner5.png);background-repeat:no-repeat;background-size: 100% 1400px;opacity:0.95;">
 			<br><br><br> 
 			<span style='font-weight: bold; margin-top: 100px; margin-left: 5%; font-size: 30px; text-align: center;color:black;'>동아리 랭킹</span> 
 			<br><br><br><br><br>
@@ -236,6 +240,7 @@ a:hover{color:red; text-decoration:none;}
 			    <c:set var="num" value="1"/>
 				<c:forEach var="circle" items="${list}" varStatus="status" begin="0" end="3">
 					<div class='mySlides myS1'>
+						
 						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
 						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
 						</a>
@@ -410,6 +415,7 @@ a:hover{color:red; text-decoration:none;}
 										onclick="university();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;직접입력</p></li>
 							</ul>
 						</div>
+						
 						<!-- 조건처리해서 안보이게끔 -->
 						<form action="${pageContext.request.contextPath }/search.do">
 							<div class="input-group" id='uni' style="display: none;">
@@ -428,7 +434,7 @@ a:hover{color:red; text-decoration:none;}
 					</script>
 					</div>
 					<form action="${pageContext.request.contextPath }/search.do">
-						<div class="col-sm-9 col-xs-offset-2">
+						<div class="col-sm-9 col-xs-offset-2" id='search2'>
 							<h4 style="color: black;font-weight:bold;">동아리명으로 검색</h4>
 							<div class="input-group">
 								<span class='green_window' style="width:600px">
@@ -443,7 +449,7 @@ a:hover{color:red; text-decoration:none;}
 				</div>
 			</div>
 		</div>
-		<!-- <div style="background-image: url(/project/resources/image/circlebanner3.jpg);background-repeat:no-repeat;background-size: 100% 100%;opacity:0.9;"> -->
+		
 		<span id="promotion" style='font-weight: bold; margin-top: 100px; margin-left: 5%; font-size: 30px; color: black;'>동아리홍보</span>
 		<div class="container" id="con1">
 			<div class="row">
@@ -467,8 +473,7 @@ a:hover{color:red; text-decoration:none;}
 									
 									<span class='likeImg' style="cursor: pointer">
 									<img src='/project/resources/image/like5.png' class='likImg' style="width: 50px; height: 45px; position: relative; right: 35px"> 
-<!-- 									<img src='https://c.motorgraph.com/files/attach/images//877/767/543edf39f81d6ae4282de20807fe284e.gif' class='likImg' style="width: 50px; height: 45px; position: relative; right: 35px">
- -->									<input type='hidden' id="circle_num" value="${circle.circle_num }">
+									<input type='hidden' id="circle_num" value="${circle.circle_num }">
 									</span>
 									
 									<span style="position:relative;right:10px;width:33px;height:33px;bottom:15px;display:inline-block" class='speech'>
@@ -512,20 +517,9 @@ a:hover{color:red; text-decoration:none;}
 										dataSpan.siblings('.speech').css({"background-image":"url(/project/resources/image/speech33.ico)","position": "relative", "top": "50%","font-size" : "18px","color" : "black"});
 										dataSpan.next().html(data2);
 										var path='/project/resources/image/';
-										/*if(data>data3){
-											alert("좋아요 추가");
-											$(this:after("input").val()).attr("value",data);
-											src = (inputImg.attr('src')===path+'like.png')?path+'like3.png':path+'like.png';
-											inputImg.attr('src',src);
-										}
-										 else{	
-											alert("좋아요 취소");
-											src =(inputImg.attr('src')===path+'like3.png')?path+'like.png':path+'like3.png';
-											inputImg.attr('src',src); 
-										} */
 									},
 									error:function(error){
-										alert("다시 시도 하거나 관리자에게 문의하세요.");
+										alert("다시 시도 하거나 재 로그인이 필요합니다.");
 									}
 								});
 							})
@@ -534,6 +528,17 @@ a:hover{color:red; text-decoration:none;}
 			<div class="pagination" id="page" style="position: relative;left:100px">
 				${pageBar}
 			</div>
+						
+			<script>
+			var flag=${flag};
+			if(flag!=0){
+				$(function(){
+					$('html, body').animate({
+						scrollTop: $('#search2').offset().top
+						}, 'slow');
+					});	
+			}
+			</script>
 		</div>
 		</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

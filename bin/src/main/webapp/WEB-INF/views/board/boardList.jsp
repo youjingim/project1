@@ -3,6 +3,8 @@
     <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
     <%@ taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
     <%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+    
     <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value="" name="pageTitle"/>
    </jsp:include>
@@ -23,7 +25,7 @@ z-index:10;
 background-color:white;
 top:30px;
 }
-   input#btn-add {float:right; margin:0 0 15px;}
+   
 
 div#main_container table#tbl-board th{
 height:60px;
@@ -55,22 +57,27 @@ div#main_container table#tbl-board th:nth-of-type(1){
 width:8%;
 }
 div#main_container table#tbl-board th:nth-of-type(2){
-width:10%;
+width:45%;
 }
 div#main_container table#tbl-board th:nth-of-type(3){
-width:45%;
-<<<<<<< HEAD
-=======
+width:10%;
 
->>>>>>> yujin
-}	
+}   
 div#main_container table#tbl-board th:nth-of-type(4){
 width:10%;
 }
 
+}   
+div#main_container table#tbl-board th:nth-of-type(4){
+width:10%;
+}
+
+div#main_container table#tbl-board td:nth-of-type(2){
+text-align:left;
+}
 
 div#main_container table#tbl-board td:nth-of-type(3){
-text-align:left;
+text-align:center;
 }
 
 
@@ -78,22 +85,39 @@ text-align:left;
 </style>
 <section>
 <div id="main_container">
-
-
-<h1 style='color:black;margin-left:1%;'>자유게시판</h1>
-<br/>
-   <p style="margin-left:1%;"> 총 ${totalCount }건의 게시물이 있습니다.</p>
-   <input type="button" value="글쓰기" id='btn-add' class='btn btn-default' onclick='fn_goboardForm();'/>
-   <script> 
+<br><br><br>
+   <br><span style="font-size:35px; font-weight:bold;color:black; margin-left:45%; text-align:center;" >자유게시판</span>
+   <br><br><br>
+   
+   
+   <span style='margin-left:75%;'>
+   <select id="searchType">
+   <option value="" selected>선택</option>
+   <option value="title" id="title" ${searchType == 'title' ? "selected":"" }>제목</option>
+   <option value="writer" id="writer" ${searchType == 'writer' ? "selected":"" }>작성자</option>
+   </select>
+   <input type="text" id="searchForm" value="${searchForm }">
+   <input type="button" value="검색" id='btn-search' class='btn btn-default' onclick='fn_searchForm()'/>
+   
+   <input type="button" value="글쓰기" id='btn-add' class='btn btn-default' onclick='fn_goboardForm()'/></span><br><br>
+  <script>
+   	  function fn_searchForm(){
+   		  location.href="${pageContext.request.contextPath}/searchForm.do?searchType="+$('#searchType').val()+"&searchForm="+$('#searchForm').val();
+   	  }
+   </script>
+  
+   <script>
       function fn_goboardForm(){
          location.href="${pageContext.request.contextPath}/boardForm.do";
       }
    </script>
+   
+   
    <table id='tbl-board' class='table'>
       <tr>
-         <th>No.</th>
-         <th>작성자</th>
+         <th>번호</th>
          <th>제목</th>
+         <th>작성자</th>
          <th>조회수</th>
          <th>첨부파일</th>
          <th>작성일</th>      
@@ -102,22 +126,29 @@ text-align:left;
          <c:forEach var='board' items='${list }' varStatus="vs">
             <tr>
                <td>${board.FREEBOARD_NUM}</td>
-               <td>${board.MEMBER_ID }</td>
                <td><a href='${pageContext.request.contextPath}/board/boardView.do?no=${board.FREEBOARD_NUM }'>${board.FREEBOARD_TITLE}</a></td>
-               <td>${board.FREEBOARD_VIEW }</td>
+			   <td>${board.MEMBER_ID }</td>              
+			   <td>${board.FREEBOARD_VIEW }</td>
                   <td align='center'><c:if test='${board.FREEBOARD_ATTACHMENT>0 }'>
                         <img alt="첨부파일"
                            src="${pageContext.request.contextPath }/resources/images/file.png"
                            width=16px>
                      </c:if></td>
-                     <td>${board.FREEBOARD_DATE }</td>
+                     <td><fmt:formatDate value="${board.FREEBOARD_DATE }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                </tr>
          </c:forEach>
       </c:if>
+      <c:if test="${empty list}">
+       <tr>
+       	<td colspan="6" style="text-align:center; font-weight:bold;">검색된 게시물이 없습니다.</td>
+       </tr>
+      </c:if>
+      
    </table>
    <span style="margin-left:50%;margin-top:100px;">
    ${pageBar }
    </span>
+
 
 
 </div>

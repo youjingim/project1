@@ -4,10 +4,6 @@
 
 <insert id="insertMember" parameterType="com.yj.project.member.model.vo.Member">
 insert into member values(#{member_id},#{member_pw},#{member_name},#{member_email},#{member_birth},#{university},#{member_addr},#{member_level},#{member_phone},sysdate,#{enroll_category,typeHandler=StringArray},#{circle1_num},0)
-<<<<<<< HEAD
-
-=======
->>>>>>> second
 </insert>
 
 <resultMap type="com.yj.project.member.model.vo.Member" id="selectMap">
