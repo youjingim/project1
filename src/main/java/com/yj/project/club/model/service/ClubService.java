@@ -14,6 +14,7 @@ import com.yj.project.club.model.vo.Club;
 import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.club.model.vo.InnerLike;
 import com.yj.project.member.model.vo.Member;
+import com.yj.project.search.model.vo.Circle;
 
 public interface ClubService {
 	public Member selectOne(String id);//로그인 한 회원정보 가져오는 로직
@@ -42,12 +43,20 @@ public interface ClubService {
 	public List<String> selectG2(int circle_num);
 	public int deleteComment(int no);
 	public int createClub(ReqCircle club);
-	public List<ReqCircle> selectClubCreate();
+	public List<ReqCircle> selectClubCreate(int cPage, int numPerPage);
 	public int pushLike(InnerLike like);
 	public InnerLike selectLike(InnerLike like);
 	public int updateDislike(InnerLike like);
 	public int updateLike(InnerLike like);
 	public List<InnerLike> selectLikeList(String member_id);
 	public int updateLevel(Member mm);
+	public int clubCount();
+	public ReqCircle makeClub(int circle_num);
+	public int deleteCircle(int circle_num);
+	public int insertCircle1(Club c);
+	public int updateMemberLevel(Map<String, Object> map);
+	public List<Club> selectClubList(int cPage,int numPerPage);
+	public int circleCount();
+	public int countMember(String member_id);
 	
 }

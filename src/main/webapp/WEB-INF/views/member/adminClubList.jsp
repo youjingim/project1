@@ -131,10 +131,10 @@ text-align:center;
 <div id="clubCreateContainer">
 <table  id='clubCreateTable'>
 
-<c:if test = '${not empty circleList}'>
-<c:forEach var="c" items="${circleList}" varStatus="vs">
+<c:if test = '${not empty clubList}'>
+<c:forEach var="c" items="${clubList}" varStatus="vs">
 <tr style='border-top:1px solid black;'>
-<td rowspan='3'><img src="resources/upload/club/${c.circle_photo }"></td><td>동아리 명 : ${c.circle_name}</td><td rowspan='3'><button class='btn btn-success' style='width:80px;height:50px;' onclick="location.href='${path}/makeClub.do?circle_num=${c.circle_num }'">승인</button></td>
+<td rowspan='3'><img src="resources/upload/club/${c.circle_photo }"></td><td>동아리 명 : ${c.circle_name}</td><td rowspan='3'><button class='btn btn-danger' style='width:80px;height:50px;' onclick="location.href='${path}/deleteClub.do?circle_num=${c.circle_num }'">삭제</button></td>
 </tr>
 <tr>
 <td>신청자 ID : ${c.member_id}
@@ -150,8 +150,8 @@ text-align:center;
 
 </table>
 
-<c:if test='${empty circleList}'>
-<span style='margin-left:45%;'>신청된 동아리가 없습니다.</span>
+<c:if test='${empty clubList}'>
+<span style='margin-left:45%;'>동아리가 없습니다.</span>
 </c:if>
 <div style='margin-left:50%;'>
 ${pageBar}
