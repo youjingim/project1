@@ -615,6 +615,11 @@ background-color:white;
 <img src='${path}/resources/image/back1.jpg'>
 </div>
 </c:if>
+<c:if test="${param.pageTitle == 'search'}">
+<div id="img_slider">
+<img src='${path}/resources/image/bae1.png'>
+</div>
+</c:if>
 
 
 

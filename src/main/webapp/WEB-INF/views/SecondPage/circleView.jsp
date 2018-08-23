@@ -31,14 +31,22 @@ height:600px;
 position:relative;
 background-color:white;
 z-index:10;
+top:300px;
+
 }
+
+div#img_slider img{
+   height:500px;
+}
+
+
 section div#main_container{
 width:100%;
 height:400px;
 position:relative;
-z-index:10;
+z-index:-1;
 background-color:white;
-top:50px;
+top:400px;
 
 }
 
@@ -60,7 +68,7 @@ top:50px;
 #sch_smit {
 	width: 130px; height: 40px;
 	vertical-align: top;
-	background: #5858FA;
+	background: #6CC0FF;
 	color: white;
 	font-weight: bold;
 	cursor: pointer;
@@ -79,7 +87,7 @@ top:50px;
 .blue_window {
 	display: inline-block;
 	width: 366px; height: 40px;
-	border: 3px solid #6C82FA;
+	border: 2px solid #6CC0FF;
 	background: white;
 }
 #tr1{
@@ -115,11 +123,10 @@ td{
 <section>
 <div id='#main_container'>
 <div class="col-xm-10" id="main_title" style="margin-top: 300px;color:#161616;">
-	<hr>
-     <div id='searchresult' style="background-image:url(/project/resources/image/searchresult.png);background-repeat:no-repeat;background-position: center;background-size: 800px 250px;margin-top:2%;width: 100%; height: 200px;">
+     <div id='searchresult' style="background-image:url(/project/resources/image/searchresult.png);background-repeat:no-repeat;background-position: center;background-size: 800px 250px;position:relative;top:50px;width: 100%; height: 200px;">
      </div>
-     <h1 style="text-align:center;position:relative;margin-left:-380px;bottom:100px;font-size:20px">총 <span style="color: red;">${totalCount }</span>개의 동아리가 검색되었습니다.</h1>
-          <div class="boardR">
+     <h1 style="text-align:center;position:relative;margin-left:-380px;bottom:50px;font-size:20px">총 <span style="color: red;">${totalCount }</span>개의 동아리가 검색되었습니다.</h1>
+          <div class="boardR" style="position:relative;bottom:230px;">
           <section id="board-container">
         <table id='table' class="table table-striped table-hover table-bordered">
           <thead>
@@ -194,7 +201,7 @@ td{
 		</div>
         </form>
 		
-        <div class="pagination" id="page" style="position: relative;left:850px;">
+        <div class="pagination" id="page" style="position: relative;left:800px;">
 				${pageBar }
 		</div>
         </section>
