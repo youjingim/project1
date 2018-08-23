@@ -41,7 +41,6 @@ margin:0px;
 position:relative;
 top:80px;
 width:30%;
-
 height:600px;
 background: #ffffff; background: rgba(255, 255, 255, 0);
 left:60%;
@@ -389,7 +388,6 @@ function login(){
                   placeholder="대학교를 선택하세요" readonly>
                   <select id='school_select' name='school_select' class="form-control" style='width:150px; display:inline-block;'>
                        <option value="" selected>선택하세요</option>
-                       <option value='서울대학교'>은경호롤롤롤로대학교</option>
                        <option value='연세대학교'>연세대학교</option>
                        <option value='고려대학교'>고려대학교</option>
                        <option value='경희대학교'>경희대학교</option>

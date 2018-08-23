@@ -87,7 +87,7 @@ top:400px;
 .blue_window {
 	display: inline-block;
 	width: 366px; height: 40px;
-	border: 1px solid #6CC0FF;
+	border: 2px solid #6CC0FF;
 	background: white;
 }
 #tr1{
