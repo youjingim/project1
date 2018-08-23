@@ -647,7 +647,7 @@ function createClub(){
 </c:if>
 <c:if test="${param.pageTitle == 'search'}">
 <div id="img_slider">
-<img src='${path}/resources/image/bae1.png'>
+<img src='${path}/resources/image/back5.png'>
 </div>
 </c:if>
 
