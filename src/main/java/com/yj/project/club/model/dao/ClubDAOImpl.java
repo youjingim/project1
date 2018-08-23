@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,7 @@ import com.yj.project.club.model.vo.Club;
 import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.club.model.vo.InnerLike;
 import com.yj.project.member.model.vo.Member;
+import com.yj.project.search.model.vo.Circle;
 
 @Repository
 public class ClubDAOImpl implements ClubDAO {
@@ -160,8 +162,9 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-	public List<ReqCircle> selectClubCreate(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("club.selectClubCreate");
+	public List<ReqCircle> selectClubCreate(SqlSessionTemplate sqlSession,int cPage,int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("club.selectClubCreate",null,rb);
 	}
 	@Override
 	public int pushLike(SqlSessionTemplate sqlSession, InnerLike like) {
@@ -194,8 +197,49 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public CB_Comment selectComment(SqlSessionTemplate sqlSession, int no) {
 		return sqlSession.selectOne("club.selectComment", no);
+=======
+	public int clubCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("club.clubCount");
+	}
+
+	@Override
+	public ReqCircle makeClub(SqlSessionTemplate sqlSession, int circle_num) {
+		return sqlSession.selectOne("club.selectReqClub",circle_num);
+	}
+
+	@Override
+	public int deleteCircle(SqlSessionTemplate sqlSession,int circle_num) {
+		return sqlSession.delete("club.deleteClub",circle_num);
+	}
+
+	@Override
+	public int insertCircle1(SqlSessionTemplate sqlSession,Club c) {
+		return sqlSession.insert("club.insertCircle",c);
+	}
+
+	@Override
+	public int updateMemberLevel(SqlSessionTemplate sqlSession, Map<String, Object> map) {
+		return sqlSession.update("club.updateMemberLevel",map);
+	}
+
+	@Override
+	public List<Club> selectClubList(SqlSessionTemplate sqlSession, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("club.selectClubList",null,rb);
+	}
+
+	@Override
+	public int circleCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("club.circleCount");
+	}
+
+	@Override
+	public int countMember(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.selectOne("club.countMember",member_id);
+>>>>>>> yujin
 	}
 	
 	

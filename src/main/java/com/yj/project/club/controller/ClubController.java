@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,7 +36,13 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 
 import com.yj.project.common.page.CirclePageCreate;
+<<<<<<< HEAD
 import com.google.gson.Gson;
+=======
+import com.yj.project.common.page.PageCreate;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+>>>>>>> yujin
 import com.google.gson.JsonIOException;
 import com.yj.project.board.controller.BoardController;
 import com.yj.project.board.model.vo.Board;
@@ -276,10 +283,6 @@ public class ClubController {
 	         	cb1.setCb_reattachment2(renamedFileName);
 	         }
 	      }
-		System.out.println(cb1.getCb_attachment());
-		System.out.println(cb1.getCb_reattachment());
-		System.out.println(cb1.getCb_attachment2());
-		System.out.println(cb1.getCb_reattachment2());
 		
 /*		if(cb1.getCb_attachment()==null) {
 			cb1.setCb_attachment("notFoundFile");
@@ -501,11 +504,32 @@ public class ClubController {
 	}
 	
 	@RequestMapping("/clubCreateEnd")
-	public ModelAndView createClubEnd(ReqCircle club,HttpServletRequest request,@RequestParam(value="member_id")String member_id,@RequestParam(value="member_pw")String member_pw) {
+	public ModelAndView createClubEnd(ReqCircle club,HttpServletRequest request,@RequestParam(value="member_id")String member_id,@RequestParam(value="member_pw")String member_pw,@RequestParam(value="circle_photo1")MultipartFile circle_photo) {
 		ModelAndView mv = new ModelAndView();
+		if(circle_photo != null) {
+			String originalFileName=circle_photo.getOriginalFilename();
+	         String saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/club");
+	         
+	         File dir=new File(saveDir);
+	         if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+	         try {
+				circle_photo.transferTo(new File(saveDir+File.separator+originalFileName));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+	            //DB에 저장할 첨부파일에 대한 정보를 구성!
+	         	club.setCircle_photo(originalFileName);
+	         }
+	      
 		int result = clubService.createClub(club);
 		String msg = "";
-		String loc = "mainPage/mainPage.jsp";
+		String loc = "/mainPageGo.do";
 		if(result > 0) {
 			msg="개설 신청 성공!";
 		}else {
@@ -654,13 +678,99 @@ public class ClubController {
 	}
 	
 	@RequestMapping("/clubManagement.do")
-	public ModelAndView clubManagement() {
+	public ModelAndView clubManagement(@RequestParam (value="cPage",required=false,defaultValue="1")int cPage) {
 		ModelAndView mv = new ModelAndView();
-		List<ReqCircle> circleList = clubService.selectClubCreate();
+		int numPerPage = 5;
+		List<ReqCircle> circleList = clubService.selectClubCreate(cPage,numPerPage);
+		int count = clubService.clubCount();
+	    String pageBar = new PageCreate().getPageBar(cPage,numPerPage,count,"clubManagement.do");
+
 		mv.addObject("circleList",circleList);
+		mv.addObject("pageBar",pageBar);
 		mv.setViewName("member/adminClub");
+		
 		return mv;
 	
+		
+	}
+	@RequestMapping("/makeClub.do")
+	public ModelAndView makeClub(int circle_num) {
+		ModelAndView mv = new ModelAndView();
+		ReqCircle circle = clubService.makeClub(circle_num);
+		Club c = new Club();
+		c.setCircle_num(circle.getCircle_num());
+		c.setCircle_name(circle.getCircle_name());
+		c.setUniversity(circle.getUniversity());
+		c.setDept_no(0);
+		c.setCircle_adviser(circle.getCircle_adviser());
+		c.setMember_id(circle.getMember_id());
+		c.setCircle_level(circle.getCircle_level());
+		c.setCircle_phone(circle.getCircle_phone());
+		c.setCircle_photo(circle.getCircle_photo());
+		c.setCategory(circle.getCategory());
+		c.setCircle_comment(circle.getCircle_comment());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", c.getMember_id());
+		map.put("circle_num", circle_num);
+		int result1 = clubService.deleteCircle(circle_num);
+		int result2 = clubService.insertCircle1(c);
+		int result3 = clubService.updateMemberLevel(map);
+		String msg = "";
+		String loc = "/mainPageGo.do";
+		if(result1>0 && result2 > 0 && result3>0) {
+			msg = "동아리 개설 수락!";
+			
+		}else {
+			msg = "동아리 개설 실패!";
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("loc",loc);
+		mv.setViewName("common/msg");
+		
+		
+		return mv;
+		
+		
+	}
+	@RequestMapping("/mainPageGo.do")
+	public String mainPageGo(HttpServletRequest request) {
+		Member member = (Member)request.getSession().getAttribute("memberLoggedIn");
+		return "mainPage/mainPage";
+	}
+	
+	@RequestMapping("/clubList.do")
+	public ModelAndView clubList(@RequestParam (value="cPage",required=false,defaultValue="1")int cPage) {
+		ModelAndView mv = new ModelAndView();
+		int numPerPage = 5;
+		List<Club> clubList = clubService.selectClubList(cPage,numPerPage);
+		int count = clubService.circleCount();
+	    String pageBar = new PageCreate().getPageBar(cPage,numPerPage,count,"clubList.do");
+	    
+	    mv.addObject("cPage",cPage);
+	    mv.addObject("pageBar",pageBar);
+	    mv.addObject("clubList",clubList);
+	    mv.setViewName("member/adminClubList");
+		return mv;
+	}
+	@RequestMapping("clubMemberCheck.do")
+	public void memberCheck(@RequestParam(value="member_id")String member_id,HttpServletResponse res) {
+		int count = clubService.countMember(member_id);
+		boolean check=false;
+		if(count>0) {
+			check=true;
+		}else {
+			check=false;
+		}
+		Gson gson=new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		try {
+			gson.toJson(check,res.getWriter());
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }

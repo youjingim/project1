@@ -37,7 +37,7 @@ background-color:white;
 <br><br>
 
       <div class="col-sm-6 col-md-offset-3" style='margin-left:25%;'>
-         <form action='${path}/clubCreateEnd' method='post'>
+         <form action='${path}/clubCreateEnd' method='post' enctype="multipart/form-data">
 		  <table class='table' style='color:black;'>
 		  <tr>
 		  <td>동아리 명</td>
@@ -67,7 +67,7 @@ background-color:white;
 		  <tr>
 		  <td>동아리 대표사진</td>
 		  <td>
-		  <input type="file" name="circle_photo" value="" >
+		  <input type="file" name="circle_photo1" value="" >
           <div id="filephoto1" style="position:absolute;top:1020px;left:268px; background-color:white; width:150px;"></div>
           <input type="hidden" name="oldfile1" value="">
 		  

@@ -50,6 +50,8 @@ border-collapse:collapse;
 #member_table {
 margin:0 auto;
 width:90%;
+position:relative;
+left:10%;
 }
 th,td {
 text-align:center;
@@ -66,7 +68,7 @@ border-bottom:3px solid black;
 width:300px;
 height:300px;
 position:absolute;
-top:100px;
+top:200px;
 left:20px;
 }
 div#adminMenu table{
@@ -112,7 +114,7 @@ color:gray;
 </tr>
 <tr>
 <td>
-<a href='#'>회원관리 관리</a>
+<a href='${path }/clubList.do'>동아리 관리</a>
 </td>
 </tr>
 </table>
@@ -120,12 +122,11 @@ color:gray;
 </div>
   <br>
       <br> <span
-         style='font-size: 30px; font-weight: bold; margin-left: 45%;color:black;'>관리자 페이지</span>
-      <br>
+         style='font-size: 30px; font-weight: bold; margin-left: 29%;color:black;'>회원관리</span>
       <hr />
-<br><br>
+<br>
 	
-    <form action="${path }/member/memberFinder.do">
+    <form action="${path }/member/memberFinder.do" style='margin-left:44%;'>
 	<select name='level' class='form-control'style='width:150px; margin-left:35%; display:inline-block'>
 	<option value=''>등급 선택</option>
 	<option value='L5'>회장</option>
@@ -136,21 +137,22 @@ color:gray;
 	<div id="search-userId" style=' display:inline-block'>
                 <input type='text' class='form-control' name="searchKeyword" size='25' placeholder="검색할 회원ID를 입력하세요." style="width: 300px; display:inline-block;" >
                 <button class="btn btn-info" type='submit' style=" display:inline-block;">검색</button>
+            </div>
             </form>
-    </div>
 	<div id='member_table'>
+	<br>
    <table>
 	<tr>
-		<th><span class='glyphicon glyphicon-user' style='color:red'/></th>
-		<th><span class='glyphicon glyphicon-sunglasses' style='color:orange'/></th>
-		<th><span class='glyphicon glyphicon-envelope' style='color:goldenrod'/></th>
-		<th><span class='glyphicon glyphicon-phone' style='color:green'/></th>
-		<th><span class='glyphicon glyphicon-gift' style='color:yellowgreen'/></th>
-		<th><span class='glyphicon glyphicon-education' style='color:skyblue'/></th>
-		<th><span class='glyphicon glyphicon-heart' style='color:blue'/></th>
-		<th><span class='glyphicon glyphicon-calendar' style='color:pink'/></th>
-		<th><span class='glyphicon glyphicon-queen' style='color:navy'/></th>
-		<th><span class='glyphicon glyphicon-thumbs-down' style='color:purple'/></th>
+		<th><span class='glyphicon glyphicon-user' style='color:red'></span></th>
+		<th><span class='glyphicon glyphicon-sunglasses' style='color:orange'></span></th>
+		<th><span class='glyphicon glyphicon-envelope' style='color:goldenrod'></span></th>
+		<th><span class='glyphicon glyphicon-phone' style='color:green'></span></th>
+		<th><span class='glyphicon glyphicon-gift' style='color:yellowgreen'></span></th>
+		<th><span class='glyphicon glyphicon-education' style='color:skyblue'></span></th>
+		<th><span class='glyphicon glyphicon-heart' style='color:blue'></span></th>
+		<th><span class='glyphicon glyphicon-calendar' style='color:pink'></span></th>
+		<th><span class='glyphicon glyphicon-queen' style='color:navy'></span></th>
+		<th><span class='glyphicon glyphicon-thumbs-down' style='color:purple'></span></th>
 	</tr>
 	<tr id='linetop' style='font-size:10px; color:black'>
 		<td>ID</td>
@@ -208,7 +210,8 @@ $(function(){
 	
 	});	
 </script>
-<div style="margin-left:48%">
+<div style="margin-left:55%">
+<br>
 ${pageBar }
 </div>
 </div>

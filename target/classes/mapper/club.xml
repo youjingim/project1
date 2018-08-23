@@ -124,7 +124,35 @@
 	<select id='selectClubCreate' resultType="com.yj.project.club.model.vo.ReqCircle">
 	select * from circle_register order by circle_num asc
 	</select>
+<<<<<<< HEAD
 	<select id="selectComment" resultType="cb_comment">
 		SELECT * FROM CB_COMMENT WHERE CB_NUM=#{no} and CB_COMMENTNO = (select MAX(CB_COMMENTNO) from CB_COMMENT where CB_NUM=#{cb_num})
 	</select>
+=======
+	<select id='clubCount' resultType='_int'>
+	select count(*) from circle_register
+	</select>
+	<select id = 'selectReqClub' parameterType="_int" resultType='com.yj.project.club.model.vo.ReqCircle'>
+	select * from circle_register where circle_num = #{circle_num}
+	</select>
+	<delete id='deleteClub' parameterType="_int">
+	delete from circle_register where circle_num = #{circle_num}
+	</delete>
+	<insert id='insertCircle' parameterType="com.yj.project.club.model.vo.Club">
+	insert into circle values(#{circle_num},#{circle_name},#{university},1,#{circle_adviser},#{member_id},#{circle_level},#{circle_phone},sysdate,#{circle_photo},#{category},#{circle_comment},0,null)
+	</insert>
+	<update id='updateMemberLevel' parameterType="string">
+	update member set member_level='L5',circle1_num=#{circle_num} where member_id=#{member_id} 
+	</update>
+	<select id='selectClubList' resultType='com.yj.project.club.model.vo.Club'>
+	select * from circle
+	</select>
+	<select id='circleCount' resultType='_int'>
+	select count(*) from circle
+	</select>
+	<select id='countMember' parameterType="string" resultType='_int'>
+	select count(*) from circle_register where member_id=#{member_id}
+	</select>
+	
+>>>>>>> yujin
 </mapper>

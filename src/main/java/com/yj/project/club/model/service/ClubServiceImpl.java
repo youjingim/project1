@@ -19,6 +19,7 @@ import com.yj.project.club.model.vo.Club;
 import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.club.model.vo.InnerLike;
 import com.yj.project.member.model.vo.Member;
+import com.yj.project.search.model.vo.Circle;
 
 @Service
 public class ClubServiceImpl implements ClubService {
@@ -158,8 +159,8 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public List<ReqCircle> selectClubCreate() {
-		return clubDAO.selectClubCreate(sqlSession);
+	public List<ReqCircle> selectClubCreate(int cPage, int numPerPage) {
+		return clubDAO.selectClubCreate(sqlSession,cPage,numPerPage);
 	}
 	@Override
 	public int pushLike(InnerLike like) {
@@ -192,8 +193,48 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public CB_Comment selectComment(int no) {
 		return clubDAO.selectComment(sqlSession,no);
+=======
+	public int clubCount() {
+		return clubDAO.clubCount(sqlSession);
+	}
+
+	@Override
+	public ReqCircle makeClub(int circle_num) {
+		return clubDAO.makeClub(sqlSession,circle_num);
+	}
+
+	@Override
+	public int deleteCircle(int circle_num) {
+		return clubDAO.deleteCircle(sqlSession,circle_num);
+	}
+
+	@Override
+	public int insertCircle1(Club c) {
+		return clubDAO.insertCircle1(sqlSession,c);
+	}
+
+	@Override
+	public int updateMemberLevel(Map<String, Object> map) {
+		return clubDAO.updateMemberLevel(sqlSession,map);
+	}
+
+	@Override
+	public List<Club> selectClubList(int cPage, int numPerPage) {
+		return clubDAO.selectClubList(sqlSession,cPage,numPerPage);
+	}
+
+	@Override
+	public int circleCount() {
+		return clubDAO.circleCount(sqlSession);
+	}
+
+	@Override
+	public int countMember(String member_id) {
+		return clubDAO.countMember(sqlSession,member_id);
+>>>>>>> yujin
 	}
 	
 	
