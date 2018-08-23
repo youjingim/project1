@@ -367,7 +367,7 @@ searchType option{
 					<div class='mySlides myS1'>
 						
 						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
-						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image'> 
+						<img src="/project/resources/upload/club/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image'> 
 						</a>
 						<div class="text-block">
 							<c:set var="count" value="${count + 1}" />
@@ -395,7 +395,7 @@ searchType option{
 					<div class='row' id='slider' style="display:none">
 					<c:forEach var="circle" items="${list}" varStatus="status" begin="0" end="3">
 						<div class='column'>
-							<img class='demo cursor dem1' src="/project/resources/image/${circle.circle_photo }" style="width: 100%; height: 200px; cursor: pointer;" onclick='currentSlide(${status.count})'>
+							<img class='demo cursor dem1' src="/project/resources/upload/club/${circle.circle_photo }" style="width: 100%; height: 200px; cursor: pointer;" onclick='currentSlide(${status.count})'>
 						</div>
 					</c:forEach>
 					</div>
@@ -435,7 +435,7 @@ searchType option{
 					<div class='row' style="display:none">
 					<c:forEach var="circle" items="${circleenroll }" varStatus="status1" begin="0" end="3">
 						<div class='column' id='slider2'>
-							<img class='demo cursor dem2' src="/project/resources/image/${circle.circle_photo}" style="width: 100%; height: 200px; cursor: pointer;" onclick='currentSlide1(${status1.count})'>
+							<img class='demo cursor dem2' src="/project/resources/upload/club/${circle.circle_photo}" style="width: 100%; height: 200px; cursor: pointer;" onclick='currentSlide1(${status1.count})'>
 						</div>
 					</c:forEach>
 					</div>
@@ -525,7 +525,7 @@ searchType option{
 								
 								<div class="panel-body" style="padding:0;margin-right:0;">
 									<a href='${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }'>
-										<img src="/project/resources/image/${circle.circle_photo }" class="img-responsive" style="width: 120%; height: 180px" alt="Image">
+										<img src="/project/resources/upload/club/${circle.circle_photo }" class="img-responsive" style="width: 120%; height: 180px" alt="Image">
 									</a>
 								</div>
 								<br>
