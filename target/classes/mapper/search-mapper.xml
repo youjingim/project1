@@ -14,7 +14,7 @@
   </select>
   
   <select id="circleList2" resultMap="circleList">
-  	select * from circle order by circle_name asc
+  	select * from circle order by circle_name asc,circle_like desc
   </select>
   
   <resultMap type="circle" id="circleList">

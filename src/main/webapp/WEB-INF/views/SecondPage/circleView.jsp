@@ -60,20 +60,14 @@ top:400px;
 	outline: none;
 }
 
-.blue_window{
-	border-top-left-radius : 10px;
-	border-bottom-left-radius : 10px;
-}
-
 #sch_smit {
-	width: 130px; height: 40px;
+	width: 70px; height: 40px;
 	vertical-align: top;
-	background: #6CC0FF;
-	color: white;
+	background: white;
+	color: gray;
 	font-weight: bold;
 	cursor: pointer;
-	border-top-right-radius : 10px;
-	border-bottom-right-radius : 10px;
+	border: 1px solid gray;
 	position:relative;
 	right:7.5px;
 	border-top-left-radius : 0px;
@@ -81,27 +75,24 @@ top:400px;
 }
 
 #sch_smit:hover {
-	background: #5882FA;
+	background: lightgray;
 }
 
 .blue_window {
 	display: inline-block;
 	width: 366px; height: 40px;
-	border: 2px solid #6CC0FF;
+	border: 1px solid gray;
 	background: white;
-}
-#tr1{
-	border : 3.05px solid black;
-
 }
 
 .th-lg{
 	font-weight:bold;
 	color:black;
+	border-bottom: 2px solid black;
 }
 
 td{
-	border-top: 2px solid black;
+	border-bottom: 2px solid black;
 	color:black;
 }
 #table{
@@ -112,11 +103,11 @@ td{
 }
 
 #searchType{
-	border-radius:5px;
-	height:35px;
+	height:40px;
 	position:relative;
 	left:3px;
-	bottom:1.5px;
+	top:1px;
+	border : 1px solid gray;
 	outline:none;
 }
 </style>
@@ -128,19 +119,19 @@ td{
      <h1 style="text-align:center;position:relative;margin-left:-380px;bottom:50px;font-size:20px">총 <span style="color: red;">${totalCount }</span>개의 동아리가 검색되었습니다.</h1>
           <div class="boardR" style="position:relative;bottom:230px;">
           <section id="board-container">
-        <table id='table' class="table table-striped table-hover table-bordered">
+        <table id='table' class="table table-bordered">
           <thead>
             <tr id='tr1'>
-              <th class="th-lg">동아리No.</th>
-              <th class="th-lg">대학교<i class="fa fa-sort ml-1"></i></th>
-              <th class="th-lg">동아리명(카테고리)<i class="fa fa-sort ml-1"></i></th>
-              <th class="th-lg">동아리회장<i class="fa fa-sort ml-1"></i></th>
-              <th class="th-lg">좋아요<i class="fa fa-sort ml-1"></i></th>
+              <th class="th-lg">No.</th>
+              <th class="th-lg">대학교</th>
+              <th class="th-lg">동아리명(카테고리)</th>
+              <th class="th-lg">동아리회장</th>
+              <th class="th-lg">좋아요</th>
             </tr>
           </thead>
           <c:if test="${not empty list }">
 		  <c:forEach var='circle' items='${list }' varStatus="vs">
-			<tr>
+			<tr id="tr2">
 					<td style="width:15%;">${circle.circle_num }</td>
 					<td style="width:20%">${circle.university }</td>
 					<td class="text-warning" style="font-weight:600;">
@@ -169,7 +160,7 @@ td{
 					<input type='text' class='input_text' name='Unsearch'  placeholder="대학 이름 입력">
 				</span>
 				<button type='submit' id='sch_smit' class='btn btn-info btn-lg'>
-					<span class="glyphicon glyphicon-search"></span> Search 
+					<span class="glyphicon glyphicon-search"></span>
 				</button>			
             </form>	
         </div>
@@ -180,7 +171,7 @@ td{
 					<input type='text' class='input_text' name='circle_name' placeholder="동아리명 입력">
 				</span>
 				<button type='submit' id='sch_smit' class='btn btn-info btn-lg'>
-					<span class="glyphicon glyphicon-search"></span> Search 
+					<span class="glyphicon glyphicon-search"></span>  
 				</button>			
             </form>	
         </div> 
