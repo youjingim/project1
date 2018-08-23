@@ -770,4 +770,38 @@ public class ClubController {
 		}
 		
 	}
+	
+	@RequestMapping("clubFail.do")
+	public ModelAndView clubFail(int circle_num,String table) {
+		ModelAndView mv = new ModelAndView();
+		String msg="";
+		String loc="";
+		if(table.equals("거절")) {
+			loc="/clubManagement.do";
+		}else {
+			loc="/clubList.do";
+		}
+		
+		
+		if(table.equals("거절")) {
+			table="circle_register";
+		}else {
+			table="circle";
+		}
+		mv.addObject("loc",loc);
+		mv.setViewName("common/msg");
+		System.out.println(table);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("table",table);
+		map.put("circle_num", circle_num);
+		int result = clubService.deleteCircle(map);
+		if(result>0) {
+			msg="삭제 성공!";
+		}else {
+			msg="삭제 실패!";
+		}
+		mv.addObject("msg", msg);
+		return mv;
+		
+	}
 }

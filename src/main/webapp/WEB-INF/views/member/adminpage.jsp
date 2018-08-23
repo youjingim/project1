@@ -49,9 +49,8 @@ border-collapse:collapse;
 }
 #member_table {
 margin:0 auto;
-width:90%;
+width:100%;
 position:relative;
-left:10%;
 }
 th,td {
 text-align:center;
@@ -65,11 +64,11 @@ border-bottom:1px solid black;
 border-bottom:3px solid black;
 }
 #adminMenu{
-width:300px;
+width:40%;
 height:300px;
 position:absolute;
-top:200px;
-left:20px;
+top:30px;
+left:33%;
 }
 div#adminMenu table{
 }
@@ -84,7 +83,7 @@ height:80px;
 
 }
 div#adminMenu table tr td:hover{
-width:310px;
+font-size:22px;
 height:90px;
 }
 div#adminMenu table tr td a{
@@ -106,13 +105,9 @@ color:gray;
 <td>
 <a href='${path }/member/adminPage.do'>회원관리</a>
 </td>
-</tr>
-<tr>
 <td>
 <a href='${path }/clubManagement.do'>동아리 개설관리</a>
 </td>
-</tr>
-<tr>
 <td>
 <a href='${path }/clubList.do'>동아리 관리</a>
 </td>
@@ -121,12 +116,12 @@ color:gray;
 
 </div>
   <br>
-      <br> <span
-         style='font-size: 30px; font-weight: bold; margin-left: 29%;color:black;'>회원관리</span>
+      <br><br><br><br><br><br> <span
+         style='font-size: 30px; font-weight: bold; margin-left: 10%;color:black;'>회원관리</span>
       <hr />
 <br>
-	
-    <form action="${path }/member/memberFinder.do" style='margin-left:44%;'>
+	<br><br><br>
+    <form action="${path }/member/memberFinder.do" style='margin-left:5%;'>
 	<select name='level' class='form-control'style='width:150px; margin-left:35%; display:inline-block'>
 	<option value=''>등급 선택</option>
 	<option value='L5'>회장</option>
@@ -141,7 +136,7 @@ color:gray;
             </form>
 	<div id='member_table'>
 	<br>
-   <table>
+   <table style='width:80%;margin-left:10%'>
 	<tr>
 		<th><span class='glyphicon glyphicon-user' style='color:red'></span></th>
 		<th><span class='glyphicon glyphicon-sunglasses' style='color:orange'></span></th>
@@ -210,7 +205,7 @@ $(function(){
 	
 	});	
 </script>
-<div style="margin-left:55%">
+<div style="margin-left:48%">
 <br>
 ${pageBar }
 </div>

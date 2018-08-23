@@ -597,9 +597,7 @@ function createClub(){
 			<tr>
 			<td>${memberLoggedIn.member_id}님</td>
 			</tr>
-			<tr>
-			<td><a href="${path }/member/mypage.do">마이페이지</a></td>
-			</tr>
+
 			<tr>
 
 			<td><a onclick="myCircleFunc('${memberLoggedIn.member_id}',${memberLoggedIn.circle1_num})">나의 동아리</a></td>

@@ -222,6 +222,7 @@ public class ClubDAOImpl implements ClubDAO {
 
 	@Override
 	public int updateMemberLevel(SqlSessionTemplate sqlSession, Map<String, Object> map) {
+		System.out.println("여기당여여가가"+map.get("circle_num"));
 		return sqlSession.update("club.updateMemberLevel",map);
 	}
 
@@ -239,6 +240,11 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public int countMember(SqlSessionTemplate sqlSession, String member_id) {
 		return sqlSession.selectOne("club.countMember",member_id);
+	}
+
+	@Override
+	public int deleteCircle(SqlSessionTemplate sqlSession, Map<String, Object> map) {
+		return sqlSession.delete("club.deletec",map);
 	}
 	
 	

@@ -59,5 +59,6 @@ public interface ClubService {
 	public List<Club> selectClubList(int cPage,int numPerPage);
 	public int circleCount();
 	public int countMember(String member_id);
+	public int deleteCircle(Map<String, Object>map);
 	
 }

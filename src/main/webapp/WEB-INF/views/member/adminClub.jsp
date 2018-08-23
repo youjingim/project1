@@ -41,11 +41,11 @@ z-index:10;
 background-color:white;
 }
 #adminMenu{
-width:300px;
+width:40%;
 height:300px;
 position:absolute;
-top:100px;
-left:20px;
+top:30px;
+left:33%;
 }
 div#adminMenu table{
 }
@@ -60,7 +60,7 @@ height:80px;
 
 }
 div#adminMenu table tr td:hover{
-width:310px;
+font-size:22px;
 height:90px;
 }
 div#adminMenu table tr td a{
@@ -73,23 +73,22 @@ color:gray;
 }
 div#clubCreateContainer{
 position:absolute;
-width:60%;
+width:80%;
 height:auto;
-left:30%;
-top:200px;
-border:1px solid black;
+left:10%;
+top:270px;
 }
 #clubCreateTable{
 width:100%;
 }
 #clubCreateTable img{
 width:80%;
-height:90%;
+height:250px;
 margin-left:10%;
 }
 
 #clubCreateTable tr td{
-height:100px;
+height:50px;
 color:black;
 padding-top:30px;
 }
@@ -113,13 +112,9 @@ text-align:center;
 <td>
 <a href='${path }/member/adminPage.do'>회원관리</a>
 </td>
-</tr>
-<tr>
 <td>
 <a href='${path }/clubManagement.do'>동아리 개설관리</a>
 </td>
-</tr>
-<tr>
 <td>
 <a href='${path }/clubList.do'>동아리 관리</a>
 </td>
@@ -127,6 +122,11 @@ text-align:center;
 </table>
 
 </div>
+  <br>
+      <br><br><br><br><br><br>  <span
+         style='font-size: 30px; font-weight: bold; margin-left: 10%;color:black;'>동아리개설 관리</span>
+      <hr />
+<br>
 
 <div id="clubCreateContainer">
 <table  id='clubCreateTable'>
@@ -134,15 +134,26 @@ text-align:center;
 <c:if test = '${not empty circleList}'>
 <c:forEach var="c" items="${circleList}" varStatus="vs">
 <tr style='border-top:1px solid black;'>
-<td rowspan='3'><img src="resources/upload/club/${c.circle_photo }"></td><td>동아리 명 : ${c.circle_name}</td><td rowspan='3'><button class='btn btn-success' style='width:80px;height:50px;' onclick="location.href='${path}/makeClub.do?circle_num=${c.circle_num }'">승인</button></td>
-</tr>
-<tr>
-<td>신청자 ID : ${c.member_id}
+<td rowspan='5'><img src="resources/upload/club/<c:if test='${c.circle_photo != null}'>${c.circle_photo }</c:if><c:if test='${c.circle_photo == null}'>noimage.png</c:if>"></td><td>ID : ${c.member_id}</td><td rowspan='5'><button class='btn btn-default'  onclick="location.href='${path}/makeClub.do?circle_num=${c.circle_num }'">승인</button><br><br><button class='btn btn-default'  onclick="location.href='${path}/clubFail.do?circle_num=${c.circle_num }&table=거절'">거절</button>
 </td>
 </tr>
 <tr>
-<td>Phone : ${c.circle_phone}</td>
-</tr >
+<td>Phone : ${c.circle_phone}
+</td>
+</tr>
+<tr>
+<td>소속학교 : ${c.university}</td>
+</tr>
+<tr>
+<td>카테고리 : ${c.category}</td>
+</tr>
+<tr>
+<td>comment : ${c.circle_comment}</td>
+</tr>
+
+<tr>
+<td style='text-align:left;font-size:27px;font-weight:bold;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:20px;'>동아리명 :</span> ${c.circle_name}</td>
+</tr>
 <tr><td colspan='3'></td></tr>
 </c:forEach>
 

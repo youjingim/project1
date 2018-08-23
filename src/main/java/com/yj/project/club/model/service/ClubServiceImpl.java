@@ -236,6 +236,11 @@ public class ClubServiceImpl implements ClubService {
 		return clubDAO.countMember(sqlSession,member_id);
 
 	}
+
+	@Override
+	public int deleteCircle(Map<String, Object> map) {
+		return clubDAO.deleteCircle(sqlSession,map);
+	}
 	
 	
 	

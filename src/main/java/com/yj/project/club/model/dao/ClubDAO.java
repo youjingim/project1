@@ -61,4 +61,5 @@ public interface ClubDAO {
 	public List<Club> selectClubList(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
 	public int circleCount(SqlSessionTemplate sqlSession);
 	public int countMember(SqlSessionTemplate sqlSession,String member_id);
+	public int deleteCircle(SqlSessionTemplate sqlSession,Map<String, Object> map);
 }

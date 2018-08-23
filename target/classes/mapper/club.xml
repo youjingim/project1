@@ -139,7 +139,7 @@
 	<insert id='insertCircle' parameterType="com.yj.project.club.model.vo.Club">
 	insert into circle values(#{circle_num},#{circle_name},#{university},1,#{circle_adviser},#{member_id},#{circle_level},#{circle_phone},sysdate,#{circle_photo},#{category},#{circle_comment},0,null)
 	</insert>
-	<update id='updateMemberLevel' parameterType="string">
+	<update id='updateMemberLevel' parameterType="map">
 	update member set member_level='L5',circle1_num=#{circle_num} where member_id=#{member_id} 
 	</update>
 	<select id='selectClubList' resultType='com.yj.project.club.model.vo.Club'>
@@ -151,5 +151,8 @@
 	<select id='countMember' parameterType="string" resultType='_int'>
 	select count(*) from circle_register where member_id=#{member_id}
 	</select>
+	<delete id='deletec' parameterType="map">
+	delete from <if test="table == 'circle_register'">circle_register</if> <if test="table != 'circle_register'">circle</if> where circle_num = #{circle_num}
+	</delete>
 	
 </mapper>
