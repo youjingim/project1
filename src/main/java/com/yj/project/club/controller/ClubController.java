@@ -36,13 +36,10 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 
 import com.yj.project.common.page.CirclePageCreate;
-<<<<<<< HEAD
 import com.google.gson.Gson;
-=======
 import com.yj.project.common.page.PageCreate;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
->>>>>>> yujin
 import com.google.gson.JsonIOException;
 import com.yj.project.board.controller.BoardController;
 import com.yj.project.board.model.vo.Board;

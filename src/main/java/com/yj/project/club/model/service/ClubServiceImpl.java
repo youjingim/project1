@@ -193,10 +193,10 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public CB_Comment selectComment(int no) {
 		return clubDAO.selectComment(sqlSession,no);
-=======
+	}
+	@Override
 	public int clubCount() {
 		return clubDAO.clubCount(sqlSession);
 	}
@@ -234,7 +234,7 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int countMember(String member_id) {
 		return clubDAO.countMember(sqlSession,member_id);
->>>>>>> yujin
+
 	}
 	
 	

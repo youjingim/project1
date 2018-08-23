@@ -197,10 +197,10 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public CB_Comment selectComment(SqlSessionTemplate sqlSession, int no) {
 		return sqlSession.selectOne("club.selectComment", no);
-=======
+	}
+	@Override	
 	public int clubCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("club.clubCount");
 	}
@@ -239,7 +239,6 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public int countMember(SqlSessionTemplate sqlSession, String member_id) {
 		return sqlSession.selectOne("club.countMember",member_id);
->>>>>>> yujin
 	}
 	
 	

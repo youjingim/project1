@@ -50,9 +50,7 @@ public interface ClubService {
 	public int updateLike(InnerLike like);
 	public List<InnerLike> selectLikeList(String member_id);
 	public int updateLevel(Member mm);
-<<<<<<< HEAD
 	public CB_Comment selectComment(int no);
-=======
 	public int clubCount();
 	public ReqCircle makeClub(int circle_num);
 	public int deleteCircle(int circle_num);
@@ -61,6 +59,5 @@ public interface ClubService {
 	public List<Club> selectClubList(int cPage,int numPerPage);
 	public int circleCount();
 	public int countMember(String member_id);
->>>>>>> yujin
 	
 }

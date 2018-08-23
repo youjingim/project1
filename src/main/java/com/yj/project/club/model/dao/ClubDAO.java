@@ -52,9 +52,7 @@ public interface ClubDAO {
 	public int updateLike(SqlSessionTemplate sqlSession,InnerLike like);
 	public List<InnerLike> selectLikeList(SqlSessionTemplate sqlSession,String member_id);
 	public int updateLevel(SqlSessionTemplate sqlSession,Member mm);
-<<<<<<< HEAD
 	public CB_Comment selectComment(SqlSessionTemplate sqlSession,int no);
-=======
 	public int clubCount(SqlSessionTemplate sqlSession);
 	public ReqCircle makeClub(SqlSessionTemplate sqlSession,int circle_num);
 	public int deleteCircle(SqlSessionTemplate sqlSession,int circle_num);
@@ -63,5 +61,4 @@ public interface ClubDAO {
 	public List<Club> selectClubList(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
 	public int circleCount(SqlSessionTemplate sqlSession);
 	public int countMember(SqlSessionTemplate sqlSession,String member_id);
->>>>>>> yujin
 }
