@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="message">
+ 	<select id="selectReceiveList" resultType="message">
+		SELECT * FROM MESSAGE WHERE MESSAGE_RECEIVER=#{id} ORDER BY MESSAGE_NUM DESC
+	</select>
+	<select id="selectReceiveCount" resultType="_int">
+		SELECT COUNT(*) FROM MESSAGE WHERE MESSAGE_RECEIVER=#{id}
+	</select>
+	<select id="selectSendList" resultType="message">
+		SELECT * FROM MESSAGE WHERE MESSAGE_SENDER=#{id} ORDER BY MESSAGE_NUM DESC
+	</select>
+	<select id="selectSendCount" resultType="_int">
+		SELECT COUNT(*) FROM MESSAGE WHERE MESSAGE_SENDER=#{id}
+	</select>
+</mapper>

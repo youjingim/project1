@@ -140,7 +140,7 @@ function like_func(id,no,event){
               <h6 class="w3-opacity" style="cursor:pointer"><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>우리 동아리 소식을 공유해요~</h6>
               <span style="margin-top: -30px; float: right;">(글쓰기)</span>
               </div>
-              <div id="post" style="display:none;">
+              <div id="post" >
               <form action="clubMainPage.do" method="post" enctype="multipart/form-data" onsubmit="return validate();">
                     <input type="text" class="form-control" id="cb_title" name="cb_title" placeholder="게시글 제목을 작성해주세요."><br>
                     <textarea class="form-control" rows="5" id="cb_content" name="cb_content" placeholder="게시글 내용을 작성해주세요."></textarea>
