@@ -284,7 +284,6 @@ public class MemberController {
 			props.put("mail.smtp.port", "465");
 			props.put("mail.smtp.user", from);
 			props.put("mail.smtp.auth", "true");
-
 			Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
 					return new PasswordAuthentication("ppj1017@gmail.com", "ahfmrqhd1!a");
