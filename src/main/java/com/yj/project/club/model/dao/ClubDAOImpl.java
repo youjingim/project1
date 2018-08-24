@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,9 @@ import com.yj.project.calendar.model.vo.Matching;
 
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.club.model.vo.ReqCircle;
+import com.yj.project.club.model.vo.InnerLike;
 import com.yj.project.member.model.vo.Member;
+import com.yj.project.search.model.vo.Circle;
 
 @Repository
 public class ClubDAOImpl implements ClubDAO {
@@ -157,6 +160,93 @@ public class ClubDAOImpl implements ClubDAO {
 	public int createClub(SqlSessionTemplate sqlSession, ReqCircle club) {
 		return sqlSession.insert("club.createClub",club);
 	}
+
+	@Override
+	public List<ReqCircle> selectClubCreate(SqlSessionTemplate sqlSession,int cPage,int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("club.selectClubCreate",null,rb);
+	}
+	@Override
+	public int pushLike(SqlSessionTemplate sqlSession, InnerLike like) {
+		return sqlSession.insert("club.like_check", like);
+	}
+
+	@Override
+	public InnerLike selectLike(SqlSessionTemplate sqlSession, InnerLike like) {
+		return sqlSession.selectOne("club.selectLike", like);
+	}
+
+	@Override
+	public int updateDislike(SqlSessionTemplate sqlSession, InnerLike like) {
+		return sqlSession.update("club.updateDislike", like);
+	}
+
+	@Override
+	public int updateLike(SqlSessionTemplate sqlSession, InnerLike like) {
+		return sqlSession.update("club.updateLike", like);
+	}
+
+	@Override
+	public List<InnerLike> selectLikeList(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.selectList("club.selectLikeList", member_id);
+	}
+
+	@Override
+	public int updateLevel(SqlSessionTemplate sqlSession, Member mm) {
+		return sqlSession.update("club.updateLevel", mm);
+	}
+
+	@Override
+	public CB_Comment selectComment(SqlSessionTemplate sqlSession, int no) {
+		return sqlSession.selectOne("club.selectComment", no);
+	}
+	@Override	
+	public int clubCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("club.clubCount");
+	}
+
+	@Override
+	public ReqCircle makeClub(SqlSessionTemplate sqlSession, int circle_num) {
+		return sqlSession.selectOne("club.selectReqClub",circle_num);
+	}
+
+	@Override
+	public int deleteCircle(SqlSessionTemplate sqlSession,int circle_num) {
+		return sqlSession.delete("club.deleteClub",circle_num);
+	}
+
+	@Override
+	public int insertCircle1(SqlSessionTemplate sqlSession,Club c) {
+		return sqlSession.insert("club.insertCircle",c);
+	}
+
+	@Override
+	public int updateMemberLevel(SqlSessionTemplate sqlSession, Map<String, Object> map) {
+		System.out.println("여기당여여가가"+map.get("circle_num"));
+		return sqlSession.update("club.updateMemberLevel",map);
+	}
+
+	@Override
+	public List<Club> selectClubList(SqlSessionTemplate sqlSession, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("club.selectClubList",null,rb);
+	}
+
+	@Override
+	public int circleCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("club.circleCount");
+	}
+
+	@Override
+	public int countMember(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.selectOne("club.countMember",member_id);
+	}
+
+	@Override
+	public int deleteCircle(SqlSessionTemplate sqlSession, Map<String, Object> map) {
+		return sqlSession.delete("club.deletec",map);
+	}
+	
 	
 	
 

@@ -100,14 +100,59 @@
 	<delete id="deleteComment">
 		DELETE FROM CB_COMMENT WHERE CB_COMMENTNO=#{no}
 	</delete>
-	<update id="like_check" parameterType="HashMap">
-		UPDATE INNERLIKE SET CB_LIKE_CHECK=CB_LIKE_CHECK + 1 WHERE MEMBER_ID=#{member_id} AND CB_NO=#{cb_no}
+	<insert id="like_check">
+		insert into INNERLIKE values (INNERLIKE_SEQ.NEXTVAL,#{member_id},#{cb_no},1)
+	</insert>
+	<select id="selectLike" resultType="innerlike">
+		select * from INNERLIKE where member_id=#{member_id} and cb_no=#{cb_no}
+	</select>
+	<update id="updateDislike">
+		UPDATE INNERLIKE SET CB_LIKE_CHECK=0 WHERE member_id=#{member_id} and cb_no=#{cb_no}
 	</update>
-	<update id="like_check_cancel" parameterType="HashMap">
-		UPDATE INNERLIKE SET CB_LIKE_CHECK=0 WHERE MEMBER_ID=#{member_id} AND CB_NO=#{cb_no}
+	<update id="updateLike">
+		UPDATE INNERLIKE SET CB_LIKE_CHECK=1 WHERE member_id=#{member_id} and cb_no=#{cb_no}
+	</update>
+	<select id="selectLikeList" resultType="innerlike">
+		SELECT * FROM INNERLIKE WHERE MEMBER_ID=#{member_id}
+	</select>
+	<update id="updateLevel">
+		UPDATE MEMBER SET MEMBER_LEVEL=#{member_level} WHERE MEMBER_ID=#{member_id}
 	</update>
 	<insert id='createClub' parameterType="com.yj.project.club.model.vo.ReqCircle">
 	insert into circle_register values(circle_register_seq.nextval,#{circle_name},#{university},#{circle_adviser},#{member_id},'L2',#{circle_phone},sysdate,#{circle_photo},#{category},#{circle_comment},0)
 	</insert>
+	<select id='selectClubCreate' resultType="com.yj.project.club.model.vo.ReqCircle">
+	select * from circle_register order by circle_num asc
+	</select>
+	<select id="selectComment" resultType="cb_comment">
+		SELECT * FROM CB_COMMENT WHERE CB_NUM=#{no} and CB_COMMENTNO = (select MAX(CB_COMMENTNO) from CB_COMMENT where CB_NUM=#{cb_num})
+	</select>
+	<select id='clubCount' resultType='_int'>
+	select count(*) from circle_register
+	</select>
+	<select id = 'selectReqClub' parameterType="_int" resultType='com.yj.project.club.model.vo.ReqCircle'>
+	select * from circle_register where circle_num = #{circle_num}
+	</select>
+	<delete id='deleteClub' parameterType="_int">
+	delete from circle_register where circle_num = #{circle_num}
+	</delete>
+	<insert id='insertCircle' parameterType="com.yj.project.club.model.vo.Club">
+	insert into circle values(#{circle_num},#{circle_name},#{university},1,#{circle_adviser},#{member_id},#{circle_level},#{circle_phone},sysdate,#{circle_photo},#{category},#{circle_comment},0,null)
+	</insert>
+	<update id='updateMemberLevel' parameterType="map">
+	update member set member_level='L5',circle1_num=#{circle_num} where member_id=#{member_id} 
+	</update>
+	<select id='selectClubList' resultType='com.yj.project.club.model.vo.Club'>
+	select * from circle
+	</select>
+	<select id='circleCount' resultType='_int'>
+	select count(*) from circle
+	</select>
+	<select id='countMember' parameterType="string" resultType='_int'>
+	select count(*) from circle_register where member_id=#{member_id}
+	</select>
+	<delete id='deletec' parameterType="map">
+	delete from <if test="table == 'circle_register'">circle_register</if> <if test="table != 'circle_register'">circle</if> where circle_num = #{circle_num}
+	</delete>
 	
 </mapper>

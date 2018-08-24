@@ -25,8 +25,10 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +36,11 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 
 import com.yj.project.common.page.CirclePageCreate;
+import com.google.gson.Gson;
+import com.yj.project.common.page.PageCreate;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.yj.project.board.controller.BoardController;
 import com.yj.project.board.model.vo.Board;
 import com.yj.project.calendar.model.vo.ClubNotice;
@@ -45,6 +52,7 @@ import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.club.model.vo.ReqCircle;
+import com.yj.project.club.model.vo.InnerLike;
 import com.yj.project.member.model.vo.Member;
 
 @Controller
@@ -100,17 +108,21 @@ public class ClubController {
 	    System.out.println("동아리 정보"+club);
 	    session.setAttribute("matching", matching);
 		String[] array=club.getCategory().split(",");
-		
+		List<InnerLike> likeList=clubService.selectLikeList(member.getMember_id());
 		List<Circle_board> list=clubService.selectBoardList(club.getCircle_num());
 		List<CB_Comment> clist=clubService.commentList();
 		System.out.println("게시글 목록: "+list);
 		System.out.println("댓글 목록: "+clist);
+		for(InnerLike i : likeList) {
+			System.out.println(member.getMember_id()+"님의 좋아요 목록:"+i);
+		}
 		session.setAttribute("member", member);
 
 		session.setAttribute("club", club);
 		session.setAttribute("BoardList", list);
 		session.setAttribute("array", array);
 		session.setAttribute("clist", clist);
+		session.setAttribute("likeList", likeList);
 
 		List<Matching> matchings = clubService.selectMatching(member.getCircle1_num());
 		List<ClubNotice> noticeList = clubService.selectNotice(member.getCircle1_num());
@@ -268,10 +280,6 @@ public class ClubController {
 	         	cb1.setCb_reattachment2(renamedFileName);
 	         }
 	      }
-		System.out.println(cb1.getCb_attachment());
-		System.out.println(cb1.getCb_reattachment());
-		System.out.println(cb1.getCb_attachment2());
-		System.out.println(cb1.getCb_reattachment2());
 		
 /*		if(cb1.getCb_attachment()==null) {
 			cb1.setCb_attachment("notFoundFile");
@@ -442,8 +450,8 @@ public class ClubController {
 	//게시글 댓글 작성 로직
 	@RequestMapping("insertComment.do")
 	@ResponseBody
-	public String insertComment(int no, String comment,String memberId,Model model) {
-		ModelAndView mv=new ModelAndView();
+	public void insertComment(int no, String comment,String memberId,HttpServletResponse response) throws JsonIOException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		System.out.println(no);
 		System.out.println(comment);
 		System.out.println(memberId);
@@ -452,12 +460,11 @@ public class ClubController {
 		c.setCb_comment_content(comment);
 		c.setCb_num(no);
 		int result=clubService.insertComment(c);
+		CB_Comment com=clubService.selectComment(no);
+		System.out.println("출력될 댓글들"+com);
+	    new Gson().toJson(com,response.getWriter());
 	
-		System.out.println(result);
 
-		
-		
-		return "clubPage/commentAjax";
 	}
 
 
@@ -494,9 +501,40 @@ public class ClubController {
 	}
 	
 	@RequestMapping("/clubCreateEnd")
-	public ModelAndView createClubEnd(ReqCircle club,HttpServletRequest request) {
+	public ModelAndView createClubEnd(ReqCircle club,HttpServletRequest request,@RequestParam(value="member_id")String member_id,@RequestParam(value="member_pw")String member_pw,@RequestParam(value="circle_photo1")MultipartFile circle_photo) {
 		ModelAndView mv = new ModelAndView();
+		if(circle_photo != null) {
+			String originalFileName=circle_photo.getOriginalFilename();
+	         String saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/club");
+	         
+	         File dir=new File(saveDir);
+	         if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+	         try {
+				circle_photo.transferTo(new File(saveDir+File.separator+originalFileName));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+	            //DB에 저장할 첨부파일에 대한 정보를 구성!
+	         	club.setCircle_photo(originalFileName);
+	         }
+	      
 		int result = clubService.createClub(club);
+		String msg = "";
+		String loc = "/mainPageGo.do";
+		if(result > 0) {
+			msg="개설 신청 성공!";
+		}else {
+			msg="개설 신청 실패!";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc",loc);
+		mv.setViewName("common/msg");
 		return mv;
 	}
 	//댓글 삭제 로직
@@ -572,11 +610,198 @@ public class ClubController {
 		}
 	}
 	@RequestMapping("changeGrade.do")
-	public String chageGrade(String id,
-			@RequestParam(value="memberGrade",defaultValue="L2",required=false) String grade
-			) {
+	public ModelAndView chageGrade(String id,String grade,int no){
+		ModelAndView mv=new ModelAndView();
 		System.out.println("회원 아이디 : "+id);
 		System.out.println("변경할 등급 : "+grade);
-		return "";
+		System.out.println("동아리 번호:"+no);
+		Member mm=new Member();
+		mm.setMember_id(id);
+		mm.setMember_level(grade);
+
+		int result=clubService.updateLevel(mm);
+		System.out.println("회원등급 변경 : "+result);
+		String msg="";
+		if(result>0) {
+			msg="등급변경을 성공하였습니다";
+		}
+		else {
+			msg="등급변경에 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "circle_list.do?circle_num="+no);
+		
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	//좋아요 로직 구현
+	@RequestMapping("/likeButton.do")
+	public void likeButton(HttpServletRequest req,HttpServletResponse res) throws IOException{
+		int no=Integer.parseInt(req.getParameter("no"));
+		String id=req.getParameter("id");
+		System.out.println("게시글 번호 : "+no);
+		System.out.println("사용자 아이디 : "+id);
+		InnerLike like=new InnerLike();
+		like.setCb_no(no);
+		like.setMember_id(id);
+		int result=0;
+		int likeNum=0;
+		int change=0;
+		//좋아요 전체 가져오기
+		InnerLike selectLike=clubService.selectLike(like);
+		if(selectLike==null) {
+			result=clubService.pushLike(like);
+			System.out.println("실행결과 : "+result);
+			likeNum=1;
+		}
+		else {
+			System.out.println("가져오는 좋아요 : "+selectLike);
+			
+			if(selectLike.getCb_like_check()==1) {
+				change=clubService.updateDislike(selectLike);
+				selectLike=clubService.selectLike(like);
+				System.out.println("변경된 좋아요 : "+selectLike.getCb_like_check());
+				likeNum=2;// 좋아요 취소 로직
+			}else {
+				change=clubService.updateLike(selectLike);
+				selectLike=clubService.selectLike(like);
+				System.out.println("변경된 좋아요 : "+selectLike.getCb_like_check());
+				likeNum=1;//좋아요 설정 로직
+			}
+		}
+
+		res.getWriter().print(Integer.valueOf(likeNum));
+		
+	}
+	
+	@RequestMapping("/clubManagement.do")
+	public ModelAndView clubManagement(@RequestParam (value="cPage",required=false,defaultValue="1")int cPage) {
+		ModelAndView mv = new ModelAndView();
+		int numPerPage = 5;
+		List<ReqCircle> circleList = clubService.selectClubCreate(cPage,numPerPage);
+		int count = clubService.clubCount();
+	    String pageBar = new PageCreate().getPageBar(cPage,numPerPage,count,"clubManagement.do");
+
+		mv.addObject("circleList",circleList);
+		mv.addObject("pageBar",pageBar);
+		mv.setViewName("member/adminClub");
+		
+		return mv;
+	
+		
+	}
+	@RequestMapping("/makeClub.do")
+	public ModelAndView makeClub(int circle_num) {
+		ModelAndView mv = new ModelAndView();
+		ReqCircle circle = clubService.makeClub(circle_num);
+		Club c = new Club();
+		c.setCircle_num(circle.getCircle_num());
+		c.setCircle_name(circle.getCircle_name());
+		c.setUniversity(circle.getUniversity());
+		c.setDept_no(0);
+		c.setCircle_adviser(circle.getCircle_adviser());
+		c.setMember_id(circle.getMember_id());
+		c.setCircle_level(circle.getCircle_level());
+		c.setCircle_phone(circle.getCircle_phone());
+		c.setCircle_photo(circle.getCircle_photo());
+		c.setCategory(circle.getCategory());
+		c.setCircle_comment(circle.getCircle_comment());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", c.getMember_id());
+		map.put("circle_num", circle_num);
+		int result1 = clubService.deleteCircle(circle_num);
+		int result2 = clubService.insertCircle1(c);
+		int result3 = clubService.updateMemberLevel(map);
+		String msg = "";
+		String loc = "/mainPageGo.do";
+		if(result1>0 && result2 > 0 && result3>0) {
+			msg = "동아리 개설 수락!";
+			
+		}else {
+			msg = "동아리 개설 실패!";
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("loc",loc);
+		mv.setViewName("common/msg");
+		
+		
+		return mv;
+		
+		
+	}
+	@RequestMapping("/mainPageGo.do")
+	public String mainPageGo(HttpServletRequest request) {
+		Member member = (Member)request.getSession().getAttribute("memberLoggedIn");
+		return "mainPage/mainPage";
+	}
+	
+	@RequestMapping("/clubList.do")
+	public ModelAndView clubList(@RequestParam (value="cPage",required=false,defaultValue="1")int cPage) {
+		ModelAndView mv = new ModelAndView();
+		int numPerPage = 5;
+		List<Club> clubList = clubService.selectClubList(cPage,numPerPage);
+		int count = clubService.circleCount();
+	    String pageBar = new PageCreate().getPageBar(cPage,numPerPage,count,"clubList.do");
+	    
+	    mv.addObject("cPage",cPage);
+	    mv.addObject("pageBar",pageBar);
+	    mv.addObject("clubList",clubList);
+	    mv.setViewName("member/adminClubList");
+		return mv;
+	}
+	@RequestMapping("clubMemberCheck.do")
+	public void memberCheck(@RequestParam(value="member_id")String member_id,HttpServletResponse res) {
+		int count = clubService.countMember(member_id);
+		boolean check=false;
+		if(count>0) {
+			check=true;
+		}else {
+			check=false;
+		}
+		Gson gson=new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		try {
+			gson.toJson(check,res.getWriter());
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@RequestMapping("clubFail.do")
+	public ModelAndView clubFail(int circle_num,String table) {
+		ModelAndView mv = new ModelAndView();
+		String msg="";
+		String loc="";
+		if(table.equals("거절")) {
+			loc="/clubManagement.do";
+		}else {
+			loc="/clubList.do";
+		}
+		
+		
+		if(table.equals("거절")) {
+			table="circle_register";
+		}else {
+			table="circle";
+		}
+		mv.addObject("loc",loc);
+		mv.setViewName("common/msg");
+		System.out.println(table);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("table",table);
+		map.put("circle_num", circle_num);
+		int result = clubService.deleteCircle(map);
+		if(result>0) {
+			msg="삭제 성공!";
+		}else {
+			msg="삭제 실패!";
+		}
+		mv.addObject("msg", msg);
+		return mv;
+		
 	}
 }

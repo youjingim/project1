@@ -192,6 +192,7 @@ margin:0 auto;
 </form>
 </div>
 
+
 </section>
 <script>
 function login(){
@@ -388,14 +389,16 @@ function login(){
                   placeholder="대학교를 선택하세요" readonly>
                   <select id='school_select' name='school_select' class="form-control" style='width:150px; display:inline-block;'>
                        <option value="" selected>선택하세요</option>
+<<<<<<< HEAD
+                       <option value='서울대학교'>서울대학교</option>
+=======
+>>>>>>> CKS2
                        <option value='연세대학교'>연세대학교</option>
                        <option value='고려대학교'>고려대학교</option>
-                       <option value='경희대학교'>경희대학교</option>
+                       <option value='중앙대학교'>중앙대학교</option>
                        <option value='홍익대학교'>홍익대학교</option>
-                       <option value='성균관대학교'>성균관대학교</option>
                        <option value='서강대학교'>서강대학교</option>
-                       <option value='한양대학교'>한양대학교</option>
-                       <option value='1'>직접입력</option>
+                       
                   </select>
             </div>
             <div class="form-group">

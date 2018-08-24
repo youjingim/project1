@@ -9,7 +9,6 @@ public class Notice {
 	   private String notice_content;
 	   private String member_id;
 	   private int notice_view;
-	   private int notice_attachment;
 	   private Date notice_date;
 
 	   public Notice() {
@@ -56,14 +55,6 @@ public class Notice {
 		this.notice_view = notice_view;
 	}
 
-	public int getNotice_attachment() {
-		return notice_attachment;
-	}
-
-	public void setNotice_attachment(int notice_attachment) {
-		this.notice_attachment = notice_attachment;
-	}
-
 	public Date getNotice_date() {
 		return notice_date;
 	}
@@ -72,23 +63,23 @@ public class Notice {
 		this.notice_date = notice_date;
 	}
 
-	@Override
-	public String toString() {
-		return "Notice [notice_no=" + notice_no + ", notice_title=" + notice_title + ", notice_content="
-				+ notice_content + ", member_id=" + member_id + ", notice_view=" + notice_view + ", notice_attachment="
-				+ notice_attachment + ", notice_date=" + notice_date + "]";
-	}
-
 	public Notice(int notice_no, String notice_title, String notice_content, String member_id, int notice_view,
-			int notice_attachment, Date notice_date) {
+			Date notice_date) {
 		super();
 		this.notice_no = notice_no;
 		this.notice_title = notice_title;
 		this.notice_content = notice_content;
 		this.member_id = member_id;
 		this.notice_view = notice_view;
-		this.notice_attachment = notice_attachment;
 		this.notice_date = notice_date;
 	}
+
+	@Override
+	public String toString() {
+		return "Notice [notice_no=" + notice_no + ", notice_title=" + notice_title + ", notice_content="
+				+ notice_content + ", member_id=" + member_id + ", notice_view=" + notice_view + ", notice_date="
+				+ notice_date + "]";
+	}
+	   
 
 }

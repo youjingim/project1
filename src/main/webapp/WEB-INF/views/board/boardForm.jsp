@@ -10,9 +10,9 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
     <c:set var='path' value="${pageContext.request.contextPath}"/>
 
-     	<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="" name="pageTitle"/>
-	</jsp:include>  
+        <jsp:include page="/WEB-INF/views/common/header.jsp">
+   <jsp:param value="" name="pageTitle"/>
+   </jsp:include>  
 <style>
 section{
 width:100%;
@@ -33,35 +33,40 @@ top:50px;
 .note-editable{
 height:320px;
 }
-	div#board-continer{width:70%;height:800px;margin:0 auto;position:absolute; left:15%;top:310px;}
-	div#board-continer input{margin-bottom:15px;}
+   div#board-continer{width:70%;height:800px;margin:0 auto;position:absolute; left:15%;top:160px;}
+   div#board-continer input{margin-bottom:15px;}
 
-	div#board-continer table td{
-	border:none;
-	color:black;
-	}
+   div#board-continer table td{
+   border:none;
+   color:black;
+   }
 
 </style>
 
  <section>
      <div id="main_container">
+   <br><span style="font-size:35px; font-weight:bold;color:black; margin-left:45%; text-align:center;">writing</span>
 
      <div id="board-continer">
-<form class="form-horizontal" action='${path}/board/boardWrite' method='post'>
-		<table class='table'>
-		<tr>
-		<td style='text-align:center;width:7%;'>제목</td><td><input type='text' class="form-control" name='freeboard_title'></td>
-		</tr>
-		<tr><td colspan='2'>
+<form class="form-horizontal" action="${path }/board/boardWrite" method='post'>
+      <table class='table'>
+      <tr>
+      <td style='text-align:center;width:7%;'>제목</td><td><input type='text' class="form-control" name="freeboard_title"></td>
+      </tr>
+      <tr><td colspan='2'>
           <textarea name="freeboard_content" id="content" class="summernote"></textarea>
-		</td></tr>
+      </td></tr>
+   		<tr><td colspan='2' style='text-align:right;'>
+   		<
         <tr><td colspan='2' style='text-align:center;'>
-          <button type="submit" class="btn btn-default">Save</button>
+        
+          <button type="submit" class="btn btn-default">등록</button>
         </td></tr>
+        
       </table>
-      <input type='hidden' value='${memberLoggedIn.member_id}' name='member_id'>
+         <input type='hidden' value='${memberLoggedIn.member_id }' name="member_id">
     </form>
-
+   
   <script>
     $(document).ready(function() {
         $('.summernote').summernote();
@@ -69,6 +74,5 @@ height:320px;
   </script>
         </div>
     </div>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-	</section>
-
+   <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+   </section>

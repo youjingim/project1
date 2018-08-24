@@ -1,9 +1,9 @@
 package com.yj.project.club.model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.yj.project.club.model.vo.Budget;
@@ -14,7 +14,9 @@ import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.club.model.vo.ReqCircle;
+import com.yj.project.club.model.vo.InnerLike;
 import com.yj.project.member.model.vo.Member;
+import com.yj.project.search.model.vo.Circle;
 
 public interface ClubDAO {
 	public Member selectOne(SqlSessionTemplate sqlSession, String id);
@@ -43,4 +45,21 @@ public interface ClubDAO {
 	public List<String> selectG2(SqlSessionTemplate sqlSession,int circle_num);
 	public int deleteComment(SqlSessionTemplate sqlSession,int no);
 	public int createClub(SqlSessionTemplate sqlSession,ReqCircle club);
+	public List<ReqCircle> selectClubCreate(SqlSessionTemplate sqlSession,int cPage, int numPerPage);
+	public int pushLike(SqlSessionTemplate sqlSession,InnerLike like);
+	public InnerLike selectLike(SqlSessionTemplate sqlSession,InnerLike like);
+	public int updateDislike(SqlSessionTemplate sqlSession,InnerLike like);
+	public int updateLike(SqlSessionTemplate sqlSession,InnerLike like);
+	public List<InnerLike> selectLikeList(SqlSessionTemplate sqlSession,String member_id);
+	public int updateLevel(SqlSessionTemplate sqlSession,Member mm);
+	public CB_Comment selectComment(SqlSessionTemplate sqlSession,int no);
+	public int clubCount(SqlSessionTemplate sqlSession);
+	public ReqCircle makeClub(SqlSessionTemplate sqlSession,int circle_num);
+	public int deleteCircle(SqlSessionTemplate sqlSession,int circle_num);
+	public int insertCircle1(SqlSessionTemplate sqlSession,Club c);
+	public int updateMemberLevel(SqlSessionTemplate sqlSession,Map<String, Object> map);
+	public List<Club> selectClubList(SqlSessionTemplate sqlSession,int cPage,int numPerPage);
+	public int circleCount(SqlSessionTemplate sqlSession);
+	public int countMember(SqlSessionTemplate sqlSession,String member_id);
+	public int deleteCircle(SqlSessionTemplate sqlSession,Map<String, Object> map);
 }
