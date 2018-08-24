@@ -4,7 +4,7 @@
 <resultMap type="map" id="board">
 </resultMap>
 <select id="selectBoardList" resultMap="board">
-select * from free_board
+select * from free_board order by freeboard_num desc
 </select>
 <select id="selectCount" resultType="_int">
 select count(*) from free_board
@@ -12,14 +12,31 @@ select count(*) from free_board
 <select id="selectView" resultType="com.yj.project.board.model.vo.Board" parameterType="_int">
 select * from free_board where freeboard_num=#{boardNo}
 </select>
-
-<insert id='boardWrite' parameterType="com.yj.project.board.model.vo.Board">
-insert into free_board values(free_board_seq.nextval,#{freeboard_title},#{freeboard_content},#{member_id},0,null,sysdate)
-</insert>
-
+<insert id="boardWrite" parameterType="com.yj.project.board.model.vo.Board">
+insert into free_board values(free_board_seq.nextval,#{freeboard_title},#{member_id},0,null,sysdate,#{freeboard_content})
+</insert> 
 <update id="boardViewUp" parameterType="_int">
 update free_board set FREEBOARD_VIEW=FREEBOARD_VIEW+1 where FREEBOARD_NUM = #{boardNo}
-
 </update>
-
+<delete id="boardDelete" parameterType="_int">
+DELETE FROM free_board WHERE FREEBOARD_NUM=#{boardNo}
+</delete>
+<update id="boardUpdateEnd" parameterType="com.yj.project.board.model.vo.Board">
+update free_board set freeboard_title=#{freeboard_title},freeboard_content=#{freeboard_content} where freeboard_num=#{freeboard_num}
+</update>
+<select id="boardSearch" parameterType="map" resultMap="board">
+select * from free_board where 1=1 <if test="searchType eq 'title'">and freeboard_title like '%'||#{searchForm}||'%'</if><if test="searchType eq 'writer'">and member_id like '%'||#{searchForm}||'%'</if> order by freeboard_num desc
+</select>
+<select id="searchSelectCount" parameterType="map" resultType="_int">
+select count(*) from free_board where 1=1 <if test="searchType eq 'title'">and freeboard_title like '%'||#{searchForm}||'%'</if><if test="searchType eq 'writer'">and member_id like '%'||#{searchForm}||'%'</if>
+</select>
+<insert id="commentInsert" parameterType="map">
+insert into fb_comment values (fb_comment_seq.nextval,#{boardNum},#{memberId},#{comment},sysdate,0)
+</insert>
+<select id='selectComment' parameterType="_int" resultType='com.yj.project.board.model.vo.Comment'>
+select * from fb_comment where board_num = #{boardNo} and COMMENT_NO = (select MAX(COMMENT_NO) from fb_comment where board_num=#{boardNo})
+</select>
+<select id="commentList" parameterType="_int" resultType='com.yj.project.board.model.vo.Comment'>
+select * from fb_comment where board_num=#{boardNo} order by comment_no desc
+</select>
 </mapper>

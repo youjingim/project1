@@ -182,20 +182,17 @@ margin:0 auto;
 <input type="password" class="form-control" placeholder="비밀번호" id="login_pw" name="member_pw">
 <br><br>
   <button type="submit" class="btn btn-primary btn-block" onclick="login()">로 그 인</button>
-<<<<<<< HEAD
-  <br><br>
-  
-=======
+
 
   
     <br><br>
->>>>>>> 7999ce0a54501955eea136d0f79b163225b6dd96
  <span style="color:black;font-size:17px;margin-left:18%;">계정이 없으신가요? &nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#myModal" style="font-weight:bold;text-decoration:none;color:black;">가입하기</a></span><br><br>
  
  <span style="color:black;font-size:15px;margin-left:22%;"><a href="#" data-toggle="modal" data-target="#idModal" >아이디 찾기</a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#passwordModal" >비밀번호 찾기 </a></span>
 </span>
 </form>
 </div>
+
 
 </section>
 <script>
@@ -393,15 +390,13 @@ function login(){
                   placeholder="대학교를 선택하세요" readonly>
                   <select id='school_select' name='school_select' class="form-control" style='width:150px; display:inline-block;'>
                        <option value="" selected>선택하세요</option>
-                       <option value='서울대학교'>은경호롤롤롤로대학교</option>
+                       <option value='서울대학교'>서울대학교</option>
                        <option value='연세대학교'>연세대학교</option>
                        <option value='고려대학교'>고려대학교</option>
-                       <option value='경희대학교'>경희대학교</option>
+                       <option value='중앙대학교'>중앙대학교</option>
                        <option value='홍익대학교'>홍익대학교</option>
-                       <option value='성균관대학교'>성균관대학교</option>
                        <option value='서강대학교'>서강대학교</option>
-                       <option value='한양대학교'>한양대학교</option>
-                       <option value='1'>직접입력</option>
+                       
                   </select>
             </div>
             <div class="form-group">

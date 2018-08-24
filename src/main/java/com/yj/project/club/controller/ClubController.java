@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,11 @@ import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
 import com.yj.project.club.model.vo.Club;
+
+import com.yj.project.club.model.vo.ReqCircle;
+
+import com.yj.project.club.model.vo.InnerLike;
+
 import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.club.model.vo.InnerLike;
 import com.yj.project.member.model.vo.Member;
@@ -113,9 +119,12 @@ public class ClubController {
 		List<CB_Comment> clist=clubService.commentList();
 		System.out.println("게시글 목록: "+list);
 		System.out.println("댓글 목록: "+clist);
-		for(InnerLike i : likeList) {
-			System.out.println(member.getMember_id()+"님의 좋아요 목록:"+i);
-		}
+		//현재의 달
+		Calendar c=Calendar.getInstance();
+		int month1=c.get(Calendar.MONTH)+1;
+		System.out.println("현재의 달:"+month1);
+		List<Member> memberBirth = clubService.selectMember(club.getCircle_num());//동아리 내 회원 정보가져오기
+		
 		session.setAttribute("member", member);
 
 		session.setAttribute("club", club);
@@ -126,7 +135,7 @@ public class ClubController {
 
 		List<Matching> matchings = clubService.selectMatching(member.getCircle1_num());
 		List<ClubNotice> noticeList = clubService.selectNotice(member.getCircle1_num());
-
+		
 		int total=member.getMember_notice();
 
 		session.setAttribute("matching", matching);
@@ -690,6 +699,7 @@ public class ClubController {
 	
 		
 	}
+<<<<<<< HEAD
 	@RequestMapping("/makeClub.do")
 	public ModelAndView makeClub(int circle_num) {
 		ModelAndView mv = new ModelAndView();
@@ -804,4 +814,7 @@ public class ClubController {
 		return mv;
 		
 	}
+=======
+
+>>>>>>> bonyeon
 }

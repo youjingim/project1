@@ -42,8 +42,10 @@ function deleteComment(no,id){
 			dataType:"json",
 			success:function(data){
 				alert("댓글 등록!");
-				console.log(data);
-				$('#commentTable').prepend("<tr><td>"+data.member_id+"</td><td>"+data.cb_comment_date+"</td></tr><tr><td>"+data.cb_comment_content+"</td><td></td></tr>");
+				alert(data.member_id);
+				alert(data.cb_comment_date);
+				alert(data.cb_comment_content);
+				$('.comment-container').prepend("<table><tr><td>"+data.member_id+"</td><td></td><tr/><tr><td>"+data.cb_comment_content+"</td></tr></table>");
 				
 				$("#comment1").prop("value","");
 			}
@@ -138,7 +140,7 @@ function like_func(id,no,event){
               <h6 class="w3-opacity" style="cursor:pointer"><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>우리 동아리 소식을 공유해요~</h6>
               <span style="margin-top: -30px; float: right;">(글쓰기)</span>
               </div>
-              <div id="post" style="display:none;">
+              <div id="post" >
               <form action="clubMainPage.do" method="post" enctype="multipart/form-data" onsubmit="return validate();">
                     <input type="text" class="form-control" id="cb_title" name="cb_title" placeholder="게시글 제목을 작성해주세요."><br>
                     <textarea class="form-control" rows="5" id="cb_content" name="cb_content" placeholder="게시글 내용을 작성해주세요."></textarea>
@@ -207,7 +209,7 @@ function like_func(id,no,event){
 	          <input type="hidden" id="no" value="${b.cb_num }"/>
 	          <input type="hidden" id="memberId" value="${member.member_id }"/>
 	          <button type="button" class="btn btn-primary" id="comment_button" onclick="insertComment(${b.cb_num})">등록</button>
-	          <div><hr>
+	          <div class="comment-container"><hr>
 	            <c:forEach items="${clist}" var='cc' varStatus="cstatus">
 	            <c:if test="${cc.cb_num eq b.cb_num }">
 	            <table class="commentTable">

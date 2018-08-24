@@ -614,7 +614,7 @@ function createClub(){
 			</script>
 			</tr>
 			<tr>
-			<td><a href="#">쪽지함</a> </td>
+			<td><a href="${path }/myMessage.do?member_id=${memberLoggedIn.member_id}">쪽지함</a> </td>
 			</tr>
 			<tr>
 			<td><a href="${path}/member/memberUpdate.do?member_id=${memberLoggedIn.member_id}">내 정보 수정</a></td>

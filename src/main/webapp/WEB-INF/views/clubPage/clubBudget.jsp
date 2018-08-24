@@ -16,7 +16,7 @@ $("#budget_button").click(function(){
 	var level='${memberLoggedIn.member_level}';
 	
 	if(level!=='L2'){
-    $("#budget_form").show();
+    $("#budget_form").toggle();
 	}
 	else{
 		alert('당신은 권한이 없습니다.');
@@ -81,11 +81,7 @@ $("#budget_button").click(function(){
         </form><hr><br>
         </div>
 
-		<!-- 예산관리 ajax로직 작성 -->
-		<script>
-		
-		</script>
-		
+
         <!-- 예산 관리 테이블 -->
         <div>
           <table class="table table-bordered" id="budget_list">
