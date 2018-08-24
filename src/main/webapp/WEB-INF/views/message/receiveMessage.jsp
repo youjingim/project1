@@ -86,7 +86,7 @@ label{
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value=' ' name='pageTitle'/>
 </jsp:include>
-<section>
+<section style="color:black">
 <div id="message_container" >
 <div class="tab">
   <button class="tablinks" onclick="receiveMessage('${member_id}')">받은 쪽지함</button>
@@ -95,23 +95,25 @@ label{
 
 <div id="receive" class="tabcontent">
   <h3>내가 받은 쪽지함</h3>
-  <table>
+  <table style="color:black">
   <tr>
-    <th style="text-align:center;">선택</th>
+    <th style="text-align:center;"><input type="checkbox" id="checkall" /></th>
     <th style="text-align:center;">보낸 사람</th>
     <th style="text-align:center;">제목</th>
     <th style="text-align:center;">내용</th>
     <th style="text-align:center;">받은 날짜</th>
     
   </tr>
+
   <c:if test="${not empty ReceiveList }">
 	  <c:forEach items="${ReceiveList }" var='r' varStatus="rStauts">
 		  <tr>
 		    <td>
 		      <div class="checkbox">
-		        <label><input type="checkbox" value=""></label>
+		        <label><input type="checkbox" name="chk" value="${r.message_num }"></label>
 		      </div>
 		    </td>
+		 
 		    <td>${r.message_sender }</td>
 		    <td><a href='${path }/messageView.do?message_num=${r.message_num }'>${r.message_title }</a></td>
 		    <td>${r.message_content }</td>
@@ -120,10 +122,11 @@ label{
 		  </tr>
 	  </c:forEach>
   </c:if>
+ 
 </table>
 <div style="margin-top:5px;">
-<button type="button" class="btn btn-info">전체선택</button>
-<button type="button" class="btn btn-warning">선택삭제</button>
+
+<button type="button" class="btn btn-warning" id="sendCheck">선택삭제</button>
 </div>
 	<div class="pagination" style="display: table;margin-right: auto;margin-left: auto;">
 	        ${PageBar }
@@ -131,6 +134,7 @@ label{
 </div>
 </div>
 <script>
+
 function sendMessage(id) {
 
    	location.href="${path }/myMessage2.do?member_id="+id;
@@ -139,6 +143,17 @@ function receiveMessage(id) {
 	
 	   location.href="${path }/myMessage.do?member_id="+id;
 	}
+$(document).ready(function(){
+    $("#checkall").click(function(){
+        if($("#checkall").prop("checked")){
+            $("input[name=chk]").prop("checked",true);
+        }else{
+            $("input[name=chk]").prop("checked",false);
+        }
+    })
+   
+})
+
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>      
 </section>

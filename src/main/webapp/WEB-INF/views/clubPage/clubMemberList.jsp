@@ -56,6 +56,43 @@
 th,td{
   text-align: center;
 }
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width:800px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
 </style>
   <!-- Middle Column -->
     <div class="w3-col m7">
@@ -76,7 +113,7 @@ th,td{
         </tr>
        <c:forEach items="${list }" var="m" varStatus="status">
         <tr>
-          <td><c:out value="${m.member_name }"/></td>
+          <td><c:out value="${m.member_name }"/> <span class="glyphicon glyphicon-envelope myBtn" id="${m.member_id }"></span></td>
           <td><c:out value="${m.member_birth}"/></td>
           <td><select name="memberGrade">         	
           	<c:if test="${m.member_level eq 'L2' }">
@@ -110,9 +147,77 @@ th,td{
             <button type="button" onclick="deleteMember('${m.member_id}',${club.circle_num });">회원삭제</button>
           </td>
         </tr>
+      <!-- The Modal -->
+      <div id="${m.member_id }" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h3>쪽지보내기</h3>
+          <hr>
+          <form action="${path }/circleMemberMessage.do" method="post">
+          <div class="form-group">
+            <label for="member_receive">받는사람</label>
+            <input type="text" class="form-control" id="member_receive" name="yid" value="${m.member_id }">
+            <input type="hidden" name="cNum" value="${m.circle1_num }"/>
+          </div>
+          <div class="form-group">
+            <label for="pwd">보내는사람</label>
+            <input type="text" class="form-control" id="pwd" name="mid"value="${memberLoggedIn.member_id }">
+          </div>
+          <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요">
+          </div>
+          <div class="form-group">
+            <label for="comment">내용</label>
+            <textarea class="form-control" rows="5" id="comment" name="content" placeholder="내용을 입력해주세요"></textarea>
+          </div>
+          <input type="submit" class="btn btn-default" value="전송"/>
+          <input type="reset" class="btn btn-default" value="취소"/>
+          </form>
+        </div>
+
+      </div>
        </c:forEach>
       </table>
       
+      <script>
+      $(function(){
+    	  $('.myBtn').on('click',function(){
+    		  var id=$(this).attr('id');
+    		  $('#'+id).css("display",'block');
+    	  });
+      	  $('.close').on('click',function(){  
+      		$(this).parents('div.modal').css('display','none');
+      	  });	
+      });
+    //Get the modal
+      var modal = document.getElementById('myModal');
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks the button, open the modal
+      /* btn.onclick = function() {
+          modal.style.display = "block";
+      } */
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+          modal.style.display = "none";
+      }
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      }
+      </script>
 	
       <!-- 페이징 처리 -->
       <div class="pagination" style="display: table;margin-right: auto;margin-left: auto;">

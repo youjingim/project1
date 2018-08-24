@@ -37,5 +37,15 @@ public class MessageDAOImpl implements MessageDAO {
 	public Message selectMessageOne(SqlSessionTemplate sqlSession, int message_num) {
 		return sqlSession.selectOne("message.selectMessageOne", message_num);
 	}
+
+	@Override
+	public int deleteMessage(SqlSessionTemplate sqlSession, int message_num) {
+		return sqlSession.delete("message.deleteMessage", message_num);
+	}
+
+	@Override
+	public int insertSend(SqlSessionTemplate sqlSession, Message m) {
+		return sqlSession.insert("message.insertSend", m);
+	}
 	
 }

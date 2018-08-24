@@ -123,7 +123,7 @@ label{
     cursor: pointer;
 }
 </style>
-
+</style>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value=' ' name='pageTitle'/>
 </jsp:include>
@@ -135,7 +135,7 @@ label{
 </div>
 
 <div id="receive" class="tabcontent">
-  <h3 style="text-align:center;">내가 받은 쪽지함</h3><br>
+  <h3 style="text-align:center;">내가 보낸 쪽지함</h3><br>
   <table style="max-width:1000px; display: table;margin-right: auto;margin-left: auto;" >
     <tr style="background-color:#E1E1E1; height:50px;">
       <td class="td_title"><strong>제목</strong></td>
@@ -160,9 +160,8 @@ label{
 </table>
   <!-- 버튼 묶은 div -->
   <div style="margin-top:10px;display: table;margin-right: auto;margin-left: auto;" >
-    <button type="button" class="btn btn-success" onclick="messageList('${message.message_receiver }')">목록</button>
-    <button type="button" class="btn btn-info" id="myBtn">답변</button>
-    <button type="button" class="btn btn-warning" onclick="deleteMessage(${message.message_num},'${message.message_receiver }')">삭제</button>
+    <button type="button" class="btn btn-success" onclick="messageList('${message.message_sender }')">목록</button>
+
   </div>
 </div>
 </div>
@@ -209,7 +208,7 @@ function receiveMessage(id) {
 	location.href="${path }/myMessage.do?member_id="+id;
 }
 function messageList(id){
-	location.href="${path }/myMessage.do?member_id="+id;
+	location.href="${path }/myMessage2.do?member_id="+id;
 }
 function deleteMessage(message_num,mid){
 	var con=confirm('삭제하시겠습니까?');

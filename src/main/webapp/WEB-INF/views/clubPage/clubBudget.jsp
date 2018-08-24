@@ -66,8 +66,8 @@ $("#budget_button").click(function(){
         <div id="budget_form" style="display:none;">
           <form action="insert_budget.do" method="post" enctype="multipart/form-data">
           <label id="budget_date">입금/출금 날짜</label> <input for="budget_date" class="form-control" type="date" name="used_date" placeholder="예산을  입력해주세요.">
-          <label id="budget_output">출금액</label> <input for="budget_output" class="form-control" type="number" name="budget_output" placeholder="출금액을 입력해주세요.">
-          <label id="budget_input">입금액</label> <input for="budget_input" class="form-control" type="number" name="budget_input" placeholder="입금액을 입력해주세요.">
+          <label id="budget_output">지출</label> <input for="budget_output" class="form-control" type="number" name="budget_output" placeholder="출금액을 입력해주세요.">
+          <label id="budget_input">입금</label> <input for="budget_input" class="form-control" type="number" name="budget_input" placeholder="입금액을 입력해주세요.">
           <label id="budget_content">내용</label> <input for="budget_content" class="form-control" type="text" name="budget_content" placeholder="내용을 입력해주세요.">
           <input type="hidden" name="circle_num" value="${club.circle_num }"/>
           <input type="hidden" name="member_id" value="${member_id}"/>

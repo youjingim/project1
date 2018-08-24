@@ -52,12 +52,14 @@
   function circle_calendar(){
 	  location.href="${path}/circle_calendar.do?circle_num="+${club.circle_num}+"&member_id="+'${memberLoggedIn.member_id}';
   }
+  
 </script>
 <style>
 /* 댓글 범위를 나타내는 css*/
 .top{
   width:700px;
 }
+
 </style>
 
 </head>
@@ -135,7 +137,8 @@
         </div>
       </div>
       <br>
-
+      
+	
       <!-- Interests -->
       <div class="w3-card w3-round w3-white w3-hide-small">
         <div class="w3-container">
