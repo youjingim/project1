@@ -60,7 +60,7 @@ section div#main_container div#rank_container {
 	text-decoration: none;
 	transition: background-color .3s;
 	position: absolute;
-	left: 350px;
+	left: 380px;
 }
 
 /* Style the active/current link */
@@ -71,7 +71,7 @@ section div#main_container div#rank_container {
 
 /* Add a grey background color on mouse-over */
 .btn-link hover {
-	transform: scale(1.2);
+	transform: scale(1.5);
 }
 
 .likeImg {
@@ -406,7 +406,7 @@ searchType option{
 				<c:forEach var="circle" items="${circleenroll}" varStatus="status" begin="0" end="3">
 					<div class='mySlides myS2'>
 						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
-						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
+						<img src="/project/resources/upload/club/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
 						
 						</a>
 						<div class="text-block">
@@ -513,7 +513,7 @@ searchType option{
     </script>
 		</div>
 			<div class="jumbotron" style="background-color:#F6F6F6">
-				<span id="promotion" style='font-weight: bold; font-size: 30px; color: black;position:relative;left:100px'>동아리목록</span>
+				<span id="promotion" style='font-weight: bold; font-size: 30px; color: black;position:relative;left:100px'>동아리 목록</span>
 		<br><br><br><br><br>	
 		<div class="container" id="con1" style="position:relative;left:1.5%;" >
 			<div class="row">
@@ -531,8 +531,8 @@ searchType option{
 								<div class="panel-heading" style="text-align: center;background-color:white;height:120px;color:black;font-weight:bold;font-size:18px;border:0">
 									${circle.circle_name}
 									<br>
-										<button id='sang' class='btn btn-link' type='button' value='상세보기' style="cursor: pointer;color:#6CC0FF" onclick="search()">상세보기</button>
-									
+										<button id='sang' class='btn btn-link' type='button' value='${circle.circle_num }' style="cursor: pointer;color:#6CC0FF" onclick="search(${circle.circle_num })">상세보기</button>
+										<input type='hidden' id="circle_num" value="${circle.circle_num }">
 									<span class='likeImg' style="cursor: pointer;position:relative;left:10px;bottom:1px;">
 									<img src='/project/resources/image/like6.png' class='likImg' style="width: 110px; height: 55px; position: relative;right:30px;bottom:5px;"> 
 									<input type='hidden' id="circle_num" value="${circle.circle_num }">
@@ -559,8 +559,8 @@ searchType option{
 					</c:forEach>
 			</div>
 			<script>
-							function search(){
-								location.href="${pageContext.request.contextPath}/search/circleView.do?no=${circle.circle_num}";
+							function search(num){
+								location.href="${pageContext.request.contextPath}/search/circleView.do?no="+num;
 							}
 				
 							$('.likeImg').on('click',function(){
@@ -596,7 +596,7 @@ searchType option{
 			if(flag!=0){
 				$(function(){
 					$('html, body').animate({
-						scrollTop: $('#search2').offset().top
+						scrollTop: $('.jumbotron').offset().top
 						}, 'slow');
 					});	
 			}
