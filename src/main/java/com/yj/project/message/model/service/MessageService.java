@@ -9,4 +9,5 @@ public interface MessageService {
 	public int selectReceiveCount(String id);
 	public List<Message> selectSendList(String id,int cPage,int numPerPage);
 	public int selectSendCount(String id);
+	public Message selectMessageOne(int message_num);
 }

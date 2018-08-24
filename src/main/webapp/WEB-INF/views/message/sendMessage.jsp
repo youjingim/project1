@@ -92,53 +92,49 @@ label{
   <button class="tablinks" onclick="receiveMessage('${member_id}')">받은 쪽지함</button>
   <button class="tablinks" onclick="sendMessage('${member_id}')">보낸 쪽지함</button>
 </div>
-
-<div id="receive" class="tabcontent">
-  <h3>내가 받은 쪽지함</h3>
+<div id="send" class="tabcontent">
+  <h3>내가 보낸 쪽지함</h3>
   <table>
   <tr>
     <th style="text-align:center;">선택</th>
-    <th style="text-align:center;">보낸 사람</th>
+    <th style="text-align:center;">받은 사람</th>
     <th style="text-align:center;">제목</th>
     <th style="text-align:center;">내용</th>
     <th style="text-align:center;">받은 날짜</th>
     
   </tr>
-  <c:if test="${not empty ReceiveList }">
-	  <c:forEach items="${ReceiveList }" var='r' varStatus="rStauts">
+  <c:if test="${not empty SendList }">
+	  <c:forEach items="${SendList }" var='s' varStatus="sStatus">
 		  <tr>
 		    <td>
 		      <div class="checkbox">
 		        <label><input type="checkbox" value=""></label>
 		      </div>
 		    </td>
-		    <td>${r.message_sender }</td>
-		    <td><a href='${path }/messageView.do?message_num=${r.message_num }'>${r.message_title }</a></td>
-		    <td>${r.message_content }</td>
-		    <td>${r.message_date }</td>
-		    
+		    <td>${s.message_receiver }</td>
+		    <td>${s.message_title }</td>
+		    <td>${s.message_content }</td>
+		    <td>${s.message_date }</td>
 		  </tr>
 	  </c:forEach>
-  </c:if>
+ </c:if>
 </table>
 <div style="margin-top:5px;">
 <button type="button" class="btn btn-info">전체선택</button>
 <button type="button" class="btn btn-warning">선택삭제</button>
 </div>
-	<div class="pagination" style="display: table;margin-right: auto;margin-left: auto;">
+<div class="pagination" style="display: table;margin-right: auto;margin-left: auto;">
 	        ${PageBar }
 	      </div>
 </div>
 </div>
 <script>
 function sendMessage(id) {
-
-   	location.href="${path }/myMessage2.do?member_id="+id;
-}
-function receiveMessage(id) {
-	
-	   location.href="${path }/myMessage.do?member_id="+id;
+	   location.href="${path }/myMessage2.do?member_id="+id;
 	}
+	function receiveMessage(id) {
+		   location.href="${path }/myMessage.do?member_id="+id;
+		}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>      
 </section>

@@ -5,12 +5,15 @@
 		SELECT * FROM MESSAGE WHERE MESSAGE_RECEIVER=#{id} ORDER BY MESSAGE_NUM DESC
 	</select>
 	<select id="selectReceiveCount" resultType="_int">
-		SELECT COUNT(*) FROM MESSAGE WHERE MESSAGE_RECEIVER=#{id}
+		SELECT COUNT(*) FROM MESSAGE WHERE MESSAGE_RECEIVER=#{id} ORDER BY MESSAGE_NUM DESC
 	</select>
 	<select id="selectSendList" resultType="message">
 		SELECT * FROM MESSAGE WHERE MESSAGE_SENDER=#{id} ORDER BY MESSAGE_NUM DESC
 	</select>
 	<select id="selectSendCount" resultType="_int">
 		SELECT COUNT(*) FROM MESSAGE WHERE MESSAGE_SENDER=#{id}
+	</select>
+	<select id="selectMessageOne" resultType="message">
+		SELECT * FROM MESSAGE WHERE MESSAGE_NUM=#{message_num}
 	</select>
 </mapper>

@@ -32,5 +32,10 @@ public class MessageDAOImpl implements MessageDAO {
 	public int selectSendCount(SqlSessionTemplate sqlSession, String id) {
 		return sqlSession.selectOne("message.selectSendCount", id);
 	}
+
+	@Override
+	public Message selectMessageOne(SqlSessionTemplate sqlSession, int message_num) {
+		return sqlSession.selectOne("message.selectMessageOne", message_num);
+	}
 	
 }

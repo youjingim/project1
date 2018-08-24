@@ -31,6 +31,10 @@ public class MessageServiceImpl implements MessageService {
 	public int selectSendCount(String id) {
 		return messageDAO.selectSendCount(sqlSession,id);
 	}
+	@Override
+	public Message selectMessageOne(int message_num) {
+		return messageDAO.selectMessageOne(sqlSession,message_num);
+	}
 	
 	
 }

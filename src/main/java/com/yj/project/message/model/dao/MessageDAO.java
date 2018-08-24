@@ -11,4 +11,5 @@ public interface MessageDAO {
 	public int selectReceiveCount(SqlSessionTemplate sqlSession, String id);
 	public List<Message> selectSendList(SqlSessionTemplate sqlSession, String id,int cPage,int numPerPage);
 	public int selectSendCount(SqlSessionTemplate sqlSession, String id);
+	public Message selectMessageOne(SqlSessionTemplate sqlSession,int message_num);
 }
