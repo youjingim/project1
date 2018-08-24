@@ -41,6 +41,8 @@
     <version>1.4.7</version>
 </dependency>
 	
+	<!-- https://mvnrepository.com/artifact/oracle/ojdbc14 -->
+
 	
 	<!-- jackson -->
 	

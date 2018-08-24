@@ -17,7 +17,7 @@
 		<property name="password" value="campus"/>
 
 	</bean>
-	
+		
 	<bean id="realDataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 	<constructor-arg ref="dataSource"/>
 	<property name="logFormatter">

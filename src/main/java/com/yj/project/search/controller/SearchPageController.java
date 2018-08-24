@@ -43,6 +43,7 @@ public class SearchPageController {
 	@Autowired
 	private SearchService searchService;
 	
+	
 	@RequestMapping("secondPage.do")
 	public ModelAndView goSecond(@RequestParam(value="cPage",required=false, defaultValue="0") int cPage,String member_id,Circle circle) throws IOException {
 		//페이징 처리
@@ -157,7 +158,6 @@ public class SearchPageController {
 			circle_name = circle_name.replace("%", "");
 			pageBar=new SearchPageCreate().getPageBar3(cPage,numPerPage,totalCount,circle_name,"search.do");
 		}
-		
 		mav.addObject("pageBar",pageBar);
 		mav.addObject("list",list);
 		mav.addObject("totalCount",totalCount);
