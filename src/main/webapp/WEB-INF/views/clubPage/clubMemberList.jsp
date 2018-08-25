@@ -33,6 +33,19 @@
 				history.go();
 			}
 		}
+		function validate(){
+		    var content = $("[name=content]").val();
+		    var title=$("[name=title]").val();
+		    if(title.trim().length==0){
+		    	alert("제목을 입력해주세요.");
+			   	return false;
+		    }
+		    if(content.trim().length==0){
+		        alert("내용을 입력하세요");
+		        return false;
+		    }
+		    return true;
+		}
 </script>
 <style>
 /* 페이징 처리 css */
@@ -155,7 +168,7 @@ th,td{
           <span class="close">&times;</span>
           <h3>쪽지보내기</h3>
           <hr>
-          <form action="${path }/circleMemberMessage.do" method="post">
+          <form action="${path }/circleMemberMessage.do" method="post" onsubmit="return validate();">
           <div class="form-group">
             <label for="member_receive">받는사람</label>
             <input type="text" class="form-control" id="member_receive" name="yid" value="${m.member_id }">

@@ -21,6 +21,19 @@ function validate(){
     }
     return true;
 }
+function validate2(){
+    var content = $("[name=content]").val();
+    var title=$("[name=title]").val();
+    if(title.trim().length==0){
+    	alert("제목을 입력해주세요.");
+	   	return false;
+    }
+    if(content.trim().length==0){
+        alert("내용을 입력하세요");
+        return false;
+    }
+    return true;
+}
 function deleteBoard(no,id){
 	location.href="${path}/deleteCircle_board.do?no="+no+"&id="+id;
 }
@@ -180,7 +193,7 @@ function like_func(id,no,event){
             <div class="w3-container w3-padding">
               <div id="post_header">
               <h6 class="w3-opacity" style="cursor:pointer"><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>우리 동아리 소식을 공유해요~</h6>
-              <span style="margin-top: -30px; float: right;">(회원기능)</span>
+              <span style="margin-top: -30px; float: right;">(동아리 회원전용)</span>
               </div>
               <c:if test="${memberLoggedIn.circle1_num eq club.circle_num }">
               <div id="post" >
@@ -283,7 +296,7 @@ function like_func(id,no,event){
     <span class="close">&times;</span>
     <h3>쪽지보내기</h3>
     <hr>
-    <form action="${path }/circleMessage.do" method="post">
+    <form action="${path }/circleMessage.do" method="post" onsubmit="return validate2();">
     <div class="form-group">
       <label for="member_receive">받는사람</label>
       <input type="text" class="form-control" id="member_receive" name="yid" value="${b.member_id }">

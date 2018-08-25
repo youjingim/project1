@@ -127,16 +127,16 @@ label{
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value=' ' name='pageTitle'/>
 </jsp:include>
-<section>
+<section style="color:black">
 <div id="message_container" >
 <div class="tab">
   <button class="tablinks" onclick="receiveMessage('${memberLoggedIn.member_id}')">받은 쪽지함</button>
   <button class="tablinks" onclick="sendMessage('${memberLoggedIn.member_id}')">보낸 쪽지함</button>
 </div>
 
-<div id="receive" class="tabcontent">
+<div id="receive" class="tabcontent" >
   <h3 style="text-align:center;">내가 받은 쪽지함</h3><br>
-  <table style="max-width:1000px; display: table;margin-right: auto;margin-left: auto;" >
+  <table style="max-width:1000px; display: table;margin-right: auto;margin-left: auto; color:black" >
     <tr style="background-color:#E1E1E1; height:50px;">
       <td class="td_title"><strong>제목</strong></td>
       <td> ${message.message_title }</td>
@@ -178,7 +178,7 @@ label{
     <span class="close">&times;</span>
     <h3>답변하기</h3>
     <hr>
-    <form action="${path }/reSendMessage2.do" method="post">
+    <form action="${path }/reSendMessage2.do" method="post" onsubmit="return validate();">
     <div class="form-group">
       <label for="member_receive">받는사람</label>
       <input type="text" class="form-control" id="member_receive" name="yid" value="${message.message_sender }">
@@ -202,6 +202,19 @@ label{
 
 </div>
 <script>
+function validate(){
+    var content = $("[name=content]").val();
+    var title=$("[name=title]").val();
+    if(title.trim().length==0){
+    	alert("제목을 입력해주세요.");
+	   	return false;
+    }
+    if(content.trim().length==0){
+        alert("내용을 입력하세요");
+        return false;
+    }
+    return true;
+}
 function sendMessage(id) {
    	location.href="${path }/myMessage2.do?member_id="+id;
 }

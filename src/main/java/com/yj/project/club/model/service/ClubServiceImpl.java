@@ -19,6 +19,7 @@ import com.yj.project.club.model.vo.Club;
 import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.club.model.vo.InnerLike;
 import com.yj.project.member.model.vo.Member;
+import com.yj.project.search.model.vo.Circle;
 
 @Service
 public class ClubServiceImpl implements ClubService {
@@ -194,6 +195,21 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public CB_Comment selectComment(int no) {
 		return clubDAO.selectComment(sqlSession,no);
+	}
+
+	@Override
+	public int outCircle(String id) {
+		return clubDAO.outCircle(sqlSession,id);
+	}
+
+	@Override
+	public Budget selectLastBud(int circle_num) {
+		return clubDAO.selectLastBud(sqlSession,circle_num);
+	}
+
+	@Override
+	public List<Budget> totalBud(int cirlce_num) {
+		return clubDAO.totalBud(sqlSession,cirlce_num);
 	}
 	
 	

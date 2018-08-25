@@ -43,7 +43,7 @@
 	  }
   }  
   function circle_budget(level,id){
-	  location.href="${path}/circle_budget.do?circle_num="+${club.circle_num}+"&id="+id;
+	  location.href="${path}/circle_budget.do?circle_num="+${club.circle_num}+"&id="+'memberLoggedIn.member_id';
 	 
   }
   function circle_gallery(){
@@ -52,7 +52,15 @@
   function circle_calendar(){
 	  location.href="${path}/circle_calendar.do?circle_num="+${club.circle_num}+"&member_id="+'${memberLoggedIn.member_id}';
   }
-  
+  function outCircle(){
+	  var cf=confirm('정말 동아리를 탈퇴하시겠습니까?');
+	  if(cf==true){
+	  	location.href="${path}/outCircle.do?member_id="+'${memberLoggedIn.member_id}'+"&no="+${club.circle_num};
+	  }
+	  else{
+			history.go();
+		}
+  }
 </script>
 <style>
 /* 댓글 범위를 나타내는 css*/
@@ -81,6 +89,7 @@
          <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.circle_location }"/> </p>
          <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i><fmt:formatDate type="date" value="${club.circle_enrolldate}" /> </p>
          <p><i class="fa fa-commenting fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.circle_comment }"/></p>
+         
         </div>
       </div><br>
 
@@ -112,6 +121,7 @@
 
           <button onclick="circle_gallery()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> 동아리 사진첩</button>
           <div id="Demo4" class="w3-hide w3-container">
+
          <div class="w3-row-padding">
          <br>
            <div class="w3-half">
@@ -137,22 +147,13 @@
         </div>
       </div>
       <br>
-      
-	
-      <!-- Interests -->
-      <div class="w3-card w3-round w3-white w3-hide-small">
-        <div class="w3-container">
-          <p>관련  태그</p>
-          <p>
-         <c:forEach  var="ca" items="${array}">	
-            <span class="w3-tag w3-small w3-theme-d1">#${ca }</span>
-
-		</c:forEach>
-          </p>
-        </div>
-      </div>
-      <br>
-
+ 
+    <c:if test="${memberLoggedIn.circle1_num eq club.circle_num }">
+      <button type="button" class="btn btn-danger" onclick="outCircle()">동아리 탈퇴</button>
+	</c:if>	
+	<c:if test="${memberLoggedIn.circle1_num ne club.circle_num }">
+      <button type="button" class="btn btn-success" >동아리 가입신청</button>
+	</c:if>	
     <!-- End Left Column -->
     </div>
    

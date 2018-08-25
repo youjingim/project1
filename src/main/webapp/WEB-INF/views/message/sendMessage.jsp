@@ -8,6 +8,13 @@
 body {font-family: Arial;
 color:black;
 }
+/* visited link */
+a:visited {
+    color: black;
+}
+a:link {
+    color: black;
+}
 section{
 width:100%;
 height:900px;

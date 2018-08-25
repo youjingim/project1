@@ -50,5 +50,7 @@ public interface ClubService {
 	public List<InnerLike> selectLikeList(String member_id);
 	public int updateLevel(Member mm);
 	public CB_Comment selectComment(int no);
-	
+	public int outCircle(String id);
+	public Budget selectLastBud(int circle_num);
+	public List<Budget> totalBud(int cirlce_num);
 }

@@ -50,7 +50,7 @@
 		UPDATE MEMBER SET CIRCLE1_NUM=0 WHERE MEMBER_ID=#{id} 
 	</update>
 	<insert id="insertBudget" parameterType="budget">
-		INSERT INTO CIRCLE_BUDGET VALUES(CIRCLE_BUDGET_SEQ.NEXTVAL,#{circle_num},#{member_id},#{budget_content},#{attachment},#{budget_input},#{budget_output},#{used_date},sysdate,#{reattachment})
+		INSERT INTO CIRCLE_BUDGET VALUES(CIRCLE_BUDGET_SEQ.NEXTVAL,#{circle_num},#{member_id},#{budget_content},#{attachment},#{budget_input},#{budget_output},#{used_date},sysdate,#{reattachment},#{total})
 	</insert>
 	<resultMap type="budget" id="insertBud">
 		<id property="budget_no" column="budget_num"/>
@@ -126,5 +126,11 @@
 	</select>
 	<select id="selectComment" resultType="cb_comment">
 		SELECT * FROM CB_COMMENT WHERE CB_NUM=#{no} and CB_COMMENTNO = (select MAX(CB_COMMENTNO) from CB_COMMENT where CB_NUM=#{cb_num})
+	</select>
+	<update id="outCircle">
+		UPDATE MEMBER SET CIRCLE1_NUM=0 WHERE MEMBER_ID=#{member_id}
+	</update>
+	<select id="selectLastBud" resultType="budget">
+	select * from circle_budget where circle_num=#{circle_num} and budget_num=(select max(budget_num) from CIRCLE_BUDGET where circle_num=#{circle_num})
 	</select>
 </mapper>

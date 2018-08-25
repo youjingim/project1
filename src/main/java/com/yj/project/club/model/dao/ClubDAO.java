@@ -51,4 +51,7 @@ public interface ClubDAO {
 	public List<InnerLike> selectLikeList(SqlSessionTemplate sqlSession,String member_id);
 	public int updateLevel(SqlSessionTemplate sqlSession,Member mm);
 	public CB_Comment selectComment(SqlSessionTemplate sqlSession,int no);
+	public int outCircle(SqlSessionTemplate sqlSession,String id);
+	public Budget selectLastBud(SqlSessionTemplate sqlSession,int circle_num);
+	public List<Budget> totalBud(SqlSessionTemplate sqlSession,int circle_num);
 }

@@ -127,7 +127,7 @@ label{
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value=' ' name='pageTitle'/>
 </jsp:include>
-<section>
+<section style="color:black">
 <div id="message_container" >
 <div class="tab">
   <button class="tablinks" onclick="receiveMessage('${memberLoggedIn.member_id}')">받은 쪽지함</button>
@@ -136,7 +136,7 @@ label{
 
 <div id="receive" class="tabcontent">
   <h3 style="text-align:center;">내가 보낸 쪽지함</h3><br>
-  <table style="max-width:1000px; display: table;margin-right: auto;margin-left: auto;" >
+  <table style="max-width:1000px; display: table;margin-right: auto;margin-left: auto; color:black" >
     <tr style="background-color:#E1E1E1; height:50px;">
       <td class="td_title"><strong>제목</strong></td>
       <td> ${message.message_title }</td>

@@ -197,6 +197,21 @@ public class ClubDAOImpl implements ClubDAO {
 	public CB_Comment selectComment(SqlSessionTemplate sqlSession, int no) {
 		return sqlSession.selectOne("club.selectComment", no);
 	}
+
+	@Override
+	public int outCircle(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.update("club.outCircle", id);
+	}
+
+	@Override
+	public Budget selectLastBud(SqlSessionTemplate sqlSession, int circle_num) {
+		return sqlSession.selectOne("club.selectLastBud", circle_num);
+	}
+
+	@Override
+	public List<Budget> totalBud(SqlSessionTemplate sqlSession, int circle_num) {
+		return sqlSession.selectList("club.selectBudgetList", circle_num);
+	}
 	
 	
 	

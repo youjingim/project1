@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -74,21 +75,41 @@ public class ClubController {
 	    System.out.println("동아리 정보"+club);
 	    session.setAttribute("matching", matching);
 		String[] array=club.getCategory().split(",");
-		
-		List<Circle_board> list=clubService.selectBoardList(circle_num);
+		//List<InnerLike> likeList=clubService.selectLikeList(member.getMember_id());
+		List<Circle_board> list=clubService.selectBoardList(club.getCircle_num());
 		List<CB_Comment> clist=clubService.commentList();
 		System.out.println("게시글 목록: "+list);
 		System.out.println("댓글 목록: "+clist);
+		//현재의 달
+		SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		String today2 = df.format(c.getTime());
+		today2=today2.substring(5, 7);
+		System.out.println("심플 데이터:"+today2);
+		
+		List<Member> memberBirth = clubService.selectMember(club.getCircle_num());//동아리 내 회원 정보가져오기
+		//같은 생일의 멤버를 담을 리스트
+		List<Member> birthMember=new ArrayList<Member>();
+		for(Member mem : memberBirth) {
+			/*System.out.println("가져온 멤버 생일:"+mem.getMember_birth().toString().substring(5, 7));*/
+			/*String today11=mem.getMember_birth().toString().substring(5, 7);*/
+			if(today2.equals(mem.getMember_birth().toString().substring(5, 7))) {
+				birthMember.add(mem);
+				
+			}
+		}
+		session.setAttribute("birthMember", birthMember);
 		//session.setAttribute("member", member);
 
 		session.setAttribute("club", club);
 		session.setAttribute("BoardList", list);
 		session.setAttribute("array", array);
 		session.setAttribute("clist", clist);
+		//session.setAttribute("likeList", likeList);
 
 		List<Matching> matchings = clubService.selectMatching(circle_num);
 		List<ClubNotice> noticeList = clubService.selectNotice(circle_num);
-
+		
 		//int total=member.getMember_notice();
 
 		session.setAttribute("matching", matching);
@@ -116,11 +137,24 @@ public class ClubController {
 		System.out.println("게시글 목록: "+list);
 		System.out.println("댓글 목록: "+clist);
 		//현재의 달
-		Calendar c=Calendar.getInstance();
-		int month1=c.get(Calendar.MONTH)+1;
-		System.out.println("현재의 달:"+month1);
-		List<Member> memberBirth = clubService.selectMember(club.getCircle_num());//동아리 내 회원 정보가져오기
+		SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		String today2 = df.format(c.getTime());
+		today2=today2.substring(5, 7);
+		System.out.println("심플 데이터:"+today2);
 		
+		List<Member> memberBirth = clubService.selectMember(club.getCircle_num());//동아리 내 회원 정보가져오기
+		//같은 생일의 멤버를 담을 리스트
+		List<Member> birthMember=new ArrayList<Member>();
+		for(Member mem : memberBirth) {
+			/*System.out.println("가져온 멤버 생일:"+mem.getMember_birth().toString().substring(5, 7));*/
+			/*String today11=mem.getMember_birth().toString().substring(5, 7);*/
+			if(today2.equals(mem.getMember_birth().toString().substring(5, 7))) {
+				birthMember.add(mem);
+				
+			}
+		}
+		session.setAttribute("birthMember", birthMember);
 		session.setAttribute("member", member);
 
 		session.setAttribute("club", club);
@@ -171,10 +205,13 @@ public class ClubController {
 		Club club=clubService.selectClub(circle_num);
 		int numPerPage=10;
 		List<Budget> list=clubService.selectBudgetList(circle_num,cPage,numPerPage);
-		
+		Budget lastBudget2=clubService.selectLastBud(circle_num);
+		int currentTotal=lastBudget2.getTotal();
+		System.out.println("현재 잔액 : "+currentTotal);
 		int totalCount=clubService.selectCountBudget(circle_num);
 		String pageBar=new CirclePageCreate().getPageBar(cPage,numPerPage,totalCount,"circle_budget.do",circle_num);
-
+		
+		mv.addObject("currentTotal", currentTotal);
 		mv.addObject("club", club);
 		mv.addObject("member_id", id);
 		mv.addObject("pageBar",pageBar);
@@ -403,14 +440,27 @@ public class ClubController {
 		b.setBudget_content(budget_content);
 		b.setCircle_num(circle_num);
 		b.setMember_id(member_id);
-		int balance=0;
-		if(b.getBudget_input()>b.getBudget_output()) {
-			balance=b.getBudget_input()-b.getBudget_output();
-			
-		}else {
-			balance=b.getBudget_output()-b.getBudget_input();
+		/*List<Budget> totalBud=clubService.totalBud(circle_num);*/
+		int totalCountBud=clubService.selectCountBudget(circle_num);
+		System.out.println("예산이 저장된 갯수 : "+totalCountBud);
+		int lastTotal=0;
+		if(totalCountBud>0) {
+		Budget lastBudget=clubService.selectLastBud(circle_num);
+		System.out.println("마지막 줄:"+lastBudget);
+		lastTotal=lastBudget.getTotal();
+		System.out.println("마지막줄 잔액:"+lastTotal);
 		}
+		int total=0;
+		if(b.getBudget_input()>b.getBudget_output()) {//수입이 지출보다 많을때
+			total=b.getBudget_input()-b.getBudget_output();
+			System.out.println("잔액은:"+total);
+		}else {//지출이 수입보다 많을때
+			total=(b.getBudget_output()-b.getBudget_input())*-1;
+			System.out.println("잔액은:"+total);
+		}
+		total=total+lastTotal;
 		
+		b.setTotal(total);
 		if(upFile != null) {
 	         
 	         String saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/club");
@@ -672,5 +722,23 @@ public class ClubController {
 	
 		
 	}
-
+	@RequestMapping("outCircle.do")
+	public ModelAndView outCircle(String member_id, int no) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("탈퇴할 회원 아이디:"+member_id);
+		int result=clubService.outCircle(member_id);
+		System.out.println("탈퇴결과:"+result);
+		String msg="";
+		if(result>0) {
+			msg="동아리 탈퇴를 성공하였습니다";
+		}
+		else {
+			msg="탈퇴를 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "index.do?seq=5");
+		
+		mv.setViewName("common/msg");
+		return mv;
+	}
 }
