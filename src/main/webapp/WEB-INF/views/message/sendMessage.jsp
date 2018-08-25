@@ -101,6 +101,7 @@ label{
 </div>
 <div id="send" class="tabcontent">
   <h3>내가 보낸 쪽지함</h3>
+  <form action="${path }/deleteCheck1.do" method="post" id="messageList">
   <table style="color:black">
   <tr>
     <th style="text-align:center;"><input type="checkbox" id="checkall" /></th>
@@ -118,6 +119,7 @@ label{
 		        <label><input type="checkbox" name="chk" value="${s.message_num }"></label>
 		      </div>
 		    </td>
+		    <input type="hidden" value="${s.message_sender }" name="senderId"/>
 		    <td>${s.message_receiver }</td>
 		    <td><a href='${path }/messageView2.do?message_num=${s.message_num }'>${s.message_title }</a></td>
 		    <td>${s.message_content }</td>
@@ -125,10 +127,9 @@ label{
 		  </tr>
 	  </c:forEach>
  </c:if>
-</table>
-<div style="margin-top:5px;">
-<button type="button" class="btn btn-warning">선택삭제</button>
-</div>
+</table><br>
+<input type="submit" class="btn btn-warning" value="선택삭제"/>
+</form>
 <div class="pagination" style="display: table;margin-right: auto;margin-left: auto;">
 	        ${PageBar }
 	      </div>

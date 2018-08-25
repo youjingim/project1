@@ -2,6 +2,9 @@ package com.yj.project.message.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -186,6 +189,51 @@ public class MessageController {
 		}
 		mv.addObject("msg",msg);
 		mv.addObject("loc", "circle_list.do?circle_num="+cNum);
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	@RequestMapping("deleteCheck.do")
+	public ModelAndView deleteCheckBox(@RequestParam("chk") int[] check,String receivId) {
+		ModelAndView mv=new ModelAndView();
+		int result=0;
+		System.out.println("아이디:"+receivId);
+		for(int checkNum : check) {
+			System.out.println("체크값:"+checkNum);
+			result=messageService.deleteMessage(checkNum);
+		}
+		System.out.println("result:"+result);
+		String msg="";
+		if(result>0) {
+			msg="쪽지 보내기를 성공하였습니다";
+		}
+		else {
+			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "myMessage.do?member_id="+receivId);
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	@RequestMapping("deleteCheck1.do")
+	public ModelAndView deleteCheckBox2(@RequestParam("chk") int[] check, String senderId) {
+		ModelAndView mv=new ModelAndView();
+		int result=0;
+		System.out.println("아이디:"+senderId);
+		for(int checkNum : check) {
+			System.out.println("체크값:"+checkNum);
+			result=messageService.deleteMessage(checkNum);
+		}
+		System.out.println("result:"+result);
+		
+		String msg="";
+		if(result>0) {
+			msg="쪽지 보내기를 성공하였습니다";
+		}
+		else {
+			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "myMessage2.do?member_id="+senderId);
 		mv.setViewName("common/msg");
 		return mv;
 	}
