@@ -37,6 +37,7 @@
 <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">  
 <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
 
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 <script>
 function fnMove(seq){
     var offset = $("#info" + seq).offset();
@@ -79,7 +80,7 @@ font-family: 'Nanum Gothic Coding', monospace;
 }
 div#myNavbar ul li a:hover{
 color:gray;
-font-size:18px;
+font-size:23px;
 }
 header{
 width:100%;
@@ -504,6 +505,7 @@ margin-bottom:0px;
 height:10px;
 }
 #infoTable td{
+font-size:20px;
 text-align:center;
 color:black;
 padding:5px;
@@ -526,6 +528,10 @@ margin-left:0% !important;
 background-color:white;
 }
 }
+
+#nav_span li a{
+font-size:20px;
+}
 </style>
 
 </head>
@@ -547,17 +553,56 @@ background-color:white;
       </button>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
+    <input type='hidden' value='${memberLoggedIn.member_id}' id='member_id_check'>
       <ul class="nav navbar-nav navbar-left" id="nav_span" >
-      	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-         <li><a href="#" onclick="fnMove('1')">CampusPick</a></li>
-        <li><a href="${path}/secondPage.do">동아리</a></li>
-        <li><a href="${path}/createClub">동아리 개설</a></li>
-        <li><a href="${path}/calendar.do">With us</a></li>
-        <li><a href="${path }/board/boardList.do">자유게시판</a></li>
+         <li><a style='cursor:pointer;' onclick="myCircleFunc('${memberLoggedIn.member_id}',${memberLoggedIn.circle1_num})">동아리 홈</a>
+         			<script>
+				function myCircleFunc(id,no){
+					if(no==0){
+						alert(id+'님은 가입된 동아리가 없습니다. 동아리 가입 후 이용해주세요');
+					}
+					else{
+						location.href="${path }/clubMain.do?member_id="+id;
+					}
+				}
+			</script></li>
+        <li><a href="${path}/secondPage.do">동아리 찾기</a></li>
+        <li><a href="#" onclick='createClub()'>동아리 개설</a></li>
+        <li><a href="${path}/calendar.do">매칭신청</a></li>
+        <li><a href="${path }/board/boardList.do">커뮤니티</a></li>
       </ul>
     </div>
   </div>
+<script>
+function createClub(){
+	var member_id = {"member_id":$('#member_id_check').val()};
+	var check = false;
+	   $.ajax({
+		      url: "${path}/clubMemberCheck.do",
+		      async: false,
+		      type:'post',
+		      data: member_id,
+		      success:function(data){
+		         if(data=="true"){
+		        	 check=true;
+		         }else{
 
+		        	 check=false;
+		         }
+		      }
+
+		   });
+	
+	if('${memberLoggedIn.circle1_num}'!=0){
+		alert('가입된 동아리가 있습니다!');
+	}else if(check){
+		alert('진행중인 개설 신청이 있습니다!');
+	}else{
+		location.href='${path}/createClub';
+	}
+	
+}
+</script>
 <div class="dropdown col-sm-2" id="info_span" >
 		<a style="font-weight:600; color:white;font-size:15px;cursor:pointer;margin-left:80%;"><img src="${path}/resources/image/profile.png" style='width:40px; height:40px;'></a>
 			
@@ -567,26 +612,10 @@ background-color:white;
 			<tr>
 			<td>${memberLoggedIn.member_id}님</td>
 			</tr>
-			<tr>
-			<td><a href="${path }/member/mypage.do">마이페이지</a></td>
-			</tr>
-			<tr>
 
-			<td><a onclick="myCircleFunc('${memberLoggedIn.member_id}',${memberLoggedIn.circle1_num})">나의 동아리</a></td>
-	
-			<script>
-				function myCircleFunc(id,no){
-					if(no==0){
-						alert(id+'님은 가입된 동아리가 없습니다. 동아리 가입 후 이용해주세요');
-					}
-					else{
-						location.href="${path }/clubMain.do?member_id="+id;
-					}
-				}
-			</script>
-			</tr>
+
 			<tr>
-			<td><a href="#">쪽지함</a> </td>
+			<td><a href="${path }/myMessage.do?member_id=${memberLoggedIn.member_id}">쪽지함</a> </td>
 			</tr>
 			<tr>
 			<td><a href="${path}/member/memberUpdate.do?member_id=${memberLoggedIn.member_id}">내 정보 수정</a></td>
@@ -613,6 +642,11 @@ background-color:white;
 <c:if test="${param.pageState != 'index'}">
 <div id="img_slider">
 <img src='${path}/resources/image/back1.jpg'>
+</div>
+</c:if>
+<c:if test="${param.pageTitle == 'search'}">
+<div id="img_slider">
+<img src='${path}/resources/image/back5.png'>
 </div>
 </c:if>
 

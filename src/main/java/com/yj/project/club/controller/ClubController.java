@@ -73,11 +73,8 @@ public class ClubController {
 	
 	//동아리 메인페이지로 넘어가는 로직
 	@RequestMapping("search/circleView.do")
-<<<<<<< HEAD
 	public String clubMain(@RequestParam(value="no") int circle_num,@RequestParam(value="id") String member_id,HttpSession session, Model model) {
-=======
-	public String clubMain(@RequestParam(value="no") int circle_num,@RequestParam(value="id") String member_id, HttpSession session, Model model) {
->>>>>>> yujin
+
 		Member member=clubService.selectOne(member_id);
 		Club club=clubService.selectClub(circle_num);
 		List<Matching> matching = clubService.selectMatching(circle_num);
@@ -89,8 +86,7 @@ public class ClubController {
 		List<CB_Comment> clist=clubService.commentList();
 		System.out.println("게시글 목록: "+list);
 		System.out.println("댓글 목록: "+clist);
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 		Member chairman=clubService.selectChairman(club.getCircle_num());
 		System.out.println("동아리 대표 : "+chairman);
 		String chiefName=chairman.getMember_id();
@@ -115,12 +111,8 @@ public class ClubController {
 		session.setAttribute("chairman", chiefName);
 		session.setAttribute("birthMember", birthMember);
 		//session.setAttribute("member", member);
-=======
+
 		session.setAttribute("member", member);
->>>>>>> c5de0f496690ed18307253b2a19a79cbc9ff22ee
-=======
-		session.setAttribute("member", member);
->>>>>>> yujin
 
 		session.setAttribute("club", club);
 		session.setAttribute("BoardList", list);
@@ -130,18 +122,12 @@ public class ClubController {
 
 		List<Matching> matchings = clubService.selectMatching(circle_num);
 		List<ClubNotice> noticeList = clubService.selectNotice(circle_num);
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 		
 		//int total=member.getMember_notice();
-=======
+
 
 		int total=member.getMember_notice();
->>>>>>> c5de0f496690ed18307253b2a19a79cbc9ff22ee
-=======
-
-		int total=member.getMember_notice();
->>>>>>> yujin
 
 		session.setAttribute("matching", matching);
 		session.setAttribute("club", club);
@@ -799,8 +785,7 @@ public class ClubController {
 	
 		
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	@RequestMapping("/makeClub.do")
 	public ModelAndView makeClub(int circle_num) {
 		ModelAndView mv = new ModelAndView();
@@ -915,10 +900,7 @@ public class ClubController {
 		return mv;
 		
 	}
-=======
 
->>>>>>> bonyeon
-=======
 	@RequestMapping("outCircle.do")
 	public ModelAndView outCircle(String member_id, int no) {
 		ModelAndView mv = new ModelAndView();
@@ -979,5 +961,4 @@ public class ClubController {
 		mv.setViewName("common/msg");*/
 		return mv;
 	}
->>>>>>> bonyeon
 }

@@ -182,7 +182,8 @@ border-bottom:1px solid lightgray;
 
               title: '${m.member_name}'+'님의 생일',
               start: '${m.member_birth}',
-              check : 'M'
+              check : 'M',
+              id: '${m.member_id}'
             },
          </c:forEach>
                ],
@@ -240,6 +241,7 @@ border-bottom:1px solid lightgray;
         	}else if(event.check=='M'){
         		$('#msg').html(event.title+"입니다!");
         		$('#memberBirthday').modal();
+        		$('#send_id').attr("value",event.id);
         	}
 
         }
@@ -326,13 +328,14 @@ border-bottom:1px solid lightgray;
         </div>
         <div id="modalBody" class="modal-body">
         <span id='msg' style='margin-left:5%;'></span><br><br>
-        <span style='margin-left:5%;'>다들 축하의 메시지를 보내주세요!</span>
+        <span style='margin-left:5%;'>축하의 메시지를 보내주세요!</span>
         <br><br>
-        <p style='margin-left:5%;font-size:15px;'>제 목</p><input type='text' name='msgTitle' style='width:90%;margin-left:5%;' class="form-control">
+        <p style='margin-left:5%;font-size:15px;'>제 목</p><input type='text' id='msgTitle' style='width:90%;margin-left:5%;' class="form-control">
         <br>
-        <p style='margin-left:5%;font-size:15px; '>내 용</p><textarea name='msgContent' style='margin-left:5%;width:90%;height:200px;' class="form-control"></textarea>
+        <p style='margin-left:5%;font-size:15px; '>내 용</p><textarea id='msgContent' style='margin-left:5%;width:90%;height:200px;' class="form-control"></textarea>
         <br>
-        <button style='margin-left:85%;' class='btn btn-success'>전송</button>
+        <input type='hidden' id="send_id">
+        <button style='margin-left:85%;' class='btn btn-success' onclick="location.href='${path}/circleMemberMessage3.do?mid=${memberLoggedIn.member_id}&yid='+$('#send_id').val()+'&title12='+$('#msgTitle').val()+'&content12='+$('#msgContent').val()+'&nn=${memberLoggedIn.circle1_num }'">전송</button>
         </div>
         
         </div>

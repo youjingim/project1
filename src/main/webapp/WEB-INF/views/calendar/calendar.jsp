@@ -284,7 +284,7 @@ font-family: 'Gothic A1', sans-serif;
            }else{
                var btn4 = "<button type='button' class='btn btn-success' onclick='return matchingFrm()' style='width:250px;margin-right:170px;'>매칭신청</button>";
               $('#modal_foot').html("<span id='change' style='cursor:pointer;color:black;position:absolute;left:15px;' onclick='chage_toggle()'> 변경하기 </span>"+btn4);
-              var send = " <a href='#'><i class='fa fa fa-envelope-o fa-fw w3-margin-right'></i></a>";
+              var send = " <a href='#' onclick='send_msg()'><i class='fa fa fa-envelope-o fa-fw w3-margin-right'></i></a>";
               
               $('#member_id_in').append(send);
            }
@@ -428,7 +428,7 @@ font-family: 'Gothic A1', sans-serif;
            <tr>
            <td>ID</td>
            <td>
-           <span id="member_id_in" class="modal-title" style="color:black;"> </span> 
+           <span id="member_id_in" class="modal-title" style="color:black;"></span> 
            </td></tr>
            <tr>
            <td>카테고리</td>
@@ -878,5 +878,9 @@ function uploadMatching(){
        changeSlide2();
    }, false);
 
-
+	function send_msg(){
+		
+		
+	}
+   
 </script>

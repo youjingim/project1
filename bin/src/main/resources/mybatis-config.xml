@@ -13,13 +13,14 @@
 
 <typeAlias type="com.yj.project.search.model.vo.Circle" alias="circle"/>
 <typeAlias type="com.yj.project.search.model.vo.Like" alias="like_tab" /> 
-
+<typeAlias type="com.yj.project.club.model.vo.Circle_join" alias="join"/>
 <typeAlias type="com.yj.project.member.model.vo.Member" alias="Member"/>
 <typeAlias type="com.yj.project.club.model.vo.Club" alias="Club"/>
 <typeAlias type="com.yj.project.club.model.vo.Budget" alias="budget"/>
 <typeAlias type="com.yj.project.club.model.vo.Circle_board" alias="cBoard"/>
 <typeAlias type="com.yj.project.club.model.vo.CB_Comment" alias="cb_comment"/>
 <typeAlias type="com.yj.project.club.model.vo.InnerLike" alias="innerlike"/>
+<typeAlias type="com.yj.project.message.model.vo.Message" alias="message"/>
 </typeAliases>
 
 

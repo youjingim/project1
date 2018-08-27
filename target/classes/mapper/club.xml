@@ -127,7 +127,7 @@
 	<select id="selectComment" resultType="cb_comment">
 		SELECT * FROM CB_COMMENT WHERE CB_NUM=#{no} and CB_COMMENTNO = (select MAX(CB_COMMENTNO) from CB_COMMENT where CB_NUM=#{cb_num})
 	</select>
-<<<<<<< HEAD
+
 	<select id='clubCount' resultType='_int'>
 	select count(*) from circle_register
 	</select>
@@ -155,8 +155,7 @@
 	<delete id='deletec' parameterType="map">
 	delete from <if test="table == 'circle_register'">circle_register</if> <if test="table != 'circle_register'">circle</if> where circle_num = #{circle_num}
 	</delete>
-	
-=======
+
 	<update id="outCircle">
 		UPDATE MEMBER SET CIRCLE1_NUM=0 WHERE MEMBER_ID=#{member_id}
 	</update>
@@ -175,5 +174,4 @@
 	<select id="selectJoinCount" resultType="_int">
 		SELECT COUNT(*) FROM CIRCLE_JOIN WHERE JOIN_RECEIVER=#{join_receiver} AND CIRCLE_NUM=#{circle_num}
 	</select>
->>>>>>> bonyeon
 </mapper>

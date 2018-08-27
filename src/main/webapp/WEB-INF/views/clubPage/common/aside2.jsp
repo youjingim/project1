@@ -88,7 +88,7 @@ width:85%;
         
         <li>
           <h5><strong><i class="fa fa-handshake-o fa-fw w3-margin-right w3-text-theme"></i>매칭 시스템</strong></h5><hr>
-          <img src="${pageContext.request.contextPath}/resources/image/${m.circle_photo}" alt="Avatar" style="width:80%;height:150px;" class='img-rounded'><br>
+          <img src="${pageContext.request.contextPath}/resources/upload/club/${m.circle_photo}" alt="Avatar" style="width:80%;height:150px;" class='img-rounded'><br>
           <br>
           <span><strong>${m.circle_name }</strong></span><br>
           <span>No.${m.withus_num } ${m.matching_date }</span>

@@ -200,7 +200,7 @@ public class ClubDAOImpl implements ClubDAO {
 	public CB_Comment selectComment(SqlSessionTemplate sqlSession, int no) {
 		return sqlSession.selectOne("club.selectComment", no);
 	}
-<<<<<<< HEAD
+
 	@Override	
 	public int clubCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("club.clubCount");
@@ -223,7 +223,6 @@ public class ClubDAOImpl implements ClubDAO {
 
 	@Override
 	public int updateMemberLevel(SqlSessionTemplate sqlSession, Map<String, Object> map) {
-		System.out.println("여기당여여가가"+map.get("circle_num"));
 		return sqlSession.update("club.updateMemberLevel",map);
 	}
 
@@ -249,7 +248,6 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 	
 	
-=======
 
 	@Override
 	public int outCircle(SqlSessionTemplate sqlSession, String id) {
@@ -286,7 +284,7 @@ public class ClubDAOImpl implements ClubDAO {
 	public int selectJoinCount(SqlSessionTemplate sqlSession, Circle_join cj) {
 		return sqlSession.selectOne("club.selectJoinCount", cj);
 	}
->>>>>>> bonyeon
+
 	
 
 }
