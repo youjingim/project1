@@ -240,6 +240,7 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int deleteCircle(Map<String, Object> map) {
 		return clubDAO.deleteCircle(sqlSession,map);
+<<<<<<< HEAD
 	}
 	@Override
 	public int outCircle(String id) {
@@ -275,6 +276,8 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int selectJoinCount(Circle_join cj) {
 		return clubDAO.selectJoinCount(sqlSession,cj);
+=======
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 	}
 
 	@Override

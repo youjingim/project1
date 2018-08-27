@@ -53,7 +53,10 @@ public interface ClubDAO {
 	public List<InnerLike> selectLikeList(SqlSessionTemplate sqlSession,String member_id);
 	public int updateLevel(SqlSessionTemplate sqlSession,Member mm);
 	public CB_Comment selectComment(SqlSessionTemplate sqlSession,int no);
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 	public int clubCount(SqlSessionTemplate sqlSession);
 	public ReqCircle makeClub(SqlSessionTemplate sqlSession,int circle_num);
 	public int deleteCircle(SqlSessionTemplate sqlSession,int circle_num);
@@ -63,6 +66,7 @@ public interface ClubDAO {
 	public int circleCount(SqlSessionTemplate sqlSession);
 	public int countMember(SqlSessionTemplate sqlSession,String member_id);
 	public int deleteCircle(SqlSessionTemplate sqlSession,Map<String, Object> map);
+<<<<<<< HEAD
 
 	public int outCircle(SqlSessionTemplate sqlSession,String id);
 	public Budget selectLastBud(SqlSessionTemplate sqlSession,int circle_num);
@@ -77,4 +81,6 @@ public interface ClubDAO {
 	
 =======
 >>>>>>> parent of f1863f8... 20180827
+=======
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 }

@@ -200,7 +200,10 @@ public class ClubDAOImpl implements ClubDAO {
 	public CB_Comment selectComment(SqlSessionTemplate sqlSession, int no) {
 		return sqlSession.selectOne("club.selectComment", no);
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 	@Override	
 	public int clubCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("club.clubCount");
@@ -248,6 +251,7 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.delete("club.deletec",map);
 	}
 	
+<<<<<<< HEAD
 
 
 	@Override
@@ -299,6 +303,8 @@ public class ClubDAOImpl implements ClubDAO {
 =======
 	
 >>>>>>> parent of f1863f8... 20180827
+=======
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 	
 	
 

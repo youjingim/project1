@@ -60,6 +60,7 @@ public interface ClubService {
 	public int circleCount();
 	public int countMember(String member_id);
 	public int deleteCircle(Map<String, Object>map);
+<<<<<<< HEAD
 	public int outCircle(String id);
 	public Budget selectLastBud(int circle_num);
 	public List<Budget> totalBud(int cirlce_num);
@@ -72,4 +73,7 @@ public interface ClubService {
 	public int deleteJoinMember(Circle_join join);
 =======
 >>>>>>> parent of f1863f8... 20180827
+=======
+	
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 }

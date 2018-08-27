@@ -35,14 +35,6 @@ public class MessageServiceImpl implements MessageService {
 	public Message selectMessageOne(int message_num) {
 		return messageDAO.selectMessageOne(sqlSession,message_num);
 	}
-	@Override
-	public int deleteMessage(int message_num) {
-		return messageDAO.deleteMessage(sqlSession,message_num);
-	}
-	@Override
-	public int insertSend(Message m) {
-		return messageDAO.insertSend(sqlSession,m);
-	}
 	
 	
 }

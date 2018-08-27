@@ -123,23 +123,23 @@ label{
     cursor: pointer;
 }
 </style>
-
+</style>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value=' ' name='pageTitle'/>
 </jsp:include>
-<section style="color:black">
+<section>
 <div id="message_container" >
 <div class="tab">
-  <button class="tablinks" onclick="receiveMessage('${memberLoggedIn.member_id}')">받은 쪽지함</button>
-  <button class="tablinks" onclick="sendMessage('${memberLoggedIn.member_id}')">보낸 쪽지함</button>
+  <button class="tablinks" onclick="receiveMessage('${member_id}')">받은 쪽지함</button>
+  <button class="tablinks" onclick="sendMessage('${member_id}')">보낸 쪽지함</button>
 </div>
 
-<div id="receive" class="tabcontent" >
+<div id="receive" class="tabcontent">
   <h3 style="text-align:center;">내가 받은 쪽지함</h3><br>
-  <table style="max-width:1000px; display: table;margin-right: auto;margin-left: auto; color:black" >
+  <table style="max-width:1000px; display: table;margin-right: auto;margin-left: auto;" >
     <tr style="background-color:#E1E1E1; height:50px;">
       <td class="td_title"><strong>제목</strong></td>
-      <td> ${message.message_title }</td>
+      <td> ${message.message_content }</td>
     </tr>
   <tr>
     <td class="td_title"><strong>보낸이</strong></td>
@@ -162,7 +162,7 @@ label{
   <div style="margin-top:10px;display: table;margin-right: auto;margin-left: auto;" >
     <button type="button" class="btn btn-success" onclick="messageList('${message.message_receiver }')">목록</button>
     <button type="button" class="btn btn-info" id="myBtn">답변</button>
-    <button type="button" class="btn btn-warning" onclick="deleteMessage(${message.message_num},'${message.message_receiver }')">삭제</button>
+    <button type="button" class="btn btn-warning" onclick="deleteMessage(${message.message_num})">삭제</button>
   </div>
 </div>
 </div>
@@ -178,22 +178,22 @@ label{
     <span class="close">&times;</span>
     <h3>답변하기</h3>
     <hr>
-    <form action="${path }/reSendMessage2.do" method="post" onsubmit="return validate();">
+    <form action="${path }/reSendMessage.do" method="post">
     <div class="form-group">
       <label for="member_receive">받는사람</label>
-      <input type="text" class="form-control" id="member_receive" name="yid" value="${message.message_sender }">
+      <input type="text" class="form-control" id="member_receive" value="${message.message_sender }">
     </div>
     <div class="form-group">
       <label for="pwd">보내는사람</label>
-      <input type="text" class="form-control" id="pwd" name="mid"value="${message.message_receiver }">
+      <input type="text" class="form-control" id="pwd" value="${message.message_receiver }">
     </div>
     <div class="form-group">
       <label for="title">제목</label>
-      <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요">
+      <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요">
     </div>
     <div class="form-group">
       <label for="comment">내용</label>
-      <textarea class="form-control" rows="5" id="comment" name="content" placeholder="내용을 입력해주세요"></textarea>
+      <textarea class="form-control" rows="5" id="comment"placeholder="내용을 입력해주세요"></textarea>
     </div>
     <input type="submit" class="btn btn-default" value="전송"/>
     <input type="reset" class="btn btn-default" value="취소"/>
@@ -202,19 +202,6 @@ label{
 
 </div>
 <script>
-function validate(){
-    var content = $("[name=content]").val();
-    var title=$("[name=title]").val();
-    if(title.trim().length==0){
-    	alert("제목을 입력해주세요.");
-	   	return false;
-    }
-    if(content.trim().length==0){
-        alert("내용을 입력하세요");
-        return false;
-    }
-    return true;
-}
 function sendMessage(id) {
    	location.href="${path }/myMessage2.do?member_id="+id;
 }
@@ -224,10 +211,10 @@ function receiveMessage(id) {
 function messageList(id){
 	location.href="${path }/myMessage.do?member_id="+id;
 }
-function deleteMessage(message_num,mid){
+function deleteMessage(message_num){
 	var con=confirm('삭제하시겠습니까?');
 	if(con==true){
-		location.href="${path }/deleteMessage.do?message_num="+message_num+"&mid="+mid;
+		location.href="${path }/deleteMessage.do?message_num="+message_num;
 	}
 	else{
 		history.go();

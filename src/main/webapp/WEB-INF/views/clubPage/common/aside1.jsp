@@ -43,7 +43,7 @@
 	  }
   }  
   function circle_budget(level,id){
-	  location.href="${path}/circle_budget.do?circle_num="+${club.circle_num}+"&id="+'memberLoggedIn.member_id';
+	  location.href="${path}/circle_budget.do?circle_num="+${club.circle_num}+"&id="+id;
 	 
   }
   function circle_gallery(){
@@ -52,6 +52,7 @@
   function circle_calendar(){
 	  location.href="${path}/circle_calendar.do?circle_num="+${club.circle_num}+"&member_id="+'${memberLoggedIn.member_id}';
   }
+<<<<<<< HEAD
   function outCircle(){
 	  var cf=confirm('정말 동아리를 탈퇴하시겠습니까?');
 	  if(cf==true){
@@ -61,12 +62,15 @@
 			history.go();
 		}
   }
+=======
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 </script>
 <style>
 /* 댓글 범위를 나타내는 css*/
 .top{
   width:700px;
 }
+<<<<<<< HEAD
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -104,6 +108,8 @@
     text-decoration: none;
     cursor: pointer;
 }
+=======
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 </style>
 
 </head>
@@ -119,6 +125,7 @@
       <div class="w3-card w3-round w3-white" style="margin-top:16px;">
         <div class="w3-container">
 <<<<<<< HEAD
+<<<<<<< HEAD
 
          <h4 class="w3-center"><c:out value="${club.circle_name }"/><span class="glyphicon glyphicon-envelope myBtnCh" id="${chairman }"></span></h4>
 =======
@@ -126,12 +133,15 @@
 >>>>>>> parent of f1863f8... 20180827
          <p class="w3-center"><img src="${pageContext.request.contextPath}/resources/image/${club.circle_photo}" class="w3-circle" style="height:106px;width:106px" alt="동아리 로고"></p>
 
+=======
+         <h4 class="w3-center"><c:out value="${club.circle_name }"/></h4>
+         <p class="w3-center"><img src="${pageContext.request.contextPath}/resources/upload/club/${club.circle_photo}" class="w3-circle" style="height:106px;width:106px" alt="동아리 로고"></p>
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
          <hr>
          <p><i class="fa fa-bookmark fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.university }"/></p>
          <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.circle_location }"/> </p>
          <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i><fmt:formatDate type="date" value="${club.circle_enrolldate}" /> </p>
          <p><i class="fa fa-commenting fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.circle_comment }"/></p>
-         
         </div>
       </div><br>
 
@@ -163,7 +173,6 @@
 
           <button onclick="circle_gallery()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> 동아리 사진첩</button>
           <div id="Demo4" class="w3-hide w3-container">
-
          <div class="w3-row-padding">
          <br>
            <div class="w3-half">
@@ -189,6 +198,7 @@
         </div>
       </div>
       <br>
+<<<<<<< HEAD
  
     <c:if test="${memberLoggedIn.circle1_num eq club.circle_num }">
       <button type="button" class="btn btn-danger" onclick="outCircle()">동아리 탈퇴</button>
@@ -196,6 +206,23 @@
 	<c:if test="${memberLoggedIn.circle1_num ne club.circle_num }">
       <button type="button" class="btn btn-success" >동아리 가입신청</button>
 	</c:if>	
+=======
+
+      <!-- Interests -->
+      <div class="w3-card w3-round w3-white w3-hide-small">
+        <div class="w3-container">
+          <p>관련  태그</p>
+          <p>
+         <c:forEach  var="ca" items="${array}">	
+            <span class="w3-tag w3-small w3-theme-d1">#${ca }</span>
+
+		</c:forEach>
+          </p>
+        </div>
+      </div>
+      <br>
+
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
     <!-- End Left Column -->
     </div>
    

@@ -8,13 +8,6 @@
 body {font-family: Arial;
 color:black;
 }
-/* visited link */
-a:visited {
-    color: black;
-}
-a:link {
-    color: black;
-}
 section{
 width:100%;
 height:900px;
@@ -93,7 +86,7 @@ label{
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value=' ' name='pageTitle'/>
 </jsp:include>
-<section style="color:black">
+<section>
 <div id="message_container" >
 <div class="tab">
   <button class="tablinks" onclick="receiveMessage('${member_id}')">받은 쪽지함</button>
@@ -101,10 +94,9 @@ label{
 </div>
 <div id="send" class="tabcontent">
   <h3>내가 보낸 쪽지함</h3>
-  <form action="${path }/deleteCheck1.do" method="post" id="messageList">
-  <table style="color:black">
+  <table>
   <tr>
-    <th style="text-align:center;"><input type="checkbox" id="checkall" /></th>
+    <th style="text-align:center;">선택</th>
     <th style="text-align:center;">받은 사람</th>
     <th style="text-align:center;">제목</th>
     <th style="text-align:center;">내용</th>
@@ -116,20 +108,22 @@ label{
 		  <tr>
 		    <td>
 		      <div class="checkbox">
-		        <label><input type="checkbox" name="chk" value="${s.message_num }"></label>
+		        <label><input type="checkbox" value=""></label>
 		      </div>
 		    </td>
 		    <input type="hidden" value="${s.message_sender }" name="senderId"/>
 		    <td>${s.message_receiver }</td>
-		    <td><a href='${path }/messageView2.do?message_num=${s.message_num }'>${s.message_title }</a></td>
+		    <td>${s.message_title }</td>
 		    <td>${s.message_content }</td>
 		    <td>${s.message_date }</td>
 		  </tr>
 	  </c:forEach>
  </c:if>
-</table><br>
-<input type="submit" class="btn btn-warning" value="선택삭제"/>
-</form>
+</table>
+<div style="margin-top:5px;">
+<button type="button" class="btn btn-info">전체선택</button>
+<button type="button" class="btn btn-warning">선택삭제</button>
+</div>
 <div class="pagination" style="display: table;margin-right: auto;margin-left: auto;">
 	        ${PageBar }
 	      </div>
@@ -142,15 +136,6 @@ function sendMessage(id) {
 	function receiveMessage(id) {
 		   location.href="${path }/myMessage.do?member_id="+id;
 		}
-	$(document).ready(function(){
-	    $("#checkall").click(function(){
-	        if($("#checkall").prop("checked")){
-	            $("input[name=chk]").prop("checked",true);
-	        }else{
-	            $("input[name=chk]").prop("checked",false);
-	        }
-	    })
-	})	
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>      
 </section>

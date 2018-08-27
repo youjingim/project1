@@ -183,7 +183,11 @@ function like_func(id,no,event){
    display: none;
 }
 .commentTable{
+<<<<<<< HEAD
    display: none;
+=======
+	display: none;
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 }
 </style>
 
@@ -206,9 +210,15 @@ function like_func(id,no,event){
               <form action="clubMainPage.do" method="post" enctype="multipart/form-data" onsubmit="return validate();">
                     <input type="text" class="form-control" id="cb_title" name="cb_title" placeholder="게시글 제목을 작성해주세요."><br>
                     <textarea class="form-control" rows="5" id="cb_content" name="cb_content" placeholder="게시글 내용을 작성해주세요."></textarea>
+<<<<<<< HEAD
                <input type="hidden" name="circle_num"value="${club.circle_num }"/>
                <input type="hidden" name="member_id" value="${member.member_id }"/>
                    
+=======
+					<input type="hidden" name="circle_num"value="${club.circle_num }"/>
+					<input type="hidden" name="member_id" value="${member.member_id }"/>
+                	
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
                     <div class="input-group mb-3" style="padding:0px;">
                         <div class="input-group-prepend" style="padding:0px;">
                             <span class="input-group-text">첨부파일1</span>
@@ -233,6 +243,7 @@ function like_func(id,no,event){
         </div>
       </div>
       <c:if test="${not empty BoardList }">
+<<<<<<< HEAD
          <c:forEach items="${BoardList}" var='b' varStatus="status">
          <div class="w3-container w3-card w3-white w3-round w3-margin check1"><br>
            <p style="display:inline-block;"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>${b.member_id }</p>
@@ -298,6 +309,71 @@ function like_func(id,no,event){
          </c:forEach>
        <button type="button" class="btn btn-default btn-block" id="moreBoard" style="margin:0px 30px 0px 16px; width:96%;" >더 보기</button>
        </c:if> 
+=======
+	      <c:forEach items="${BoardList}" var='b' varStatus="status">
+	      <div class="w3-container w3-card w3-white w3-round w3-margin check1"><br>
+	        <p style="display:inline-block;"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>${b.member_id }</p>
+	        <c:if test="${member.member_id eq b.member_id}">
+	        <div style="flaot:right; display: inline-block;">
+	        <button type="button" class="btn btn-warning" style="margin-right:5px;" onclick="updateBoard(${b.cb_num })">수정</button>
+	        <button type="button" class="btn btn-danger" onclick="deleteBoard(${b.cb_num },'${b.member_id }')">삭제</button>
+	        </div>
+	        </c:if>
+	        <span class="w3-right w3-opacity"><fmt:formatDate type="both" value="${b.cb_date}" /></span>
+	        <h4><bold>${b.cb_title }</bold></h4>
+	        <hr class="w3-clear">
+	        <p>
+	        ${b.cb_content }
+	        </p><br>
+	        <c:if test="${not empty b.cb_attachment }">
+	          <div class="w3-row-padding" style="margin:0 -16px" id="img_container">
+	           
+	              <img src="${path }/resources/upload/club/${b.cb_reattachment }" style="width:300px; height:300px; display: inline-block;" alt="게시글 사진1" class="w3-margin-bottom">
+	              <c:if test="${not empty b.cb_attachment2 }">
+	              <img src="${path }/resources/upload/club/${b.cb_reattachment2 }" style="width:300px; height:300px; display: inline-block;" alt="게시글 사진1" class="w3-margin-bottom">
+	          		</c:if>
+			 </div>
+			 </c:if>
+			 <c:if test="${not empty likeList }">	
+			 	<c:forEach items="${likeList }" var='ll' varStatus="llstatus">
+			 		<c:if test="${ll.member_id eq member.member_id and ll.cb_no eq b.cb_num and ll.cb_like_check eq 1 }">		 	
+	        		<button type="button" class="w3-button w3-red w3-margin-bottom like_icon" id="like_icon" onclick="like_func('${member.member_id}','${b.cb_num }',event);"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
+	        		</c:if>
+	        	</c:forEach>
+	        		<button type="button" class="w3-button w3-indigo w3-margin-bottom like_icon1" id="like_icon1" onclick="like_func('${member.member_id}','${b.cb_num }',event);"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
+	        </c:if>	
+	        		<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" id="circle_comment"><i class="fa fa-comment"></i> 댓글 </button>
+	        <div id="post_comment" >
+	          <input type="text" class="form-control" name="comment1" id="comment1" placeholder="댓글을 작성해주세요." style="display:inline-block; width:90%;"/>
+	          <input type="hidden" id="no" value="${b.cb_num }"/>
+	          <input type="hidden" id="memberId" value="${member.member_id }"/>
+	          <button type="button" class="btn btn-primary" id="comment_button" onclick="insertComment(${b.cb_num})">등록</button>
+	          <div class="comment-container"><hr>
+	            <c:forEach items="${clist}" var='cc' varStatus="cstatus">
+	            <c:if test="${cc.cb_num eq b.cb_num }">
+	            <table class="commentTable">
+	              <tr>
+	                <td class="top"><strong>${cc.member_id }</strong> <fmt:formatDate type="both" value="${cc.cb_comment_date}" /></td>
+	                <td></td>
+	              </tr>
+	              <tr>
+	                <td class="top">${cc.cb_comment_content }</td>
+	                <c:if test="${member.member_id eq b.member_id}">	                
+	                <td><button type="button" class="btn btn-danger" onclick="deleteComment(${cc.cb_commentno},'${member.member_id }');">삭제</button></td>
+	                </c:if>
+	              </tr>
+	            </table>
+	            </c:if>
+	           </c:forEach>
+	         		<button type="button" class="btn btn-default" id="moreComment"> 댓글 더 보기</button>	     
+	          </div>
+	          <br>
+	        </div>
+	      </div>
+	      </c:forEach>
+	    <button type="button" class="btn btn-default btn-block" id="moreBoard" style="margin:0px 30px 0px 16px; width:96%;" >더 보기</button>
+	    </c:if> 
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
     <!-- End Middle Column -->
     </div>
 

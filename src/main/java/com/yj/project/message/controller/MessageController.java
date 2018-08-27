@@ -2,9 +2,6 @@ package com.yj.project.message.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,14 +72,6 @@ public class MessageController {
 		model.addAttribute("message", message);
 		return "message/messageView";
 	}
-	@RequestMapping("messageView2.do")
-	public String messageView2(int message_num, Model model) {
-		System.out.println("메세지 번호:"+message_num);
-		Message message=messageService.selectMessageOne(message_num);
-		System.out.println("내가 불러온 메세지:"+message);
-		model.addAttribute("message", message);
-		return "message/messageView2";
-	}
 	//내가 받은 메시지 답장 페이지 넘기는 로직
 	@RequestMapping("reSendMessage.do")
 	public String reSendMessage(String mid,String yid,Model model) {
@@ -94,9 +83,9 @@ public class MessageController {
 	}
 	//메세지 삭제 로직
 	@RequestMapping("deleteMessage.do")
-	public ModelAndView deleteMessage(int message_num,String mid) {
-		ModelAndView mv=new ModelAndView();
+	public String deleteMessage(int message_num) {
 		System.out.println("삭제할 메시지 번호:"+message_num);
+<<<<<<< HEAD
 		int result = messageService.deleteMessage(message_num);
 		System.out.println(result);
 		
@@ -259,5 +248,8 @@ public class MessageController {
 		mv.addObject("loc", "myMessage2.do?member_id="+senderId);
 		mv.setViewName("common/msg");
 		return mv;
+=======
+		return "";
+>>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 	}
 }
