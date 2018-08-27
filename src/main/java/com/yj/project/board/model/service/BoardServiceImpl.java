@@ -73,6 +73,12 @@ public class BoardServiceImpl implements BoardService{
    @Override
    public List<Comment> commentList(int boardNo) {
 	return boardDAO.commentList(boardNo);
+
+ }
+   
+   @Override
+   public int commentDelete(int commentNo) {
+	return boardDAO.commentDelete(commentNo);
 }
 
   

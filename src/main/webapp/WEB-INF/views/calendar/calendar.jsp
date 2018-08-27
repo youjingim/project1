@@ -148,11 +148,11 @@ font-family: 'Gothic A1', sans-serif;
    </select>
    <input type="button" class="btn btn-success" onclick="category()" value="검색" style="font-size:15px;display:inline-block;width:100px;">
    <br><br>
-   <div style='margin-left:50px;'><span style='margin-left:10px;width:30px;height:15px;background-color:#7C96C9;display:inline-block;border-radius:10%;margin-left:55px;'></span> 나의 동아리 신청 매칭
+   <div style='margin-left:50px;'><span style='margin-left:10px;width:30px;height:15px;background-color:#7C96C9;display:inline-block;border-radius:10%;margin-left:55px;'></span><span style='color:black;'> 나의 동아리 신청 매칭</span>
    <br>
-   <span style='width:30px;height:15px;background-color:#A5DE9F;display:inline-block;border-radius:10%;margin-left:55px;'></span> &nbsp;타&nbsp;&nbsp; 동아리 신청 매칭
+   <span style='width:30px;height:15px;background-color:#A5DE9F;display:inline-block;border-radius:10%;margin-left:55px;'></span> <span style='color:black;'>&nbsp;타&nbsp;&nbsp; 동아리 신청 매칭</span>
    <br>
-   <span style='margin-left:185px;'><a href='#' onclick="$('#Explanation').modal();">설명보기</a></span>
+   <span style='margin-left:185px;'><a href='#' style='color:black;' onclick="$('#Explanation').modal();">설명보기</a></span>
    <br>
    <c:if test="${memberLoggedIn.member_level eq 'L5'}">
    <button type="button" class="btn btn-info" style="margin-left:90px;cursor:pointer;margin-left:150px;" data-toggle="modal" data-target="#myModal">매칭 업로드</button>   

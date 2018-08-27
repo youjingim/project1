@@ -39,4 +39,7 @@ select * from fb_comment where board_num = #{boardNo} and COMMENT_NO = (select M
 <select id="commentList" parameterType="_int" resultType='com.yj.project.board.model.vo.Comment'>
 select * from fb_comment where board_num=#{boardNo} order by comment_no desc
 </select>
+<delete id="commentDelete" parameterType="_int">
+delete from fb_comment where comment_no=#{commentNo}
+</delete> 
 </mapper>

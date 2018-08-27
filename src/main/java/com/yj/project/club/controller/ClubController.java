@@ -75,14 +75,14 @@ public class ClubController {
 	//동아리 메인페이지로 넘어가는 로직
 	@RequestMapping("search/circleView.do")
 	public String clubMain(@RequestParam(value="no") int circle_num,@RequestParam(value="id") String member_id,HttpSession session, Model model) {
-
+		
 		Member member=clubService.selectOne(member_id);
 		Club club=clubService.selectClub(circle_num);
 		List<Matching> matching = clubService.selectMatching(circle_num);
 	    System.out.println("동아리 정보"+club);
 	    session.setAttribute("matching", matching);
 		
-		//List<InnerLike> likeList=clubService.selectLikeList(member.getMember_id());
+		List<InnerLike> likeList=clubService.selectLikeList(member_id);
 		List<Circle_board> list=clubService.selectBoardList(club.getCircle_num());
 		List<CB_Comment> clist=clubService.commentList();
 		System.out.println("게시글 목록: "+list);
@@ -111,16 +111,13 @@ public class ClubController {
 		}
 		session.setAttribute("chairman", chiefName);
 		session.setAttribute("birthMember", birthMember);
-		//session.setAttribute("member", member);
-
 		session.setAttribute("member", member);
-
 		session.setAttribute("club", club);
 		session.setAttribute("BoardList", list);
 		
 		session.setAttribute("clist", clist);
-		//session.setAttribute("likeList", likeList);
-
+		session.setAttribute("likeList", likeList);
+		
 		List<Matching> matchings = clubService.selectMatching(circle_num);
 		List<ClubNotice> noticeList = clubService.selectNotice(circle_num);
 
@@ -136,7 +133,7 @@ public class ClubController {
 		session.setAttribute("noticeList", noticeList);
 		model.addAttribute("BoardList", list);
 		
-		
+		System.out.println("아라아라암니ㅓㅁㄴ러ㅐㅈ리ㅓㅁㄴ러ㅑㅣ");
 
 		return "clubPage/clubMain";
 	}
@@ -245,10 +242,13 @@ public class ClubController {
 		System.out.println("로그인 한 회원 : "+id);
 		Club club=clubService.selectClub(circle_num);
 		int numPerPage=10;
+		int currentTotal=0;
 		List<Budget> list=clubService.selectBudgetList(circle_num,cPage,numPerPage);
 		Budget lastBudget2=clubService.selectLastBud(circle_num);
-		int currentTotal=lastBudget2.getTotal();
+		if(lastBudget2!=null) {
+		currentTotal=lastBudget2.getTotal();
 		System.out.println("현재 잔액 : "+currentTotal);
+		}
 		int totalCount=clubService.selectCountBudget(circle_num);
 		String pageBar=new CirclePageCreate().getPageBar(cPage,numPerPage,totalCount,"circle_budget.do",circle_num);
 		
@@ -961,8 +961,6 @@ public class ClubController {
 		mv.setViewName("common/msg");*/
 		return mv;
 	}
-<<<<<<< HEAD
-=======
 	//동아리 회원신청 수락하는 페이지
 	@RequestMapping("inputMember.do")
 	public ModelAndView inputMember(Circle_join join) {
@@ -985,5 +983,4 @@ public class ClubController {
 		return mv;
 	}
 
->>>>>>> bonyeon
 }

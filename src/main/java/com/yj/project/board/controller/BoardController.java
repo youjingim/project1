@@ -9,7 +9,6 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
@@ -28,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.yj.project.board.model.service.BoardService;
 
@@ -222,9 +222,34 @@ public class BoardController {
    int result=boardService.commentInsert(comment,boardNum,memberId);
    response.setCharacterEncoding("UTF-8");
    Comment board = boardService.selectComment(boardNum);
-   System.out.println(board);
-   new Gson().toJson(board,response.getWriter());
-   }
+   Gson gson=new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	gson.toJson(board,response.getWriter());
+	
+	
+  }
 
+   @RequestMapping("commentDelete.do")
+   public ModelAndView commentDelete(@RequestParam(value="no")int commentNo,@RequestParam(value="boardNo") int boardNo) {
+   ModelAndView mv=new ModelAndView();
+   int result=boardService.commentDelete(commentNo);
+   
+   String msg="";
+   String loc="/board/boardView.do?no="+boardNo;
+   if(result>0) {
+      msg="댓글 삭제 성공!";
+   }else {
+      msg="댓글 삭제 실패!";
+   }
+   mv.addObject("msg",msg);
+   mv.addObject("loc",loc);
+   
+   mv.setViewName("common/msg");
+   
+   return mv;
+
+   }
+   
+   
+   
    
 }

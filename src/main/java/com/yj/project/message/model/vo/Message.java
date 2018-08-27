@@ -1,6 +1,6 @@
 package com.yj.project.message.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Message {
 	private int message_num;

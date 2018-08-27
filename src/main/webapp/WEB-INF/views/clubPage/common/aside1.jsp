@@ -27,11 +27,10 @@
     $("#circle_comment").click(function(){
         $("#post_comment").toggle();
     });
+
   });
 
-  function circle_home(){
-	  location.href="${path}/clubMain.do?member_id="+'${memberLoggedIn.member_id}';
-  }  
+ 
   function circle_list(level){
 	  var grade=level;
 	  if(grade!=='L2'){
@@ -43,7 +42,7 @@
 	  }
   }  
   function circle_budget(level,id){
-	  location.href="${path}/circle_budget.do?circle_num="+${club.circle_num}+"&id="+'${memberLoggedIn.member_id}';
+	  location.href="${path}/circle_budget.do?circle_num="+${club.circle_num}+"&id="+id;
 	 
   }
   function circle_gallery(){
@@ -65,6 +64,9 @@
 		}
   }
   $(function(){
+	  
+	  
+	  
 	  $('.myBtnCh#${chairman}').on('click',function(){
 		  var id=$(this).attr('id');
 		  $('#'+id+'.modal').css("display",'block');
@@ -139,7 +141,43 @@
 .top{
   width:700px;
 }
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width:800px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
 </style>
 
 </head>
@@ -154,14 +192,8 @@
       <!-- Profile -->
       <div class="w3-card w3-round w3-white" style="margin-top:16px;">
         <div class="w3-container">
-<<<<<<< HEAD
          <h4 class="w3-center"><c:out value="${club.circle_name }"/><span class="glyphicon glyphicon-envelope myBtnCh" id="${chairman }"></span></h4>
          <p class="w3-center"><img src="${pageContext.request.contextPath}/resources/upload/club/${club.circle_photo}" class="w3-circle" style="height:106px;width:106px" alt="동아리 로고"></p>
-=======
-
-         <h4 class="w3-center"><c:out value="${club.circle_name }"/><span class="glyphicon glyphicon-envelope myBtnCh" id="${chairman }"></span></h4>
-         <p class="w3-center"><img src="${pageContext.request.contextPath}/resources/image/${club.circle_photo}" class="w3-circle" style="height:106px;width:106px" alt="동아리 로고"></p>
->>>>>>> bonyeon
 
          <hr>
          <p><i class="fa fa-bookmark fa-fw w3-margin-right w3-text-theme"></i><c:out value="${club.university }"/></p>
@@ -283,5 +315,11 @@
     <input type="reset" class="btn btn-default" value="취소"/>
     </form>
   </div>
+  <script>
+  function circle_home(){
+	  location.href="${path}/clubMain.do?member_id="+'${memberLoggedIn.member_id}';
+}
+
+  </script>
 
 </div> 

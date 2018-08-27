@@ -247,13 +247,6 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.delete("club.deletec",map);
 	}
 	
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> bonyeon
-
-	@Override
 	public int outCircle(SqlSessionTemplate sqlSession, String id) {
 		return sqlSession.update("club.outCircle", id);
 	}
@@ -289,8 +282,6 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.selectOne("club.selectJoinCount", cj);
 	}
 
-<<<<<<< HEAD
-=======
 	@Override
 	public int inputMember(SqlSessionTemplate sqlSession, Circle_join cj) {
 		return sqlSession.update("club.inputMember", cj);
@@ -301,7 +292,6 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.delete("club.deleteJoinMember", cj);
 	}
 	
->>>>>>> bonyeon
 	
 
 }

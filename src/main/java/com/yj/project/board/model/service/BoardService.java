@@ -19,4 +19,5 @@ public interface BoardService {
    int commentInsert(String comment,int boardNum,String memberId);
    Comment selectComment(int boardNum);
    List<Comment> commentList(int boardNo);
+   int commentDelete(int commentNo);
 }

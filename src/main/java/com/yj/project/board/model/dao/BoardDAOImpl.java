@@ -96,4 +96,9 @@ public class BoardDAOImpl implements BoardDAO{
 	return sqlSession.selectList("board.commentList",boardNo);
 }
 
+   @Override
+   public int commentDelete(int commentNo) {
+	return sqlSession.delete("board.commentDelete",commentNo);
+}
+
 }

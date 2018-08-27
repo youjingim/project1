@@ -61,10 +61,7 @@ public interface ClubService {
 	public int circleCount();
 	public int countMember(String member_id);
 	public int deleteCircle(Map<String, Object>map);
-<<<<<<< HEAD
-	
-=======
->>>>>>> bonyeon
+
 	public int outCircle(String id);
 	public Budget selectLastBud(int circle_num);
 	public List<Budget> totalBud(int cirlce_num);
@@ -72,9 +69,7 @@ public interface ClubService {
 	public int joinCircle(Circle_join join);
 	public List<Circle_join> selectJoinList(Circle_join cj,int cPage, int numPerPage);
 	public int selectJoinCount(Circle_join cj);
-<<<<<<< HEAD
-=======
+
 	public int inputMember(Circle_join join);
 	public int deleteJoinMember(Circle_join join);
->>>>>>> bonyeon
 }
