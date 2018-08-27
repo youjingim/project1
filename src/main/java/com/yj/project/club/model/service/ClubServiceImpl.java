@@ -197,7 +197,6 @@ public class ClubServiceImpl implements ClubService {
 	public CB_Comment selectComment(int no) {
 		return clubDAO.selectComment(sqlSession,no);
 	}
-<<<<<<< HEAD
 	@Override
 	public int clubCount() {
 		return clubDAO.clubCount(sqlSession);
@@ -242,8 +241,7 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int deleteCircle(Map<String, Object> map) {
 		return clubDAO.deleteCircle(sqlSession,map);
-=======
-
+	}
 	@Override
 	public int outCircle(String id) {
 		return clubDAO.outCircle(sqlSession,id);
@@ -277,7 +275,16 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int selectJoinCount(Circle_join cj) {
 		return clubDAO.selectJoinCount(sqlSession,cj);
->>>>>>> bonyeon
+	}
+
+	@Override
+	public int inputMember(Circle_join join) {
+		return clubDAO.inputMember(sqlSession,join);
+	}
+
+	@Override
+	public int deleteJoinMember(Circle_join join) {
+		return clubDAO.deleteJoinMember(sqlSession,join);
 	}
 	
 	
