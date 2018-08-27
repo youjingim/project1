@@ -50,7 +50,7 @@
 		UPDATE MEMBER SET CIRCLE1_NUM=0 WHERE MEMBER_ID=#{id} 
 	</update>
 	<insert id="insertBudget" parameterType="budget">
-		INSERT INTO CIRCLE_BUDGET VALUES(CIRCLE_BUDGET_SEQ.NEXTVAL,#{circle_num},#{member_id},#{budget_content},#{attachment},#{budget_input},#{budget_output},#{used_date},sysdate,#{reattachment})
+		INSERT INTO CIRCLE_BUDGET VALUES(CIRCLE_BUDGET_SEQ.NEXTVAL,#{circle_num},#{member_id},#{budget_content},#{attachment},#{budget_input},#{budget_output},#{used_date},sysdate,#{reattachment},#{total})
 	</insert>
 	<resultMap type="budget" id="insertBud">
 		<id property="budget_no" column="budget_num"/>
@@ -127,10 +127,6 @@
 	<select id="selectComment" resultType="cb_comment">
 		SELECT * FROM CB_COMMENT WHERE CB_NUM=#{no} and CB_COMMENTNO = (select MAX(CB_COMMENTNO) from CB_COMMENT where CB_NUM=#{cb_num})
 	</select>
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 	<select id='clubCount' resultType='_int'>
 	select count(*) from circle_register
 	</select>
@@ -158,15 +154,13 @@
 	<delete id='deletec' parameterType="map">
 	delete from <if test="table == 'circle_register'">circle_register</if> <if test="table != 'circle_register'">circle</if> where circle_num = #{circle_num}
 	</delete>
-<<<<<<< HEAD
-
+	
 	<update id="outCircle">
 		UPDATE MEMBER SET CIRCLE1_NUM=0 WHERE MEMBER_ID=#{member_id}
 	</update>
 	<select id="selectLastBud" resultType="budget">
 	select * from circle_budget where circle_num=#{circle_num} and budget_num=(select max(budget_num) from CIRCLE_BUDGET where circle_num=#{circle_num})
 	</select>
-<<<<<<< HEAD
 	<select id="selectChairman" resultType="Member">
 		select * from member where circle1_num=#{circle_num} and member_level='L5'
 	</select>
@@ -179,15 +173,4 @@
 	<select id="selectJoinCount" resultType="_int">
 		SELECT COUNT(*) FROM CIRCLE_JOIN WHERE JOIN_RECEIVER=#{join_receiver} AND CIRCLE_NUM=#{circle_num}
 	</select>
-	<update id="inputMember">
-		UPDATE MEMBER SET CIRCLE1_NUM=#{circle_num} WHERE MEMBER_ID=#{join_sender}
-	</update>
-	<delete id="deleteJoinMember">
-		DELETE FROM CIRCLE_JOIN WHERE JOINNUM=#{joinNum}
-	</delete>
-=======
->>>>>>> parent of f1863f8... 20180827
-=======
-	
->>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 </mapper>

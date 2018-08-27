@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
+import com.yj.project.club.model.vo.Circle_join;
 import com.yj.project.calendar.model.vo.ClubNotice;
 import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
@@ -53,10 +54,6 @@ public interface ClubDAO {
 	public List<InnerLike> selectLikeList(SqlSessionTemplate sqlSession,String member_id);
 	public int updateLevel(SqlSessionTemplate sqlSession,Member mm);
 	public CB_Comment selectComment(SqlSessionTemplate sqlSession,int no);
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 	public int clubCount(SqlSessionTemplate sqlSession);
 	public ReqCircle makeClub(SqlSessionTemplate sqlSession,int circle_num);
 	public int deleteCircle(SqlSessionTemplate sqlSession,int circle_num);
@@ -66,21 +63,11 @@ public interface ClubDAO {
 	public int circleCount(SqlSessionTemplate sqlSession);
 	public int countMember(SqlSessionTemplate sqlSession,String member_id);
 	public int deleteCircle(SqlSessionTemplate sqlSession,Map<String, Object> map);
-<<<<<<< HEAD
-
 	public int outCircle(SqlSessionTemplate sqlSession,String id);
 	public Budget selectLastBud(SqlSessionTemplate sqlSession,int circle_num);
 	public List<Budget> totalBud(SqlSessionTemplate sqlSession,int circle_num);
-<<<<<<< HEAD
 	public Member selectChairman(SqlSessionTemplate sqlSession,int circle_num);
 	public int joinCircle(SqlSessionTemplate sqlSession,Circle_join join);
 	public List<Circle_join> selectJoinList(SqlSessionTemplate sqlSession,Circle_join cj,int cPage, int numPerPage);
 	public int selectJoinCount(SqlSessionTemplate sqlSession,Circle_join cj);
-	public int inputMember(SqlSessionTemplate sqlSession,Circle_join cj);
-	public int deleteJoinMember(SqlSessionTemplate sqlSession,Circle_join cj);
-	
-=======
->>>>>>> parent of f1863f8... 20180827
-=======
->>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 }

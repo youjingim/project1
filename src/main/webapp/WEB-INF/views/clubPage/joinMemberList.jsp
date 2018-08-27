@@ -33,9 +33,9 @@
 				history.go();
 			}
 		}
-		/*  function validate11(){
-		    var content = $("[name=join_content]").val();
-		    var title=$("[name=join_title]").val();
+		/* function validate11(){
+		    var content = $("[name=content12]").val();
+		    var title=$("[name=title12]").val();
 		    if(title.trim().length==0){
 		    	alert("제목을 입력해주세요.");
 			   	return false;
@@ -45,7 +45,7 @@
 		        return false;
 		    }
 		    return true;
-		}  */
+		} */
 </script>
 <style>
 /* 페이징 처리 css */
@@ -143,23 +143,22 @@ th,td{
           <span class="close">&times;</span>
           <h3>쪽지보내기</h3>
           <hr>
-          <form action="${path }/circleMemberMessage2.do" method="post" onsubmit="return validate11();">
+          <form action="${path }/circleMemberMessage.do" method="post" onsubmit="return validate11();">
           <div class="form-group">
             <label for="member_receive">받는사람</label>
-            <input type="text" class="form-control" id="member_receive" name="message_sender" value="${m.join_sender }">
+            <input type="text" class="form-control" id="member_receive" name="yid" value="${m.join_sender }">
           </div>
-          <input type="hidden" name="num" value="${club.circle_num }"/>
           <div class="form-group">
             <label for="pwd">보내는사람</label>
-            <input type="text" class="form-control" id="pwd" name="message_receiver"value="${m.join_receiver }">
+            <input type="text" class="form-control" id="pwd" name="mid"value="${m.join_receiver }">
           </div>
           <div class="form-group">
             <label for="title">제목</label>
-            <input type="text" class="form-control" id="title" name="message_title" placeholder="제목을 입력하세요.">
+            <input type="text" class="form-control" id="title" name="title12" placeholder="제목을 입력하세요.">
           </div>
           <div class="form-group">
             <label for="comment">내용</label>
-            <textarea class="form-control" rows="5" id="comment" name="message_content" placeholder="내용을 입력하세요."></textarea>
+            <textarea class="form-control" rows="5" id="comment" name="content12" placeholder="내용을 입력하세요."></textarea>
           </div>
           <input type="submit" class="btn btn-default" value="전송"/>
           <input type="reset" class="btn btn-default" value="취소"/>
@@ -175,24 +174,23 @@ th,td{
           <span class="close">&times;</span>
           <h3>동아리 가입신청</h3>
           <hr>
-          <form action="${path }/inputMember.do" method="post">
+          <form action="${path }/circleMemberMessage2.do" method="post">
           <div class="form-group">
             <label for="member_receive">받는사람</label>
-            <input type="text" class="form-control" id="member_receive" name="join_receiver" value="${m.join_receiver }">
+            <input type="text" class="form-control" id="member_receive" name="yid" value="${m.join_receiver }">
           </div>
-          <input type="hidden" name="circle_num" value="${club.circle_num }"/>
-          <input type="hidden" name="joinNum" value="${m.joinNum }"/>
+          <input type="hidden" name="nn" values="${club.circle_num }"/>
           <div class="form-group">
             <label for="pwd">보내는사람</label>
-            <input type="text" class="form-control" id="pwd" name="join_sender"value="${m.join_sender }">
+            <input type="text" class="form-control" id="pwd" name="mid"value="${m.join_sender }">
           </div>
           <div class="form-group">
             <label for="title">제목</label>
-            <input type="text" class="form-control" id="title" name="join_title" value="${m.join_title }">
+            <input type="text" class="form-control" id="title" name="title" value="${m.join_title }">
           </div>
           <div class="form-group">
             <label for="comment">내용</label>
-            <textarea class="form-control" rows="5" id="comment" name="join_content" >${m.join_content }</textarea>
+            <textarea class="form-control" rows="5" id="comment" name="content" >${m.join_content }</textarea>
           </div>
           <input type="submit" class="btn btn-default" value="수락"/>
           

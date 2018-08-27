@@ -2,6 +2,9 @@ package com.yj.project.message.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yj.project.club.model.vo.Circle_join;
 import com.yj.project.common.page.MessagePageCreate;
 import com.yj.project.message.model.service.MessageService;
 import com.yj.project.message.model.vo.Message;
@@ -72,6 +74,14 @@ public class MessageController {
 		model.addAttribute("message", message);
 		return "message/messageView";
 	}
+	@RequestMapping("messageView2.do")
+	public String messageView2(int message_num, Model model) {
+		System.out.println("메세지 번호:"+message_num);
+		Message message=messageService.selectMessageOne(message_num);
+		System.out.println("내가 불러온 메세지:"+message);
+		model.addAttribute("message", message);
+		return "message/messageView2";
+	}
 	//내가 받은 메시지 답장 페이지 넘기는 로직
 	@RequestMapping("reSendMessage.do")
 	public String reSendMessage(String mid,String yid,Model model) {
@@ -83,9 +93,9 @@ public class MessageController {
 	}
 	//메세지 삭제 로직
 	@RequestMapping("deleteMessage.do")
-	public String deleteMessage(int message_num) {
+	public ModelAndView deleteMessage(int message_num,String mid) {
+		ModelAndView mv=new ModelAndView();
 		System.out.println("삭제할 메시지 번호:"+message_num);
-<<<<<<< HEAD
 		int result = messageService.deleteMessage(message_num);
 		System.out.println(result);
 		
@@ -182,12 +192,18 @@ public class MessageController {
 		mv.setViewName("common/msg");
 		return mv;
 	}
-<<<<<<< HEAD
 	@RequestMapping("circleMemberMessage2.do")
-	public ModelAndView insertCircleMemberSend2(Message m, int num) {
+	public ModelAndView insertCircleMemberSend2(String yid, String mid,String title12,String content12,int nn) {
 		ModelAndView mv=new ModelAndView();
-		System.out.println("메시지"+m);
-		System.out.println("동아리 번호:"+num);
+		System.out.println("yid"+yid);
+		System.out.println("mid"+mid);
+		System.out.println("title"+title12);
+		System.out.println("content:"+content12);
+		Message m=new Message();
+		m.setMessage_content(content12);
+		m.setMessage_title(title12);
+		m.setMessage_receiver(yid);
+		m.setMessage_sender(mid);
 		int result = messageService.insertSend(m);
 		System.out.println("메세지 입력 여부:"+result);
 		String msg="";
@@ -198,12 +214,10 @@ public class MessageController {
 			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
 		}
 		mv.addObject("msg",msg);
-		mv.addObject("loc", "joinCircleMember.do?circle_num="+num+"&member_id="+m.getMessage_receiver());
+		mv.addObject("loc", "joinCircleMember.do?circle_num="+nn+"&member_id="+mid);
 		mv.setViewName("common/msg");
 		return mv;
 	}
-=======
->>>>>>> parent of f1863f8... 20180827
 	@RequestMapping("deleteCheck.do")
 	public ModelAndView deleteCheckBox(@RequestParam("chk") int[] check,String receivId) {
 		ModelAndView mv=new ModelAndView();
@@ -216,10 +230,10 @@ public class MessageController {
 		System.out.println("result:"+result);
 		String msg="";
 		if(result>0) {
-			msg="쪽지 보내기를 성공하였습니다";
+			msg="쪽지 삭제를 성공하였습니다";
 		}
 		else {
-			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
+			msg="쪽지 삭제를 실패하였습니다. 다시확인해주세요";
 		}
 		mv.addObject("msg",msg);
 		mv.addObject("loc", "myMessage.do?member_id="+receivId);
@@ -239,17 +253,14 @@ public class MessageController {
 		
 		String msg="";
 		if(result>0) {
-			msg="쪽지 보내기를 성공하였습니다";
+			msg="쪽지 삭제를 성공하였습니다";
 		}
 		else {
-			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
+			msg="쪽지 삭제를 실패하였습니다. 다시확인해주세요";
 		}
 		mv.addObject("msg",msg);
 		mv.addObject("loc", "myMessage2.do?member_id="+senderId);
 		mv.setViewName("common/msg");
 		return mv;
-=======
-		return "";
->>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 	}
 }

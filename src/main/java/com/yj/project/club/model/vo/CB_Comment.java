@@ -1,6 +1,6 @@
 package com.yj.project.club.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class CB_Comment {
 	private int cb_commentno;

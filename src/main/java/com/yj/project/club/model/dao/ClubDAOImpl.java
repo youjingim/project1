@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
-
+import com.yj.project.club.model.vo.Circle_join;
 import com.yj.project.calendar.model.vo.Matching;
 
 
@@ -200,10 +200,6 @@ public class ClubDAOImpl implements ClubDAO {
 	public CB_Comment selectComment(SqlSessionTemplate sqlSession, int no) {
 		return sqlSession.selectOne("club.selectComment", no);
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
 	@Override	
 	public int clubCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("club.clubCount");
@@ -251,8 +247,7 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.delete("club.deletec",map);
 	}
 	
-<<<<<<< HEAD
-
+	
 
 	@Override
 	public int outCircle(SqlSessionTemplate sqlSession, String id) {
@@ -268,7 +263,6 @@ public class ClubDAOImpl implements ClubDAO {
 	public List<Budget> totalBud(SqlSessionTemplate sqlSession, int circle_num) {
 		return sqlSession.selectList("club.selectBudgetList", circle_num);
 	}
-<<<<<<< HEAD
 
 	@Override
 	public Member selectChairman(SqlSessionTemplate sqlSession, int circle_num) {
@@ -290,22 +284,6 @@ public class ClubDAOImpl implements ClubDAO {
 	public int selectJoinCount(SqlSessionTemplate sqlSession, Circle_join cj) {
 		return sqlSession.selectOne("club.selectJoinCount", cj);
 	}
-
-	@Override
-	public int inputMember(SqlSessionTemplate sqlSession, Circle_join cj) {
-		return sqlSession.update("club.inputMember", cj);
-	}
-
-	@Override
-	public int deleteJoinMember(SqlSessionTemplate sqlSession, Circle_join cj) {
-		return sqlSession.delete("club.deleteJoinMember", cj);
-	}
-=======
-	
->>>>>>> parent of f1863f8... 20180827
-=======
->>>>>>> parent of 13248e6... Merge branch 'bonyeon' into second
-	
 	
 
 }

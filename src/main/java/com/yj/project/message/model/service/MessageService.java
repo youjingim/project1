@@ -10,4 +10,7 @@ public interface MessageService {
 	public List<Message> selectSendList(String id,int cPage,int numPerPage);
 	public int selectSendCount(String id);
 	public Message selectMessageOne(int message_num);
+	public int deleteMessage(int message_num);
+	public int insertSend(Message m);
+	
 }
