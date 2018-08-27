@@ -59,8 +59,13 @@ section div#main_container div#rank_container {
 	padding: 8px 16px;
 	text-decoration: none;
 	transition: background-color .3s;
+<<<<<<< HEAD
 	position: absolute;
 	margin : 0 auto;
+=======
+	position: relative;
+	margin: 0 auto;
+>>>>>>> yujin
 }
 
 /* Style the active/current link */
@@ -406,7 +411,11 @@ searchType option{
 				<c:forEach var="circle" items="${circleenroll}" varStatus="status" begin="0" end="3">
 					<div class='mySlides myS2'>
 						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }&id=${memberLoggedIn.member_id}">
+<<<<<<< HEAD
 						<img src="/project/resources/upload/club/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
+=======
+						<img src="/project/resources/image/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
+>>>>>>> yujin
 						
 						</a>
 						<div class="text-block">
@@ -531,8 +540,13 @@ searchType option{
 								<div class="panel-heading" style="text-align: center;background-color:white;height:120px;color:black;font-weight:bold;font-size:18px;border:0">
 									${circle.circle_name}
 									<br>
+<<<<<<< HEAD
 										<button id='sang' class='btn btn-link' type='button' value='${circle.circle_num }' style="cursor: pointer;color:#6CC0FF" onclick="search('${circle.circle_num }','${memberLoggedIn.member_id}')">상세보기</button>
 										<input type='hidden' id="circle_num" value="${circle.circle_num }">
+=======
+										<button id='sang' class='btn btn-link' type='button' value='상세보기' style="cursor: pointer;color:#6CC0FF" onclick="search('${circle.circle_num }','${memberLoggedIn.member_id}')">상세보기</button>
+									
+>>>>>>> yujin
 									<span class='likeImg' style="cursor: pointer;position:relative;left:10px;bottom:1px;">
 									<img src='/project/resources/image/like6.png' class='likImg' style="width: 110px; height: 55px; position: relative;right:30px;bottom:5px;"> 
 									<input type='hidden' id="circle_num" value="${circle.circle_num }">

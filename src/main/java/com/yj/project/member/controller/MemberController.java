@@ -527,4 +527,29 @@ public class MemberController {
 
 		return mv;	
 		}
+	
+		@RequestMapping("deleteMember.do")
+		public ModelAndView deleteMember(String member_id,@RequestParam(value="admin",required=false,defaultValue="member")String check) {
+			ModelAndView mv = new ModelAndView();
+			int result = service.deleteMember(member_id);
+			String msg="";
+			String loc="";
+			if(check.equals("admin")) {
+				loc="/member/adminPage.do";
+			}else {
+				loc="/";
+			}
+			if(result>0) {
+				msg="탈퇴 성공";
+			}else {
+				msg="탈퇴 실패";
+			}
+			mv.addObject("msg",msg);
+			mv.addObject("loc",loc);
+			mv.setViewName("common/msg");
+			
+			return mv;
+			
+			
+		}
 }

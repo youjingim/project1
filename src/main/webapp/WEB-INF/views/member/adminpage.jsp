@@ -198,7 +198,7 @@ $(function(){
 	$(".deleteMember").click(function () {
 		var member_id = $(this).attr("name");
 		if(confirm($(this).attr("name")+"님을 탈퇴 시키시겠습니까?")){
-			locatin.href="${path}/deleteMember.do?member_id="+member_id;
+			location.href="${path}/deleteMember.do?member_id="+member_id+"&admin=admin";
 		}
 	});
 	

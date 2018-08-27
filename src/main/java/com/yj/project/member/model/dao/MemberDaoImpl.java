@@ -93,6 +93,10 @@ public class MemberDaoImpl implements MemberDao{
 		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
 		return sqlSession.selectList("project.findById",searchKeyword,rb);
 	}
+	@Override
+	public int deleteMember(String member_id) {
+		return sqlSession.delete("project.deleteMember",member_id);
+	}
 
 	
 }

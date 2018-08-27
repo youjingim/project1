@@ -22,5 +22,5 @@ public interface MemberDao {
 	int levelChange(Map<String, String> map);
 	int checkEmail(String email);
 	List<Member> findById(int cPage, int numPerPage,String searchKeyword);
-
+	int deleteMember(String member_id);
 }

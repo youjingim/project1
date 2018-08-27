@@ -246,6 +246,9 @@ background-color:white;
                <button type="reset" class="btn btn-warning">
                   다시작성<i class="fa fa-times spaceLeft"></i>
                </button>
+               <button type="button" class="btn btn-danger" onclick = "location.href='${path}/deleteMember.do?member_id=${memberLoggedIn.member_id}'">
+                  회원탈퇴<i class="fa fa-times spaceLeft"></i>
+               </button>
             </div>
          </form>
 

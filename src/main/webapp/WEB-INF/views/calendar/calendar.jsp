@@ -152,6 +152,7 @@ font-family: 'Gothic A1', sans-serif;
    <br>
    <span style='width:30px;height:15px;background-color:#A5DE9F;display:inline-block;border-radius:10%;margin-left:55px;'></span> &nbsp;타&nbsp;&nbsp; 동아리 신청 매칭
    <br>
+   <span style='margin-left:185px;'><a href='#' onclick="$('#Explanation').modal();">설명보기</a></span>
    <br>
    <c:if test="${memberLoggedIn.member_level eq 'L5'}">
    <button type="button" class="btn btn-info" style="margin-left:90px;cursor:pointer;margin-left:150px;" data-toggle="modal" data-target="#myModal">매칭 업로드</button>   
