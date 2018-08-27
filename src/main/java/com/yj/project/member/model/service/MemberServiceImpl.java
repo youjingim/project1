@@ -85,5 +85,9 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return memberDao.findById(cPage,numPerPage,searchKeyword);
 	}
+	@Override
+	public int deleteMember(String member_id) {
+		return memberDao.deleteMember(member_id);
+	}
 
 }

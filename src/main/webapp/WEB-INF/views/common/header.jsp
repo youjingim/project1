@@ -37,6 +37,7 @@
 <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">  
 <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
 
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 <script>
 function fnMove(seq){
     var offset = $("#info" + seq).offset();
@@ -79,7 +80,7 @@ font-family: 'Nanum Gothic Coding', monospace;
 }
 div#myNavbar ul li a:hover{
 color:gray;
-font-size:18px;
+font-size:23px;
 }
 header{
 width:100%;
@@ -504,6 +505,7 @@ margin-bottom:0px;
 height:10px;
 }
 #infoTable td{
+font-size:20px;
 text-align:center;
 color:black;
 padding:5px;
@@ -525,6 +527,10 @@ margin-left:0% !important;
 #nav_span{
 background-color:white;
 }
+}
+
+#nav_span li a{
+font-size:20px;
 }
 </style>
 
@@ -549,12 +555,21 @@ background-color:white;
     <div class="collapse navbar-collapse" id="myNavbar">
     <input type='hidden' value='${memberLoggedIn.member_id}' id='member_id_check'>
       <ul class="nav navbar-nav navbar-left" id="nav_span" >
-      	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-         <li><a href="#" onclick="fnMove('1')">CampusPick</a></li>
-        <li><a href="${path}/secondPage.do">동아리</a></li>
+         <li><a style='cursor:pointer;' onclick="myCircleFunc('${memberLoggedIn.member_id}',${memberLoggedIn.circle1_num})">동아리 홈</a>
+         			<script>
+				function myCircleFunc(id,no){
+					if(no==0){
+						alert(id+'님은 가입된 동아리가 없습니다. 동아리 가입 후 이용해주세요');
+					}
+					else{
+						location.href="${path }/clubMain.do?member_id="+id;
+					}
+				}
+			</script></li>
+        <li><a href="${path}/secondPage.do">동아리 찾기</a></li>
         <li><a href="#" onclick='createClub()'>동아리 개설</a></li>
-        <li><a href="${path}/calendar.do">With us</a></li>
-        <li><a href="${path }/board/boardList.do">자유게시판</a></li>
+        <li><a href="${path}/calendar.do">매칭신청</a></li>
+        <li><a href="${path }/board/boardList.do">커뮤니티</a></li>
       </ul>
     </div>
   </div>
@@ -598,21 +613,7 @@ function createClub(){
 			<td>${memberLoggedIn.member_id}님</td>
 			</tr>
 
-			<tr>
 
-			<td><a onclick="myCircleFunc('${memberLoggedIn.member_id}',${memberLoggedIn.circle1_num})">나의 동아리</a></td>
-	
-			<script>
-				function myCircleFunc(id,no){
-					if(no==0){
-						alert(id+'님은 가입된 동아리가 없습니다. 동아리 가입 후 이용해주세요');
-					}
-					else{
-						location.href="${path }/clubMain.do?member_id="+id;
-					}
-				}
-			</script>
-			</tr>
 			<tr>
 			<td><a href="#">쪽지함</a> </td>
 			</tr>

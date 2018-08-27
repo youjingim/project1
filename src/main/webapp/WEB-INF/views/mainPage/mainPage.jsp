@@ -209,6 +209,7 @@ z-index:100;
 right:0%;
 }
 
+
 </style>
 
 <section>
@@ -217,17 +218,16 @@ right:0%;
 
 <div class="mySlides fade">
   <img src="${path }/resources/image/background1.jpg" style="width:100%; height:900px;">
-  <div>봉주 바부</div>
 </div>
 
 <div class="mySlides fade">
   <img src="${path }/resources/image/background2.jpg" style="width:100%; height:900px;">
-  <div class="text">Caption Two</div>
+  
 </div>
 
  <div class="mySlides fade">
   <img src="${path }/resources/image/image1.jpg" style="width:100%; height:900px;">
-  <div class="text">Caption Three</div>
+
 </div> 
 
 

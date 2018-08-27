@@ -12,27 +12,31 @@ import com.yj.project.faq.model.dao.FaqDAO;
 import com.yj.project.faq.model.vo.Faq;
 @Service
 public class FaqServiceImpl implements FaqService{
-	
-	 @Autowired
-	   private FaqDAO faqDAO;
-	   private Logger logger = LoggerFactory.getLogger(FaqServiceImpl.class);
-	
-	   @Override
-	   public List<Faq> selectFaqList() {
-		      
-		      return faqDAO.selectFaqList();
-		      
-		   }
+   
+    @Autowired
+      private FaqDAO faqDAO;
+      private Logger logger = LoggerFactory.getLogger(FaqServiceImpl.class);
+   
+      @Override
+      public List<Faq> selectFaqList() {
+            
+            return faqDAO.selectFaqList();
+            
+         }
 
-	@Override
-	public int faqUp(Map<String, Object> map) {
-		
-		return faqDAO.faqUp(map);
-	}
-/*	@Override
-	public int faqWrite(Faq faq) {
-		
-		return noticeDAO.faqWrite(faq);
-	}
-*/
+   @Override
+   public int faqUp(Map<String, Object> map) {
+      
+      return faqDAO.faqUp(map);
+   }
+      @Override
+      public int faqDelete(int faqNo) {
+        return faqDAO.faqDelete(faqNo);
+   }
+
+   @Override
+   public int faqWrite(Faq faq) {
+      
+      return faqDAO.faqWrite(faq);
+   }
 }

@@ -66,5 +66,9 @@ update member set member_level=#{level} where member_id=#{member_id}
 select * from member where member_id like '%'||#{searchKeyword}||'%'
 </select>
 
+<delete id='deleteMember' parameterType="string">
+delete from member where member_id = #{member_id}
+</delete>
+
 
 </mapper>

@@ -8,6 +8,8 @@ select * from faq
 </select>
 <update id="faqUpdate" parameterType="map"> 
 update faq set question=#{title},answer=#{content} where ques_num = #{num}</update>
-
-
+<delete id="faqDelete" parameterType="_int"> DELETE FROM faq WHERE ques_num=#{faq_no} </delete>
+<insert id='faqWrite' parameterType="com.yj.project.faq.model.vo.Faq">
+insert into faq values(faq_seq.nextval,#{question},#{answer})
+</insert>
 </mapper>
