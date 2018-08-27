@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yj.project.club.model.vo.Circle_join;
 import com.yj.project.common.page.MessagePageCreate;
 import com.yj.project.message.model.service.MessageService;
 import com.yj.project.message.model.vo.Message;
@@ -193,17 +194,10 @@ public class MessageController {
 		return mv;
 	}
 	@RequestMapping("circleMemberMessage2.do")
-	public ModelAndView insertCircleMemberSend2(String yid, String mid,String title12,String content12,int nn) {
+	public ModelAndView insertCircleMemberSend2(Message m, int num) {
 		ModelAndView mv=new ModelAndView();
-		System.out.println("yid"+yid);
-		System.out.println("mid"+mid);
-		System.out.println("title"+title12);
-		System.out.println("content:"+content12);
-		Message m=new Message();
-		m.setMessage_content(content12);
-		m.setMessage_title(title12);
-		m.setMessage_receiver(yid);
-		m.setMessage_sender(mid);
+		System.out.println("메시지"+m);
+		System.out.println("동아리 번호:"+num);
 		int result = messageService.insertSend(m);
 		System.out.println("메세지 입력 여부:"+result);
 		String msg="";
@@ -214,7 +208,7 @@ public class MessageController {
 			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
 		}
 		mv.addObject("msg",msg);
-		mv.addObject("loc", "joinCircleMember.do?circle_num="+nn+"&member_id="+mid);
+		mv.addObject("loc", "joinCircleMember.do?circle_num="+num+"&member_id="+m.getMessage_receiver());
 		mv.setViewName("common/msg");
 		return mv;
 	}

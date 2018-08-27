@@ -174,4 +174,13 @@
 	<select id="selectJoinCount" resultType="_int">
 		SELECT COUNT(*) FROM CIRCLE_JOIN WHERE JOIN_RECEIVER=#{join_receiver} AND CIRCLE_NUM=#{circle_num}
 	</select>
+<<<<<<< HEAD
+=======
+	<update id="inputMember">
+		UPDATE MEMBER SET CIRCLE1_NUM=#{circle_num} WHERE MEMBER_ID=#{join_sender}
+	</update>
+	<delete id="deleteJoinMember">
+		DELETE FROM CIRCLE_JOIN WHERE JOINNUM=#{joinNum}
+	</delete>
+>>>>>>> bonyeon
 </mapper>
