@@ -60,7 +60,7 @@ section div#main_container div#rank_container {
 	text-decoration: none;
 	transition: background-color .3s;
 	position: absolute;
-	left: 380px;
+	margin : 0 auto;
 }
 
 /* Style the active/current link */
