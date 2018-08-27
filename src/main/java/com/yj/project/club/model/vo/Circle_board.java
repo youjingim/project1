@@ -1,6 +1,6 @@
 package com.yj.project.club.model.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Circle_board {
 	private int cb_num;

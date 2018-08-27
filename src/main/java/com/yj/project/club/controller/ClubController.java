@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -942,10 +943,9 @@ public class ClubController {
 	}
 	//신청서 삭제 로직
 	@RequestMapping("deleteJoin.do")
-	public ModelAndView deleteJoin(int cirlce_num, int joinNum) {
+	public ModelAndView deleteJoin(Circle_join cj) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("삭제할 조인번호:"+joinNum);
-		System.out.println("동아리 번호:"+cirlce_num);
+		
 		
 		/*System.out.println("신청결과:"+result);
 		String msg="";
@@ -961,4 +961,29 @@ public class ClubController {
 		mv.setViewName("common/msg");*/
 		return mv;
 	}
+<<<<<<< HEAD
+=======
+	//동아리 회원신청 수락하는 페이지
+	@RequestMapping("inputMember.do")
+	public ModelAndView inputMember(Circle_join join) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println(join);
+		int result=clubService.inputMember(join);
+		int result1=clubService.deleteJoinMember(join);
+		System.out.println("신청결과:"+result);
+		String msg="";
+		if(result>0) {
+			msg="동아리 가입신청을 성공하였습니다";
+		}
+		else {
+			msg="가입신청을 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "joinCircleMember.do?circle_num="+join.getCircle_num()+"&member_id="+join.getJoin_receiver());
+		
+		mv.setViewName("common/msg");
+		return mv;
+	}
+
+>>>>>>> bonyeon
 }
