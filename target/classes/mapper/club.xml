@@ -162,6 +162,7 @@
 	<select id="selectLastBud" resultType="budget">
 	select * from circle_budget where circle_num=#{circle_num} and budget_num=(select max(budget_num) from CIRCLE_BUDGET where circle_num=#{circle_num})
 	</select>
+<<<<<<< HEAD
 	<select id="selectChairman" resultType="Member">
 		select * from member where circle1_num=#{circle_num} and member_level='L5'
 	</select>
@@ -180,4 +181,6 @@
 	<delete id="deleteJoinMember">
 		DELETE FROM CIRCLE_JOIN WHERE JOINNUM=#{joinNum}
 	</delete>
+=======
+>>>>>>> parent of f1863f8... 20180827
 </mapper>

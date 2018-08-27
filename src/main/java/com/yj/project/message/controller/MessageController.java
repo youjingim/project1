@@ -193,6 +193,7 @@ public class MessageController {
 		mv.setViewName("common/msg");
 		return mv;
 	}
+<<<<<<< HEAD
 	@RequestMapping("circleMemberMessage2.do")
 	public ModelAndView insertCircleMemberSend2(Message m, int num) {
 		ModelAndView mv=new ModelAndView();
@@ -212,6 +213,8 @@ public class MessageController {
 		mv.setViewName("common/msg");
 		return mv;
 	}
+=======
+>>>>>>> parent of f1863f8... 20180827
 	@RequestMapping("deleteCheck.do")
 	public ModelAndView deleteCheckBox(@RequestParam("chk") int[] check,String receivId) {
 		ModelAndView mv=new ModelAndView();
@@ -224,10 +227,10 @@ public class MessageController {
 		System.out.println("result:"+result);
 		String msg="";
 		if(result>0) {
-			msg="쪽지 삭제를 성공하였습니다";
+			msg="쪽지 보내기를 성공하였습니다";
 		}
 		else {
-			msg="쪽지 삭제를 실패하였습니다. 다시확인해주세요";
+			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
 		}
 		mv.addObject("msg",msg);
 		mv.addObject("loc", "myMessage.do?member_id="+receivId);
@@ -247,10 +250,10 @@ public class MessageController {
 		
 		String msg="";
 		if(result>0) {
-			msg="쪽지 삭제를 성공하였습니다";
+			msg="쪽지 보내기를 성공하였습니다";
 		}
 		else {
-			msg="쪽지 삭제를 실패하였습니다. 다시확인해주세요";
+			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
 		}
 		mv.addObject("msg",msg);
 		mv.addObject("loc", "myMessage2.do?member_id="+senderId);

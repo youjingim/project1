@@ -15,7 +15,6 @@ import com.yj.project.club.model.dao.ClubDAO;
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
-import com.yj.project.club.model.vo.Circle_join;
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.club.model.vo.InnerLike;
@@ -256,6 +255,7 @@ public class ClubServiceImpl implements ClubService {
 	public List<Budget> totalBud(int cirlce_num) {
 		return clubDAO.totalBud(sqlSession,cirlce_num);
 	}
+<<<<<<< HEAD
 
 	@Override
 	public Member selectChairman(int circle_num) {
@@ -286,6 +286,8 @@ public class ClubServiceImpl implements ClubService {
 	public int deleteJoinMember(Circle_join join) {
 		return clubDAO.deleteJoinMember(sqlSession,join);
 	}
+=======
+>>>>>>> parent of f1863f8... 20180827
 	
 	
 	
