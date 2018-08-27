@@ -135,7 +135,7 @@ td{
 					<td style="width:15%;">${circle.circle_num }</td>
 					<td style="width:20%">${circle.university }</td>
 					<td class="text-warning" style="font-weight:600;">
-					<a href='${pageContext.request.contextPath}/search/circleView.do?no=${circle.circle_num }' style="color:black;font:bold;">${circle.circle_name }</a>
+					<a href='${pageContext.request.contextPath}/search/circleView.do?no=${circle.circle_num }&id=${memberLoggedIn.member_id}' style="color:black;font:bold;">${circle.circle_name }</a>
 					<span class='badge'>${circle.category}</span>
 					</td>
 					<td style="width:20%">${circle.member_id }</td>

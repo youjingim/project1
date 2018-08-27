@@ -365,7 +365,7 @@ searchType option{
 				<c:forEach var="circle" items="${list}" varStatus="status" begin="0" end="3">
 					<div class='mySlides myS1'>
 						
-						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
+						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }&id=${memberLoggedIn.member_id}">
 						<img src="/project/resources/upload/club/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image'> 
 						</a>
 						<div class="text-block">
@@ -405,7 +405,7 @@ searchType option{
 			    <c:set var="num1" value="1"/>
 				<c:forEach var="circle" items="${circleenroll}" varStatus="status" begin="0" end="3">
 					<div class='mySlides myS2'>
-						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }">
+						<a href="${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }&id=${memberLoggedIn.member_id}">
 						<img src="/project/resources/upload/club/${circle.circle_photo }" style="width: 80%; height: 400px; margin-left: 120px" class='image' alt="${circle.circle_comment }"> 
 						
 						</a>
@@ -523,7 +523,7 @@ searchType option{
 							<div class="panel panel-default" style="width:80%">
 								
 								<div class="panel-body" style="padding:0;margin-right:0;">
-									<a href='${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }'>
+									<a href='${pageContext.request.contextPath }/search/circleView.do?no=${circle.circle_num }&id=${memberLoggedIn.member_id}'>
 										<img src="/project/resources/upload/club/${circle.circle_photo }" class="img-responsive" style="width: 120%; height: 180px" alt="Image">
 									</a>
 								</div>
@@ -531,7 +531,7 @@ searchType option{
 								<div class="panel-heading" style="text-align: center;background-color:white;height:120px;color:black;font-weight:bold;font-size:18px;border:0">
 									${circle.circle_name}
 									<br>
-										<button id='sang' class='btn btn-link' type='button' value='${circle.circle_num }' style="cursor: pointer;color:#6CC0FF" onclick="search(${circle.circle_num })">상세보기</button>
+										<button id='sang' class='btn btn-link' type='button' value='${circle.circle_num }' style="cursor: pointer;color:#6CC0FF" onclick="search('${circle.circle_num }','${memberLoggedIn.member_id}')">상세보기</button>
 										<input type='hidden' id="circle_num" value="${circle.circle_num }">
 									<span class='likeImg' style="cursor: pointer;position:relative;left:10px;bottom:1px;">
 									<img src='/project/resources/image/like6.png' class='likImg' style="width: 110px; height: 55px; position: relative;right:30px;bottom:5px;"> 
@@ -559,13 +559,11 @@ searchType option{
 					</c:forEach>
 			</div>
 			<script>
-							function search(num){
-								location.href="${pageContext.request.contextPath}/search/circleView.do?no="+num;
+							function search(num,id){
+								location.href="${pageContext.request.contextPath}/search/circleView.do?no="+num+"&id="+id;
 							}
 				
 							$('.likeImg').on('click',function(){
-								/* var frm_read=$('#frm_read');
-								var circle_num = $('#circle_num',frm_read).val(); */
 								var inputImg=$(this).children('.likImg');
 								var dataSpan=$(this);
 								$.ajax({

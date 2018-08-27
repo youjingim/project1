@@ -65,8 +65,8 @@ public class ClubController {
 	
 	//동아리 메인페이지로 넘어가는 로직
 	@RequestMapping("search/circleView.do")
-	public String clubMain(@RequestParam(value="no") int circle_num, HttpSession session, Model model) {
-		//Member member=clubService.selectOne(member_id);
+	public String clubMain(@RequestParam(value="no") int circle_num,@RequestParam(value="id") String member_id,HttpSession session, Model model) {
+		Member member=clubService.selectOne(member_id);
 		Club club=clubService.selectClub(circle_num);
 		List<Matching> matching = clubService.selectMatching(circle_num);
 	    System.out.println("동아리 정보"+club);
@@ -77,7 +77,7 @@ public class ClubController {
 		List<CB_Comment> clist=clubService.commentList();
 		System.out.println("게시글 목록: "+list);
 		System.out.println("댓글 목록: "+clist);
-		//session.setAttribute("member", member);
+		session.setAttribute("member", member);
 
 		session.setAttribute("club", club);
 		session.setAttribute("BoardList", list);
@@ -87,11 +87,11 @@ public class ClubController {
 		List<Matching> matchings = clubService.selectMatching(circle_num);
 		List<ClubNotice> noticeList = clubService.selectNotice(circle_num);
 
-		//int total=member.getMember_notice();
+		int total=member.getMember_notice();
 
 		session.setAttribute("matching", matching);
 		session.setAttribute("club", club);
-		//session.setAttribute("total", total);
+		session.setAttribute("total", total);
 		session.setAttribute("noticeList", noticeList);
 		model.addAttribute("BoardList", list);
 		model.addAttribute("categoryArr", array);
