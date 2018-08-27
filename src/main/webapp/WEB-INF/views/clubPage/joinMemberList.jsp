@@ -10,18 +10,7 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/clubPage/common/aside1.jsp"/>
  <script>
-		function deleteMember(id,no)
-		{
-			var choose=confirm('동아리에서 탈퇴시키겠습니까?');
-			if(choose==true){
-				location.href="${path}/deleteCircleMember.do?id="+id+"&no="+no;
-			}
-			else{
-				alert('다시 동아리 회원관리 페이지로 넘어갑니다.');
-				history.go();
-			}
-			
-		}
+
 		function changeLevel(id,no){
 			var grade=$("[name='memberGrade']").val();
 			var choose=confirm(id+'님의 등급을 변경하시겠습니까?');
@@ -33,9 +22,20 @@
 				history.go();
 			}
 		}
-		function validate(){
-		    var content = $("[name=content]").val();
-		    var title=$("[name=title]").val();
+		function deleteJoin(join_num,circleNum){
+			alert(join_num);
+			alert(circleNum);
+			var chance=confirm('가입신청서를 삭제하시겠습니까?');
+			if(chance==true){
+				location.href="${path}/deleteJoin.do?circle_num="+circleNum+"&joinNum="+join_num;
+			}else{
+				alert('다시 신청서 페이지로 넘어갑니다.');
+				history.go();
+			}
+		}
+		/* function validate11(){
+		    var content = $("[name=content12]").val();
+		    var title=$("[name=title12]").val();
 		    if(title.trim().length==0){
 		    	alert("제목을 입력해주세요.");
 			   	return false;
@@ -45,7 +45,7 @@
 		        return false;
 		    }
 		    return true;
-		}
+		} */
 </script>
 <style>
 /* 페이징 처리 css */
@@ -72,7 +72,7 @@ th,td{
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 9; /* Sit on top */
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
@@ -90,6 +90,7 @@ th,td{
     padding: 20px;
     border: 1px solid #888;
     max-width:800px;
+    z-index: 9;
 }
 
 /* The Close Button */
@@ -112,82 +113,87 @@ th,td{
 
       <div class="w3-container w3-card w3-white w3-round w3-margin" style="height:700px;"><br>
         <div>
-        <h5 style="text-align:center;"><strong><c:out value="${club.circle_name }"/> 회원관리</strong></h5> <hr>
+        <h5 style="text-align:center;"><strong><c:out value="${club.circle_name }"/> 회원신청 리스트</strong></h5> <hr>
         </div>
         <div>
         <table class="table">
         <tr>
-          <th>이름</th>
-          <th>생년월일</th>
-          <th>회원등급</th>
-          <th>전화번호</th>
-          <th>이메일</th>
-          <th>수정 / 삭제</th>
+          <th>신청자</th>
+          <th>신청날짜</th>
+          <th>제목</th>
+          <th>내용</th>
+  
+          <th>보기  / 삭제</th>
         </tr>
        <c:forEach items="${list }" var="m" varStatus="status">
         <tr>
-          <td><c:out value="${m.member_name }"/> <span class="glyphicon glyphicon-envelope myBtn" id="${m.member_id }"></span></td>
-          <td><c:out value="${m.member_birth}"/></td>
-          <td><select name="memberGrade">         	
-          	<c:if test="${m.member_level eq 'L2' }">
-              <option value="L2" selected>일반회원</option>
-              <option value="L3">총부</option>
-              <option value="L4">부회장</option>
-              <option value="L5">회장</option>
-          	</c:if>
-           	<c:if test="${m.member_level eq 'L3' }">
-              <option value="L2" >일반회원</option>
-              <option value="L3" selected>총부</option>
-              <option value="L4">부회장</option>
-              <option value="L5">회장</option>
-            </c:if>
-            <c:if test="${m.member_level eq 'L4' }">
-              <option value="L2" >일반회원</option>
-              <option value="L3">총부</option>
-              <option value="L4" selected>부회장</option>
-              <option value="L5">회장</option>
-           	</c:if>
-           	<c:if test="${m.member_level eq 'L5' }">
-              <option value="L2" >일반회원</option>
-              <option value="L3">총부</option>
-              <option value="L4">부회장</option>
-              <option value="L5" selected>회장</option>
-         	</c:if>
-            </select></td>
-          <td><c:out value="${m.member_phone }"/></td>
-          <td><c:out value="${m.member_email }"/></td>
-          <td><button type="button" onclick="changeLevel('${m.member_id}',${club.circle_num });">등급수정</button>
-            <button type="button" onclick="deleteMember('${m.member_id}',${club.circle_num });">회원삭제</button>
+          <td><c:out value="${m.join_sender }"/> <span class="glyphicon glyphicon-envelope myBtn" id="${m.join_sender }"></span></td>
+          <td><c:out value="${m.join_date}"/></td>
+          <td><c:out value="${m.join_title }"/></td>
+          <td><c:out value="${m.join_content }"/></td>
+          <td><button type="button" class="view" id="${m.joinNum }">보기</button>
+            <button type="button" onclick="deleteJoin(${m.joinNum},${club.circle_num });">삭제</button>
           </td>
         </tr>
       <!-- The Modal -->
-      <div id="${m.member_id }" class="modal">
+      <div id="${m.join_sender }" class="modal">
 
         <!-- Modal content -->
         <div class="modal-content">
           <span class="close">&times;</span>
           <h3>쪽지보내기</h3>
           <hr>
-          <form action="${path }/circleMemberMessage.do" method="post" onsubmit="return validate();">
+          <form action="${path }/circleMemberMessage.do" method="post" onsubmit="return validate11();">
           <div class="form-group">
             <label for="member_receive">받는사람</label>
-            <input type="text" class="form-control" id="member_receive" name="yid" value="${m.member_id }">
-            <input type="hidden" name="cNum" value="${m.circle1_num }"/>
+            <input type="text" class="form-control" id="member_receive" name="yid" value="${m.join_sender }">
           </div>
           <div class="form-group">
             <label for="pwd">보내는사람</label>
-            <input type="text" class="form-control" id="pwd" name="mid"value="${memberLoggedIn.member_id }">
+            <input type="text" class="form-control" id="pwd" name="mid"value="${m.join_receiver }">
           </div>
           <div class="form-group">
             <label for="title">제목</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요">
+            <input type="text" class="form-control" id="title" name="title12" placeholder="제목을 입력하세요.">
           </div>
           <div class="form-group">
             <label for="comment">내용</label>
-            <textarea class="form-control" rows="5" id="comment" name="content" placeholder="내용을 입력해주세요"></textarea>
+            <textarea class="form-control" rows="5" id="comment" name="content12" placeholder="내용을 입력하세요."></textarea>
           </div>
           <input type="submit" class="btn btn-default" value="전송"/>
           <input type="reset" class="btn btn-default" value="취소"/>
+          </form>
+        </div>
+
+      </div>
+      <!-- The Modal --><!-- 상세보기 모달 -->
+      <div id="${m.joinNum }" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h3>동아리 가입신청</h3>
+          <hr>
+          <form action="${path }/circleMemberMessage2.do" method="post">
+          <div class="form-group">
+            <label for="member_receive">받는사람</label>
+            <input type="text" class="form-control" id="member_receive" name="yid" value="${m.join_receiver }">
+          </div>
+          <input type="hidden" name="nn" values="${club.circle_num }"/>
+          <div class="form-group">
+            <label for="pwd">보내는사람</label>
+            <input type="text" class="form-control" id="pwd" name="mid"value="${m.join_sender }">
+          </div>
+          <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" class="form-control" id="title" name="title" value="${m.join_title }">
+          </div>
+          <div class="form-group">
+            <label for="comment">내용</label>
+            <textarea class="form-control" rows="5" id="comment" name="content" >${m.join_content }</textarea>
+          </div>
+          <input type="submit" class="btn btn-default" value="수락"/>
+          
           </form>
         </div>
 
@@ -196,6 +202,15 @@ th,td{
       </table>
       
       <script>
+      $(function(){
+    	  $('.view').on('click',function(){
+    		  var id=$(this).attr('id');
+    		  $('#'+id).css("display",'block');
+    	  });
+      	  $('.close').on('click',function(){  
+      		$(this).parents('div.modal').css('display','none');
+      	  });	
+      });
       $(function(){
     	  $('.myBtn').on('click',function(){
     		  var id=$(this).attr('id');

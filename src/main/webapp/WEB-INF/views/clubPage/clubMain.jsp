@@ -10,6 +10,24 @@
 <script>
 function validate(){
     var content = $("[name=cb_content]").val();
+    var title=$("[name=cb_title]").val();
+    if(title.trim().length==0){
+    	alert("제목을 입력해주세요.");
+	   	return false;
+    }
+    if(content.trim().length==0){
+        alert("내용을 입력하세요");
+        return false;
+    }
+    return true;
+}
+function validate2(){
+    var content = $("[name=content]").val();
+    var title=$("[name=title]").val();
+    if(title.trim().length==0){
+    	alert("제목을 입력해주세요.");
+	   	return false;
+    }
     if(content.trim().length==0){
         alert("내용을 입력하세요");
         return false;
@@ -123,6 +141,43 @@ function like_func(id,no,event){
 .commentTable{
 	display: none;
 }
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width:800px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
 </style>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -138,14 +193,15 @@ function like_func(id,no,event){
             <div class="w3-container w3-padding">
               <div id="post_header">
               <h6 class="w3-opacity" style="cursor:pointer"><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>우리 동아리 소식을 공유해요~</h6>
-              <span style="margin-top: -30px; float: right;">(글쓰기)</span>
+              <span style="margin-top: -30px; float: right;">(동아리 회원전용)</span>
               </div>
+              <c:if test="${memberLoggedIn.circle1_num eq club.circle_num }">
               <div id="post" >
               <form action="clubMainPage.do" method="post" enctype="multipart/form-data" onsubmit="return validate();">
                     <input type="text" class="form-control" id="cb_title" name="cb_title" placeholder="게시글 제목을 작성해주세요."><br>
                     <textarea class="form-control" rows="5" id="cb_content" name="cb_content" placeholder="게시글 내용을 작성해주세요."></textarea>
 					<input type="hidden" name="circle_num"value="${club.circle_num }"/>
-					<input type="hidden" name="member_id" value="${member.member_id }"/>
+					<input type="hidden" name="member_id" value="${memberLoggedIn.member_id }"/>
                 	
                     <div class="input-group mb-3" style="padding:0px;">
                         <div class="input-group-prepend" style="padding:0px;">
@@ -166,6 +222,7 @@ function like_func(id,no,event){
                 <input type="submit" class="w3-button w3-theme" style="float:right;" value="등록">
               </form>
               </div>
+              </c:if>
             </div>
           </div>
         </div>
@@ -173,8 +230,8 @@ function like_func(id,no,event){
       <c:if test="${not empty BoardList }">
 	      <c:forEach items="${BoardList}" var='b' varStatus="status">
 	      <div class="w3-container w3-card w3-white w3-round w3-margin check1"><br>
-	        <p style="display:inline-block;"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>${b.member_id }</p>
-	        <c:if test="${member.member_id eq b.member_id}">
+	        <p style="display:inline-block;">${b.member_id }  <span class="glyphicon glyphicon-envelope myBtn1" id="${b.cb_num }"></span></p>
+	        <c:if test="${memberLoggedIn.member_id eq b.member_id}">
 	        <div style="flaot:right; display: inline-block;">
 	        <button type="button" class="btn btn-warning" style="margin-right:5px;" onclick="updateBoard(${b.cb_num })">수정</button>
 	        <button type="button" class="btn btn-danger" onclick="deleteBoard(${b.cb_num },'${b.member_id }')">삭제</button>
@@ -197,17 +254,17 @@ function like_func(id,no,event){
 			 </c:if>
 			 <c:if test="${not empty likeList }">	
 			 	<c:forEach items="${likeList }" var='ll' varStatus="llstatus">
-			 		<c:if test="${ll.member_id eq member.member_id and ll.cb_no eq b.cb_num and ll.cb_like_check eq 1 }">		 	
-	        		<button type="button" class="w3-button w3-red w3-margin-bottom like_icon" id="like_icon" onclick="like_func('${member.member_id}','${b.cb_num }',event);"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
+			 		<c:if test="${ll.member_id eq memberLoggedIn.member_id and ll.cb_no eq b.cb_num and ll.cb_like_check eq 1 }">		 	
+	        		<button type="button" class="w3-button w3-red w3-margin-bottom like_icon" id="like_icon" onclick="like_func('${memberLoggedIn.member_id}','${b.cb_num }',event);"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
 	        		</c:if>
 	        	</c:forEach>
-	        		<button type="button" class="w3-button w3-indigo w3-margin-bottom like_icon1" id="like_icon1" onclick="like_func('${member.member_id}','${b.cb_num }',event);"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
+	        		<button type="button" class="w3-button w3-indigo w3-margin-bottom like_icon1" id="like_icon1" onclick="like_func('${memberLoggedIn.member_id}','${b.cb_num }',event);"><i class="fa fa-thumbs-up"></i> 좋아요 </button>
 	        </c:if>	
 	        		<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" id="circle_comment"><i class="fa fa-comment"></i> 댓글 </button>
 	        <div id="post_comment" >
 	          <input type="text" class="form-control" name="comment1" id="comment1" placeholder="댓글을 작성해주세요." style="display:inline-block; width:90%;"/>
 	          <input type="hidden" id="no" value="${b.cb_num }"/>
-	          <input type="hidden" id="memberId" value="${member.member_id }"/>
+	          <input type="hidden" id="memberId" value="${memberLoggedIn.member_id }"/>
 	          <button type="button" class="btn btn-primary" id="comment_button" onclick="insertComment(${b.cb_num})">등록</button>
 	          <div class="comment-container"><hr>
 	            <c:forEach items="${clist}" var='cc' varStatus="cstatus">
@@ -219,8 +276,8 @@ function like_func(id,no,event){
 	              </tr>
 	              <tr>
 	                <td class="top">${cc.cb_comment_content }</td>
-	                <c:if test="${member.member_id eq b.member_id}">	                
-	                <td><button type="button" class="btn btn-danger" onclick="deleteComment(${cc.cb_commentno},'${member.member_id }');">삭제</button></td>
+	                <c:if test="${memberLoggedIn.member_id eq b.member_id}">	                
+	                <td><button type="button" class="btn btn-danger" onclick="deleteComment(${cc.cb_commentno},'${memberLoggedIn.member_id }');">삭제</button></td>
 	                </c:if>
 	              </tr>
 	            </table>
@@ -231,11 +288,72 @@ function like_func(id,no,event){
 	          <br>
 	        </div>
 	      </div>
+	      	        <!-- The Modal -->
+<div id="${b.cb_num }" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>쪽지보내기</h3>
+    <hr>
+    <form action="${path }/circleMessage.do" method="post" onsubmit="return validate2();">
+    <div class="form-group">
+      <label for="member_receive">받는사람</label>
+      <input type="text" class="form-control" id="member_receive" name="yid" value="${b.member_id }">
+    </div>
+    <div class="form-group">
+      <label for="pwd">보내는사람</label>
+      <input type="text" class="form-control" id="pwd" name="mid"value="${memberLoggedIn.member_id }">
+    </div>
+    <div class="form-group">
+      <label for="title">제목</label>
+      <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요">
+    </div>
+    <div class="form-group">
+      <label for="comment">내용</label>
+      <textarea class="form-control" rows="5" id="comment" name="content" placeholder="내용을 입력해주세요"></textarea>
+    </div>
+    <input type="submit" class="btn btn-default" value="전송"/>
+    <input type="reset" class="btn btn-default" value="취소"/>
+    </form>
+  </div>
+
+</div>
 	      </c:forEach>
 	    <button type="button" class="btn btn-default btn-block" id="moreBoard" style="margin:0px 30px 0px 16px; width:96%;" >더 보기</button>
 	    </c:if> 
     <!-- End Middle Column -->
     </div>
 
-      
+<script>
+$(function(){
+	 $('.myBtn1').on('click',function(){
+		  var messageId=$(this).attr('id');
+		  $('#'+messageId+'.modal').css("display",'block'); 
+	  });  
+
+	  $('.close').on('click',function(){  
+		$(this).parents('div.modal').css('display','none');
+	  });	
+});
+//Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn1");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+} 
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 <jsp:include page="/WEB-INF/views/clubPage/common/aside2.jsp"/>      

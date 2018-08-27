@@ -65,11 +65,18 @@ width:85%;
     <div class="w3-col m2" style="margin-top:16px;">
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
-          <h5><strong><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>이번 주 생일의 주인공</strong></h5>
+          <h5><strong><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>이달의 생일 주인공</strong></h5>
           <hr>
-          <p>07.24 홍길동</p>
-          <p>07.27 이순신</p>
-          <p><button class="w3-button w3-block w3-theme-l4">Info</button></p>
+          <c:forEach var='bm' items="${birthMember}" varStatus="vmStatus">
+          <p><fmt:formatDate value="${bm.member_birth}" pattern="MM월 dd일" /> ${bm.member_name}</p>
+          
+          </c:forEach>
+          <p><button class="w3-button w3-block w3-theme-l4" onclick="changeCalendar('${memberLoggedIn.member_id}',${club.circle_num })">Info</button></p>
+          <script>
+          	function changeCalendar(){
+          		location.href="${path}/circle_calendar.do?circle_num="+${club.circle_num}+"&member_id="+'${memberLoggedIn.member_id}';
+          	} 
+          </script>
         </div>
       </div>
       <br>

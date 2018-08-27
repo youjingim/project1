@@ -15,6 +15,7 @@ import com.yj.project.club.model.dao.ClubDAO;
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
+import com.yj.project.club.model.vo.Circle_join;
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.club.model.vo.InnerLike;
@@ -196,6 +197,7 @@ public class ClubServiceImpl implements ClubService {
 	public CB_Comment selectComment(int no) {
 		return clubDAO.selectComment(sqlSession,no);
 	}
+<<<<<<< HEAD
 	@Override
 	public int clubCount() {
 		return clubDAO.clubCount(sqlSession);
@@ -240,6 +242,42 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int deleteCircle(Map<String, Object> map) {
 		return clubDAO.deleteCircle(sqlSession,map);
+=======
+
+	@Override
+	public int outCircle(String id) {
+		return clubDAO.outCircle(sqlSession,id);
+	}
+
+	@Override
+	public Budget selectLastBud(int circle_num) {
+		return clubDAO.selectLastBud(sqlSession,circle_num);
+	}
+
+	@Override
+	public List<Budget> totalBud(int cirlce_num) {
+		return clubDAO.totalBud(sqlSession,cirlce_num);
+	}
+
+	@Override
+	public Member selectChairman(int circle_num) {
+		return clubDAO.selectChairman(sqlSession,circle_num);
+	}
+
+	@Override
+	public int joinCircle(Circle_join join) {
+		return clubDAO.joinCircle(sqlSession,join);
+	}
+
+	@Override
+	public List<Circle_join> selectJoinList(Circle_join cj, int cPage, int numPerPage) {
+		return clubDAO.selectJoinList(sqlSession,cj,cPage,numPerPage);
+	}
+
+	@Override
+	public int selectJoinCount(Circle_join cj) {
+		return clubDAO.selectJoinCount(sqlSession,cj);
+>>>>>>> bonyeon
 	}
 	
 	

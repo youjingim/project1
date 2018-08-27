@@ -2,6 +2,9 @@ package com.yj.project.message.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +74,14 @@ public class MessageController {
 		model.addAttribute("message", message);
 		return "message/messageView";
 	}
+	@RequestMapping("messageView2.do")
+	public String messageView2(int message_num, Model model) {
+		System.out.println("메세지 번호:"+message_num);
+		Message message=messageService.selectMessageOne(message_num);
+		System.out.println("내가 불러온 메세지:"+message);
+		model.addAttribute("message", message);
+		return "message/messageView2";
+	}
 	//내가 받은 메시지 답장 페이지 넘기는 로직
 	@RequestMapping("reSendMessage.do")
 	public String reSendMessage(String mid,String yid,Model model) {
@@ -82,8 +93,174 @@ public class MessageController {
 	}
 	//메세지 삭제 로직
 	@RequestMapping("deleteMessage.do")
-	public String deleteMessage(int message_num) {
+	public ModelAndView deleteMessage(int message_num,String mid) {
+		ModelAndView mv=new ModelAndView();
 		System.out.println("삭제할 메시지 번호:"+message_num);
-		return "";
+		int result = messageService.deleteMessage(message_num);
+		System.out.println(result);
+		
+		String msg="";
+		if(result>0) {
+			msg="쪽지 삭제를 성공하였습니다";
+		}
+		else {
+			msg="삭제를 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "myMessage.do?member_id="+mid);
+		
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	//답장 보내는 로직
+	@RequestMapping("reSendMessage2.do")
+	public ModelAndView insertReSend(String yid, String mid,String title,String content) {
+		ModelAndView mv=new ModelAndView();
+		System.out.println("yid"+yid);
+		System.out.println("mid"+mid);
+		System.out.println("title"+title);
+		System.out.println("content:"+content);
+		Message m=new Message();
+		m.setMessage_content(content);
+		m.setMessage_title(title);
+		m.setMessage_receiver(yid);
+		m.setMessage_sender(mid);
+		int result = messageService.insertSend(m);
+		System.out.println("메세지 입력 여부:"+result);
+		String msg="";
+		if(result>0) {
+			msg="쪽지 보내기를 성공하였습니다";
+		}
+		else {
+			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "myMessage.do?member_id="+mid);
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	//답장 보내는 로직
+		@RequestMapping("circleMessage.do")
+		public ModelAndView insertSend(String yid, String mid,String title,String content) {
+			ModelAndView mv=new ModelAndView();
+			System.out.println("yid"+yid);
+			System.out.println("mid"+mid);
+			System.out.println("title"+title);
+			System.out.println("content:"+content);
+			Message m=new Message();
+			m.setMessage_content(content);
+			m.setMessage_title(title);
+			m.setMessage_receiver(yid);
+			m.setMessage_sender(mid);
+			int result = messageService.insertSend(m);
+			System.out.println("메세지 입력 여부:"+result);
+			String msg="";
+			if(result>0) {
+				msg="쪽지 보내기를 성공하였습니다";
+			}
+			else {
+				msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
+			}
+			mv.addObject("msg",msg);
+			mv.addObject("loc", "clubMain.do?member_id="+mid);
+			mv.setViewName("common/msg");
+			return mv;
+		}
+	@RequestMapping("circleMemberMessage.do")
+	public ModelAndView insertCircleMemberSend(String yid, String mid,String title,String content,int cNum) {
+		ModelAndView mv=new ModelAndView();
+		System.out.println("yid"+yid);
+		System.out.println("mid"+mid);
+		System.out.println("title"+title);
+		System.out.println("content:"+content);
+		Message m=new Message();
+		m.setMessage_content(content);
+		m.setMessage_title(title);
+		m.setMessage_receiver(yid);
+		m.setMessage_sender(mid);
+		int result = messageService.insertSend(m);
+		System.out.println("메세지 입력 여부:"+result);
+		String msg="";
+		if(result>0) {
+			msg="쪽지 보내기를 성공하였습니다";
+		}
+		else {
+			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "circle_list.do?circle_num="+cNum);
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	@RequestMapping("circleMemberMessage2.do")
+	public ModelAndView insertCircleMemberSend2(String yid, String mid,String title12,String content12,int nn) {
+		ModelAndView mv=new ModelAndView();
+		System.out.println("yid"+yid);
+		System.out.println("mid"+mid);
+		System.out.println("title"+title12);
+		System.out.println("content:"+content12);
+		Message m=new Message();
+		m.setMessage_content(content12);
+		m.setMessage_title(title12);
+		m.setMessage_receiver(yid);
+		m.setMessage_sender(mid);
+		int result = messageService.insertSend(m);
+		System.out.println("메세지 입력 여부:"+result);
+		String msg="";
+		if(result>0) {
+			msg="쪽지 보내기를 성공하였습니다";
+		}
+		else {
+			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "joinCircleMember.do?circle_num="+nn+"&member_id="+mid);
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	@RequestMapping("deleteCheck.do")
+	public ModelAndView deleteCheckBox(@RequestParam("chk") int[] check,String receivId) {
+		ModelAndView mv=new ModelAndView();
+		int result=0;
+		System.out.println("아이디:"+receivId);
+		for(int checkNum : check) {
+			System.out.println("체크값:"+checkNum);
+			result=messageService.deleteMessage(checkNum);
+		}
+		System.out.println("result:"+result);
+		String msg="";
+		if(result>0) {
+			msg="쪽지 삭제를 성공하였습니다";
+		}
+		else {
+			msg="쪽지 삭제를 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "myMessage.do?member_id="+receivId);
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	@RequestMapping("deleteCheck1.do")
+	public ModelAndView deleteCheckBox2(@RequestParam("chk") int[] check, String senderId) {
+		ModelAndView mv=new ModelAndView();
+		int result=0;
+		System.out.println("아이디:"+senderId);
+		for(int checkNum : check) {
+			System.out.println("체크값:"+checkNum);
+			result=messageService.deleteMessage(checkNum);
+		}
+		System.out.println("result:"+result);
+		
+		String msg="";
+		if(result>0) {
+			msg="쪽지 삭제를 성공하였습니다";
+		}
+		else {
+			msg="쪽지 삭제를 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "myMessage2.do?member_id="+senderId);
+		mv.setViewName("common/msg");
+		return mv;
 	}
 }

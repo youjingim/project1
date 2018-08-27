@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -51,6 +52,7 @@ import com.yj.project.club.model.service.ClubService;
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
+import com.yj.project.club.model.vo.Circle_join;
 import com.yj.project.club.model.vo.Club;
 
 import com.yj.project.club.model.vo.ReqCircle;
@@ -77,22 +79,46 @@ public class ClubController {
 		List<Matching> matching = clubService.selectMatching(circle_num);
 	    System.out.println("동아리 정보"+club);
 	    session.setAttribute("matching", matching);
-		String[] array=club.getCategory().split(",");
 		
-		List<Circle_board> list=clubService.selectBoardList(circle_num);
+		//List<InnerLike> likeList=clubService.selectLikeList(member.getMember_id());
+		List<Circle_board> list=clubService.selectBoardList(club.getCircle_num());
 		List<CB_Comment> clist=clubService.commentList();
 		System.out.println("게시글 목록: "+list);
 		System.out.println("댓글 목록: "+clist);
+		Member chairman=clubService.selectChairman(club.getCircle_num());
+		System.out.println("동아리 대표 : "+chairman);
+		String chiefName=chairman.getMember_id();
+		//현재의 달
+		SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		String today2 = df.format(c.getTime());
+		today2=today2.substring(5, 7);
+		System.out.println("심플 데이터:"+today2);
+		
+		List<Member> memberBirth = clubService.selectMember(club.getCircle_num());//동아리 내 회원 정보가져오기
+		//같은 생일의 멤버를 담을 리스트
+		List<Member> birthMember=new ArrayList<Member>();
+		for(Member mem : memberBirth) {
+			/*System.out.println("가져온 멤버 생일:"+mem.getMember_birth().toString().substring(5, 7));*/
+			/*String today11=mem.getMember_birth().toString().substring(5, 7);*/
+			if(today2.equals(mem.getMember_birth().toString().substring(5, 7))) {
+				birthMember.add(mem);
+				
+			}
+		}
+		session.setAttribute("chairman", chiefName);
+		session.setAttribute("birthMember", birthMember);
 		//session.setAttribute("member", member);
 
 		session.setAttribute("club", club);
 		session.setAttribute("BoardList", list);
-		session.setAttribute("array", array);
+		
 		session.setAttribute("clist", clist);
+		//session.setAttribute("likeList", likeList);
 
 		List<Matching> matchings = clubService.selectMatching(circle_num);
 		List<ClubNotice> noticeList = clubService.selectNotice(circle_num);
-
+		
 		//int total=member.getMember_notice();
 
 		session.setAttribute("matching", matching);
@@ -100,7 +126,7 @@ public class ClubController {
 		//session.setAttribute("total", total);
 		session.setAttribute("noticeList", noticeList);
 		model.addAttribute("BoardList", list);
-		model.addAttribute("categoryArr", array);
+		
 		
 
 		return "clubPage/clubMain";
@@ -113,23 +139,38 @@ public class ClubController {
 		List<Matching> matching = clubService.selectMatching(member.getCircle1_num());
 	    System.out.println("동아리 정보"+club);
 	    session.setAttribute("matching", matching);
-		String[] array=club.getCategory().split(",");
+		Member chairman=clubService.selectChairman(club.getCircle_num());
+		System.out.println("동아리 대표 : "+chairman);
+		String chiefName=chairman.getMember_id();
 		List<InnerLike> likeList=clubService.selectLikeList(member.getMember_id());
 		List<Circle_board> list=clubService.selectBoardList(club.getCircle_num());
 		List<CB_Comment> clist=clubService.commentList();
 		System.out.println("게시글 목록: "+list);
 		System.out.println("댓글 목록: "+clist);
 		//현재의 달
-		Calendar c=Calendar.getInstance();
-		int month1=c.get(Calendar.MONTH)+1;
-		System.out.println("현재의 달:"+month1);
-		List<Member> memberBirth = clubService.selectMember(club.getCircle_num());//동아리 내 회원 정보가져오기
+		SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		String today2 = df.format(c.getTime());
+		today2=today2.substring(5, 7);
+		System.out.println("심플 데이터:"+today2);
 		
+		List<Member> memberBirth = clubService.selectMember(club.getCircle_num());//동아리 내 회원 정보가져오기
+		//같은 생일의 멤버를 담을 리스트
+		List<Member> birthMember=new ArrayList<Member>();
+		for(Member mem : memberBirth) {
+			/*System.out.println("가져온 멤버 생일:"+mem.getMember_birth().toString().substring(5, 7));*/
+			/*String today11=mem.getMember_birth().toString().substring(5, 7);*/
+			if(today2.equals(mem.getMember_birth().toString().substring(5, 7))) {
+				birthMember.add(mem);
+				
+			}
+		}
+		session.setAttribute("chairman", chiefName);
+		session.setAttribute("birthMember", birthMember);
 		session.setAttribute("member", member);
 
 		session.setAttribute("club", club);
 		session.setAttribute("BoardList", list);
-		session.setAttribute("array", array);
 		session.setAttribute("clist", clist);
 		session.setAttribute("likeList", likeList);
 
@@ -143,7 +184,7 @@ public class ClubController {
 		session.setAttribute("total", total);
 		session.setAttribute("noticeList", noticeList);
 		model.addAttribute("BoardList", list);
-		model.addAttribute("categoryArr", array);
+		
 		
 
 		return "clubPage/clubMain";
@@ -166,6 +207,27 @@ public class ClubController {
 		
 		return mv;
 	}
+	//동아리 회원가입신청한 멤버 관리 페이지로 가는 로직
+		@RequestMapping("joinCircleMember.do")
+		public ModelAndView joinMemberList(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage,int circle_num, String member_id) {
+			ModelAndView mv = new ModelAndView();
+			Circle_join cj=new Circle_join();
+			cj.setCircle_num(circle_num);
+			cj.setJoin_receiver(member_id);
+			int numPerPage=10;
+			List<Circle_join> list=clubService.selectJoinList(cj,cPage,numPerPage);
+			System.out.println("동아리 신청인원:"+list);
+			int totalCount=clubService.selectJoinCount(cj);
+			System.out.println("동아리 신청한 회원 수 :"+totalCount);
+			String pageBar=new CirclePageCreate().getPageBar(cPage,numPerPage,totalCount,"joinCircleMember.do",circle_num);
+			mv.addObject("pageBar",pageBar);
+			mv.addObject("list",list);
+			mv.addObject("cPage",cPage);
+			mv.addObject("totalCount",totalCount);
+			mv.setViewName("clubPage/joinMemberList");
+			
+			return mv;
+		}
 	//예산 페이지로 넘어가는 로직
 	@RequestMapping("circle_budget.do")
 	public ModelAndView budget(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage, int circle_num, String id) {
@@ -175,10 +237,13 @@ public class ClubController {
 		Club club=clubService.selectClub(circle_num);
 		int numPerPage=10;
 		List<Budget> list=clubService.selectBudgetList(circle_num,cPage,numPerPage);
-		
+		Budget lastBudget2=clubService.selectLastBud(circle_num);
+		int currentTotal=lastBudget2.getTotal();
+		System.out.println("현재 잔액 : "+currentTotal);
 		int totalCount=clubService.selectCountBudget(circle_num);
 		String pageBar=new CirclePageCreate().getPageBar(cPage,numPerPage,totalCount,"circle_budget.do",circle_num);
-
+		
+		mv.addObject("currentTotal", currentTotal);
 		mv.addObject("club", club);
 		mv.addObject("member_id", id);
 		mv.addObject("pageBar",pageBar);
@@ -403,14 +468,27 @@ public class ClubController {
 		b.setBudget_content(budget_content);
 		b.setCircle_num(circle_num);
 		b.setMember_id(member_id);
-		int balance=0;
-		if(b.getBudget_input()>b.getBudget_output()) {
-			balance=b.getBudget_input()-b.getBudget_output();
-			
-		}else {
-			balance=b.getBudget_output()-b.getBudget_input();
+		/*List<Budget> totalBud=clubService.totalBud(circle_num);*/
+		int totalCountBud=clubService.selectCountBudget(circle_num);
+		System.out.println("예산이 저장된 갯수 : "+totalCountBud);
+		int lastTotal=0;
+		if(totalCountBud>0) {
+		Budget lastBudget=clubService.selectLastBud(circle_num);
+		System.out.println("마지막 줄:"+lastBudget);
+		lastTotal=lastBudget.getTotal();
+		System.out.println("마지막줄 잔액:"+lastTotal);
 		}
+		int total=0;
+		if(b.getBudget_input()>b.getBudget_output()) {//수입이 지출보다 많을때
+			total=b.getBudget_input()-b.getBudget_output();
+			System.out.println("잔액은:"+total);
+		}else {//지출이 수입보다 많을때
+			total=(b.getBudget_output()-b.getBudget_input())*-1;
+			System.out.println("잔액은:"+total);
+		}
+		total=total+lastTotal;
 		
+		b.setTotal(total);
 		if(upFile != null) {
 	         
 	         String saveDir=request.getSession().getServletContext().getRealPath("/resources/upload/club");
@@ -700,6 +778,7 @@ public class ClubController {
 		
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@RequestMapping("/makeClub.do")
 	public ModelAndView makeClub(int circle_num) {
 		ModelAndView mv = new ModelAndView();
@@ -816,5 +895,67 @@ public class ClubController {
 	}
 =======
 
+>>>>>>> bonyeon
+=======
+	@RequestMapping("outCircle.do")
+	public ModelAndView outCircle(String member_id, int no) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("탈퇴할 회원 아이디:"+member_id);
+		int result=clubService.outCircle(member_id);
+		System.out.println("탈퇴결과:"+result);
+		String msg="";
+		if(result>0) {
+			msg="동아리 탈퇴를 성공하였습니다";
+		}
+		else {
+			msg="탈퇴를 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "index.do?seq=5");
+		
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	//동아리 신청가입 로직
+	@RequestMapping("joinClubMember.do")
+	
+	public ModelAndView joinClub(Circle_join join) {
+		ModelAndView mv = new ModelAndView();
+		int result=clubService.joinCircle(join);
+		System.out.println("신청결과:"+result);
+		String msg="";
+		if(result>0) {
+			msg="동아리 가입신청을 성공하였습니다";
+		}
+		else {
+			msg="가입신청을 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "search/circleView.do?no="+join.getCircle_num());
+		
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	//신청서 삭제 로직
+	@RequestMapping("deleteJoin.do")
+	public ModelAndView deleteJoin(int cirlce_num, int joinNum) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("삭제할 조인번호:"+joinNum);
+		System.out.println("동아리 번호:"+cirlce_num);
+		
+		/*System.out.println("신청결과:"+result);
+		String msg="";
+		if(result>0) {
+			msg="동아리 가입신청을 성공하였습니다";
+		}
+		else {
+			msg="가입신청을 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "search/circleView.do?no="+join.getCircle_num());
+		
+		mv.setViewName("common/msg");*/
+		return mv;
+	}
 >>>>>>> bonyeon
 }

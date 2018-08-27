@@ -10,6 +10,7 @@ import com.yj.project.calendar.model.vo.Matching;
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
+import com.yj.project.club.model.vo.Circle_join;
 import com.yj.project.club.model.vo.Club;
 import com.yj.project.club.model.vo.ReqCircle;
 import com.yj.project.club.model.vo.InnerLike;
@@ -51,6 +52,7 @@ public interface ClubService {
 	public List<InnerLike> selectLikeList(String member_id);
 	public int updateLevel(Member mm);
 	public CB_Comment selectComment(int no);
+<<<<<<< HEAD
 	public int clubCount();
 	public ReqCircle makeClub(int circle_num);
 	public int deleteCircle(int circle_num);
@@ -61,4 +63,13 @@ public interface ClubService {
 	public int countMember(String member_id);
 	public int deleteCircle(Map<String, Object>map);
 	
+=======
+	public int outCircle(String id);
+	public Budget selectLastBud(int circle_num);
+	public List<Budget> totalBud(int cirlce_num);
+	public Member selectChairman(int circle_num);
+	public int joinCircle(Circle_join join);
+	public List<Circle_join> selectJoinList(Circle_join cj,int cPage, int numPerPage);
+	public int selectJoinCount(Circle_join cj);
+>>>>>>> bonyeon
 }
