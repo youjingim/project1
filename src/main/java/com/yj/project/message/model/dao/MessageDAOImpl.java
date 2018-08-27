@@ -40,7 +40,7 @@ public class MessageDAOImpl implements MessageDAO {
 
 	@Override
 	public int deleteMessage(SqlSessionTemplate sqlSession, int message_num) {
-		return sqlSession.delete("message.deleteMessage", message_num);
+		return sqlSession.update("message.deleteMessage", message_num);
 	}
 
 	@Override

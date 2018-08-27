@@ -48,6 +48,7 @@ import com.yj.project.club.model.service.ClubService;
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
+import com.yj.project.club.model.vo.Circle_join;
 import com.yj.project.club.model.vo.Club;
 
 import com.yj.project.club.model.vo.ReqCircle;
@@ -74,12 +75,15 @@ public class ClubController {
 		List<Matching> matching = clubService.selectMatching(circle_num);
 	    System.out.println("동아리 정보"+club);
 	    session.setAttribute("matching", matching);
-		String[] array=club.getCategory().split(",");
+		
 		//List<InnerLike> likeList=clubService.selectLikeList(member.getMember_id());
 		List<Circle_board> list=clubService.selectBoardList(club.getCircle_num());
 		List<CB_Comment> clist=clubService.commentList();
 		System.out.println("게시글 목록: "+list);
 		System.out.println("댓글 목록: "+clist);
+		Member chairman=clubService.selectChairman(club.getCircle_num());
+		System.out.println("동아리 대표 : "+chairman);
+		String chiefName=chairman.getMember_id();
 		//현재의 달
 		SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd");
 		Calendar c = Calendar.getInstance();
@@ -98,12 +102,13 @@ public class ClubController {
 				
 			}
 		}
+		session.setAttribute("chairman", chiefName);
 		session.setAttribute("birthMember", birthMember);
 		//session.setAttribute("member", member);
 
 		session.setAttribute("club", club);
 		session.setAttribute("BoardList", list);
-		session.setAttribute("array", array);
+		
 		session.setAttribute("clist", clist);
 		//session.setAttribute("likeList", likeList);
 
@@ -117,7 +122,7 @@ public class ClubController {
 		//session.setAttribute("total", total);
 		session.setAttribute("noticeList", noticeList);
 		model.addAttribute("BoardList", list);
-		model.addAttribute("categoryArr", array);
+		
 		
 
 		return "clubPage/clubMain";
@@ -130,7 +135,9 @@ public class ClubController {
 		List<Matching> matching = clubService.selectMatching(member.getCircle1_num());
 	    System.out.println("동아리 정보"+club);
 	    session.setAttribute("matching", matching);
-		String[] array=club.getCategory().split(",");
+		Member chairman=clubService.selectChairman(club.getCircle_num());
+		System.out.println("동아리 대표 : "+chairman);
+		String chiefName=chairman.getMember_id();
 		List<InnerLike> likeList=clubService.selectLikeList(member.getMember_id());
 		List<Circle_board> list=clubService.selectBoardList(club.getCircle_num());
 		List<CB_Comment> clist=clubService.commentList();
@@ -154,12 +161,12 @@ public class ClubController {
 				
 			}
 		}
+		session.setAttribute("chairman", chiefName);
 		session.setAttribute("birthMember", birthMember);
 		session.setAttribute("member", member);
 
 		session.setAttribute("club", club);
 		session.setAttribute("BoardList", list);
-		session.setAttribute("array", array);
 		session.setAttribute("clist", clist);
 		session.setAttribute("likeList", likeList);
 
@@ -173,7 +180,7 @@ public class ClubController {
 		session.setAttribute("total", total);
 		session.setAttribute("noticeList", noticeList);
 		model.addAttribute("BoardList", list);
-		model.addAttribute("categoryArr", array);
+		
 		
 
 		return "clubPage/clubMain";
@@ -196,6 +203,27 @@ public class ClubController {
 		
 		return mv;
 	}
+	//동아리 회원가입신청한 멤버 관리 페이지로 가는 로직
+		@RequestMapping("joinCircleMember.do")
+		public ModelAndView joinMemberList(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage,int circle_num, String member_id) {
+			ModelAndView mv = new ModelAndView();
+			Circle_join cj=new Circle_join();
+			cj.setCircle_num(circle_num);
+			cj.setJoin_receiver(member_id);
+			int numPerPage=10;
+			List<Circle_join> list=clubService.selectJoinList(cj,cPage,numPerPage);
+			System.out.println("동아리 신청인원:"+list);
+			int totalCount=clubService.selectJoinCount(cj);
+			System.out.println("동아리 신청한 회원 수 :"+totalCount);
+			String pageBar=new CirclePageCreate().getPageBar(cPage,numPerPage,totalCount,"joinCircleMember.do",circle_num);
+			mv.addObject("pageBar",pageBar);
+			mv.addObject("list",list);
+			mv.addObject("cPage",cPage);
+			mv.addObject("totalCount",totalCount);
+			mv.setViewName("clubPage/joinMemberList");
+			
+			return mv;
+		}
 	//예산 페이지로 넘어가는 로직
 	@RequestMapping("circle_budget.do")
 	public ModelAndView budget(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage, int circle_num, String id) {
@@ -739,6 +767,47 @@ public class ClubController {
 		mv.addObject("loc", "index.do?seq=5");
 		
 		mv.setViewName("common/msg");
+		return mv;
+	}
+	//동아리 신청가입 로직
+	@RequestMapping("joinClubMember.do")
+	
+	public ModelAndView joinClub(Circle_join join) {
+		ModelAndView mv = new ModelAndView();
+		int result=clubService.joinCircle(join);
+		System.out.println("신청결과:"+result);
+		String msg="";
+		if(result>0) {
+			msg="동아리 가입신청을 성공하였습니다";
+		}
+		else {
+			msg="가입신청을 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "search/circleView.do?no="+join.getCircle_num());
+		
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	//신청서 삭제 로직
+	@RequestMapping("deleteJoin.do")
+	public ModelAndView deleteJoin(int cirlce_num, int joinNum) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("삭제할 조인번호:"+joinNum);
+		System.out.println("동아리 번호:"+cirlce_num);
+		
+		/*System.out.println("신청결과:"+result);
+		String msg="";
+		if(result>0) {
+			msg="동아리 가입신청을 성공하였습니다";
+		}
+		else {
+			msg="가입신청을 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "search/circleView.do?no="+join.getCircle_num());
+		
+		mv.setViewName("common/msg");*/
 		return mv;
 	}
 }

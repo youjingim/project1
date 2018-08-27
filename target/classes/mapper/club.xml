@@ -133,4 +133,16 @@
 	<select id="selectLastBud" resultType="budget">
 	select * from circle_budget where circle_num=#{circle_num} and budget_num=(select max(budget_num) from CIRCLE_BUDGET where circle_num=#{circle_num})
 	</select>
+	<select id="selectChairman" resultType="Member">
+		select * from member where circle1_num=#{circle_num} and member_level='L5'
+	</select>
+	<insert id="joinCircle">
+		INSERT INTO CIRCLE_JOIN VALUES(CIRCLE_IOIN_SEQ.NEXTVAL,#{circle_num},#{join_sender},#{join_receiver},#{join_title},#{join_content},sysdate)
+	</insert>
+	<select id="selectJoinList" resultType="join">
+		SELECT * FROM CIRCLE_JOIN WHERE JOIN_RECEIVER=#{join_receiver} AND CIRCLE_NUM=#{circle_num}
+	</select>
+	<select id="selectJoinCount" resultType="_int">
+		SELECT COUNT(*) FROM CIRCLE_JOIN WHERE JOIN_RECEIVER=#{join_receiver} AND CIRCLE_NUM=#{circle_num}
+	</select>
 </mapper>

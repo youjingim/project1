@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
-
+import com.yj.project.club.model.vo.Circle_join;
 import com.yj.project.calendar.model.vo.Matching;
 
 
@@ -212,8 +212,27 @@ public class ClubDAOImpl implements ClubDAO {
 	public List<Budget> totalBud(SqlSessionTemplate sqlSession, int circle_num) {
 		return sqlSession.selectList("club.selectBudgetList", circle_num);
 	}
-	
-	
+
+	@Override
+	public Member selectChairman(SqlSessionTemplate sqlSession, int circle_num) {
+		return sqlSession.selectOne("club.selectChairman", circle_num);
+	}
+
+	@Override
+	public int joinCircle(SqlSessionTemplate sqlSession, Circle_join join) {
+		return sqlSession.insert("club.joinCircle", join);
+	}
+
+	@Override
+	public List<Circle_join> selectJoinList(SqlSessionTemplate sqlSession, Circle_join cj, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("club.selectJoinList", cj, rb);
+	}
+
+	@Override
+	public int selectJoinCount(SqlSessionTemplate sqlSession, Circle_join cj) {
+		return sqlSession.selectOne("club.selectJoinCount", cj);
+	}
 	
 
 }

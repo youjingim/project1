@@ -119,13 +119,13 @@ label{
 		        <label><input type="checkbox" name="chk" value="${s.message_num }"></label>
 		      </div>
 		    </td>
-		    <input type="hidden" value="${s.message_sender }" name="senderId"/>
 		    <td>${s.message_receiver }</td>
 		    <td><a href='${path }/messageView2.do?message_num=${s.message_num }'>${s.message_title }</a></td>
 		    <td>${s.message_content }</td>
 		    <td>${s.message_date }</td>
 		  </tr>
 	  </c:forEach>
+		    <input type="hidden" value="${member_id}" name="senderId"/>
  </c:if>
 </table><br>
 <input type="submit" class="btn btn-warning" value="선택삭제"/>

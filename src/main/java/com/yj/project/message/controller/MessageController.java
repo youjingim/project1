@@ -192,6 +192,32 @@ public class MessageController {
 		mv.setViewName("common/msg");
 		return mv;
 	}
+	@RequestMapping("circleMemberMessage2.do")
+	public ModelAndView insertCircleMemberSend2(String yid, String mid,String title12,String content12,int nn) {
+		ModelAndView mv=new ModelAndView();
+		System.out.println("yid"+yid);
+		System.out.println("mid"+mid);
+		System.out.println("title"+title12);
+		System.out.println("content:"+content12);
+		Message m=new Message();
+		m.setMessage_content(content12);
+		m.setMessage_title(title12);
+		m.setMessage_receiver(yid);
+		m.setMessage_sender(mid);
+		int result = messageService.insertSend(m);
+		System.out.println("메세지 입력 여부:"+result);
+		String msg="";
+		if(result>0) {
+			msg="쪽지 보내기를 성공하였습니다";
+		}
+		else {
+			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "joinCircleMember.do?circle_num="+nn+"&member_id="+mid);
+		mv.setViewName("common/msg");
+		return mv;
+	}
 	@RequestMapping("deleteCheck.do")
 	public ModelAndView deleteCheckBox(@RequestParam("chk") int[] check,String receivId) {
 		ModelAndView mv=new ModelAndView();
@@ -204,10 +230,10 @@ public class MessageController {
 		System.out.println("result:"+result);
 		String msg="";
 		if(result>0) {
-			msg="쪽지 보내기를 성공하였습니다";
+			msg="쪽지 삭제를 성공하였습니다";
 		}
 		else {
-			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
+			msg="쪽지 삭제를 실패하였습니다. 다시확인해주세요";
 		}
 		mv.addObject("msg",msg);
 		mv.addObject("loc", "myMessage.do?member_id="+receivId);
@@ -227,10 +253,10 @@ public class MessageController {
 		
 		String msg="";
 		if(result>0) {
-			msg="쪽지 보내기를 성공하였습니다";
+			msg="쪽지 삭제를 성공하였습니다";
 		}
 		else {
-			msg="쪽지 보내기 실패하였습니다. 다시확인해주세요";
+			msg="쪽지 삭제를 실패하였습니다. 다시확인해주세요";
 		}
 		mv.addObject("msg",msg);
 		mv.addObject("loc", "myMessage2.do?member_id="+senderId);

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.yj.project.club.model.vo.Budget;
 import com.yj.project.club.model.vo.CB_Comment;
 import com.yj.project.club.model.vo.Circle_board;
+import com.yj.project.club.model.vo.Circle_join;
 import com.yj.project.calendar.model.vo.ClubNotice;
 import com.yj.project.calendar.model.vo.FinalWithus;
 import com.yj.project.calendar.model.vo.Matching;
@@ -54,4 +55,8 @@ public interface ClubDAO {
 	public int outCircle(SqlSessionTemplate sqlSession,String id);
 	public Budget selectLastBud(SqlSessionTemplate sqlSession,int circle_num);
 	public List<Budget> totalBud(SqlSessionTemplate sqlSession,int circle_num);
+	public Member selectChairman(SqlSessionTemplate sqlSession,int circle_num);
+	public int joinCircle(SqlSessionTemplate sqlSession,Circle_join join);
+	public List<Circle_join> selectJoinList(SqlSessionTemplate sqlSession,Circle_join cj,int cPage, int numPerPage);
+	public int selectJoinCount(SqlSessionTemplate sqlSession,Circle_join cj);
 }

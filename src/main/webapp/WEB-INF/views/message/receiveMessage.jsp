@@ -121,7 +121,6 @@ label{
 		        <label><input type="checkbox" name="chk" value="${r.message_num }"></label>
 		      </div>
 		    </td>
-		 	<input type="hidden" name="receivId" value="${r.message_receiver }"/>
 		    <td>${r.message_sender }</td>
 		    <td><a href='${path }/messageView.do?message_num=${r.message_num }'>${r.message_title }</a></td>
 		    <td>${r.message_content }</td>
@@ -129,6 +128,7 @@ label{
 		    
 		  </tr>
 	  </c:forEach>
+		 	<input type="hidden" name="receivId" value="${member_id}"/>
   </c:if>
 </table><br>
 <input type="submit" class="btn btn-warning" value="선택삭제"/>
